@@ -1,14 +1,14 @@
 using DG.Tweening;
-using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-using Utilities;
+
+using Random = UnityEngine.Random;
+
+
 
 public enum BattleTileState
 {
@@ -34,6 +34,9 @@ public class BattleTile : MonoBehaviour
     [SerializeField] private float overlayEffectDuration;
     [SerializeField] private Color addedColorOverlayOutline;
     [SerializeField] private Color addedColorOverlayBack;
+
+    [Header("Actions")]
+    public Action<int> OnUnitEnterTile; 
 
     [Header("Private Infos")]
     private Vector2Int tileCoordinates;
@@ -64,6 +67,7 @@ public class BattleTile : MonoBehaviour
     [SerializeField] private SpriteRenderer _mainSpriteRenderer;
     [SerializeField] private SpriteRenderer _backSpriteRenderer;
     [SerializeField] private Button _tileButton;
+    [SerializeField] private Canvas _buttonCanvas;
 
 
 
@@ -225,10 +229,10 @@ public class BattleTile : MonoBehaviour
     public void UnitEnterTile(Unit unit, bool isTall)
     {
         unitOnTile = unit;
+        OnUnitEnterTile?.Invoke(1);    // For tutorial
 
-        if (!isTall) return;
-        
         // We prevent unit stoping on the top neighbor if the unit is tall
+        if (!isTall) return;
         foreach(BattleTile neighbor in tileNeighbors)
         {
             if (neighbor.TileCoordinates.y <= tileCoordinates.y) continue;
@@ -375,6 +379,28 @@ public class BattleTile : MonoBehaviour
 
 
     #region Other Effects
+
+    int[] originalLayers;
+    public void SetToFirstLayer(int newLayer)
+    {
+        originalLayers = new int[3];
+        originalLayers[0] = _mainSpriteRenderer.sortingOrder;
+        originalLayers[1] = _backSpriteRenderer.sortingOrder;
+        originalLayers[2] = _buttonCanvas.sortingOrder;
+
+        _buttonCanvas.sortingOrder = newLayer;
+
+        _mainSpriteRenderer.sortingOrder = newLayer;
+        _backSpriteRenderer.sortingOrder = newLayer;
+    }
+
+    public void SetToNormalLayer()
+    {
+        _mainSpriteRenderer.sortingOrder = originalLayers[0];
+        _backSpriteRenderer.sortingOrder = originalLayers[1];
+        _buttonCanvas.sortingOrder = originalLayers[2];
+    }
+
 
     public void HighlightMovePathTile()
     {

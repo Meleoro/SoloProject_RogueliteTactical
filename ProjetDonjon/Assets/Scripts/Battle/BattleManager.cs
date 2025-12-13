@@ -22,6 +22,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     public Action OnSkillUsed;
     public Action OnBattleEnd;
     public Action OnBattleStart;
+    public Action<int> OnHeroTurnStart;    // For tuto
 
     [Header("Private Infos")]
     private bool isInBattle;
@@ -48,7 +49,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     public PathCalculator PathCalculator { get { return _pathCalculator; } }
     public TilesManager TilesManager {  get { return _tilesManager; } }
     public PassivesManager PassivesManager {  get { return _passivesManager; } }
-
 
     [Header("References")]
     [SerializeField] private Timeline _timeline;
@@ -292,8 +292,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         if (!isInBattle) yield break;
 
-        if(endTurn)
-            _timeline.NextTurn();
+        if(endTurn) _timeline.NextTurn();
 
         currentUnit = _timeline.Slots[0].Unit;
         _tilesManager.currentUnit = currentUnit;
@@ -302,6 +301,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         if (currentUnit.GetType() == typeof(Hero))
         {
+            OnHeroTurnStart?.Invoke(6);
             _playerActionsMenu.SetupHeroActionsUI(currentUnit as Hero);
         }
         else

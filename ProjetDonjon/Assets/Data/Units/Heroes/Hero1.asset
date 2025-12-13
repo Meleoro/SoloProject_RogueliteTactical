@@ -17,12 +17,12 @@ MonoBehaviour:
   unitImageHighlight: {fileID: -1674175842, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   baseHealth: 5
   baseStrength: 2
-  baseSpeed: 3
+  baseSpeed: 4
   baseLuck: 2
   startAlterations: []
   baseMovePoints: 3
   maxSkillPoints: 3
-  startSkillPoints: 1
+  startSkillPoints: 0
   heroInventoryPrefab: {fileID: 4803297770596504823, guid: 631feea1674ffbb4fa06dc5b02c9d019, type: 3}
   heroBaseSkills:
   - {fileID: 11400000, guid: 9adbc46d5d2b7644ba3a2c4d1114e811, type: 2}

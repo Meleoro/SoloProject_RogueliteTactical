@@ -31,6 +31,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     public Minimap Minimap { get { return _minimap; } }
     public FloorTransition FloorTransition { get { return _floorTransition; } }
     public HeroInfosScreen HeroInfosScreen { get { return _heroInfosScreen; } }
+    public PlayerActionsMenu PlayerActionsMenu { get { return _playerActionsMenu; } }
     public UIState CurrentUIState { get { return currentState; } }
 
     [Header("Actions")]
@@ -51,6 +52,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private CoinUI _coinUI;
     [SerializeField] private Minimap _minimap;
     [SerializeField] private FloorTransition _floorTransition;
+    [SerializeField] private PlayerActionsMenu _playerActionsMenu;
 
     [Header("References Hero Infos")]
     [SerializeField] private HeroInfoPanel[] _heroInfoPanels1H;

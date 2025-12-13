@@ -22,7 +22,7 @@ MonoBehaviour:
   startAlterations: []
   baseMovePoints: 3
   maxSkillPoints: 3
-  startSkillPoints: 1
+  startSkillPoints: 0
   heroInventoryPrefab: {fileID: 4803297770596504823, guid: 73957351403097a46aedc8ddb9ee430c, type: 3}
   heroBaseSkills:
   - {fileID: 11400000, guid: fa97ea0063e522441914677eada810e1, type: 2}

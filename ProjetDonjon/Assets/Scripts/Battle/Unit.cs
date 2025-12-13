@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
 
     [Header("Actions")]
     public Action OnHeroInfosChange;
+    public Action<int> OnAlterationAdded;    // For tuto 
 
     [Header("Alteration VFXs")]
     [SerializeField] private GameObject buffVFX;
@@ -85,7 +86,8 @@ public class Unit : MonoBehaviour
 
     [Header("Public Infos")]
     public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; 
-            _ui.ActualiseUI((float)currentHealth / currentMaxHealth, currentHealth, currentAlterations); OnHeroInfosChange?.Invoke(); } }
+            _ui.ActualiseUI((float)currentHealth / currentMaxHealth, currentHealth, currentAlterations); 
+            OnHeroInfosChange?.Invoke(); } }
     public int CurrentShield { get { return currentShield; } set { currentShield = value; } }
     public int CurrentMaxHealth { get { return currentMaxHealth; } }
     public int CurrentStrength { get { return currentStrength + strengthModificatorAdditive; } }
@@ -295,6 +297,7 @@ public class Unit : MonoBehaviour
     public bool VerifyCrit(Unit[] attackedUnits, int addedProba)
     {
         if(attackedUnits.Length == 0) return false;
+        if (TutoManager.Instance.IsInTuto) return false;
 
         int averageLuck = 0;
         for(int i = 0; i < attackedUnits.Length; i++)
@@ -319,6 +322,13 @@ public class Unit : MonoBehaviour
 
         _animator.SetTrigger("Damage");
         CameraManager.Instance.DoCameraShake(0.2f, Mathf.Lerp(0.5f, 1f, damageAmount / 15f), 50);
+
+        // For no damages when the hero explores in the tuto
+        if (!BattleManager.Instance.IsInBattle && TutoManager.Instance.IsInTuto)
+        {
+            StartCoroutine(DoColorEffectCoroutine(damageColor));
+            return;
+        }
 
         // Thorn
         if (originUnit)
@@ -403,6 +413,8 @@ public class Unit : MonoBehaviour
     public void AddAlteration(AlterationData alteration, Unit origin)
     {
         bool alreadyApplied = false;
+
+        OnAlterationAdded?.Invoke(1);
 
         if (BattleManager.Instance.PassivesManager.VerifyAlterationImmunities(alteration.alterationType, this)) return;
         int passiveModificator = BattleManager.Instance.PassivesManager.GetGivePassiveAlterationUpgrade(origin, alteration);

@@ -307,6 +307,36 @@ public class Room : MonoBehaviour
 
     #region Battle Functions
 
+
+    public void StartBattle()
+    {
+        battleIsDone = true;
+
+        if (!isBossRoom)
+        {
+            BattleManager.Instance.StartBattle(battleTiles, transform.position, startCameraSize, this);
+            SetupSpawners(HeroesManager.Instance.Heroes);
+            SetupEnemies();
+
+            StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(2, 2.0f));
+        }
+        else
+            StartCoroutine(DoBossIntroCoroutine());
+
+        for (int i = 0; i < battleTiles.Count; i++)
+        {
+            StartCoroutine(battleTiles[i].ShowTileCoroutine(Random.Range(0, 0.2f)));
+        }
+    }
+
+    public void EndBattle()
+    {
+        for (int i = 0; i < battleTiles.Count; i++)
+        {
+            StartCoroutine(battleTiles[i].HideTileCoroutine(Random.Range(0, 0.2f)));
+        }
+    }
+
     private void SetupBattleTiles()
     {
         battleTiles = new List<BattleTile>();
@@ -363,8 +393,8 @@ public class Room : MonoBehaviour
             for (int j = 0; j < heroes.Length; j++) 
             {
                 int dist = (int)Vector2Int.Distance(heroes[j].CurrentTile.TileCoordinates, roomEnemySpawners[i].AssociatedTile.TileCoordinates);
-                if (dist <= 2) 
-                { 
+                if (dist <= 2 && TutoManager.Instance.DidBattleTuto) 
+                {
                     roomEnemySpawners.RemoveAt(i);
                     break;
                 }
@@ -483,35 +513,6 @@ public class Room : MonoBehaviour
 
         return PlacedBattleTiles[coordinates.x, coordinates.y];
     }
-
-
-    public void StartBattle()
-    {
-        battleIsDone = true;
-
-        if (!isBossRoom)
-        {
-            BattleManager.Instance.StartBattle(battleTiles, transform.position, startCameraSize, this);
-            SetupSpawners(HeroesManager.Instance.Heroes);
-            SetupEnemies();
-        }
-        else
-            StartCoroutine(DoBossIntroCoroutine());
-
-        for (int i = 0; i < battleTiles.Count; i++)
-        {
-            StartCoroutine(battleTiles[i].ShowTileCoroutine(Random.Range(0, 0.2f)));
-        }
-    }
-
-    public void EndBattle()
-    {
-        for (int i = 0; i < battleTiles.Count; i++)
-        {
-            StartCoroutine(battleTiles[i].HideTileCoroutine(Random.Range(0, 0.2f)));
-        }
-    }
-
 
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -44,7 +44,7 @@ public class GameManager : GenericSingletonClass<GameManager>
         UIManager.Instance.StartExploration(enviroData);
         RelicsManager.Instance.StartExploration(enviroData.enviroIndex);
 
-        ProceduralGenerationManager.Instance.StartExploration(enviroData);
+        ProceduralGenerationManager.Instance.StartExploration(enviroData, !TutoManager.Instance.DidTutorial);
     }
 
 

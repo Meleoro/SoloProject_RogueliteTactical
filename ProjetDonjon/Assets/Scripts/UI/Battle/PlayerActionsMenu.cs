@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Linq;
 using TMPro;
@@ -29,6 +30,10 @@ public class PlayerActionsMenu : MonoBehaviour
     [SerializeField] private Sprite filledSkillPointSprite;
     [SerializeField] private Sprite emptySkillPointSprite;
 
+    [Header("Actions")]
+    public Action<int> OnMoveAction;
+    public Action<int> OnSkillAction;
+
     [Header("Private Infos")]
     private Hero currentHero;
     private Color[] colorSaves;
@@ -37,6 +42,9 @@ public class PlayerActionsMenu : MonoBehaviour
 
     [Header("Public Infos")]
     public MenuType CurrentMenu { get { return currentMenu; } }
+    public Image[] ActionPointImages { get { return _actionPointImages; } }
+    public Image[] SkillPointImages { get { return _skillPointImages; } }
+    public Image[] ButtonImages { get { return _buttonImages; } }
 
     [Header("References")]
     [SerializeField] private Animator _animator;
@@ -138,6 +146,8 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         if (currentHero.IsHindered) return;
 
+        OnMoveAction?.Invoke(0);
+
         currentMenu = MenuType.Move;
         BattleManager.Instance.TilesManager.DisplayPossibleMoveTiles(currentHero, true);
 
@@ -148,6 +158,8 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         currentMenu = MenuType.Skills;
         _skillsPanel.OpenSkillsPanel(currentHero);
+
+        OnSkillAction?.Invoke(0);
 
         CloseActionsMenu();
     }

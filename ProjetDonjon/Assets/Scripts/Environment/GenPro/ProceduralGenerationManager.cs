@@ -19,11 +19,13 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
     [Header("Parameters")]
     [SerializeField] private EnviroData enviroData;
+    [SerializeField] private EnviroData tutoData;
+    [SerializeField] private RoomGlobalCollider roomGlobalColliderPredab;
+    [SerializeField] private Room[] tutorialRooms;
     [SerializeField] private Vector2Int roomSizeUnits;
     [SerializeField] private Vector2 offsetRoomCenter;
-    [SerializeField] private RoomGlobalCollider roomGlobalColliderPredab;
     [SerializeField] private bool noGeneration;
-
+    
     [Header("Private Infos")]
     private int wantedRoomAmount;
     private List<Room> generatedRooms;
@@ -44,15 +46,26 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
     #region Start / End Exploration
 
-    public void StartExploration(EnviroData enviroData)
+    public void StartExploration(EnviroData enviroData, bool isTuto)
     {
         this.enviroData = enviroData;
+        _heroesManager.StartExploration(spawnPos);
 
         trailFloorsIndexes = new int[2];
         trailFloorsIndexes[0] = Random.Range(0, 2);
         trailFloorsIndexes[1] = Random.Range(3, 5);
 
-        _heroesManager.StartExploration(spawnPos);
+        if (isTuto)
+        {
+            this.enviroData = tutoData;
+
+            TutoManager.Instance.StartTutorial();
+            GenerateTutorialFloor();
+
+            StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.15f));
+            StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(0, 1.5f));
+            return;
+        }
 
         if (!noGeneration)
             GenerateFloor(enviroData);
@@ -92,7 +105,6 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         else if (currentFloor == 5) GenerateBossFloor(false);
         else GenerateFloor(enviroData);
     }
-
 
     public void GenerateFloor(EnviroData enviroData)
     {
@@ -136,7 +148,6 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         UIManager.Instance.Minimap.SetupMinimap(_pathCalculator.floorGenProTiles, _pathCalculator);
     }
 
-
     private void GenerateStartAndEnd(Vector2Int centerPosition)
     {
         // Start
@@ -158,7 +169,6 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         AddRoom(endPos, enviroData.possibleStairsRooms[Random.Range(0, enviroData.possibleStairsRooms.Length)]);
         GeneratePath(centerPosition, endPos, (int)(_pathCalculator.GetManhattanDistance(centerPosition, endPos) * 0.5f));
     }
-
 
     private void GenerateAlternativePathes(int alternativePathesCount)
     {
@@ -192,7 +202,6 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
                 (int)(path.Count * 0.5f), true);
         }
     }
-
 
     private void GenerateDeadEnds(int deadEndsCount)
     {
@@ -447,6 +456,34 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         return neighborRooms;
     }
 
+
+    #endregion
+
+
+    #region Tutorial Functions
+
+    private void GenerateTutorialFloor()
+    {
+        generatedRooms = new List<Room>();
+
+        wantedRoomAmount = tutorialRooms.Length;
+        Vector2Int currentPos = new Vector2Int(wantedRoomAmount, wantedRoomAmount);
+
+        _pathCalculator = new GenProPathCalculator(wantedRoomAmount * 2);
+
+        for (int i = 0; i < wantedRoomAmount; i++)
+        {
+            AddRoom(currentPos, tutorialRooms[i]);
+            currentPos += new Vector2Int(0, 1);
+        }
+
+        spawnPos = generatedRooms[0]._heroSpawnerTr.position;
+        HeroesManager.Instance.Teleport(spawnPos);
+
+        CloseUnusedEntrances();
+
+        UIManager.Instance.Minimap.SetupMinimap(_pathCalculator.floorGenProTiles, _pathCalculator);
+    }
 
     #endregion
 }

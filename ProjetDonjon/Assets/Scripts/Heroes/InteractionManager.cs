@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,9 @@ public class InteractionManager : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private float yOffset;
 
+    [Header("Actions")]
+    public Action<int> OnInteraction;    // For Tuto
+
     [Header("Private Infos")]
     private List<IInteractible> interactiblesAtRange = new List<IInteractible>();
     private IInteractible closestInteractible;
@@ -15,6 +19,7 @@ public class InteractionManager : MonoBehaviour
 
     [Header("Referencess")]
     private Transform currentHeroTransform;
+    
 
     private void Start()
     {
@@ -40,6 +45,7 @@ public class InteractionManager : MonoBehaviour
         if (UIManager.Instance.CurrentUIState != UIState.Nothing) return;
         if (InputManager.wantsToInteract)
         {
+            OnInteraction?.Invoke(0);
             closestInteractible.Interact();
         }
     }

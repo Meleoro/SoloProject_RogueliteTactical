@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ public class AIUnit : Unit
     [SerializeField] private Loot lootPrefab;
     [SerializeField] private Coin coinPrefab;
     [SerializeField] private bool isBoss;
+
+    [Header("Actions")]
+    public Action<int> OnDamageTaken;   // For Tuto
 
     [Header("Private Infos")]
     private BattleTile[] aimedTiles;
@@ -435,6 +439,8 @@ public class AIUnit : Unit
     public override void TakeDamage(int damageAmount, Unit originUnit)
     {
         AudioManager.Instance.PlaySoundOneShot(2, 1);
+
+        OnDamageTaken?.Invoke(1);
 
         base.TakeDamage(damageAmount, originUnit);
     }

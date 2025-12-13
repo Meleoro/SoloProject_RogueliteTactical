@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79dd46977732774e8de2f5811e5f0c1, type: 3}
+  m_Name: Tuto
+  m_EditorClassIdentifier: 
+  chestPossibleLoots:
+  - probability: 100
+    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 8c619ec65573b5b4b89ce41ad5d53ee7, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 7256e143e98fdac43bba6a109d0b0f9c, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
+  minChestCoins: 4
+  maxChestCoins: 7
+  battleEndPossibleLoots:
+  - probability: 100
+    loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
+  - probability: 25
+    loot: {fileID: 11400000, guid: 6a19da2e9de63b94d98a3dfd2959074d, type: 2}
+  - probability: 25
+    loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: b34ba33fc8826fd44a2ea8b0b5747196, type: 2}
+  minBattleCoins: 2
+  maxBattleCoins: 5
+  challengeEndPossibleLoots:
+  - probability: 20
+    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+  minChallengeCoins: 6
+  maxChallengeCoins: 9

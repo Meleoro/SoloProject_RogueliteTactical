@@ -20,6 +20,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     public Hero[] Heroes { get { return heroes; } }
     public Hero[] AllHeroes { get { return allHeroes; } }
     public int CurrentHeroIndex { get { return currentHeroIndex; } }
+    public InteractionManager InteractionManager { get { return _interactionManager; } }
 
     [Header("Private Infos")]
     private Hero[] heroes = new Hero[0];
@@ -132,12 +133,16 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             allHeroes[i].OnRevive += HeroRevives;
         }
 
-        heroes = new Hero[allHeroes.Length];
+        List<Hero> heroesList = new List<Hero>();
         for (int i = 0; i < allHeroes.Length; i++)
         {
-            heroes[i] = GetHeroObject(allHeroes[i]);
-            heroes[i].transform.position = Vector3.zero;
+            if (i != 0 && !RelicsManager.Instance.VerifyHasCampUpgrade(CampLevelData.CampUnlockType.NewHero, i)) continue;
+
+            heroesList.Add(GetHeroObject(allHeroes[i]));
+            heroesList[i].transform.position = Vector3.zero;
         }
+
+        heroes = heroesList.ToArray();
     }
 
     public void StartExploration(Vector2 spawnPos)
@@ -162,6 +167,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         for(int i = 0; i < allHeroes.Length; i++)
         {
+            if (!allHeroes[i]) continue;
             if (allHeroes[i].HeroData.unitName == wantedHero.HeroData.unitName) return allHeroes[i];
         }
 

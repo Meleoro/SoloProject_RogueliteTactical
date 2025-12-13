@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: PREPARATION
   skillDescription: PUTS 2 SHIELDS ON AN UNIT
   animName: Skill2
-  skillPointCost: 1
+  skillPointCost: 2
   skillIcon: {fileID: -28761685, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 1171102006, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:
@@ -36,6 +36,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

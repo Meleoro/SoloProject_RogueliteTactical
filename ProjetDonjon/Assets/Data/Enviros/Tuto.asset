@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4df46b03aadc9249bda5741a5972ca0, type: 3}
+  m_Name: Tuto
+  m_EditorClassIdentifier: 
+  enviroName: THE CRYPT
+  enviroDescription: THIS CRYPT FULL OF TREASURE IS ALSO HOME FOR A CIVILISATION
+    OF GOBLINS, IT IS ALSO SAID THAT A DARK MAGE LURKS IN THE DEPTH OF THIS CRYPT
+  enviroDangerText: LOW
+  enviroIllustration: {fileID: 7975086727044346999, guid: a70726b90ea81ae4ebcea3b9fc470dce, type: 3}
+  enviroIndex: 0
+  recommandedLevels: 010000000200000004000000050000000600000008000000
+  minDistGoldenPath: 5
+  maxDistGoldenPath: 7
+  minRoomAmount: 7
+  maxRoomAmount: 10
+  floorsAmount: 5
+  possibleBattleRooms:
+  - {fileID: 2917294264406634095, guid: 6d5789751cd4f5840bd377f0d57b4ae2, type: 3}
+  - {fileID: 2917294264406634095, guid: 0ce6309a5c1defe4cacf6938dc39b307, type: 3}
+  - {fileID: 2917294264406634095, guid: 4667598ee5cbfca4d9b29ca669afdd36, type: 3}
+  - {fileID: 2917294264406634095, guid: ddb26f0363c8f6e4da95b3031e6e07bf, type: 3}
+  - {fileID: 6937991569428506517, guid: 469b1836312c23945b3c56712c887aa5, type: 3}
+  possibleCorridorRooms:
+  - {fileID: 2917294264406634095, guid: 3fb2efc6eb1d84c4e9c70404e1922f11, type: 3}
+  - {fileID: 1856086751064925117, guid: 7abfbe6e3f513954494e647f8b38976c, type: 3}
+  - {fileID: 1856086751064925117, guid: b92b98f296c70324cae3224e36091707, type: 3}
+  possibleCorridorTrapRooms:
+  - {fileID: 2917294264406634095, guid: d0712f18a6c113748a718bea172b2827, type: 3}
+  - {fileID: 2917294264406634095, guid: fe3cf7f00058be14ab178e75e85752fe, type: 3}
+  - {fileID: 2917294264406634095, guid: 45f20c2edfd7b814794b0f68b04cda39, type: 3}
+  possibleCorridorPlateformRooms:
+  - {fileID: 2917294264406634095, guid: 6616e4c47be786b42a4f5a3e40966387, type: 3}
+  - {fileID: 2917294264406634095, guid: ada4e059088f9a24c8e4d7787d6220d5, type: 3}
+  - {fileID: 2917294264406634095, guid: bc47482e243ce94468c87bc393626d78, type: 3}
+  - {fileID: 2917294264406634095, guid: 9cc03ae9ad4105a419c16a8e903adfae, type: 3}
+  - {fileID: 2917294264406634095, guid: b749238e1025e1649a06205f509d2f1b, type: 3}
+  possiblePlateformRooms:
+  - {fileID: 2917294264406634095, guid: acd82df5924bf224db9788423c8ed8dc, type: 3}
+  - {fileID: 2917294264406634095, guid: f309f058cedd6e24a90942071bb7db5a, type: 3}
+  - {fileID: 2917294264406634095, guid: 6dbcd3546dae674429c6634589a0c711, type: 3}
+  - {fileID: 2917294264406634095, guid: 28d403d7ca77e1d4db15b4c93708afab, type: 3}
+  possibleTrapRooms:
+  - {fileID: 2917294264406634095, guid: e19b037d6cb7802489ab86828f7b52e1, type: 3}
+  - {fileID: 2917294264406634095, guid: 0dc7e514750cd7548a917b3cf49001aa, type: 3}
+  possiblePuzzleRooms:
+  - {fileID: 2917294264406634095, guid: 4e1c9c053424a984d814e594755a3ded, type: 3}
+  - {fileID: 2917294264406634095, guid: 156a46d7ea7d6124b802ffed2bfe3346, type: 3}
+  - {fileID: 2917294264406634095, guid: c826b453fc43a35478cd1fd3ac4eb250, type: 3}
+  - {fileID: 2917294264406634095, guid: df77dd622b9431f4294e6b2221fa6a9b, type: 3}
+  possibleChallengeRooms:
+  - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
+  possibleStartRooms:
+  - {fileID: 2917294264406634095, guid: 581c2856ecf5e4f4987601aa19cdea79, type: 3}
+  possibleStairsRooms:
+  - {fileID: 2917294264406634095, guid: 7f1c262d991c12f48bffac1db4436036, type: 3}
+  possibleFirstBossRooms:
+  - {fileID: 2917294264406634095, guid: 5cbe374aae63ec84195d013e30bd5ad4, type: 3}
+  possibleSecondBossRooms: []
+  lootPerFloors:
+  - {fileID: 11400000, guid: 552fdf40ba613ba4798b39159b339ca9, type: 2}
+  - {fileID: 11400000, guid: c2e6cfa2e8d18214ea3f908b7db5ebd6, type: 2}
+  - {fileID: 11400000, guid: 7456501236f695146b33097042b37c4b, type: 2}
+  - {fileID: 11400000, guid: 9c07328acd89c8040b6d866114eaaf12, type: 2}
+  - {fileID: 11400000, guid: dec5c41635ad061418926eccd860a28f, type: 2}
+  - {fileID: 11400000, guid: 7077cbaea47420645918febcb3ee1463, type: 2}
+  enemySpawnsPerFloor:
+  - {fileID: 11400000, guid: 38f8abab29c33934e8eec422d3b66663, type: 2}
+  - {fileID: 11400000, guid: a751178e5de40aa4a8d8fbe6f743b8ff, type: 2}
+  - {fileID: 11400000, guid: a86e230126572f245a9f589e9f504163, type: 2}
+  - {fileID: 11400000, guid: e66d0b04f75115443869519f98a37726, type: 2}
+  - {fileID: 11400000, guid: efb18c40d988cfe4781d6cf5b2e39cec, type: 2}
+  - {fileID: 11400000, guid: 222ba2f9b981e884c86a8d1e695ad698, type: 2}

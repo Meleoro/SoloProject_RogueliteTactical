@@ -22,6 +22,8 @@ public class HeroController : MonoBehaviour
 
     [Header("Actions")]
     public Action EndAutoMoveAction;
+    public Action<int> OnMove;
+    public Action<int> OnJump;
 
     [Header("Private Infos")]
     private ControllerState currentControllerState;
@@ -111,6 +113,8 @@ public class HeroController : MonoBehaviour
         if (inputDir != Vector2.zero)
         {
             _animator.SetBool("IsWalking", true);
+
+            OnMove?.Invoke(0);
 
             if (currentControllerState == ControllerState.Jump) return;
 
@@ -210,6 +214,7 @@ public class HeroController : MonoBehaviour
 
         oldPos = transform.position;
 
+        OnJump?.Invoke(1);
         AudioManager.Instance.PlaySoundOneShot(1, 3);
 
         _rbSprite.bodyType = RigidbodyType2D.Dynamic;

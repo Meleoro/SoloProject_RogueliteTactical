@@ -147,7 +147,9 @@ public class Hero : Unit
         _controller.EnterBattle();
         _controller.AutoMove(startTile.transform.position);
 
-        foreach(Loot equipment in equippedLoot)
+        CurrentSkillPoints = heroData.startSkillPoints;
+
+        foreach (Loot equipment in equippedLoot)
         {
             if (equipment is null) continue;
             if (equipment.LootData.equipmentEffectType != SpecialEquipmentEffectType.Alteration) continue;
@@ -194,6 +196,13 @@ public class Hero : Unit
     public override void TakeDamage(int damageAmount, Unit originUnit)
     {
         base.TakeDamage(damageAmount, originUnit);
+        
+        // For no damages when the hero explores in the tuto
+        if (!BattleManager.Instance.IsInBattle && TutoManager.Instance.IsInTuto)
+        {
+            AudioManager.Instance.PlaySoundOneShot(2, 0);
+            return;
+        }
 
         OnHeroInfosChange?.Invoke();
 

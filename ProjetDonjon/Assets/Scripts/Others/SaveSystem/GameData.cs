@@ -15,6 +15,10 @@ public class GameData
     public bool[] possessedRelicsIndexes;
     public int campLevel;
 
+    // Others
+    public bool[] finishedTutorialSteps;
+    public bool launchedTutorial;
+
 
 
     public GameData()
@@ -29,5 +33,7 @@ public class GameData
 
         needEquippedInitialisation = true;
         campLevel = 0;
+
+        finishedTutorialSteps = new bool[30];
     }
 }
