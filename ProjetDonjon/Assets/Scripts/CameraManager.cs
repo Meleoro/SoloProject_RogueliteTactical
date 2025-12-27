@@ -150,7 +150,7 @@ public class CameraManager : GenericSingletonClass<CameraManager>
     {
         if (isInputLocked) return;
 
-        if (Input.GetMouseButton(1))
+        if (InputManager.wantsToDrag)
         {
             if(!isDragged)
             {

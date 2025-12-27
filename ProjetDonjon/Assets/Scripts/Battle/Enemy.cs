@@ -444,5 +444,22 @@ public class AIUnit : Unit
         base.TakeDamage(damageAmount, originUnit);
     }
 
+
+    public override void RotateTowardTarget(Transform aimedTr)
+    {
+        base.RotateTowardTarget(aimedTr);
+
+        if (transform.position.x + 0.2f > aimedTr.position.x) return;
+
+        _spriteRenderer.transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    public override void RotateBackToNormal()
+    {
+        base.RotateBackToNormal();
+
+        _spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     #endregion
 }

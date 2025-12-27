@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
 
     [Header("Actions")]
     public Action OnHeroInfosChange;
+    public Action OnSkillAnimEnd;
     public Action<int> OnAlterationAdded;    // For tuto 
     public Action<int> OnClickUnit;          // For tuto 
 
@@ -405,6 +406,25 @@ public class Unit : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
 
         _spriteRenderer.material.DOVector(Color.black, "_AddedColor", 0.25f);
+    }
+
+    public IEnumerator UseSkillCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+
+        OnSkillAnimEnd?.Invoke();
+    }
+
+    public virtual void RotateTowardTarget(Transform aimedTr)
+    {
+        OnSkillAnimEnd += RotateBackToNormal;
+    }
+
+    public virtual void RotateBackToNormal()
+    {
+        OnSkillAnimEnd -= RotateBackToNormal;
     }
 
     #endregion

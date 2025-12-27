@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     public static bool wantsToRotateRight;
     public static bool wantsToReturn;
     public static bool wantsToRightClick;
+    public static bool wantsToDrag;
 
     private void Update()
     {
@@ -38,5 +39,6 @@ public class InputManager : MonoBehaviour
         wantsToRotateRight = _playerInput.actions["RotateRight"].WasPressedThisFrame();
         wantsToReturn = _playerInput.actions["Return"].WasPressedThisFrame();
         wantsToRightClick = _playerInput.actions["RightClick"].WasPressedThisFrame();
+        wantsToDrag = _playerInput.actions["Drag"].IsPressed();
     }
 }

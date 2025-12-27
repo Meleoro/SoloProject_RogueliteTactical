@@ -295,19 +295,19 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         currentUnit = _timeline.Slots[0].Unit;
         _tilesManager.currentUnit = currentUnit;
 
-        currentUnit.StartTurn();
+        CurrentUnit.StartTurn();
 
-        if (currentUnit.GetType() == typeof(Hero))
+        if (CurrentUnit.GetType() == typeof(Hero))
         {
             isEnemyTurn = false;
             OnHeroTurnStart?.Invoke();
-            _playerActionsMenu.SetupHeroActionsUI(currentUnit as Hero);
+            _playerActionsMenu.SetupHeroActionsUI(CurrentUnit as Hero);
         }
         else
         {
             isEnemyTurn = true;
-            CameraManager.Instance.FocusOnTr(currentUnit.transform, 5f);
-            AIUnit enemy = currentUnit as AIUnit;
+            CameraManager.Instance.FocusOnTr(CurrentUnit.transform, 5f);
+            AIUnit enemy = CurrentUnit as AIUnit;
             StartCoroutine(enemy.PlayEnemyTurnCoroutine());
         }
     }
@@ -369,6 +369,13 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         OnSkillUsed.Invoke();
 
         BattleTile[] skillBattleTiles = _tilesManager.GetAllSkillTiles().ToArray();
+        BattleTile[] cameraTiles = new BattleTile[skillBattleTiles.Length + 1];
+        for(int i = 0; i < skillBattleTiles.Length; i++)
+        {
+            cameraTiles[i] = skillBattleTiles[i];
+        }
+        cameraTiles[cameraTiles.Length - 1] = currentUnit.CurrentTile;
+
         currentVFXIndex = 0;
 
         // We verify is the attack is crit
@@ -380,9 +387,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         }
 
         // We launch the animations / others effects
-        StartCoroutine(CameraManager.Instance.DoAttackFeelCoroutine(skillBattleTiles, CurrentUnit._unitAnimsInfos, isCrit));
+        StartCoroutine(CameraManager.Instance.DoAttackFeelCoroutine(cameraTiles, CurrentUnit._unitAnimsInfos, isCrit));
         CurrentUnit._animator.SetBool("IsCrit", isCrit);
         CurrentUnit._animator.SetTrigger(usedSkill.animName);
+        CurrentUnit.RotateTowardTarget(skillBattleTiles[0].transform);
+        StartCoroutine(CurrentUnit.UseSkillCoroutine());
 
         // We wait the moment the skill applies it's effect
         int wantedAttackCount = usedSkill.attackCount, currentAttackCount = 0;

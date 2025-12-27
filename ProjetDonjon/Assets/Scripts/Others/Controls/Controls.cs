@@ -192,6 +192,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Drag"",
+                    ""type"": ""Button"",
+                    ""id"": ""91bded37-51e5-42f7-85e5-55e84ff4810c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MouseDelta"",
                     ""type"": ""Value"",
                     ""id"": ""54956aba-6c23-45c6-8dc2-7412bd4d6e21"",
@@ -483,6 +492,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e11d0fd-253b-4593-adc5-13de6f19e06d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -502,6 +522,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_BaseActionMap_RotateRight = m_BaseActionMap.FindAction("RotateRight", throwIfNotFound: true);
         m_BaseActionMap_Return = m_BaseActionMap.FindAction("Return", throwIfNotFound: true);
         m_BaseActionMap_RightClick = m_BaseActionMap.FindAction("RightClick", throwIfNotFound: true);
+        m_BaseActionMap_Drag = m_BaseActionMap.FindAction("Drag", throwIfNotFound: true);
         m_BaseActionMap_MouseDelta = m_BaseActionMap.FindAction("MouseDelta", throwIfNotFound: true);
         m_BaseActionMap_MousePosition = m_BaseActionMap.FindAction("MousePosition", throwIfNotFound: true);
         m_BaseActionMap_MouseScroll = m_BaseActionMap.FindAction("MouseScroll", throwIfNotFound: true);
@@ -596,6 +617,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_BaseActionMap_RotateRight;
     private readonly InputAction m_BaseActionMap_Return;
     private readonly InputAction m_BaseActionMap_RightClick;
+    private readonly InputAction m_BaseActionMap_Drag;
     private readonly InputAction m_BaseActionMap_MouseDelta;
     private readonly InputAction m_BaseActionMap_MousePosition;
     private readonly InputAction m_BaseActionMap_MouseScroll;
@@ -654,6 +676,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BaseActionMap/RightClick".
         /// </summary>
         public InputAction @RightClick => m_Wrapper.m_BaseActionMap_RightClick;
+        /// <summary>
+        /// Provides access to the underlying input action "BaseActionMap/Drag".
+        /// </summary>
+        public InputAction @Drag => m_Wrapper.m_BaseActionMap_Drag;
         /// <summary>
         /// Provides access to the underlying input action "BaseActionMap/MouseDelta".
         /// </summary>
@@ -725,6 +751,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RightClick.started += instance.OnRightClick;
             @RightClick.performed += instance.OnRightClick;
             @RightClick.canceled += instance.OnRightClick;
+            @Drag.started += instance.OnDrag;
+            @Drag.performed += instance.OnDrag;
+            @Drag.canceled += instance.OnDrag;
             @MouseDelta.started += instance.OnMouseDelta;
             @MouseDelta.performed += instance.OnMouseDelta;
             @MouseDelta.canceled += instance.OnMouseDelta;
@@ -778,6 +807,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RightClick.started -= instance.OnRightClick;
             @RightClick.performed -= instance.OnRightClick;
             @RightClick.canceled -= instance.OnRightClick;
+            @Drag.started -= instance.OnDrag;
+            @Drag.performed -= instance.OnDrag;
+            @Drag.canceled -= instance.OnDrag;
             @MouseDelta.started -= instance.OnMouseDelta;
             @MouseDelta.performed -= instance.OnMouseDelta;
             @MouseDelta.canceled -= instance.OnMouseDelta;
@@ -904,6 +936,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDrag(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "MouseDelta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

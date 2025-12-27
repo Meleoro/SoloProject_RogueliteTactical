@@ -106,6 +106,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Drag",
+                    "type": "Button",
+                    "id": "91bded37-51e5-42f7-85e5-55e84ff4810c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "MouseDelta",
                     "type": "Value",
                     "id": "54956aba-6c23-45c6-8dc2-7412bd4d6e21",
@@ -395,6 +404,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e11d0fd-253b-4593-adc5-13de6f19e06d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
