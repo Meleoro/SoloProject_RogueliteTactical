@@ -30,10 +30,17 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 4667598ee5cbfca4d9b29ca669afdd36, type: 3}
   - {fileID: 2917294264406634095, guid: ddb26f0363c8f6e4da95b3031e6e07bf, type: 3}
   - {fileID: 6937991569428506517, guid: 469b1836312c23945b3c56712c887aa5, type: 3}
+  - {fileID: 6937991569428506517, guid: 59ea394616e758e4fbbf775561097cbe, type: 3}
+  - {fileID: 2917294264406634095, guid: 8a9c6d9302b53524588329c27380022e, type: 3}
+  - {fileID: 2917294264406634095, guid: 43999d5fd2398684893d30c85f0f1a3f, type: 3}
+  - {fileID: 2917294264406634095, guid: 7a80536822c8da443b249570fd073869, type: 3}
   possibleCorridorRooms:
   - {fileID: 2917294264406634095, guid: 3fb2efc6eb1d84c4e9c70404e1922f11, type: 3}
   - {fileID: 1856086751064925117, guid: 7abfbe6e3f513954494e647f8b38976c, type: 3}
   - {fileID: 1856086751064925117, guid: b92b98f296c70324cae3224e36091707, type: 3}
+  - {fileID: 1856086751064925117, guid: 74ae62d704662a74fb639f237bbb8dd7, type: 3}
+  - {fileID: 2917294264406634095, guid: e59b18cce1e22ee458f7f6481a2172e5, type: 3}
+  - {fileID: 2917294264406634095, guid: 701b6b3e30f24544ba2805dd56605b1d, type: 3}
   possibleCorridorTrapRooms:
   - {fileID: 2917294264406634095, guid: d0712f18a6c113748a718bea172b2827, type: 3}
   - {fileID: 2917294264406634095, guid: fe3cf7f00058be14ab178e75e85752fe, type: 3}
@@ -59,6 +66,8 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: df77dd622b9431f4294e6b2221fa6a9b, type: 3}
   possibleChallengeRooms:
   - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
+  - {fileID: 2917294264406634095, guid: 4701f986ea23a454c9225a52851a083f, type: 3}
+  - {fileID: 2917294264406634095, guid: f698fdfd24d220545a30d7883a759fca, type: 3}
   possibleStartRooms:
   - {fileID: 2917294264406634095, guid: 581c2856ecf5e4f4987601aa19cdea79, type: 3}
   possibleStairsRooms:
