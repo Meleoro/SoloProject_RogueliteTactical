@@ -8208,10 +8208,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0010570824
-    y: 0
-    width: 0.9978858
-    height: 0.9993739
+    x: 0.0010845987
+    y: 0.0019267823
+    width: 0.9978308
+    height: 0.99421966
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -13104,7 +13104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -74.99374}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 100, y: 662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1014221188
@@ -19244,8 +19244,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 804431307}
   m_HandleRect: {fileID: 804431306}
   m_Direction: 2
-  m_Value: 0.9710365
-  m_Size: 0.75950146
+  m_Value: 0.9396711
+  m_Size: 0.7595015
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22895,7 +22895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6537920207254496290, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -504.99948
+      value: -504.9995
       objectReference: {fileID: 0}
     - target: {fileID: 6548522314039332329, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_SizeDelta.x
@@ -23287,7 +23287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760944051009081212, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 476.99948
+      value: 476.9995
       objectReference: {fileID: 0}
     - target: {fileID: 7777384955102529824, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -27321,10 +27321,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1012943427}
     m_Modifications:
-    - target: {fileID: 3108068645861419349, guid: 85c10796a2912a7408f24da5263c9f23, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5605538697946456536, guid: 85c10796a2912a7408f24da5263c9f23, type: 3}
       propertyPath: m_Name
       value: ShopRow
