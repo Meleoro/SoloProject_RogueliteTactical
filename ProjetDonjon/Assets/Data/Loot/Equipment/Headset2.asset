@@ -16,7 +16,7 @@ MonoBehaviour:
   lootDescription: When you get hit, you have a 50% chance to inflict Unlucky
   lootType: 1
   sprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 15
+  value: 50
   spaceTaken:
   - row: 01
   equipmentType: 1
@@ -25,10 +25,13 @@ MonoBehaviour:
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 2
+  mpUpgrade: 0
+  spUpgrade: 0
   equipmentEffectType: 2
   equipmentEffectAlteration: {fileID: 11400000, guid: 69245b854151af14396500e9975c69b1, type: 2}
   equipmentEffectPower: 50
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 59d881c1f4aa5014da46ae777fb2debb, type: 2}

@@ -27,6 +27,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [SerializeField] private MainMetaMenu _mainMetaMenu;
     [SerializeField] private ExpeditionsMenu _expeditionsMenu;
     [SerializeField] private ChestMenu _chestMenu;
+    [SerializeField] private ShopMenu _shopMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
     
 
@@ -47,6 +48,11 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _chestMenu.OnEndTransition += EndTransition;
         _chestMenu.OnShow += () => currentMetaMenu = CurrentMetaMenu.Chest;
         _chestMenu.OnHide += () => currentMetaMenu = CurrentMetaMenu.Main;
+
+        _shopMenu.OnStartTransition += StartTransition;
+        _shopMenu.OnEndTransition += EndTransition;
+        _shopMenu.OnShow += () => currentMetaMenu = CurrentMetaMenu.Shop;
+        _shopMenu.OnHide += () => currentMetaMenu = CurrentMetaMenu.Main;
     }
 
 
@@ -67,6 +73,10 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
 
                 case CurrentMetaMenu.Collection:
                     _collectionMenu.Hide();
+                    break;
+
+                case CurrentMetaMenu.Shop:
+                    _shopMenu.Hide();
                     break;
             }
         }

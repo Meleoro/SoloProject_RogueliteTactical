@@ -23,12 +23,16 @@ public class HUDExploration : MonoBehaviour
     {
         _heroInfosScreen.OnShow += Hide;
         _heroInfosScreen.OnHide += Show;
+
         _inventoryManager.OnInventoryOpen += Hide;
         _inventoryManager.OnInventoryClose += Show;
+
         _skillTreeScreen.OnShow += Hide;
         _skillTreeScreen.OnHide += Show;
+
         BattleManager.Instance.OnBattleStart += Hide;
         BattleManager.Instance.OnBattleEnd += Show;
+
         _skillsMenu.OnShow += Hide;
         _skillsMenu.OnHide += Show;
 
@@ -39,8 +43,6 @@ public class HUDExploration : MonoBehaviour
 
             button.material = material2;
         }
-
-        Show();
     }
 
 

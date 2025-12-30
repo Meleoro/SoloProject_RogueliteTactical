@@ -25,12 +25,13 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     private List<InventorySlot> allSlots = new List<InventorySlot>();
     private List<Loot> allLoots = new List<Loot>();
     private int inventoryInstantiatedAmount = 0;
+    private int currentCoins;
 
     [Header("Public Infos")]
     public RectTransform MainLootParent { get { return _mainLootParent; } }
     public GenericDetailsPanel DetailsPanel { get { return _detailsPanel; } }
     public InventoryActionPanel InventoryActionPanel { get { return _inventoryActionsPanel; } }  
-
+    public int CurrentCoins { get { return currentCoins; } }
 
     [Header("References")]
     [SerializeField] private RectTransform[] _hiddenInventoryPositions;
@@ -46,6 +47,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     [SerializeField] private Image _backFadeImage;
     [SerializeField] private GenericDetailsPanel _detailsPanel;
     [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
+    [SerializeField] private CoinUI _coinUI;
 
 
     private void Start()
@@ -202,6 +204,23 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
             if (loot == unhoveredLoot) continue;
             loot.QuitOverlayOtherLoot();
         }
+    }
+
+    #endregion
+
+
+    #region Coins
+
+    public void AddCoins(int quantity)
+    {
+        currentCoins += quantity;
+        _coinUI.ActualiseCoins(currentCoins);
+    }
+
+    public void RemoveCoins(int quantity)
+    {
+        currentCoins -= quantity;
+        _coinUI.ActualiseCoins(currentCoins);
     }
 
     #endregion

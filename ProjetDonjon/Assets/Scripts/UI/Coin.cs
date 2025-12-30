@@ -36,7 +36,7 @@ public class Coin : MonoBehaviour
 
         if(_aimedTr.rect.height * 0.5f > Mathf.Abs(dir.y) && _aimedTr.rect.width * 0.5f > Mathf.Abs(dir.x))
         {
-            UIManager.Instance.CoinUI.AddCoin(1);
+            InventoriesManager.Instance.AddCoins(1);
 
             Destroy(gameObject);
         }

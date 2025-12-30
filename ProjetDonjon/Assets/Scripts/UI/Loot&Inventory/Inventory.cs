@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -240,7 +241,30 @@ public class Inventory : MonoBehaviour
     #endregion
 
 
-    public void AutoPlaceItem(Loot item)
+    #region Auto Place 
+
+    public bool VerifyCanPlaceItem(LootData data)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 0);
+            if (overlayedSlots.Count == 0) continue;
+
+            return true;
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 90);
+            if (overlayedSlots.Count == 0) continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool AutoPlaceItem(Loot item)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -248,8 +272,19 @@ public class Inventory : MonoBehaviour
             if (overlayedSlots.Count == 0) continue;
 
             item.PlaceInInventory(overlayedSlots);
-            return;
+            return true;
         }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, item.LootData.spaceTaken, 90);
+            if (overlayedSlots.Count == 0) continue;
+
+            item.PlaceInInventory(overlayedSlots);
+            return true;
+        }
+
+        return false;
     }
 
     public List<InventorySlot> GetOverlayedCoordinates(Vector2Int bottomLeftCoord, SpaceTakenRow[] spaceTaken, float currentAngle)
@@ -280,4 +315,6 @@ public class Inventory : MonoBehaviour
         if (coord.x >= inventorySlotsTab.GetLength(0) || coord.y >= inventorySlotsTab.GetLength(1)) return null;
         return inventorySlotsTab[coord.x, coord.y];
     }
+
+    #endregion
 }

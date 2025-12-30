@@ -16,11 +16,12 @@ public class ChestMenu : MonoBehaviour
     public Action OnShow;
     public Action OnHide;
 
+    [Header("Public Infos")]
+    public Inventory ChestInventory { get {  return _chestInventory; } }
+
     [Header("Private Infos")]
     private Hero currentHero;
     private Inventory currentInventory;
-    private InventorySlot[] chestSlots;
-    private InventorySlot[,] chestSlotsTab;
 
     [Header("References")]
     [SerializeField] private MainMetaMenu _mainMetaMenu;
@@ -53,13 +54,6 @@ public class ChestMenu : MonoBehaviour
         currentInventory.LootParent.SetParent(_inventoryParent);
         currentInventory.LootParent.localPosition = Vector3.zero;
     }
-
-
-    #region Chest Inventory Functions
-
-
-
-    #endregion
 
 
     #region Show / Hide
