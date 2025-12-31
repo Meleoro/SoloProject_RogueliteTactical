@@ -1,8 +1,29 @@
-using System.Net.NetworkInformation;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameData 
 {
+    [Serializable]
+    public struct ItemSaveStruct
+    {
+        public string itemID;
+        public int inventoryID;
+        public Vector2Int coord;
+        public int angle;
+        public bool isEquipped;
+
+        public ItemSaveStruct(string itemID, int inventoryID, Vector2Int coord, int angle, bool isEquipped)
+        {
+            this.itemID = itemID;
+            this.inventoryID = inventoryID;
+            this.coord = coord;
+            this.angle = angle;
+            this.isEquipped = isEquipped;
+        }
+    }
+
     public bool needEquippedInitialisation;
 
     // HEROES
@@ -17,6 +38,9 @@ public class GameData
     public int campLevel;
     public int shopLevel;
     public int chestLevel;
+
+    // INVENTORIES ITEMS
+    public List<ItemSaveStruct> savedInventoryItems;
 
     // Others
     public bool[] finishedTutorialSteps;
@@ -37,7 +61,9 @@ public class GameData
         needEquippedInitialisation = true;
         campLevel = 0;
         shopLevel = 0;
-        chestLevel = 0; 
+        chestLevel = 0;
+
+        savedInventoryItems = new List<ItemSaveStruct>();
 
         finishedTutorialSteps = new bool[30];
     }

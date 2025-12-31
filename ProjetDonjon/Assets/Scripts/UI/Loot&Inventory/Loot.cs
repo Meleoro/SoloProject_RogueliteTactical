@@ -37,6 +37,8 @@ public class Loot : MonoBehaviour, IInteractible
     public Image Image { get { return _image; } }
     public Hero AssociatedHero { get { return associatedHero; } }
     public bool IsEquipped { get { return isEquipped; } }
+    public InventorySlot BottomLeftSlot { get { return bottomLeftSlot; } }
+    public int CurrentAngle { get { return currentAngle; } }
 
     [Header("Private Infos")]
     private bool isDragged;
@@ -47,12 +49,14 @@ public class Loot : MonoBehaviour, IInteractible
     private bool isEquipped;
     private Vector3 addedSize;
     private InventorySlot[] slotsOccupied;
+    private InventorySlot bottomLeftSlot;      // For Save
     private EquipmentSlot overlayedEquipmentSlot;
     private EquipmentSlot equipmentSlot;
     private Vector3 dragWantedPos;
     private Vector3 saveSize;
     private Coroutine inventoryBounceCoroutine;
     private Hero associatedHero;
+    private int currentAngle;
 
     [Header("References")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -112,7 +116,7 @@ public class Loot : MonoBehaviour, IInteractible
 
     #region Become / Quit Inventory
 
-    public void BecomeInventoryItem(bool isStart = false)
+    public void BecomeInventoryItem(bool isStart = false, int angle = 0)
     {
         _image.enabled = true;
         _imageBackground.enabled = true;
@@ -124,7 +128,10 @@ public class Loot : MonoBehaviour, IInteractible
         _rays2SpriteRenderer.enabled = false;
 
         _imageBackground.rectTransform.position = CameraManager.Instance.transform.position + Vector3.forward * 9;
+        _imageBackground.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
         _imageBackground.rectTransform.SetParent(InventoriesManager.Instance.MainLootParent);
+
+        currentAngle = angle;
 
         _image.rectTransform.localScale = Vector3.one;
         _image.SetNativeSize();
@@ -303,11 +310,15 @@ public class Loot : MonoBehaviour, IInteractible
         {
             StartCoroutine(RotateLootCoroutine(0.1f, _imageBackground.rectTransform.rotation * Quaternion.Euler(0, 0, -90),
                 _imageBackground.rectTransform.rotation * Quaternion.Euler(0, 0, -115)));
+
+            currentAngle -= 90;
         }
         if (InputManager.wantsToRotateRight)
         {
             StartCoroutine(RotateLootCoroutine(0.1f, _imageBackground.rectTransform.rotation * Quaternion.Euler(0, 0, 90),
                 _imageBackground.rectTransform.rotation * Quaternion.Euler(0, 0, 115)));
+
+            currentAngle += 90;
         }
     }
 
@@ -377,6 +388,8 @@ public class Loot : MonoBehaviour, IInteractible
         Vector3 position = Vector2.zero;
         slotsOccupied = new InventorySlot[overlayedSlots.Count];
 
+        bottomLeftSlot = overlayedSlots[0];
+
         for (int i = 0; i < overlayedSlots.Count; i++)
         {
             position += overlayedSlots[i].RectTransform.position;
@@ -409,8 +422,7 @@ public class Loot : MonoBehaviour, IInteractible
     public void OverlayLoot()
     {
         isOverlayed = true;
-        InventoriesManager.Instance.DetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, false);
-        InventoriesManager.Instance.HoverLoot(this);
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, false);
 
         AudioManager.Instance.PlaySoundOneShot(0, 0);
 
@@ -421,21 +433,16 @@ public class Loot : MonoBehaviour, IInteractible
     private IEnumerator OverlayLootCoroutine(float duration)
     {
         _imageBackground.rectTransform.UChangeScale(duration, saveSize * 1.35f, CurveType.EaseInOutSin);
-        //_imageBackground.material.ULerpMaterialColor(duration, Color.white * 0.2f, "_AddedColor");
-        //_image.material.ULerpMaterialColor(duration, Color.white * 0.3f, "_AddedColor");
 
         yield return new WaitForSeconds(duration);
 
         _imageBackground.rectTransform.UChangeScale(duration * 0.3f, saveSize * 1.2f, CurveType.EaseInOutSin);
-        //_imageBackground.material.ULerpMaterialColor(duration * 0.3f, Color.white * 0.1f, "_AddedColor");
-        //_image.material.ULerpMaterialColor(duration * 0.3f, Color.white * 0.15f, "_AddedColor");
     }
 
     public void QuitOverlayLoot()
     {
         isOverlayed = false;
-        InventoriesManager.Instance.DetailsPanel.HideDetails();
-        InventoriesManager.Instance.UnhoverLoot(this);
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
         if (overlayCoroutine is not null) StopCoroutine(overlayCoroutine);
 
@@ -458,7 +465,7 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void ClickLoot()
     {
-        InventoriesManager.Instance.DetailsPanel.HideDetails();
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
         AudioManager.Instance.PlaySoundOneShot(0, 1);
 
@@ -618,9 +625,12 @@ public class Loot : MonoBehaviour, IInteractible
         InventorySlot bottomLeftSlot = InventoriesManager.Instance.VerifyIsOverlayingSlot(raycastPos, _imageBackground.rectTransform.position);
 
         if (bottomLeftSlot is null) return new List<InventorySlot>();
+        List<InventorySlot> finalOverlayedSlots = bottomLeftSlot.AssociatedInventory.GetOverlayedCoordinates(bottomLeftSlot.SlotCoordinates, 
+            lootData.spaceTaken, _imageBackground.rectTransform.eulerAngles.z);
 
-        return bottomLeftSlot.AssociatedInventory.GetOverlayedCoordinates(bottomLeftSlot.SlotCoordinates, lootData.spaceTaken, 
-            _imageBackground.rectTransform.eulerAngles.z);
+        if(finalOverlayedSlots.Count == 0) return new List<InventorySlot>();
+
+        return finalOverlayedSlots;
     }
 
     private int GetNeededOccupiedSpace()

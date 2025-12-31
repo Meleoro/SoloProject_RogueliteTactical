@@ -21,6 +21,8 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [Header("Public Infos")]
     public bool IsInTransition { get { return isInTransition; } }
     public CollectionMenu CollectionMenu { get { return _collectionMenu; } }
+    public MainMetaMenu MainMetaMenu { get { return _mainMetaMenu; } }
+    public GenericDetailsPanel GenericDetailsPanel { get { return _genericDetailsPanel; } }
 
     [Header("References")]
     [SerializeField] private Transform _globalParent;
@@ -29,6 +31,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [SerializeField] private ChestMenu _chestMenu;
     [SerializeField] private ShopMenu _shopMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
+    [SerializeField] private GenericDetailsPanel _genericDetailsPanel;
     
 
     public override void Awake()

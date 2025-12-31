@@ -11,6 +11,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private LootData itemData;
     [SerializeField] private Color validColor;
     [SerializeField] private Color invalidColor;
+    [SerializeField] private bool reverseDetails;
 
     [Header("Action")]
     public Action<ShopItem, LootData> OnValidClick;
@@ -55,6 +56,8 @@ public class ShopItem : MonoBehaviour
     {
         _itemImage.DOComplete();
 
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(itemData, transform.position, reverseDetails);
+
         _itemImage.rectTransform.DOScale(Vector3.one * 1.2f, 0.15f).SetEase(Ease.OutCubic);
         _itemImage.rectTransform.DOLocalMove(originalPos + Vector3.up * 10f, 0.15f).SetEase(Ease.OutCubic);
         _itemImage.material.DOFloat(1f, "_OutlineSize", 0.15f).SetEase(Ease.OutCubic);
@@ -64,6 +67,8 @@ public class ShopItem : MonoBehaviour
     {
         _itemImage.DOComplete();
         _itemImage.rectTransform.DOComplete();
+
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
         StopAllCoroutines();
 

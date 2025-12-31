@@ -54,6 +54,17 @@ public class InventoryActionPanel : MonoBehaviour
         }
 
         _mainRectTr.position = associatedLoot.Image.rectTransform.position + offset;
+
+        // Sell Button
+        if (GameManager.Instance.IsInExplo)
+        {
+            _buttonsRectTr[6].gameObject.SetActive(false);
+        }
+        else 
+        {
+            _buttonsRectTr[6].gameObject.SetActive(true);
+            _buttonsTexts[6].text = "SELL (" + (int)(associatedLoot.LootData.value * 0.5f) + ")";
+        }
     }
 
     public void ClosePanel()
@@ -100,6 +111,16 @@ public class InventoryActionPanel : MonoBehaviour
     public void PressThrow()
     {
         currentLoot.BecomeWorldItem();
+
+        ClosePanel();
+    }
+
+    public void PressSell()
+    {
+        InventoriesManager.Instance.AddCoins((int)(currentLoot.LootData.value * 0.5f));
+
+        InventoriesManager.Instance.RemoveItem(currentLoot);
+        currentLoot.DestroyItem();
 
         ClosePanel();
     }

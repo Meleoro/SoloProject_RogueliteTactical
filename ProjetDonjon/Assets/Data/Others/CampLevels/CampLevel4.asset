@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: CampLevel4
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
   neededRelicCount: 8
-  unlockType: 1
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 1
+  unlockType: 0
+  unlockName: 'NEW HERO: THE SAMURAI'
+  unlockDescription: "La m\xEAme qu'avant : vous avez rien gagn\xE9, le samurai champignon
+    est pas encore dans le jeu :("
+  unlockedHeroIndex: 2
+  unlockedExpeditionIndex: 0

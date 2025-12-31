@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: CampLevel3
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
   neededRelicCount: 5
-  unlockType: 3
-  unlockName: 'UNLOCKED: THE BLACKSMITH'
-  unlockDescription: 
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 0
+  unlockType: 1
+  unlockName: 'NEW AREA: THE TEMPLE'
+  unlockDescription: "En gros l\xE0 vous devriez obtenir l'acc\xE8s vers la seconde
+    zone, mais elle est pas encore dans le jeu, donc en fait vous avez rien gagn\xE9
+    voil\xE0"
+  unlockedHeroIndex: 0
+  unlockedExpeditionIndex: 1

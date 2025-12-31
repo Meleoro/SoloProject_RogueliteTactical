@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: CampLevel5
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
   neededRelicCount: 12
-  unlockType: 0
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 0
+  unlockType: 3
+  unlockName: 'UNLOCKED : THE BLACKSMITH'
+  unlockDescription: Toujours rien
+  unlockedHeroIndex: 0
+  unlockedExpeditionIndex: 0

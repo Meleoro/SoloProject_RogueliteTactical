@@ -61,8 +61,6 @@ public class UpgradePanel : MonoBehaviour
         {
             _matTexts[i].text = "";
             _matIcons[i].enabled = false;
-
-            Debug.Log(12);
         }
 
         ActualiseResourcesFeedbacks();

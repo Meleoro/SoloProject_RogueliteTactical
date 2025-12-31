@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel6
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 18
+  neededRelicCount: 16
   unlockType: 1
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 2
+  unlockName: 'NEW AREA: THE LIBRARY'
+  unlockDescription: 
+  unlockedHeroIndex: 0
+  unlockedExpeditionIndex: 0

@@ -10,9 +10,6 @@ using Utilities;
 
 public class MainMetaMenu : MonoBehaviour
 {
-    [Header("Parameters")]
-    [SerializeField] private float hoverRotationPower = 5f;
-
     [Header("Private Infos")]
     private Coroutine hoverCoroutine;
     private Vector2[] saveLocalPosShadows;
@@ -20,6 +17,7 @@ public class MainMetaMenu : MonoBehaviour
     private CampLevelData[] campLevels;
     private int currentCampLevel;
     private int currentRelicCount;
+    private bool loadedCampProgress;
 
     [Header("References")]
     [SerializeField] private RectTransform[] _buttonsRectTr;
@@ -41,6 +39,8 @@ public class MainMetaMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _campLevelProgressText;
     [SerializeField] private TextMeshProUGUI _campLevelMainText;
     [SerializeField] private PopUp _popUp;
+    [SerializeField] private Lock _shopLock;
+    [SerializeField] private Lock _smithLock;
 
 
 
@@ -52,11 +52,6 @@ public class MainMetaMenu : MonoBehaviour
         {
             saveLocalPosShadows[i] = _shadowsRectTr[i].localPosition;
         }
-
-        campLevels = RelicsManager.Instance.CampLevels;
-        currentCampLevel = RelicsManager.Instance.CurrentCampLevel;
-
-        ActualiseCampProgress();
     }
 
 
@@ -178,26 +173,27 @@ public class MainMetaMenu : MonoBehaviour
             StopCoroutine(hoverCoroutine);
         }
 
+        _buttonsRectTr[index].DOComplete();
         hoverCoroutine = StartCoroutine(HoverButtonCoroutine(index));
     }
 
     private IEnumerator HoverButtonCoroutine(int index)
     {
-        _buttonsRectTr[index].DOScale(Vector3.one * 1.3f, 0.1f).SetEase(Ease.InOutSine);
+        //_buttonsRectTr[index].DOScale(Vector3.one * 1.3f, 0.1f).SetEase(Ease.InOutSine);
 
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
 
-        _buttonsRectTr[index].DOScale(Vector3.one * 1.15f, 0.2f).SetEase(Ease.InOutSine);
+        _buttonsRectTr[index].DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutCubic);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
 
         while(true)
         {
-            _buttonsRectTr[index].DOScale(Vector3.one * 1.2f, 0.85f).SetEase(Ease.InOutSine);
+            _buttonsRectTr[index].DOScale(Vector3.one * 1.15f, 0.85f).SetEase(Ease.InOutSine);
 
             yield return new WaitForSeconds(1f);
 
-            _buttonsRectTr[index].DOScale(Vector3.one * 1.15f, 0.85f).SetEase(Ease.InOutSine);
+            _buttonsRectTr[index].DOScale(Vector3.one * 1.1f, 0.85f).SetEase(Ease.InOutSine);
 
             yield return new WaitForSeconds(1f);
         }
@@ -213,8 +209,7 @@ public class MainMetaMenu : MonoBehaviour
         }
 
         _buttonsRectTr[index].DOComplete();
-
-        _buttonsRectTr[index].DOScale(Vector3.one * 1f, 0.2f).SetEase(Ease.InOutSine);
+        _buttonsRectTr[index].DOScale(Vector3.one * 1f, 0.2f).SetEase(Ease.OutCubic);
     }
 
     #endregion
@@ -222,8 +217,34 @@ public class MainMetaMenu : MonoBehaviour
 
     #region Camps Level
     
+    // Called when the relic count is loaded from the save
+    public void LoadCampProgress()
+    {
+        loadedCampProgress = true;
+
+        campLevels = RelicsManager.Instance.CampLevels;
+        currentCampLevel = RelicsManager.Instance.CurrentCampLevel;
+        currentRelicCount = RelicsManager.Instance.CurrentCampRelicCount;
+
+        if (RelicsManager.Instance.VerifyHasCampUpgrade(CampLevelData.CampUnlockType.Shop))
+        {
+            _shopLock.Unlock(true);
+        }
+
+        if (RelicsManager.Instance.VerifyHasCampUpgrade(CampLevelData.CampUnlockType.Blacksmith))
+        {
+            _shopLock.Unlock(true);
+        }
+
+        _campLevelProgressBar.fillAmount = currentRelicCount / campLevels[currentCampLevel].neededRelicCount;
+        _campLevelProgressText.text = currentRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
+        _campLevelMainText.text = "CAMP LEVEL " + currentCampLevel;
+    }
+
     public void ActualiseCampProgress()
     {
+        if (!loadedCampProgress) return;
+
         int previousCampLevel = RelicsManager.Instance.CurrentCampLevel;
         int previousRelicCount = RelicsManager.Instance.CurrentCampRelicCount;
 
@@ -264,10 +285,20 @@ public class MainMetaMenu : MonoBehaviour
         // If we gain a new level
         _campLevelProgressBar.fillAmount = 0;
         _campLevelMainText.text = "CAMP LEVEL " + ++currentCampLevel;
-        _campLevelProgressText.text = campLevels[currentCampLevel].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
+        _campLevelProgressText.text = campLevels[currentCampLevel - 1].neededRelicCount + "/" + campLevels[currentCampLevel - 1].neededRelicCount;
 
-        _popUp.DisplayPopUp(campLevels[currentCampLevel]);
+        _popUp.DisplayPopUp(campLevels[currentCampLevel - 1]);
         _popUp.OnHide += ContinueProgress;
+
+        if (campLevels[currentCampLevel - 1].unlockType == CampLevelData.CampUnlockType.Shop)
+        {
+            _shopLock.Unlock(false);
+        }
+
+        else if (campLevels[currentCampLevel - 1].unlockType == CampLevelData.CampUnlockType.Blacksmith)
+        {
+            _smithLock.Unlock(false);
+        }
     }
 
     public void ContinueProgress()

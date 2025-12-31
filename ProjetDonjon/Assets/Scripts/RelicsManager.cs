@@ -143,6 +143,8 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
             currentCampLevel = campLevels.Length - 1;
         }
 
+        ActualiseCampLevel();
+        UIMetaManager.Instance.MainMetaMenu.LoadCampProgress();
     }
 
     public void SaveGame(ref GameData data)

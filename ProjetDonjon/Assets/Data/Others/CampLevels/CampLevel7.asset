@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel7
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 24
+  neededRelicCount: 22
   unlockType: 0
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 0
+  unlockName: 'UNLOCKED: THE MAGE'
+  unlockDescription: 
+  unlockedHeroIndex: 0
+  unlockedExpeditionIndex: 0

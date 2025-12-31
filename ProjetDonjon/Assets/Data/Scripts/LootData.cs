@@ -42,6 +42,7 @@ public enum SpecialEquipmentEffectType
 public class LootData : ScriptableObject
 {
     [Header("Main Infos")]
+    public int lootID;
     public string lootName;
     public string lootDescription;
     public LootType lootType;

@@ -6,8 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using static GameData;
 
-public class InventoriesManager : GenericSingletonClass<InventoriesManager>
+public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISaveable
 {
     [Header("Parameters")]
     [SerializeField] private float openEffectDuration;
@@ -15,6 +16,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     public float slotSize;
     [SerializeField] private Sprite[] inventoryBackSprites;
     [SerializeField] private Loot lootPrefab;
+    [SerializeField] private LootData[] allLootDatas;
 
     [Header("Actions")]
     public Action OnInventoryOpen;
@@ -27,10 +29,10 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     private List<Loot> allLoots = new List<Loot>();
     private int inventoryInstantiatedAmount = 0;
     private int currentCoins;
+    private bool alreadyLoadedSave;
 
     [Header("Public Infos")]
     public RectTransform MainLootParent { get { return _mainLootParent; } }
-    public GenericDetailsPanel DetailsPanel { get { return _detailsPanel; } }
     public InventoryActionPanel InventoryActionPanel { get { return _inventoryActionsPanel; } }  
     public int CurrentCoins { get { return currentCoins; } }
 
@@ -46,7 +48,6 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     [SerializeField] private RectTransform _inventoriesParent;
     [SerializeField] private Image _backInventoriesImage;
     [SerializeField] private Image _backFadeImage;
-    [SerializeField] private GenericDetailsPanel _detailsPanel;
     [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
     [SerializeField] private CoinUI _coinUI;
     [SerializeField] private Inventory _chestInventory;
@@ -78,6 +79,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
 
         return heroesInventories[index];
     }
+
 
     public void AddSlots(InventorySlot[] addedSlots)
     {
@@ -127,7 +129,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
         {
             if(allLoots[i].LootData == item)
             {
+                RemoveItem(allLoots[i]);
                 allLoots[i].DestroyItem();
+                break;
             }
         }
     }
@@ -253,6 +257,76 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
     #endregion
 
 
+    #region Save
+
+    public void LoadGame(GameData data)
+    {
+        // To avoid creating multiple times the same objects
+        if (alreadyLoadedSave) return;
+        alreadyLoadedSave = true;
+
+        StartCoroutine(LoadGameWithDelayCoroutine(0.25f, data));
+    }
+
+    private IEnumerator LoadGameWithDelayCoroutine(float delay, GameData data)
+    {
+        yield return new WaitForSeconds(delay);
+
+        for (int i = 0; i < data.savedInventoryItems.Count; i++)
+        {
+            // First we pick the right inventory
+            Inventory concernedInventory = null;
+            if (data.savedInventoryItems[i].inventoryID == -1) concernedInventory = _chestInventory;
+            else concernedInventory = heroesInventories[data.savedInventoryItems[i].inventoryID];
+
+            if (concernedInventory is null) continue;
+
+            // Next we find the item data
+            LootData lootData = null;
+
+            for (int j = 0; j < allLootDatas.Length; j++)
+            {
+                if (allLootDatas[j].lootName != data.savedInventoryItems[i].itemID) continue;
+
+                lootData = allLootDatas[j];
+                break;
+            }
+
+            if (lootData is null) continue;
+
+            //Then we create the object and put it in the inventory
+            Loot item = Instantiate(lootPrefab);
+            item.Initialise(lootData);
+            item.BecomeInventoryItem(false, data.savedInventoryItems[i].angle);
+
+            item.PlaceInInventory(concernedInventory.GetOverlayedCoordinates(data.savedInventoryItems[i].coord,
+                lootData.spaceTaken, data.savedInventoryItems[i].angle));
+        }
+    }
+
+    public void SaveGame(ref GameData data)
+    {
+        List<ItemSaveStruct> itemsToSave = new List<ItemSaveStruct>();
+
+        for (int i = 0; i < allLoots.Count; i++)
+        {
+            string itemID = allLoots[i].LootData.lootName;
+            int inventoryID = -1;
+            if (allLoots[i].AssociatedHero is not null) inventoryID = allLoots[i].AssociatedHero.HeroIndex;
+            Vector2Int coord = allLoots[i].BottomLeftSlot.SlotCoordinates;
+            int angle = allLoots[i].CurrentAngle;
+            bool isEquipped = allLoots[i].IsEquipped;
+
+            itemsToSave.Add(new ItemSaveStruct(itemID, inventoryID, coord, angle, isEquipped));
+        }
+
+        data.savedInventoryItems = itemsToSave;
+    }
+
+
+    #endregion
+
+
     #region Others
 
     public int GetItemCount(LootData material)
@@ -301,7 +375,6 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>
 
         return bestSlot;
     }
-
 
     #endregion
 }

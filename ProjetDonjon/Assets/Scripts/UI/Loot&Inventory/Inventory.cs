@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utilities;
-using static UnityEditor.Progress;
+
 
 public class Inventory : MonoBehaviour
 {
@@ -208,6 +207,86 @@ public class Inventory : MonoBehaviour
     #endregion
 
 
+    #region Auto Place 
+
+    public bool VerifyCanPlaceItem(LootData data)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 0);
+            if (overlayedSlots.Count == 0) continue;
+
+            return true;
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 90);
+            if (overlayedSlots.Count == 0) continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool AutoPlaceItem(Loot item)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, item.LootData.spaceTaken, 0);
+            if (overlayedSlots.Count == 0) continue;
+
+            item.PlaceInInventory(overlayedSlots);
+            return true;
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, item.LootData.spaceTaken, 90);
+            if (overlayedSlots.Count == 0) continue;
+
+            item.PlaceInInventory(overlayedSlots);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<InventorySlot> GetOverlayedCoordinates(Vector2Int bottomLeftCoord, SpaceTakenRow[] spaceTaken, float currentAngle)
+    {
+        List<InventorySlot> validSlots = new List<InventorySlot>();
+
+        for (int y = 0; y < spaceTaken.Length; y++)
+        {
+            for (int x = 0; x < spaceTaken[y].row.Length; x++)
+            {
+                Vector2 currentCoord = bottomLeftCoord;
+                currentCoord += new Vector2(x, y).RotateDirection(currentAngle);
+
+                InventorySlot currentSlot = GetSlotAtCoord(new Vector2Int(Mathf.RoundToInt(currentCoord.x), Mathf.RoundToInt(currentCoord.y)));
+
+                if (currentSlot is null) return new List<InventorySlot>();    // If the placement isn't valid
+                if (currentSlot.VerifyHasLoot()) return new List<InventorySlot>();
+                if (!currentSlot.IsAvailable) return new List<InventorySlot>();
+
+                validSlots.Add(currentSlot);             // If the placement is valid
+            }
+        }
+
+        return validSlots;
+    }
+
+    private InventorySlot GetSlotAtCoord(Vector2Int coord)
+    {
+        if (coord.x < 0 || coord.y < 0) return null;
+        if (coord.x >= inventorySlotsTab.GetLength(0) || coord.y >= inventorySlotsTab.GetLength(1)) return null;
+        return inventorySlotsTab[coord.x, coord.y];
+    }
+
+    #endregion
+
+
     #region Others
 
     public InventorySlot[] GetSlots()
@@ -295,86 +374,6 @@ public class Inventory : MonoBehaviour
 
         _rectTransform.position = _hiddenRectTr.position;
         _lootParent.position = _hiddenRectTr.position;
-    }
-
-    #endregion
-
-
-    #region Auto Place 
-
-    public bool VerifyCanPlaceItem(LootData data)
-    {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 0);
-            if (overlayedSlots.Count == 0) continue;
-
-            return true;
-        }
-
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, data.spaceTaken, 90);
-            if (overlayedSlots.Count == 0) continue;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool AutoPlaceItem(Loot item)
-    {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, item.LootData.spaceTaken, 0);
-            if (overlayedSlots.Count == 0) continue;
-
-            item.PlaceInInventory(overlayedSlots);
-            return true;
-        }
-
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            List<InventorySlot> overlayedSlots = GetOverlayedCoordinates(inventorySlots[i].SlotCoordinates, item.LootData.spaceTaken, 90);
-            if (overlayedSlots.Count == 0) continue;
-
-            item.PlaceInInventory(overlayedSlots);
-            return true;
-        }
-
-        return false;
-    }
-
-    public List<InventorySlot> GetOverlayedCoordinates(Vector2Int bottomLeftCoord, SpaceTakenRow[] spaceTaken, float currentAngle)
-    {
-        List<InventorySlot> validSlots = new List<InventorySlot>();
-
-        for (int y = 0; y < spaceTaken.Length; y++)
-        {
-            for (int x = 0; x < spaceTaken[y].row.Length; x++)
-            {
-                Vector2 currentCoord = bottomLeftCoord;
-                currentCoord += new Vector2(x, y).RotateDirection(currentAngle);
-
-                InventorySlot currentSlot = GetSlotAtCoord(new Vector2Int(Mathf.RoundToInt(currentCoord.x), Mathf.RoundToInt(currentCoord.y)));
-
-                if (currentSlot is null) return new List<InventorySlot>();    // If the placement isn't valid
-                if (currentSlot.VerifyHasLoot()) return new List<InventorySlot>();
-                if (!currentSlot.IsAvailable) return new List<InventorySlot>();
-
-                validSlots.Add(currentSlot);             // If the placement is valid
-            }
-        }
-
-        return validSlots;
-    }
-
-    private InventorySlot GetSlotAtCoord(Vector2Int coord)
-    {
-        if(coord.x < 0 || coord.y < 0) return null;
-        if (coord.x >= inventorySlotsTab.GetLength(0) || coord.y >= inventorySlotsTab.GetLength(1)) return null;
-        return inventorySlotsTab[coord.x, coord.y];
     }
 
     #endregion

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Sword3
   m_EditorClassIdentifier: 
-  lootName: CRISTAL SWORD
-  lootDescription: 
+  lootID: 0
+  lootName: METAL SWORD
+  lootDescription: If the unit has Shield on it, deals +2 damages
   lootType: 1
+  rarityType: 1
   sprite: {fileID: 69072542855030155, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
   value: 50
   spaceTaken:

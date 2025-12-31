@@ -37,8 +37,6 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         baseSize = _rectTr.localScale;
-
-        //_mainSpriteRenderer.sprite = possibleSprites[Random.Range(0, possibleSprites.Length)];
     }
 
     public void SetupCoordinates(Vector2Int coordinates)
