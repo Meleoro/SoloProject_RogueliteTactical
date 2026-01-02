@@ -52,6 +52,9 @@ public class GenericDetailsPanel : MonoBehaviour
         {
             _statGlobalParent.gameObject.SetActive(true);
 
+            if (mirrorHorizontal) _mainRectTr.position = _mainRectTr.position + Vector3.left * 0.75f;
+            else _mainRectTr.position = _mainRectTr.position;
+
             for (int i = 0; i < _statsParents.Length; i++)
             {
                 _statsParents[i].gameObject.SetActive(false);

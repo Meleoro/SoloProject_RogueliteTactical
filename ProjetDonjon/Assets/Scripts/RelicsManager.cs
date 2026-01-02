@@ -20,6 +20,7 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
 
     [Header("Actions")]
     public Action<RelicData, int> OnRelicObtained;
+    public Action OnLevelUp;
 
     [Header("Private Infos")]
     private List<RelicData> currentAvailableRelics;
@@ -144,7 +145,9 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
         }
 
         ActualiseCampLevel();
+
         UIMetaManager.Instance.MainMetaMenu.LoadCampProgress();
+        HeroesManager.Instance.Initialise();
     }
 
     public void SaveGame(ref GameData data)
@@ -176,6 +179,11 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
             if (campLevels[i].neededRelicCount > currentPossessedRelicCount && !unlockAllDebug) continue;
             currentCampLevel = i + 1;
         }
+    }
+
+    public void CampLevelUp()
+    {
+        OnLevelUp?.Invoke();
     }
 
     public CampLevelData[] GetUnlockedCampLevels()

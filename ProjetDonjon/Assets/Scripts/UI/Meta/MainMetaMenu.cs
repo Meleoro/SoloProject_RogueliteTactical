@@ -290,6 +290,8 @@ public class MainMetaMenu : MonoBehaviour
         _popUp.DisplayPopUp(campLevels[currentCampLevel - 1]);
         _popUp.OnHide += ContinueProgress;
 
+        RelicsManager.Instance.CampLevelUp();
+
         if (campLevels[currentCampLevel - 1].unlockType == CampLevelData.CampUnlockType.Shop)
         {
             _shopLock.Unlock(false);

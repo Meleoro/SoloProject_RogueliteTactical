@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private float distanceBetweenSlots;
+    [SerializeField] private float inventoryScale;
     [SerializeField] private bool isChest;
 
     [Header("Public Infos")]
@@ -57,6 +58,20 @@ public class Inventory : MonoBehaviour
 
         originalParent = _rectTransform.parent as RectTransform;
         originalLootParentParent = _lootParent.parent as RectTransform;
+
+        if(inventorySlots is null)
+        {
+            baseSlots = _slotsParent.GetComponentsInChildren<InventorySlot>();
+            upgradeSlots1 = _upgrade1SlotsParent.GetComponentsInChildren<InventorySlot>();
+            upgradeSlots2 = _upgrade2SlotsParent.GetComponentsInChildren<InventorySlot>();
+
+            inventorySlots = baseSlots.Concat(upgradeSlots1).Concat(upgradeSlots2).ToArray();
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].SetupReferences(_lootParent, _slotsParent, _overlayedSlotsParent, this);
+        }
     }
 
     public void InitialiseInventory(Hero hero)
@@ -78,7 +93,6 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             inventorySlotsTab[inventorySlots[i].SlotCoordinates.x, inventorySlots[i].SlotCoordinates.y] = inventorySlots[i];
-            inventorySlots[i].SetupReferences(_lootParent, _slotsParent, _overlayedSlotsParent, this);
         }
 
         for (int i = 0; i < baseSlots.Length; i++)
@@ -172,6 +186,8 @@ public class Inventory : MonoBehaviour
 
     public IEnumerator OpenInventoryCoroutine(float duration)
     {
+        RebootPosition();
+
         _rectTransform.position = _hiddenRectTr.position;
         _lootParent.position = _hiddenRectTr.position;
 
@@ -369,11 +385,14 @@ public class Inventory : MonoBehaviour
 
     public void RebootPosition()
     {
-        _rectTransform.SetParent(originalParent);
-        _lootParent.SetParent(originalLootParentParent);
+        _rectTransform.SetParent(originalParent, true);
+        _lootParent.SetParent(originalLootParentParent, true);
 
         _rectTransform.position = _hiddenRectTr.position;
         _lootParent.position = _hiddenRectTr.position;
+
+        _rectTransform.localScale = Vector3.one * inventoryScale;
+        _lootParent.localScale = Vector3.one;
     }
 
     #endregion

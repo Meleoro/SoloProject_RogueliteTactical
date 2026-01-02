@@ -47,7 +47,9 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     private void Start()
     {
-        if (!isInitialised) Initialise();
+        RelicsManager.Instance.OnLevelUp += ActualiseUnlockedHeroes;
+
+        //if (!isInitialised) Initialise();
     }
 
 
@@ -118,8 +120,18 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     #region Initialisation / Environment Related
 
-    private void Initialise()
+    public void Initialise()
     {
+        if(HeroesEquippedSkillNames is null)   // When we want to initialise the heroes, but the save still haven't been loaded
+        {
+            StartCoroutine(InitialiseWithDelayCoroutine());
+            return;
+        }
+        if (isInitialised) 
+        {
+            ActualiseUnlockedHeroes();
+            return;
+        }
         isInitialised = true;
 
         allHeroes = new Hero[allHeroesPrefabs.Length];
@@ -136,7 +148,10 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         List<Hero> heroesList = new List<Hero>();
         for (int i = 0; i < allHeroes.Length; i++)
         {
+            if (i > 3) return;
             if (i != 0 && !RelicsManager.Instance.VerifyHasCampUpgrade(CampLevelData.CampUnlockType.NewHero, i)) continue;
+
+            _inventoryManager.EnableInventory(i);
 
             heroesList.Add(GetHeroObject(allHeroes[i]));
             heroesList[i].transform.position = Vector3.zero;
@@ -144,6 +159,31 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
         heroes = heroesList.ToArray();
     }
+
+    public IEnumerator InitialiseWithDelayCoroutine()
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        Initialise();
+    }
+
+    public void ActualiseUnlockedHeroes()
+    {
+        List<Hero> heroesList = new List<Hero>();
+        for (int i = 0; i < allHeroes.Length; i++)
+        {
+            if (i > 3) return;
+            if (i != 0 && !RelicsManager.Instance.VerifyHasCampUpgrade(CampLevelData.CampUnlockType.NewHero, i)) continue;
+
+            _inventoryManager.EnableInventory(i);
+
+            heroesList.Add(GetHeroObject(allHeroes[i]));
+            heroesList[i].transform.position = Vector3.zero;
+        }
+
+        heroes = heroesList.ToArray();
+    }
+
 
     public void StartExploration(Vector2 spawnPos)
     {
@@ -323,10 +363,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             {
                 HeroesEquippedSkillNames[i * 6] = allHeroesPrefabs[i].HeroData.heroBaseSkills[0].skillName;
                 HeroesEquippedSkillNames[i * 6 + 1] = allHeroesPrefabs[i].HeroData.heroBaseSkills[1].skillName;
-
-                
             }
-
         }
     }
 

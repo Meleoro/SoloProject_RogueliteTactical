@@ -24,7 +24,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public Action OnInventoryChange;
 
     [Header("Private Infos")]
-    private Inventory[] heroesInventories = new Inventory[3];
+    private Inventory[] allHeroesInventories = new Inventory[4];
+    private Inventory[] currentHeroesInventories = new Inventory[3];
+    private bool[] enabledInventories = new bool[4];
     private List<InventorySlot> allSlots = new List<InventorySlot>();
     private List<Loot> allLoots = new List<Loot>();
     private int inventoryInstantiatedAmount = 0;
@@ -60,24 +62,44 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     public Inventory InitialiseInventory(Inventory inventoryPrefab, int index, Hero hero)
     {
-        heroesInventories[index] = Instantiate(inventoryPrefab, _inventoriesParent);
-        heroesInventories[index].SetupPosition(_hiddenInventoryPositions[index], _shownInventoryPositions[index], _lootParents[index]);
-        heroesInventories[index].InitialiseInventory(hero);
+        allHeroesInventories[index] = Instantiate(inventoryPrefab, _inventoriesParent);
+        allHeroesInventories[index].InitialiseInventory(hero);
 
-        _backInventoriesImage.sprite = inventoryBackSprites[index];
-        _backInventoriesImage.SetNativeSize();
-
-        allSlots.AddRange(heroesInventories[index].GetSlots());
-        inventoryInstantiatedAmount++;
-
-        _hiddenInventoryPositions[index].gameObject.SetActive(true);
-        _shownInventoryPositions[index].gameObject.SetActive(true);
+        allSlots.AddRange(allHeroesInventories[index].GetSlots());
 
         StartCoroutine(ResetPosDelayCoroutine());
+        StartCoroutine(SetupStartItemsCoroutine(allHeroesInventories[index], hero));
 
-        StartCoroutine(SetupStartItemsCoroutine(heroesInventories[index], hero));
+        return allHeroesInventories[index];
+    }
 
-        return heroesInventories[index];
+    public void EnableInventory(int index)
+    {
+        if (enabledInventories[index]) return;
+
+        currentHeroesInventories[inventoryInstantiatedAmount] = allHeroesInventories[index];
+        enabledInventories[index] = true;
+
+        currentHeroesInventories[inventoryInstantiatedAmount].SetupPosition(_hiddenInventoryPositions[inventoryInstantiatedAmount],
+            _shownInventoryPositions[inventoryInstantiatedAmount], _lootParents[inventoryInstantiatedAmount]);
+
+        _hiddenInventoryPositions[inventoryInstantiatedAmount].gameObject.SetActive(true);
+        _shownInventoryPositions[inventoryInstantiatedAmount].gameObject.SetActive(true);
+
+        _backInventoriesImage.sprite = inventoryBackSprites[inventoryInstantiatedAmount];
+        _backInventoriesImage.SetNativeSize();
+
+        inventoryInstantiatedAmount++;
+    }
+
+    public void DisableInventory(int index)
+    {
+        enabledInventories[index] = false;
+
+        inventoryInstantiatedAmount--;
+
+        _backInventoriesImage.sprite = inventoryBackSprites[inventoryInstantiatedAmount];
+        _backInventoriesImage.SetNativeSize();
     }
 
 
@@ -94,9 +116,12 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
         {
-            heroesInventories[i].RebootPosition(); 
+            currentHeroesInventories[i].RebootPosition(); 
         }
     }
+
+
+    #region Main Functions
 
     // Opens the inventories and add a new item to place
     public void AddItemToInventories(Loot loot)
@@ -125,9 +150,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     // Called when an item is used
     public void DestroyItem(LootData item)
     {
-        for(int i = 0; i < allLoots.Count; i++)
+        for (int i = 0; i < allLoots.Count; i++)
         {
-            if(allLoots[i].LootData == item)
+            if (allLoots[i].LootData == item)
             {
                 RemoveItem(allLoots[i]);
                 allLoots[i].DestroyItem();
@@ -143,6 +168,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         OnInventoryChange?.Invoke();
     }
 
+    #endregion
+
 
     #region Open / Close Functions
 
@@ -150,7 +177,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         for(int i = 0; i < inventoryInstantiatedAmount; i++)
         {
-            if (!heroesInventories[i].GetCanOpenOrClose())
+            if (!currentHeroesInventories[i].GetCanOpenOrClose())
                 return false;
         }
 
@@ -187,7 +214,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
         {
-            StartCoroutine(heroesInventories[i].OpenInventoryCoroutine(openEffectDuration));
+            StartCoroutine(currentHeroesInventories[i].OpenInventoryCoroutine(openEffectDuration));
         }
 
         await Task.Delay((int)(openEffectDuration * 0.75f * 1000));
@@ -210,7 +237,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
         {
-            StartCoroutine(heroesInventories[i].CloseInventoryCoroutine(closeEffectDuration));
+            StartCoroutine(currentHeroesInventories[i].CloseInventoryCoroutine(closeEffectDuration));
         }
     }
 
@@ -277,7 +304,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
             // First we pick the right inventory
             Inventory concernedInventory = null;
             if (data.savedInventoryItems[i].inventoryID == -1) concernedInventory = _chestInventory;
-            else concernedInventory = heroesInventories[data.savedInventoryItems[i].inventoryID];
+            else concernedInventory = allHeroesInventories[data.savedInventoryItems[i].inventoryID];
 
             if (concernedInventory is null) continue;
 
@@ -333,10 +360,10 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         int currentCount = 0;
 
-        for(int i = 0; i < heroesInventories.Length; i++)
+        for(int i = 0; i < allHeroesInventories.Length; i++)
         {
-            if (heroesInventories[i] == null) continue;
-            currentCount += heroesInventories[i].GetItemCount(material);
+            if (allHeroesInventories[i] == null) continue;
+            currentCount += allHeroesInventories[i].GetItemCount(material);
         }
 
         currentCount += _chestInventory.GetItemCount(material);

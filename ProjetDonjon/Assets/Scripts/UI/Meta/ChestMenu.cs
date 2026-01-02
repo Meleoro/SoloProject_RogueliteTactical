@@ -58,10 +58,10 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
         currentInventory = currentHero.Inventory;
 
-        currentInventory.RectTransform.SetParent(_inventoryParent);
+        currentInventory.RectTransform.SetParent(_inventoryParent, true);
         currentInventory.RectTransform.localPosition = Vector3.zero;
 
-        currentInventory.LootParent.SetParent(_inventoryParent);
+        currentInventory.LootParent.SetParent(_inventoryParent, true);
         currentInventory.LootParent.localPosition = Vector3.zero;
     }
 

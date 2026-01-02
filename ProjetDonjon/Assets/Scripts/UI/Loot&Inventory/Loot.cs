@@ -385,6 +385,11 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void PlaceInInventory(List<InventorySlot> overlayedSlots)
     {
+        if(overlayedSlots.Count == 0)
+        {
+            return;
+        }
+
         Vector3 position = Vector2.zero;
         slotsOccupied = new InventorySlot[overlayedSlots.Count];
 
@@ -422,7 +427,9 @@ public class Loot : MonoBehaviour, IInteractible
     public void OverlayLoot()
     {
         isOverlayed = true;
-        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, false);
+
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, 
+            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.65f);
 
         AudioManager.Instance.PlaySoundOneShot(0, 0);
 

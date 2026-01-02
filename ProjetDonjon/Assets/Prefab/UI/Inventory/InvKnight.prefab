@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenSlots: 75
+  inventoryScale: 0.75
   isChest: 0
   _slotsParent: {fileID: 3719026017874865117}
   _overlayedSlotsParent: {fileID: 7221139497290881991}

@@ -19,5 +19,5 @@ MonoBehaviour:
 
     He can fight from
     a distance, summon forrest creatures to help and cast powerful debuff on enemies'
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 0
+  unlockedHeroIndex: 1
+  unlockedExpeditionIndex: 0
