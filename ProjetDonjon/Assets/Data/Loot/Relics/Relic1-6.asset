@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b35908f0dd9829489f2f95c15984d9a, type: 3}
   m_Name: Relic1-6
   m_EditorClassIdentifier: 
-  relicName: WTF is this
+  relicName: STRANGE ROCK
   relicDescription: 
   relicHint: Can be found everywhere
   icon: {fileID: 1503466479, guid: 65bdc79d4d0e3214394972f5a75bd9c6, type: 3}
-  type: 3
+  rarityType: 2
   spawnType: 0
   spawnProbaPerFloor:
   - 0

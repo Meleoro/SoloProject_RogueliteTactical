@@ -86,6 +86,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
   - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
   - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+  neededXPLevelZero: 8
+  neededXPMultiplicator: 1.25
   _controller: {fileID: 7159339506722094448}
   _spriteRendererParent: {fileID: 5050220775268981595}
   _shadowTransform: {fileID: 316598353547619335}

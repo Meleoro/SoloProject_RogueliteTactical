@@ -14,6 +14,8 @@ public class Hero : Unit
     [SerializeField] private SkillTreeData skillTreeData;
     [SerializeField] private int heroIndex;        // ID To access heroes save
     public LootData[] startLoot;
+    [SerializeField] public int neededXPLevelZero;
+    [SerializeField] public float neededXPMultiplicator;
 
     [Header("Actions")]
     public Action OnClickUnit;
@@ -69,7 +71,7 @@ public class Hero : Unit
         _controller.EndAutoMoveAction += HideHero;
 
         CurrentLevel = HeroesManager.Instance.HeroesLevel[heroIndex];
-        CurrentXPToReach = (int)(10 * ((currentLevel + 1) * 1.25f));
+        CurrentXPToReach = (int)(neededXPLevelZero * ((currentLevel + 1) * neededXPMultiplicator));
 
         skillTreeUnlockedNodes = new bool[15];
         for(int i = 0; i < 15; i++)
@@ -330,7 +332,7 @@ public class Hero : Unit
         currentSkillTreePoints++;
 
         CurrentXP = currentXP - XPToReach;
-        CurrentXPToReach = (int)(XPToReach * 1.25f);
+        CurrentXPToReach = (int)(XPToReach * neededXPMultiplicator);
 
         _ui.ResetXPProgress();
 
@@ -345,13 +347,18 @@ public class Hero : Unit
         currentSkillTreePoints++;
 
         currentXP = currentXP - XPToReach;
-        XPToReach = (int)(XPToReach * 1.25f);
+        XPToReach = (int)(XPToReach * neededXPMultiplicator);
     }
 
     #endregion
 
 
     #region Others
+
+    public void StartExploration()
+    {
+        currentHealth = currentMaxHealth;
+    }
 
     public override void ActualiseUnitInfos(int addedMaxHealth, int addedStrength, int addedSpeed, int addedLuck, int addedMovePoints, int addedSP)
     {

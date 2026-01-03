@@ -154,8 +154,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         {
             if (allLoots[i].LootData == item)
             {
-                RemoveItem(allLoots[i]);
-                allLoots[i].DestroyItem();
+                Loot loot = allLoots[i];
+                RemoveItem(loot);
+                loot.DestroyItem();
                 break;
             }
         }

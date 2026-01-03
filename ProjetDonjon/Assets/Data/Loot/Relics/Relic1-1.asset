@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b35908f0dd9829489f2f95c15984d9a, type: 3}
   m_Name: Relic1-1
   m_EditorClassIdentifier: 
-  relicName: Old Clock
+  relicName: OLD CLOCK
   relicDescription: 
   relicHint: Can be obtained everywhere
   icon: {fileID: 6479744082570966766, guid: 65bdc79d4d0e3214394972f5a75bd9c6, type: 3}
-  type: 0
+  rarityType: 0
   spawnType: 1
   spawnProbaPerFloor:
   - 100

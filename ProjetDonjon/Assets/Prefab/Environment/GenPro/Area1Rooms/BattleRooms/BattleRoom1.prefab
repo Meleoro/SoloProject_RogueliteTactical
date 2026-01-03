@@ -736,7 +736,7 @@ MonoBehaviour:
   battleTilePrefab: {fileID: 9084654784566164501, guid: e950f2b08a81ec248b20f6d3ca670eab, type: 3}
   battleTilesOffset: {x: 1, y: 0.75, z: 0}
   startCameraSize: 6
-  minDangerAmount: 5
+  minDangerAmount: 4
   maxDangerAmount: 8
   holeTiles:
   - {fileID: 11400000, guid: 3b6d3c454fb403d4484c64b28e1d020c, type: 2}

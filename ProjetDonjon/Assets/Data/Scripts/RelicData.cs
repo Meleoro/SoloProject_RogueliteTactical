@@ -8,7 +8,7 @@ public class RelicData : ScriptableObject
     [TextArea] public string relicDescription;
     [TextArea] public string relicHint;
     public Sprite icon;
-    public RarityType type;
+    public RarityType rarityType;
 
     [Header("Spawn Infos")]
     public RelicSpawnType spawnType;

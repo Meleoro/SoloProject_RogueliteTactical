@@ -15,7 +15,8 @@ MonoBehaviour:
   enviroName: THE CRYPT
   enviroDescription: THIS CRYPT FULL OF TREASURE IS ALSO HOME FOR A CIVILISATION
     OF GOBLINS, IT IS ALSO SAID THAT A DARK MAGE LURKS IN THE DEPTH OF THIS CRYPT
-  enviroDangerText: LOW
+  enviroDangerText: 'RECOMMENDED LEVEL : 1 - 8'
+  enviroResourcesTexts: 'RESOURCES : WOOD, IRON'
   enviroIllustration: {fileID: 7975086727044346999, guid: a70726b90ea81ae4ebcea3b9fc470dce, type: 3}
   enviroIndex: 0
   recommandedLevels: 010000000200000004000000050000000600000008000000

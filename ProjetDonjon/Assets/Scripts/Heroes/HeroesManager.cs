@@ -201,6 +201,11 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         ActualiseDisplayedHero();
 
         UIManager.Instance.SetupHeroInfosPanel(heroes);
+
+        for(int i = 0; i < aliveHeroCount; i++)
+        {
+            heroes[i].StartExploration();
+        }
     }
 
     private Hero GetHeroObject(Hero wantedHero)

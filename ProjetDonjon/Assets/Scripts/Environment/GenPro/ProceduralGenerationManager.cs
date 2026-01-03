@@ -51,6 +51,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         this.enviroData = enviroData;
         _heroesManager.StartExploration(spawnPos);
 
+        currentFloor = 0;
+
         trailFloorsIndexes = new int[2];
         trailFloorsIndexes[0] = Random.Range(0, 2);
         trailFloorsIndexes[1] = Random.Range(3, 5);
@@ -69,6 +71,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
         if (!noGeneration)
             GenerateFloor(enviroData);
+
         StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.15f));
     }
 

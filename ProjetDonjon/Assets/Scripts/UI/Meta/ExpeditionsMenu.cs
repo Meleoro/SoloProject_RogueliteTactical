@@ -27,7 +27,8 @@ public class ExpeditionsMenu : MonoBehaviour
     [SerializeField] private RectTransform _shownPositionRectTr;
     [SerializeField] private RectTransform _hiddenPositionRectTr;
     [SerializeField] private TextMeshProUGUI _dangerText;
-    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [SerializeField] private TextMeshProUGUI _resourcesText;
+    [SerializeField] private TextMeshProUGUI _relicText;
     [SerializeField] private TextMeshProUGUI _mainExpeditionName;
     [SerializeField] private Image _mainExpeditionImage;
     [SerializeField] private RectTransform[] _arrowsRectTr;
@@ -39,8 +40,10 @@ public class ExpeditionsMenu : MonoBehaviour
         _mainExpeditionName.text = enviroData.enviroName;
         _mainExpeditionImage.sprite = enviroData.enviroIllustration;
 
-        _descriptionText.text = enviroData.enviroDescription;
-        _dangerText.text = "DANGER : " + enviroData.enviroDangerText;
+        _resourcesText.text = enviroData.enviroResourcesTexts;
+        _dangerText.text = enviroData.enviroDangerText;
+        _relicText.text =  "RELICS FOUND : " + RelicsManager.Instance.GetAreaCurrentRelicCount(enviroData.enviroIndex) + "/" +
+            RelicsManager.Instance.GetAreaAllRelicCount(enviroData.enviroIndex);
     }
 
 
@@ -58,13 +61,7 @@ public class ExpeditionsMenu : MonoBehaviour
 
     private IEnumerator ShowCoroutine()
     {
-        yield return new WaitForSeconds(0.4f);
-
-        _mainRectTr.DOMove(_shownPositionRectTr.position + Vector3.down * 0.4f, 0.3f).SetEase(Ease.InOutSine);
-
-        yield return new WaitForSeconds(0.3f);
-
-        _mainRectTr.DOMove(_shownPositionRectTr.position, 0.5f).SetEase(Ease.InOutSine);
+        _mainRectTr.DOMove(_shownPositionRectTr.position, 0.3f).SetEase(Ease.OutCubic);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -88,13 +85,9 @@ public class ExpeditionsMenu : MonoBehaviour
 
     private IEnumerator HideCoroutine()
     {
-        _mainRectTr.DOMove(_shownPositionRectTr.position + Vector3.down * 0.4f, 0.3f).SetEase(Ease.InOutSine);
+        _mainRectTr.DOMove(_hiddenPositionRectTr.position, 0.3f).SetEase(Ease.OutCubic);
 
         yield return new WaitForSeconds(0.3f);
-
-        _mainRectTr.DOMove(_hiddenPositionRectTr.position, 0.3f).SetEase(Ease.InOutSine);
-
-        yield return new WaitForSeconds(0.6f);
 
         OnEndTransition.Invoke();
     }
@@ -123,6 +116,7 @@ public class ExpeditionsMenu : MonoBehaviour
     }
 
     #endregion
+
 
     #region Arrows Inputs
 

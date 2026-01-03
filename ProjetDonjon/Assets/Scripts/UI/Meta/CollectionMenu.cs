@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Utilities;
 
 public class CollectionMenu : MonoBehaviour
@@ -19,6 +20,7 @@ public class CollectionMenu : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
+    [SerializeField] private Image _backgroundImage;
     [SerializeField] private CollectionRelic[] _collectionRelics;
 
 
@@ -72,7 +74,11 @@ public class CollectionMenu : MonoBehaviour
         OnStartTransition?.Invoke();
         OnShow?.Invoke();
 
+        if (GameManager.Instance.IsInExplo)
+            HeroesManager.Instance.StopControl();
+
         _mainRectTr.gameObject.SetActive(true);
+        _backgroundImage.DOFade(0.5f, 0.3f);
 
         possessedRelics = RelicsManager.Instance.PossessedRelicIndexes;
         LoadPage(startPage);
@@ -94,6 +100,11 @@ public class CollectionMenu : MonoBehaviour
     {
         OnStartTransition?.Invoke();
         OnHide?.Invoke();
+
+        if(GameManager.Instance.IsInExplo)
+            HeroesManager.Instance.RestartControl();
+
+        _backgroundImage.DOFade(0f, 0.3f);
 
         StartCoroutine(HideCoroutine());
     }

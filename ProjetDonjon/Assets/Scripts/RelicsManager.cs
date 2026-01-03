@@ -14,6 +14,7 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
     [SerializeField] private Relic relicPrefab;
     [SerializeField] private RelicData debugRelicData;
     [SerializeField] private CampLevelData[] campLevels;
+    [SerializeField] private int relicsPerArea;
 
     [Header("Debug")]
     [SerializeField] private bool unlockAllDebug;
@@ -54,10 +55,10 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
 
     public void StartExploration(int enviroIndex)
     {
-        int startIndex = enviroIndex * 12;
+        int startIndex = enviroIndex * relicsPerArea;
         currentAvailableRelics = new List<RelicData>();
 
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < relicsPerArea; i++)
         {
             if (i + startIndex >= allRelics.Length) return;
             if (PossessedRelicIndexes[i + startIndex]) continue;
@@ -65,7 +66,6 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
             currentAvailableRelics.Add(allRelics[i]);
         }
     }
-
 
     public void ObtainNewRelic(RelicData data)
     {
@@ -79,6 +79,26 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
 
             break;
         }
+    }
+
+    public int GetAreaAllRelicCount(int areaIndex)
+    {
+        return Mathf.Clamp(allRelics.Length - relicsPerArea * areaIndex, 0, relicsPerArea);
+    }
+
+    public int GetAreaCurrentRelicCount(int areaIndex)
+    {
+        int result = 0;
+
+        for(int i = 0; i < relicsPerArea; i++)
+        {
+            int realIndex = relicsPerArea * areaIndex + i;
+            if (allRelics.Length < realIndex) continue;
+
+            if(possessedRelicIndexes[realIndex]) result++;
+        }
+
+        return result;  
     }
 
     #endregion

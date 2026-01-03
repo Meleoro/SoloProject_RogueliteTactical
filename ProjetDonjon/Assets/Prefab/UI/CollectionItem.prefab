@@ -27,8 +27,8 @@ RectTransform:
   m_GameObject: {fileID: 2747606868979018773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8447343145916180679}
   - {fileID: 5905243226405193613}
@@ -54,10 +54,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hiddenColor: {r: 0, g: 0, b: 0, a: 0.78431374}
+  colorPerRarity:
+  - {r: 0.8745098, g: 0.77254903, b: 0.60784316, a: 1}
+  - {r: 0.6431373, g: 0.8666667, b: 0.6509804, a: 1}
+  - {r: 0.90588236, g: 0.6392157, b: 0.98039216, a: 1}
+  - {r: 1, g: 0.62352943, b: 0.25490198, a: 1}
   _relicImage: {fileID: 1830506929513708449}
   _secondaryImage: {fileID: 6499379439539838542}
   _rectTr: {fileID: 5350843787601427124}
   _animator: {fileID: 553792713931724833}
+  _nameText: {fileID: 1338054676756614270}
+  _rarityText: {fileID: 8971908917689481852}
 --- !u!95 &553792713931724833
 Animator:
   serializedVersion: 7
@@ -154,8 +161,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291620863
+  m_fontColor: {r: 1, g: 0.93643343, b: 0.8018867, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -290,8 +297,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282490879
+  m_fontColor: {r: 1, g: 0.6232978, b: 0.25471687, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -308,8 +315,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -318,7 +325,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: -5
+  m_characterSpacing: -2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

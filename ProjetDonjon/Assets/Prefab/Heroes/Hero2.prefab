@@ -154,6 +154,8 @@ MonoBehaviour:
   skillTreeData: {fileID: 11400000, guid: a30e973bcd836de43a0bab2511a3732c, type: 2}
   heroIndex: 1
   startLoot: []
+  neededXPLevelZero: 8
+  neededXPMultiplicator: 1.25
   _controller: {fileID: 7159339506722094448}
   _spriteRendererParent: {fileID: 5050220775268981595}
   _shadowTransform: {fileID: 316598353547619335}

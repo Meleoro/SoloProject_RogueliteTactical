@@ -8,6 +8,7 @@ public class EnviroData : ScriptableObject
     public string enviroName;
     [TextArea] public string enviroDescription;
     public string enviroDangerText;
+    public string enviroResourcesTexts;
     public Sprite enviroIllustration;
     public int enviroIndex;
     public int[] recommandedLevels;

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b35908f0dd9829489f2f95c15984d9a, type: 3}
   m_Name: Relic1-7
   m_EditorClassIdentifier: 
-  relicName: Brute's Skull
+  relicName: BRUTE'S SKULL
   relicDescription: 
   relicHint: Can be obtained after defeating The Brute
   icon: {fileID: 1066309943, guid: 65bdc79d4d0e3214394972f5a75bd9c6, type: 3}
-  type: 1
+  rarityType: 2
   spawnType: 0
   spawnProbaPerFloor:
   - 0

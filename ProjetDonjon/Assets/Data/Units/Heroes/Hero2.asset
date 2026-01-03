@@ -16,7 +16,7 @@ MonoBehaviour:
   unitImage: {fileID: -7196809872301644223, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   unitImageHighlight: {fileID: -698061677, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   baseHealth: 3
-  baseStrength: 2
+  baseStrength: 1
   baseSpeed: 4
   baseLuck: 3
   startAlterations: []
