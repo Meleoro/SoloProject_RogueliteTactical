@@ -177,20 +177,36 @@ public class HeroInfosScreen : MonoBehaviour
 
     #region Manage Equipment
 
+    // Called on the hero info screen
     private void AddEquipment(Loot equipment, int slotIndex)
     {
         hero.AddEquipment(equipment, slotIndex);
 
         hero.ActualiseUnitInfos(0, 0, 0, 0, 0, 0);
-        //ActualiseInfoScreen(hero);
     }
 
+    // Called from inventory
+    private void AddEquipment(Loot equipment, int slotIndex, Hero hero)
+    {
+        hero.AddEquipment(equipment, slotIndex);
+
+        hero.ActualiseUnitInfos(0, 0, 0, 0, 0, 0);
+    }
+
+    // Called on the hero info screen
     private void RemoveEquipment(Loot equipment, int slotIndex)
     {
         hero.RemoveEquipment(equipment, slotIndex);
 
         hero.ActualiseUnitInfos(0, 0, 0, 0, 0, 0);
-        //ActualiseInfoScreen(hero);
+    }
+
+    // Called from inventory
+    private void RemoveEquipment(Loot equipment, int slotIndex, Hero hero)
+    {
+        hero.RemoveEquipment(equipment, slotIndex);
+
+        hero.ActualiseUnitInfos(0, 0, 0, 0, 0, 0);
     }
 
     #endregion
@@ -264,7 +280,7 @@ public class HeroInfosScreen : MonoBehaviour
 
         for (int i = 0; i < hero.EquippedLoot.Length; i++)
         {
-            _equipmentSlots[i].RemoveEquipment(false);
+            _equipmentSlots[i].RemoveEquipment(false, hero);
 
             if (hero.EquippedLoot[i] == null) continue;
 
@@ -275,7 +291,7 @@ public class HeroInfosScreen : MonoBehaviour
             //currentMovePoints += hero.EquippedLoot[i].LootData.mpUpgrade;
             //currentMaxSP += hero.EquippedLoot[i].LootData.spUpgrade;
 
-            _equipmentSlots[i].AddEquipment(hero.EquippedLoot[i], false);
+            _equipmentSlots[i].AddEquipment(hero.EquippedLoot[i], false, hero);
         }
 
         _heroName.text = heroData.unitName;

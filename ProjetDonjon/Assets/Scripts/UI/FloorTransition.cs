@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine.UI;
 
 public class FloorTransition : MonoBehaviour
 {
+    [Header("Actions")]
+    public Action OnTransitionStart;
+    public Action OnTransitionEnd;
+
     [Header("Private Infos")]
     private EnviroData currentEnviroData;
     private RectTransform[] buttonsRectTr;
@@ -71,6 +76,17 @@ public class FloorTransition : MonoBehaviour
     public void FadeScreen(float duration, float endValue)
     {
         _fadeImage.DOFade(endValue, duration);
+
+        if(endValue == 0)
+        {
+            _continueButton.enabled = false;
+            _stopButton.enabled = false;
+        }
+        else
+        {
+            _continueButton.enabled = true;
+            _stopButton.enabled = true;
+        }
     }
 
 
@@ -94,6 +110,8 @@ public class FloorTransition : MonoBehaviour
 
     private IEnumerator ChangeFloorCoroutine(int floorIndex, float duration)
     {
+        OnTransitionStart?.Invoke();
+
         FadeScreen(1, duration * 0.3f);
 
         yield return new WaitForSeconds(duration * 0.3f);
@@ -136,6 +154,8 @@ public class FloorTransition : MonoBehaviour
         FadeScreen(duration, 0);
 
         yield return new WaitForSeconds(duration);
+
+        OnTransitionEnd?.Invoke();
     }
 
     private IEnumerator StopCoroutine(float duration)

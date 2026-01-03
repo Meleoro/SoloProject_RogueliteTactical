@@ -216,7 +216,7 @@ public class Loot : MonoBehaviour, IInteractible
         isEquipped = true;
 
         equipmentSlot = slot;
-        equipmentSlot.AddEquipment(this, true);
+        equipmentSlot.AddEquipment(this, true, associatedHero);
 
         float slotSize = InventoriesManager.Instance.slotSize;
         _equippedImage.rectTransform.localPosition = new Vector3(-_imageBackground.rectTransform.rect.width * 0.5f + 20, 
@@ -231,7 +231,7 @@ public class Loot : MonoBehaviour, IInteractible
         isEquipped = false;
 
         _equippedImage.enabled = false;
-        equipmentSlot.RemoveEquipment(true);
+        equipmentSlot.RemoveEquipment(true, associatedHero);
         equipmentSlot = null;
     }
 
@@ -388,6 +388,12 @@ public class Loot : MonoBehaviour, IInteractible
         if(overlayedSlots.Count == 0)
         {
             return;
+        }
+
+        // Unequip if we change of inventory owner
+        if(AssociatedHero != overlayedSlots[0].AssociatedInventory.AssociatedHero && isEquipped)
+        {
+            Unequip();
         }
 
         Vector3 position = Vector2.zero;

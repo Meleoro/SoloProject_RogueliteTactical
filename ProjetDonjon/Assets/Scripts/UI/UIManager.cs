@@ -37,6 +37,8 @@ public class UIManager : GenericSingletonClass<UIManager>
     [Header("Actions")]
     public Action OnStartDrag;
     public Action OnStopDrag;
+    public Action OnExplorationStart;
+    public Action OnExplorationEnd;
 
     [Header("Private Infos")]
     private UIState currentState;
@@ -53,6 +55,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private Minimap _minimap;
     [SerializeField] private FloorTransition _floorTransition;
     [SerializeField] private PlayerActionsMenu _playerActionsMenu;
+    [SerializeField] private HUDExploration _hudExploration;
 
     [Header("References Hero Infos")]
     [SerializeField] private HeroInfoPanel[] _heroInfoPanels1H;
@@ -135,6 +138,8 @@ public class UIManager : GenericSingletonClass<UIManager>
 
     public void StartExploration(EnviroData enviroData)
     {
+        OnExplorationStart?.Invoke();
+
         _collectionMenu.OnShow += () => currentState = UIState.Collection;
         _collectionMenu.OnHide += () => currentState = UIState.Nothing;
 
@@ -154,6 +159,8 @@ public class UIManager : GenericSingletonClass<UIManager>
 
     public void EndExploration()
     {
+        OnExplorationEnd?.Invoke();
+
         _collectionMenu.OnShow -= () => currentState = UIState.Collection;
         _collectionMenu.OnHide -= () => currentState = UIState.Nothing;
 

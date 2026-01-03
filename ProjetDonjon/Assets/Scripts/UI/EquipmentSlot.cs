@@ -15,8 +15,8 @@ public class EquipmentSlot : MonoBehaviour
     [SerializeField] private float highlightSize;
 
     [Header("Actions")]
-    public Action<Loot, int> OnEquipmentAdd;
-    public Action<Loot, int> OnEquipmentRemove;
+    public Action<Loot, int, Hero> OnEquipmentAdd;
+    public Action<Loot, int, Hero> OnEquipmentRemove;
 
     [Header("Public Infos")]
     public EquipmentType EquipmentType { get { return equipmentType; } }
@@ -73,11 +73,11 @@ public class EquipmentSlot : MonoBehaviour
         return verifiedLoot.LootData.equipmentType == equipmentType;
     }
 
-    public void AddEquipment(Loot addedLoot, bool callAction)
+    public void AddEquipment(Loot addedLoot, bool callAction, Hero hero)
     {
         if(equipedLoot != null)
         {
-            RemoveEquipment(callAction);
+            RemoveEquipment(callAction, hero);
         }
 
         _equipmentImage.sprite = addedLoot.LootData.equipmentSprite;
@@ -89,13 +89,13 @@ public class EquipmentSlot : MonoBehaviour
         if (callAction) 
         {
             AudioManager.Instance.PlaySoundOneShot(0, 2);
-            OnEquipmentAdd?.Invoke(addedLoot, slotIndex); 
+            OnEquipmentAdd?.Invoke(addedLoot, slotIndex, hero); 
         }
     }
 
 
 
-    public void RemoveEquipment(bool callAction)
+    public void RemoveEquipment(bool callAction, Hero hero)
     {
         _equipmentImage.sprite = null;
         _equipmentImage.enabled = false;
@@ -109,7 +109,7 @@ public class EquipmentSlot : MonoBehaviour
 
             AudioManager.Instance.PlaySoundOneShot(0, 3);
 
-            OnEquipmentRemove?.Invoke(equipedLoot, slotIndex); 
+            OnEquipmentRemove?.Invoke(equipedLoot, slotIndex, hero); 
         }
     }
 

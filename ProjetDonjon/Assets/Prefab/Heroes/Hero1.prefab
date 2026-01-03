@@ -81,11 +81,7 @@ MonoBehaviour:
   skillTreeData: {fileID: 11400000, guid: a8b4c8c4e0bf3ed4f8a1f0d2f2486129, type: 2}
   heroIndex: 0
   startLoot:
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+  - {fileID: 11400000, guid: 861915a6d01ecc247b8ba04832474eb5, type: 2}
   neededXPLevelZero: 8
   neededXPMultiplicator: 1.25
   _controller: {fileID: 7159339506722094448}

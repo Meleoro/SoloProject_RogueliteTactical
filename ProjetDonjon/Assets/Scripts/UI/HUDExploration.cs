@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -36,6 +37,10 @@ public class HUDExploration : MonoBehaviour
         _skillsMenu.OnShow += Hide;
         _skillsMenu.OnHide += Show;
 
+        UIManager.Instance.OnExplorationStart += ShowWithDelay;
+        UIManager.Instance.FloorTransition.OnTransitionStart += Hide;
+        UIManager.Instance.FloorTransition.OnTransitionEnd += Show;
+
         foreach (var button in _buttonsImages)
         {
             Material material = button.material;
@@ -50,16 +55,28 @@ public class HUDExploration : MonoBehaviour
     {
         if (BattleManager.Instance.IsInBattle) return;
         if (isDisplayed) return;
-        isDisplayed = true;
 
+        isDisplayed = true;
         _animator.SetBool("IsDisplayed", true);
+    }
+
+    private void ShowWithDelay()
+    {
+        StartCoroutine(ShowWithDelayCoroutine());
+    }
+
+    private IEnumerator ShowWithDelayCoroutine()
+    {
+        yield return new WaitForSeconds(2.1f);
+
+        Show();
     }
 
     private void Hide()
     {
         if (!isDisplayed) return;
-        isDisplayed = false;
 
+        isDisplayed = false;
         _animator.SetBool("IsDisplayed", false);
     }
 
