@@ -178,7 +178,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             _inventoryManager.EnableInventory(i);
 
             heroesList.Add(GetHeroObject(allHeroes[i]));
-            heroesList[i].transform.position = Vector3.zero;
+            //heroesList[i].transform.position = Vector3.zero;
         }
 
         heroes = heroesList.ToArray();
@@ -221,7 +221,9 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     public void Teleport(Vector3 position)
     {
-        if (!isInitialised) return;
+        //if (!isInitialised) return;
+
+        Debug.Log(position);
 
         heroes[currentHeroIndex].transform.position = position;
     }

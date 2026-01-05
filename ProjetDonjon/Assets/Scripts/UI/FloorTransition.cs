@@ -11,6 +11,10 @@ public class FloorTransition : MonoBehaviour
     public Action OnTransitionStart;
     public Action OnTransitionEnd;
 
+    [Header("Public Infos")]
+    public TextMeshProUGUI StopButtonText { get { return _stopButtonText; } }
+    public Button StopButton { get { return _stopButton; } }
+
     [Header("Private Infos")]
     private EnviroData currentEnviroData;
     private RectTransform[] buttonsRectTr;
@@ -120,6 +124,8 @@ public class FloorTransition : MonoBehaviour
         _flootCounterText.DOFade(1, duration * 0.2f);
 
         yield return new WaitForSeconds(duration * 0.2f);
+
+        TutoManager.Instance.DisplayTutorial(10);
 
         Color saveColor = _flootCounterText.color;
         _flootCounterText.rectTransform.DOScale(Vector3.one * 1.4f, duration * 0.05f);

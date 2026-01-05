@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Utilities;
@@ -8,6 +9,8 @@ public class GameManager : GenericSingletonClass<GameManager>
     [SerializeField] private bool startGameInExplo;
     [SerializeField] private EnviroData startEnviroData;
 
+    [Header("Actions")]
+    public Action<int> OnReturnToCamp;  // For tutorial
 
     [Header("Public Infos")]
     public bool IsInExplo { get; private set; }
@@ -50,6 +53,8 @@ public class GameManager : GenericSingletonClass<GameManager>
 
     public IEnumerator EndExplorationCoroutine()
     {
+        OnReturnToCamp.Invoke(0);
+
         UIManager.Instance.FloorTransition.FadeScreen(0.8f, 1);
 
         yield return new WaitForSeconds(1);

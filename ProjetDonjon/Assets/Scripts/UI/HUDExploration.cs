@@ -31,7 +31,7 @@ public class HUDExploration : MonoBehaviour
         _skillTreeScreen.OnShow += Hide;
         _skillTreeScreen.OnHide += Show;
 
-        BattleManager.Instance.OnBattleStart += Hide;
+        BattleManager.Instance.OnBattleStart += HideEnterBattle;
         BattleManager.Instance.OnBattleEnd += Show;
 
         _skillsMenu.OnShow += Hide;
@@ -58,6 +58,8 @@ public class HUDExploration : MonoBehaviour
 
         isDisplayed = true;
         _animator.SetBool("IsDisplayed", true);
+
+        UIManager.Instance.ShowHeroInfosPanels();
     }
 
     private void ShowWithDelay()
@@ -73,6 +75,16 @@ public class HUDExploration : MonoBehaviour
     }
 
     private void Hide()
+    {
+        if (!isDisplayed) return;
+
+        isDisplayed = false;
+        _animator.SetBool("IsDisplayed", false);
+
+        UIManager.Instance.HideHeroInfosPanels();
+    }
+
+    private void HideEnterBattle()
     {
         if (!isDisplayed) return;
 

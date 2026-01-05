@@ -2468,7 +2468,7 @@ GameObject:
   - component: {fileID: 7876773366933053830}
   - component: {fileID: 4987641504215733351}
   m_Layer: 5
-  m_Name: SkillTrees
+  m_Name: Skills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2523,7 +2523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8111326630984187781, guid: 6eb367a2ee42ba94794663b57fa6582a, type: 3}
+  m_Sprite: {fileID: 517746789781160526, guid: 6eb367a2ee42ba94794663b57fa6582a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7554,7 +7554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 146.30713, y: 58}
-  m_SizeDelta: {x: 65.625, y: 71.875}
+  m_SizeDelta: {x: 87.5, y: 62.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5069516241646934450
 CanvasRenderer:
@@ -7584,7 +7584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 517746789781160526, guid: 6eb367a2ee42ba94794663b57fa6582a, type: 3}
+  m_Sprite: {fileID: -832827744, guid: 6eb367a2ee42ba94794663b57fa6582a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11906,6 +11906,7 @@ MonoBehaviour:
   _minimap: {fileID: 2600933081750961809}
   _floorTransition: {fileID: 939981192782512149}
   _playerActionsMenu: {fileID: 5180609351778176802}
+  _hudExploration: {fileID: 0}
   _heroInfoPanels1H:
   - {fileID: 2662905831428831098}
   _heroInfoPanelsAnimator1H: {fileID: 5470279092063729061}
@@ -18278,7 +18279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.699982, y: 211.87996}
+  m_AnchoredPosition: {x: 11.699982, y: 211.87999}
   m_SizeDelta: {x: 368.09998, y: 700}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &219194172111049252
@@ -19991,7 +19992,7 @@ GameObject:
   - component: {fileID: 7119576924062423094}
   - component: {fileID: 1653424314387022047}
   m_Layer: 5
-  m_Name: Skills
+  m_Name: SkillTrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

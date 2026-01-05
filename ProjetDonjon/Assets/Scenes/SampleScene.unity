@@ -16615,7 +16615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c2535909f1d4b4da9c5eba2603000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameInExplo: 0
+  startGameInExplo: 1
   startEnviroData: {fileID: 11400000, guid: 59fdfdcea8206904799269feb13b0cfa, type: 2}
 --- !u!114 &1460704117
 MonoBehaviour:
@@ -20956,6 +20956,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4808100384204035335, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4808100384204035335, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4808100384204035335, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4896166603825509212, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21348,6 +21360,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6070983317845478851, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070983317845478851, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070983317845478851, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6072444201343397170, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21523,6 +21547,18 @@ PrefabInstance:
     - target: {fileID: 6782756783561821923, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791814869696551761, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_text
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791814869696551761, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791814869696551761, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6914759170555922880, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22036,6 +22072,18 @@ PrefabInstance:
       propertyPath: _heroesManager
       value: 
       objectReference: {fileID: 1887892336}
+    - target: {fileID: 8430720270501683195, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8430720270501683195, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8430720270501683195, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8456223564765089744, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -24586,7 +24634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b18fb0b697ff894b91494415125b616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutoManager
-  tutoSteps:
+  mainTutoSteps:
   - {fileID: 11400000, guid: 050011d897ec0054e9503478ec2b99c8, type: 2}
   - {fileID: 11400000, guid: 55a70c3241d6da74b87b272ae8284a86, type: 2}
   - {fileID: 11400000, guid: 7ed92725a880cb8408ac4ac61a4218b0, type: 2}
@@ -24597,7 +24645,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4351219535c8da40a8fb673f5274b61, type: 2}
   - {fileID: 11400000, guid: 1ec08f18932371a40bab1b7f1e0da421, type: 2}
   - {fileID: 11400000, guid: 649c69c6c63355048acd838b92039ef3, type: 2}
-  disableTuto: 1
+  - {fileID: 11400000, guid: feebf14128cfa05409831113d8765ebb, type: 2}
+  disableTuto: 0
   _leftPosRef: {fileID: 1921454748}
   _rightPosRef: {fileID: 1359650930}
   _tutorialPanel: {fileID: 805319899}

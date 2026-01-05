@@ -6,7 +6,7 @@ using Utilities;
 public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 {
     [Header("Parameters")]
-    [SerializeField] private TutoStepData[] tutoSteps;
+    [SerializeField] private TutoStepData[] mainTutoSteps;
     [SerializeField] private bool disableTuto;
 
     [Header("Actions")]
@@ -55,7 +55,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
         didTutorialStep[tutoID] = true;
 
-        currentStep = tutoSteps[tutoID];
+        currentStep = mainTutoSteps[tutoID];
         currentTutoID = tutoID;
 
         if (currentStep.leftSidePanel)
@@ -114,6 +114,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 BattleManager.Instance.CurrentEnemies[0].OnClickUnit += ValidateEndCondition;
                 endConditionsValidated = new bool[1];
                 break;
+
+            case TutoEndCondition.ReturnToCamp:
+                GameManager.Instance.OnReturnToCamp += ValidateEndCondition;
+                break;
         }
     }
 
@@ -136,8 +140,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         _tutorialPanel.OnHide -= EndTutorialStep;
 
-        if (BattleManager.Instance.IsInBattle)
-            CameraManager.Instance.UnlockCameraInputs();
+        CameraManager.Instance.UnlockCameraInputs();
 
         switch (currentStep.endCondition)
         {
@@ -172,6 +175,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.ClickEnemy:
                 BattleManager.Instance.CurrentEnemies[0].OnClickUnit -= ValidateEndCondition;
+                break;
+
+            case TutoEndCondition.ReturnToCamp:
+                GameManager.Instance.OnReturnToCamp -= ValidateEndCondition;
                 break;
         }
 

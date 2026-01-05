@@ -87,11 +87,18 @@ public class TutorialPanel : MonoBehaviour
                 break;
 
             case TutoHighlightType.HighlightEnemy:
-                BattleManager.Instance.CurrentEnemies[0].UI.Canvas.sortingOrder = 310;
+                BattleManager.Instance.CurrentEnemies[0].UI.Canvas.sortingOrder = 330;
                 highlightedImages = new Image[] { };
 
                 _backDarkImage.DOComplete();
                 _backDarkImage.DOFade(0.3f, 0.2f).SetEase(Ease.OutBack);
+                break;
+
+            case TutoHighlightType.HighlightReturnToCamp:
+                highlightedImages = new Image[] { UIManager.Instance.FloorTransition.StopButton.image };
+
+                _backDarkImage.DOComplete();
+                _backDarkImage.DOFade(0.7f, 0.2f).SetEase(Ease.OutBack);
                 break;
         }
 
@@ -112,7 +119,7 @@ public class TutorialPanel : MonoBehaviour
 
         Vector2Int enemyCoordinates = BattleManager.Instance.CurrentEnemies[0].CurrentTile.TileCoordinates;
         BattleManager.Instance.TilesManager.battleRoom.
-            PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].SetToFirstLayer(320);
+            PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].SetToFirstLayer(330);
 
         TutoManager.Instance.OnFirstStepValidated -= HighlightMoveTile;
     }

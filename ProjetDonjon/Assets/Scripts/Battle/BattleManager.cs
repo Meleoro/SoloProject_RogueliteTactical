@@ -175,7 +175,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         CameraManager.Instance.EnterBattle(battleCenterPos, cameraSize);
         HeroesManager.Instance.EnterBattle(possibleTiles);
 
-        UIManager.Instance.ShowHeroInfosPanels();
+        //UIManager.Instance.ShowHeroInfosPanels();
 
         StartCoroutine(StartBattleCoroutine(delay));
     }
@@ -275,7 +275,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     {
         isInBattle = false;
 
-        UIManager.Instance.HideHeroInfosPanels();
+        //UIManager.Instance.HideHeroInfosPanels();
         _playerActionsMenu.CloseActionsMenu();
     }
 

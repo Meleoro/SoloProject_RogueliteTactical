@@ -43,6 +43,8 @@ public class UIManager : GenericSingletonClass<UIManager>
     [Header("Private Infos")]
     private UIState currentState;
     private Loot draggedLoot;
+    private HeroInfoPanel[] currentHeroInfoPanels;
+    private Animator currentHeroInfoPanelsAnimator;
 
     [Header("References")]
     [SerializeField] private InventoriesManager _inventoriesManager;
@@ -187,63 +189,39 @@ public class UIManager : GenericSingletonClass<UIManager>
 
     public void SetupHeroInfosPanel(Hero[] heroes)
     {
-        HeroInfoPanel[] currentPanels = new HeroInfoPanel[0];
-        switch (heroes.Length)
+        switch (HeroesManager.Instance.Heroes.Length)
         {
             case 1:
-                currentPanels = _heroInfoPanels1H;
+                currentHeroInfoPanels = _heroInfoPanels1H;
+                currentHeroInfoPanelsAnimator = _heroInfoPanelsAnimator1H;
                 break;
 
             case 2:
-                currentPanels = _heroInfoPanels2H;  
+                currentHeroInfoPanels = _heroInfoPanels2H;
+                currentHeroInfoPanelsAnimator = _heroInfoPanelsAnimator2H;
                 break;
 
             case 3:
-                currentPanels = _heroInfoPanels3H;
+                currentHeroInfoPanels = _heroInfoPanels3H;
+                currentHeroInfoPanelsAnimator = _heroInfoPanelsAnimator3H;
                 break;
         }
 
         for (int i = 0; i < heroes.Length; i++)
         {
-            currentPanels[i].InitialisePanel(heroes[i]);
-            heroes[i].SetupHeroInfosPanel(currentPanels[i]);
+            currentHeroInfoPanels[i].InitialisePanel(heroes[i]);
+            heroes[i].SetupHeroInfosPanel(currentHeroInfoPanels[i]);
         }
     }
 
     public void ShowHeroInfosPanels()
     {
-        switch (HeroesManager.Instance.Heroes.Length)
-        {
-            case 1:
-                _heroInfoPanelsAnimator1H.SetBool("IsOpened", true);
-                break;
-
-            case 2:
-                _heroInfoPanelsAnimator2H.SetBool("IsOpened", true);
-                break;
-
-            case 3:
-                _heroInfoPanelsAnimator3H.SetBool("IsOpened", true);
-                break;
-        }
+        currentHeroInfoPanelsAnimator.SetBool("IsOpened", true);
     }
 
     public void HideHeroInfosPanels()
     {
-        switch (HeroesManager.Instance.Heroes.Length)
-        {
-            case 1:
-                _heroInfoPanelsAnimator1H.SetBool("IsOpened", false);
-                break;
-
-            case 2:
-                _heroInfoPanelsAnimator2H.SetBool("IsOpened", false);
-                break;
-
-            case 3:
-                _heroInfoPanelsAnimator3H.SetBool("IsOpened", false);
-                break;
-        }
+        currentHeroInfoPanelsAnimator.SetBool("IsOpened", false);
     }
 
     #endregion
