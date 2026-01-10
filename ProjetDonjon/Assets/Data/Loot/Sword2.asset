@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Sword2
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: CRISTAL SWORD
-  lootDescription: Your critical attacks deal +50% damages
+  lootDescription: WHEN THIS UNIT DEALS A CRITICAL HIT, DEALS +50% DAMAGES
   lootType: 1
+  rarityType: 2
   sprite: {fileID: 7607525373114708640, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 15
+  value: 100
   spaceTaken:
   - row: 01
   - row: 01
@@ -26,9 +28,10 @@ MonoBehaviour:
   strengthUpgrade: 1
   speedUpgrade: 0
   luckUpgrade: 3
-  equipmentEffectType: 4
-  equipmentEffectAlteration: {fileID: 0}
-  equipmentEffectPower: 1.5
+  mpUpgrade: 0
+  spUpgrade: 0
+  appliedPassive: {fileID: 11400000, guid: 7912d90b574fcfd4bb0d87c3a311e919, type: 2}
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
   additionalTooltipDatas: []

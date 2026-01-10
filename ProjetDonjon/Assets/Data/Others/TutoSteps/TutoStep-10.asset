@@ -12,17 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-10
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: RELICS
-  stepDescription: 'RELICS ARE WHAT YOU ARE SEARCHING FOR TO FILL YOUR COLLECTION
-    !
-
-
-    SOME WILL SPAWN AT THE END OF BATTLES, OTHERS IN CHESTS... IT WILL BE
-    UP TO YOU TO COLLECT THEM ALL !
-
-
-    PRESS [E] TO INTERACT WITH IT.'
+  stepName: DEATH
+  stepDescription: BE SURE TO PAY ATTENTION TO THOSE ENEMIES, SINCE IF ALL THE HEROES
+    IN YOUR TEAM DIE, YOU LOSE EVERYTHING YOU HAD IN YOUR INVENTORIES
   highlightType: 0
-  endCondition: 4
+  endCondition: 0
   leftSidePanel: 0
   playNextStepOnFinished: 0
+  playNextStepDelay: 0.2

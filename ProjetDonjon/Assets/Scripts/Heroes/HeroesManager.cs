@@ -58,6 +58,12 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         SaveManager.Instance.SaveGame();
 
         StopControl();
+
+        if (!BattleManager.Instance.IsInBattle) return;
+        for (int i = 0; i < heroes.Length; i++)
+        {
+            heroes[i].ExitBattle(heroes[currentHeroIndex]);
+        }
     }
 
 
@@ -309,21 +315,21 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     #region Damage / Death 
 
-
     public void TakeDamage(int damagesAmount)
     {
         if (isInvincible) return;
 
         heroes[currentHeroIndex].TakeDamage(damagesAmount, null);
 
-        StartCoroutine(DamageInvincibilityCoroutine());
+        if(!BattleManager.Instance.IsInBattle)
+            StartCoroutine(DamageInvincibilityCoroutine());
     }
 
     private IEnumerator DamageInvincibilityCoroutine()
     {
         isInvincible = true;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.75f);
 
         isInvincible = false;
     }
@@ -332,8 +338,22 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         aliveHeroCount--;
 
-        if(aliveHeroCount >= 0)
+        if (aliveHeroCount > 0)
             SwitchDeadHero();
+
+        else
+        {
+            EndExploration();
+
+            StopControl();
+            CameraManager.Instance.ExitBattle();
+
+            UIManager.Instance.FloorTransition.StartDeathTransition();
+            InventoriesManager.Instance.EmptyCurrentHeroesInventories();
+
+            BattleManager.Instance.AllHeroDefeatEndBattle();
+            InteractionManager.DisableInteractions();
+        }
     }
 
     private void SwitchDeadHero()

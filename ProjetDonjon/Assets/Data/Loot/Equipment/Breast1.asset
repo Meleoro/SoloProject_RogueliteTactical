@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Breast1
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: WOODEN ARMOR
-  lootDescription: Does nothing special
+  lootDescription: DOES NOTHING SPECIAL
   lootType: 1
+  rarityType: 0
   sprite: {fileID: -799607783, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
   value: 15
   spaceTaken:
@@ -22,9 +24,14 @@ MonoBehaviour:
   - row: 0101
   equipmentType: 2
   equipmentSprite: {fileID: 1990072176, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 2
-  strengthUpgrade: 1
+  healthUpgrade: 3
+  strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 1
+  mpUpgrade: 0
+  spUpgrade: 0
+  appliedPassive: {fileID: 0}
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas: []

@@ -34,8 +34,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     private List<Unit> currentUnits = new();
     private Room battleRoom;
     private Unit currentUnit;
-    private SkillData currentSkill;
-    private BattleTile currentSkillBaseTile;
     private int currentVFXIndex;
 
     [Header("Public Infos")]
@@ -110,6 +108,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public void RemoveUnit(Unit unit)
     {
+        if (!isInBattle) return;
+
         _timeline.RemoveUnit(unit);
         currentUnits.Remove(unit);
 
@@ -199,7 +199,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             //deadHeroes[i].HideOutline();
             //deadHeroes[i].Heal(1);
         }
-        deadHeroes.Clear();
+        //deadHeroes.Clear();
 
         for (int i = 0; i < currentAllies.Count; i++)
         {
@@ -217,6 +217,15 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         _timeline.Disappear();
     }
 
+    public void AllHeroDefeatEndBattle()
+    {
+        if (!isInBattle) return;
+        isInBattle = false;
+
+        _timeline.Disappear();
+        _playerActionsMenu.CloseActionsMenu();
+    }
+
     public void BattleEndRewards(AIUnit lastUnit)
     {
         // Relic Spawn
@@ -229,11 +238,10 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         }
 
         // Loot Spawn
-        SpawnBattleEndLoot(lastUnit);
+        LootManager.Instance.SpawnLootBattleEnd(lastUnit.transform.position);
         if (lastUnit.IsBoss)
         {
-            SpawnBattleEndLoot(lastUnit);
-            SpawnBattleEndLoot(lastUnit);
+            LootManager.Instance.SpawnLootBattleEnd(lastUnit.transform.position);
         }
 
         // Coin Spawn
@@ -244,30 +252,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         {
             Coin coin = Instantiate(coinPrefab, transform.position, Quaternion.Euler(0, 0, 0), UIManager.Instance.CoinUI.transform);
             coin.transform.position = transform.position;
-        }
-    }
-
-    private void SpawnBattleEndLoot(AIUnit lastUnit)
-    {
-        PossibleLootData[] possibleLoots =
-            ProceduralGenerationManager.Instance.EnviroData.lootPerFloors[ProceduralGenerationManager.Instance.CurrentFloor].battleEndPossibleLoots;
-
-        int pickedPercentage = Random.Range(0, 100);
-        int currentSum = 0;
-
-        for (int i = 0; i < possibleLoots.Length; i++)
-        {
-            currentSum += possibleLoots[i].probability;
-
-            if (currentSum > pickedPercentage)
-            {
-                if (possibleLoots[i].loot is null) break;
-
-                Loot newLoot = Instantiate(lootPrefab, lastUnit.transform.position, Quaternion.Euler(0, 0, 0));
-                newLoot.Initialise(possibleLoots[i].loot);
-
-                break;
-            }
         }
     }
 

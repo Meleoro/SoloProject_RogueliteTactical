@@ -12,19 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-11
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: EXTRACTION
-  stepDescription: 'ONCE YOU FINISH TO EXPLORE A FLOOR, YOU GET THE CHOICE EITHER
-    TO CONTINUE, OR TO GO BACK TO YOUR CAMP
+  stepName: RELICS
+  stepDescription: 'RELICS ARE WHAT YOU ARE SEARCHING FOR TO FILL YOUR COLLECTION
+    !
 
 
-    THE DEEPER YOU GO, THE BETTER THE
-    LOOT ! BUT CAREFUL, BECAUSE THE DUNGEON ALSO GETS MORE DANGEROUS
+    SOME WILL SPAWN AT THE END OF BATTLES, OTHERS IN CHESTS... IT WILL BE
+    UP TO YOU TO COLLECT THEM ALL !
 
 
-    FOR NOW,
-    LETS GET BACK THE CAMP'
-  highlightType: 11
-  endCondition: 7
-  leftSidePanel: 1
+    PRESS [E] TO INTERACT WITH IT.'
+  highlightType: 0
+  endCondition: 4
+  leftSidePanel: 0
   playNextStepOnFinished: 0
-  playNextStepDelay: 0.2

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: RingSpeed
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: SPEED RING
   lootDescription: 
   lootType: 1
+  rarityType: 0
   sprite: {fileID: -1717718313, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
   value: 25
   spaceTaken:
@@ -24,12 +26,10 @@ MonoBehaviour:
   healthUpgrade: 0
   strengthUpgrade: 0
   speedUpgrade: 2
-  luckUpgrade: 0
+  luckUpgrade: -1
   mpUpgrade: 0
   spUpgrade: 0
-  equipmentEffectType: 0
-  equipmentEffectAlteration: {fileID: 0}
-  equipmentEffectPower: 0
+  appliedPassive: {fileID: 0}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0

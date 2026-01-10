@@ -62,9 +62,10 @@ public class LootData : ScriptableObject
     public int spUpgrade;
 
     [Header("Equipment Special Effect Infos")]
-    public SpecialEquipmentEffectType equipmentEffectType;
+    /*public SpecialEquipmentEffectType equipmentEffectType;
     public AlterationData equipmentEffectAlteration;
-    public float equipmentEffectPower;
+    public float equipmentEffectPower;*/
+    public PassiveData appliedPassive;
 
     [Header("Consumable Infos")]
     public ConsumableType consumableType;

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Sword1
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: CLASSIC SWORD
-  lootDescription: Does nothing special
+  lootDescription: DOES NOTHING SPECIAL
   lootType: 1
+  rarityType: 0
   sprite: {fileID: -8969279410694380580, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
   value: 10
   spaceTaken:
@@ -26,7 +28,11 @@ MonoBehaviour:
   strengthUpgrade: 1
   speedUpgrade: 1
   luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  appliedPassive: {fileID: 0}
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 2240da7ae1324d1408e0140b3d3cb302, type: 2}

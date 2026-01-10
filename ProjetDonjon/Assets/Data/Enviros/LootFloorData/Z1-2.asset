@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79dd46977732774e8de2f5811e5f0c1, type: 3}
   m_Name: Z1-2
   m_EditorClassIdentifier: 
+  probaPerTierChest: 1e0000003c0000000a00000000000000
   chestPossibleLoots:
   - probability: 15
     loot: {fileID: 11400000, guid: 489ce2b2d4640574e8be925a9007ddd8, type: 2}
@@ -35,6 +36,7 @@ MonoBehaviour:
     loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
   minChestCoins: 5
   maxChestCoins: 8
+  probaPerTierBattle: 3c000000230000000500000000000000
   battleEndPossibleLoots:
   - probability: 30
     loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
@@ -46,6 +48,7 @@ MonoBehaviour:
     loot: {fileID: 11400000, guid: b34ba33fc8826fd44a2ea8b0b5747196, type: 2}
   minBattleCoins: 3
   maxBattleCoins: 6
+  probaPerTierChallenge: 00000000500000001400000000000000
   challengeEndPossibleLoots:
   - probability: 20
     loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}

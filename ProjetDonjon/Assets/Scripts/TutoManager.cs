@@ -109,7 +109,6 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 endConditionsValidated = new bool[1];
                 break;
 
-
             case TutoEndCondition.ClickEnemy:
                 BattleManager.Instance.CurrentEnemies[0].OnClickUnit += ValidateEndCondition;
                 endConditionsValidated = new bool[1];
@@ -117,6 +116,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.ReturnToCamp:
                 GameManager.Instance.OnReturnToCamp += ValidateEndCondition;
+                endConditionsValidated = new bool[1];
                 break;
         }
     }

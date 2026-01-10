@@ -32,21 +32,8 @@ public class ChallengeChest : MonoBehaviour, IInteractible
 
     private void GenerateLoot()
     {
-        int pickedPercentage = Random.Range(0, 100);
-        int currentSum = 0;
-
-        for (int i = 0; i < possibleLoots.Length; i++)
-        {
-            currentSum += possibleLoots[i].probability;
-
-            if (currentSum > pickedPercentage)
-            {
-                Loot newLoot = Instantiate(lootPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-                newLoot.Initialise(possibleLoots[i].loot);
-
-                break;
-            }
-        }
+        LootManager.Instance.SpawnLootChallengeEnd(transform.position);
+        LootManager.Instance.SpawnLootChallengeEnd(transform.position);
     }
 
 

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f51d3c135e2eb44b0a2bc3502c2e38, type: 3}
+  m_Name: EP_12
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveData
+  passiveName: Metal Headset
+  passiveDescription: WHEN THIS UNIT GETS HIT, 25% CHANCES TO GET STRENGTH III
+  passiveIcon: {fileID: 0}
+  passiveHighlightIcon: {fileID: 0}
+  additionalTooltipDatas: []
+  passiveTriggerType: 1
+  neededAlteration: {fileID: 0}
+  passiveTriggerProba: 25
+  passiveEffects:
+  - passiveEffectType: 1
+    appliedAlteration: {fileID: 11400000, guid: 449ed391ee20c6b41ae5ef502741728b, type: 2}
+    additivePower: 0
+    multipliedPower: 0

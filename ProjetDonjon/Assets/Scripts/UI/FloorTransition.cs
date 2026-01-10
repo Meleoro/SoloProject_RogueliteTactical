@@ -30,19 +30,30 @@ public class FloorTransition : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _stopButton;
 
+    [Header("Death Reference")]
+    [SerializeField] private TextMeshProUGUI _mainDeathText;
+    [SerializeField] private TextMeshProUGUI _secondaryDeathText;
+    [SerializeField] private TextMeshProUGUI _backToCampText;
+    [SerializeField] private Button _backToCampButton;
+
 
     private void Start()
     {
         _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 1);
 
-        buttonsRectTr = new RectTransform[2];
+        buttonsRectTr = new RectTransform[3];
         buttonsRectTr[0] = _continueButtonText.GetComponent<RectTransform>();
         buttonsRectTr[1] = _stopButtonText.GetComponent<RectTransform>();
+        buttonsRectTr[2] = _backToCampText.GetComponent<RectTransform>();
     }
 
     public void StartTransition(EnviroData enviroData, int floorIndex)
     {
         currentEnviroData = enviroData;
+
+        _backToCampText.gameObject.SetActive(false);
+        _mainDeathText.gameObject.SetActive(false);
+        _secondaryDeathText.gameObject.SetActive(false);
 
         if (floorIndex == 0)
         {
@@ -77,6 +88,26 @@ public class FloorTransition : MonoBehaviour
         }
     }
 
+    public void StartDeathTransition()
+    {
+        _recommandedLevelText.gameObject.SetActive(false);
+        _recommandedLevelCounterText.gameObject.SetActive(false);
+
+        _continueButton.gameObject.SetActive(false);
+        _stopButton.gameObject.SetActive(false);
+
+        _backToCampText.gameObject.SetActive(true);
+        _mainDeathText.gameObject.SetActive(true);
+        _secondaryDeathText.gameObject.SetActive(true);
+
+        FadeScreen(0.2f, 1f);
+
+        _backToCampText.DOFade(1, 0.2f);
+        _mainDeathText.DOFade(1, 0.2f);
+        _secondaryDeathText.DOFade(1, 0.2f);
+    }
+
+
     public void FadeScreen(float duration, float endValue)
     {
         _fadeImage.DOFade(endValue, duration);
@@ -85,11 +116,7 @@ public class FloorTransition : MonoBehaviour
         {
             _continueButton.enabled = false;
             _stopButton.enabled = false;
-        }
-        else
-        {
-            _continueButton.enabled = true;
-            _stopButton.enabled = true;
+            _backToCampButton.enabled = false;
         }
     }
 
@@ -125,7 +152,7 @@ public class FloorTransition : MonoBehaviour
 
         yield return new WaitForSeconds(duration * 0.2f);
 
-        TutoManager.Instance.DisplayTutorial(10);
+        TutoManager.Instance.DisplayTutorial(11);
 
         Color saveColor = _flootCounterText.color;
         _flootCounterText.rectTransform.DOScale(Vector3.one * 1.4f, duration * 0.05f);
@@ -175,6 +202,10 @@ public class FloorTransition : MonoBehaviour
         _continueButtonText.DOFade(0, duration);
         _stopButtonText.DOFade(0, duration);
 
+        _backToCampText.DOFade(0, duration);
+        _mainDeathText.DOFade(0, duration);
+        _secondaryDeathText.DOFade(0, duration);
+
         yield return new WaitForSeconds(duration);
 
         StartCoroutine(GameManager.Instance.EndExplorationCoroutine());
@@ -201,6 +232,7 @@ public class FloorTransition : MonoBehaviour
     {
         _continueButton.enabled = false;
         _stopButton.enabled = false;
+        _backToCampButton.enabled = false;
 
         StartCoroutine(ContinueCoroutine(1f));
     }
@@ -209,6 +241,7 @@ public class FloorTransition : MonoBehaviour
     {
         _continueButton.enabled = false;
         _stopButton.enabled = false;
+        _backToCampButton.enabled = false;
 
         StartCoroutine(StopCoroutine(1f));
     }

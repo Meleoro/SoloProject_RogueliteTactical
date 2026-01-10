@@ -1,98 +1,11 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PassivesManager 
 {
-    public bool VerifyAlterationImmunities(AlterationType alterationType, Unit unit)
-    {
-        for (int i = 0; i < unit.EquippedPassives.Length; i++)
-        {
-            if (unit.EquippedPassives[i] is null) continue;
-            if (unit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.Always) continue;
-
-            int pickedProba = Random.Range(0, 100);
-            if (pickedProba >= unit.EquippedPassives[i].passiveTriggerProba) continue;
-
-            if (unit.EquippedPassives[i].passiveEffects[0].passiveEffectType != PassiveEffectType.ImmuneAlteration) continue;
-            if (unit.EquippedPassives[i].passiveEffects[0].appliedAlteration.alterationType != alterationType) continue;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public int GetPassiveMaxSkillPointUpgrade(Unit unit)
-    {
-        for (int i = 0; i < unit.EquippedPassives.Length; i++)
-        {
-            if (unit.EquippedPassives[i] is null) continue;
-            if (unit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.Always) continue;
-
-            if (unit.EquippedPassives[i].passiveEffects[0].passiveEffectType != PassiveEffectType.MaxSkillPoints) continue;
-
-            return (int)unit.EquippedPassives[i].passiveEffects[0].additivePower;
-        }
-
-        return 0;
-    }
-
-    public int GetPassiveCritChanceUpgrade(Unit unit, Unit attackedUnit)
-    {
-        for (int i = 0; i < unit.EquippedPassives.Length; i++)
-        {
-            if (unit.EquippedPassives[i] is null) continue;
-            if (unit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.OnAttack && 
-                (unit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.OnAttackUnitWithAlt || 
-                !attackedUnit.VerifyHasAlteration(unit.EquippedPassives[i].neededAlteration.alterationType))) continue;
-
-            if (unit.EquippedPassives[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeCritChances) continue;
-
-            return (int)unit.EquippedPassives[i].passiveEffects[0].additivePower;
-        }
-
-        return 0;
-    }
-
-    public int GetGivePassiveAlterationUpgrade(Unit originUnit, AlterationData appliedAlteration)
-    {
-        for (int i = 0; i < originUnit.EquippedPassives.Length; i++)
-        {
-            if (originUnit.EquippedPassives[i] is null) continue;
-            if (originUnit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.OnAlterationApplied) continue;
-
-            if (originUnit.EquippedPassives[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration || 
-                appliedAlteration.alterationType != originUnit.EquippedPassives[i].neededAlteration.alterationType) continue;
-
-            return (int)originUnit.EquippedPassives[i].passiveEffects[0].additivePower;
-        }
-
-        return 0;
-    }
-
-    public int GetReceivePassiveAlterationUpgrade(Unit unit, AlterationData appliedAlteration)
-    {
-        for (int i = 0; i < unit.EquippedPassives.Length; i++)
-        {
-            if (unit.EquippedPassives[i] is null) continue;
-            if (unit.EquippedPassives[i].passiveTriggerType != PassiveTriggerType.OnAlterationGained) continue;
-
-            if (unit.EquippedPassives[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration ||
-                appliedAlteration.alterationType != unit.EquippedPassives[i].neededAlteration.alterationType) continue;
-
-            return (int)unit.EquippedPassives[i].passiveEffects[0].additivePower;
-        }
-
-        return 0;
-    }
-
-    public int GetPassiveCritDamagesUpgrade(Unit unit, Unit attackedUnit)
-    {
-
-        return 0;
-    }
-
+    #region Main Functions
 
     public List<PassiveData> GetTriggeredPassives(PassiveTriggerType triggerType, Unit unit)
     {
@@ -100,17 +13,21 @@ public class PassivesManager
 
         if (!unit) return returnedList;
 
-        for (int i = 0; i < unit.EquippedPassives.Length; i++)
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
         {
-            if (unit.EquippedPassives[i] == null) continue;
-            if (unit.EquippedPassives[i].passiveTriggerType != triggerType) continue;
+            if (passivesToCheck[i] == null) continue;
+            if (passivesToCheck[i].passiveTriggerType != triggerType) continue;
 
             int pickedProba = Random.Range(0, 100);
-            if (pickedProba >= unit.EquippedPassives[i].passiveTriggerProba) continue;
+            if (pickedProba >= passivesToCheck[i].passiveTriggerProba) continue;
 
-            returnedList.Add(unit.EquippedPassives[i]);
+            returnedList.Add(passivesToCheck[i]);
         }
-
+        
         return returnedList;
     }
 
@@ -161,4 +78,123 @@ public class PassivesManager
             }
         }
     }
+
+    #endregion
+
+
+    #region Specific Cases
+
+    public bool VerifyAlterationImmunities(AlterationType alterationType, Unit unit)
+    {
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if(unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();   
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.Always) continue;
+
+            int pickedProba = Random.Range(0, 100);
+            if (pickedProba >= passivesToCheck[i].passiveTriggerProba) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.ImmuneAlteration) continue;
+            if (passivesToCheck[i].passiveEffects[0].appliedAlteration.alterationType != alterationType) continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public int GetPassiveMaxSkillPointUpgrade(Unit unit)
+    {
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.Always) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.MaxSkillPoints) continue;
+
+            return (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return 0;
+    }
+
+    public int GetPassiveCritChanceUpgrade(Unit unit, Unit attackedUnit)
+    {
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttack &&
+                (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttackUnitWithAlt ||
+                !attackedUnit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType))) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeCritChances) continue;
+
+            return (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return 0;
+    }
+
+    public int GetGivePassiveAlterationUpgrade(Unit originUnit, AlterationData appliedAlteration)
+    {
+        PassiveData[] passivesToCheck = originUnit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (originUnit.GetType() == typeof(Hero)) passivesToCheck = originUnit.EquippedPassives.Concat(((Hero)originUnit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAlterationApplied) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration ||
+                appliedAlteration.alterationType != passivesToCheck[i].neededAlteration.alterationType) continue;
+
+            return (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return 0;
+    }
+
+    public int GetReceivePassiveAlterationUpgrade(Unit unit, AlterationData appliedAlteration)
+    {
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAlterationGained) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration ||
+                appliedAlteration.alterationType != passivesToCheck[i].neededAlteration.alterationType) continue;
+
+            return (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return 0;
+    }
+
+    public int GetPassiveCritDamagesUpgrade(Unit unit, Unit attackedUnit)
+    {
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        return 0;
+    }
+
+    #endregion
 }

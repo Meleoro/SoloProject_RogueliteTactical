@@ -76,7 +76,7 @@ public class Unit : MonoBehaviour
     private float critModificatorAdditive;
     private List<AlterationStruct> currentAlterations = new List<AlterationStruct>(); 
 
-    [Header("Protected Other Infos")]
+    [Header("Protected Infos")]
     protected BattleTile currentTile;
     protected BattleTile previousTile;
     protected bool isUnitsTurn;
@@ -782,16 +782,18 @@ public class Unit : MonoBehaviour
     #endregion
 
 
-    protected IEnumerator DisappearCoroutine(float duration)
+    #region Others
+
+    protected IEnumerator DisappearCoroutine(float duration, bool destroy = true)
     {
         BattleManager.Instance.RemoveUnit(this);
         _spriteRenderer.material.ULerpMaterialFloat(duration, -0.5f, "_DitherProgress");
 
         yield return new WaitForSeconds(duration);
 
-        Destroy(gameObject);
+        if(destroy)
+            Destroy(gameObject);
     }
-
 
     public void UseItem(LootData itemData)
     {
@@ -811,7 +813,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-
     public virtual void StartTurn()
     {
         isUnitsTurn = true;
@@ -826,7 +827,6 @@ public class Unit : MonoBehaviour
         StartTurnOutline();
     }
 
-
     public virtual void EndTurn(float delay)
     {
         isUnitsTurn = false;
@@ -839,4 +839,6 @@ public class Unit : MonoBehaviour
 
         StartCoroutine(BattleManager.Instance.NextTurnCoroutine(delay));
     }
+
+    #endregion
 }

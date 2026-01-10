@@ -53,7 +53,7 @@ public class GameManager : GenericSingletonClass<GameManager>
 
     public IEnumerator EndExplorationCoroutine()
     {
-        OnReturnToCamp.Invoke(0);
+        OnReturnToCamp?.Invoke(0);
 
         UIManager.Instance.FloorTransition.FadeScreen(0.8f, 1);
 

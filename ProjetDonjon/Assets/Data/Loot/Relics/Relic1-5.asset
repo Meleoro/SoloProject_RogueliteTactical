@@ -19,9 +19,9 @@ MonoBehaviour:
   rarityType: 1
   spawnType: 2
   spawnProbaPerFloor:
-  - 2
-  - 4
+  - 15
+  - 25
   - 0
-  - 6
-  - 8
+  - 40
+  - 60
   - 0

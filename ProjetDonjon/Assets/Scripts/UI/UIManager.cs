@@ -57,7 +57,6 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private Minimap _minimap;
     [SerializeField] private FloorTransition _floorTransition;
     [SerializeField] private PlayerActionsMenu _playerActionsMenu;
-    [SerializeField] private HUDExploration _hudExploration;
 
     [Header("References Hero Infos")]
     [SerializeField] private HeroInfoPanel[] _heroInfoPanels1H;

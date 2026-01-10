@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-03
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: BATTLES
-  stepDescription: 'SOMETIMES, WHEN YOU''LL ENTER A ROOM, A BATTLE WILL START.
+  stepName: EQUIPMENT
+  stepDescription: 'YOU FOUND A PIECE OF EQUIPMENT YOU CAN EQUIP IT IN THE EQUIPMENT
+    MENU (TO OPEN IT, PRESS [2] OR CLICK ON THE ARMOR ICON AT THE BOTTOM LEFT OF
+    YOUR SCREEN)
 
 
-    YOU
-    WILL HAVE TO BEAT ALL THE ENEMIES TO BE ABLE END THE BATTLE.'
+    TO EQUIP IT YOU CAN SIMPLY DRAG AND DROP IT, OR CLICK IT AND
+    CLICK ON EQUIP'
   highlightType: 0
   endCondition: 0
   leftSidePanel: 0
   playNextStepOnFinished: 1
+  playNextStepDelay: 0.2

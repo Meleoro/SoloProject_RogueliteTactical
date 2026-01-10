@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Breast3
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: METAL ARMOR
-  lootDescription: You start each fights with 2 Shields
+  lootDescription: THIS UNIT STARTS EACH FIGHT WITH TWO SHIELDS
   lootType: 1
   rarityType: 1
   sprite: {fileID: 1408896084216172181, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
@@ -27,11 +28,9 @@ MonoBehaviour:
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 0
-  mpUpgrade: 0
+  mpUpgrade: -1
   spUpgrade: 0
-  equipmentEffectType: 1
-  equipmentEffectAlteration: {fileID: 11400000, guid: d2f85ac883d83d24dae0ce0269a5d9e8, type: 2}
-  equipmentEffectPower: 2
+  appliedPassive: {fileID: 11400000, guid: ba301f2792baf4c4cb44381cbd07fc4a, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f51d3c135e2eb44b0a2bc3502c2e38, type: 3}
+  m_Name: EP_00
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveData
+  passiveName: Crystal Boots
+  passiveDescription: When you get hit, you have a 50% chance to gain Lucky
+  passiveIcon: {fileID: 0}
+  passiveHighlightIcon: {fileID: 0}
+  additionalTooltipDatas: []
+  passiveTriggerType: 1
+  neededAlteration: {fileID: 0}
+  passiveTriggerProba: 50
+  passiveEffects:
+  - passiveEffectType: 0
+    appliedAlteration: {fileID: 11400000, guid: 974d5994fb28d6c45b7bb6731df5b642, type: 2}
+    additivePower: 0
+    multipliedPower: 0

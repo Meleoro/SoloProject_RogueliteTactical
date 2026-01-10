@@ -76,6 +76,54 @@ MonoBehaviour:
   possibleFirstBossRooms:
   - {fileID: 2917294264406634095, guid: 5cbe374aae63ec84195d013e30bd5ad4, type: 3}
   possibleSecondBossRooms: []
+  possibleCommonLoot:
+  - probability: 25
+    loot: {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 8c619ec65573b5b4b89ce41ad5d53ee7, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 489ce2b2d4640574e8be925a9007ddd8, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 7256e143e98fdac43bba6a109d0b0f9c, type: 2}
+  - probability: 15
+    loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 6a19da2e9de63b94d98a3dfd2959074d, type: 2}
+  possibleRareLoot:
+  - probability: 20
+    loot: {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 861915a6d01ecc247b8ba04832474eb5, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: ae63ec5eccf09584dac1a34cf0bd7b4c, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: c6365ca817b6eca4f9ee09436cae8af2, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: aa4d0709758515249b72ea99be866219, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: f911b33cd98bec44498b9613ec0b396e, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: d232afad462b29e4a89ee38c348180c0, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 45011751c251c3d4facdd68092b5380c, type: 2}
+  possibleEpicLoot:
+  - probability: 20
+    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
+  possibleMysticLoot: []
   lootPerFloors:
   - {fileID: 11400000, guid: 552fdf40ba613ba4798b39159b339ca9, type: 2}
   - {fileID: 11400000, guid: c2e6cfa2e8d18214ea3f908b7db5ebd6, type: 2}

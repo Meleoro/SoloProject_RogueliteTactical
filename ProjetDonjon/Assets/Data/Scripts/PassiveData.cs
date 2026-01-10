@@ -39,7 +39,8 @@ public enum PassiveEffectType
     MaxSkillPoints,
     GainSkillPoint,
     UpgradeSummonHealth,
-    UpgradeSummonDamages
+    UpgradeSummonDamages,
+    UpgradeDamages
 }
 
 public enum PassiveTriggerType

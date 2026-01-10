@@ -53,6 +53,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
         currentFloor = 0;
 
+        LootManager.Instance.ActualiseInfos(enviroData, enviroData.lootPerFloors[currentFloor]);
+
         trailFloorsIndexes = new int[2];
         trailFloorsIndexes[0] = Random.Range(0, 2);
         trailFloorsIndexes[1] = Random.Range(3, 5);
@@ -96,6 +98,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     {
         Transform[] roomsToDestroy = _roomsParent.GetComponentsInChildren<Transform>();
         currentFloor++;
+
+        LootManager.Instance.ActualiseInfos(enviroData, enviroData.lootPerFloors[currentFloor]);
 
         for (int i = 0; i < roomsToDestroy.Length; i++)
         {

@@ -23,6 +23,7 @@ public class Loot : MonoBehaviour, IInteractible
     [SerializeField] private LayerMask UIcollisionLayer;
     [SerializeField] private BackgroundType[] possibleBackgrounds;
     [SerializeField] private Color[] lootColorAccordingToType;
+    [SerializeField] private Color[] lootColorAccordingToRarity;
     [SerializeField] private float dragLerpSpeed;
     [SerializeField] private bool debug;
 
@@ -141,9 +142,7 @@ public class Loot : MonoBehaviour, IInteractible
         _imageBackground.SetNativeSize();
 
         dragWantedPos = InventoriesManager.Instance.MainLootParent.position;
-
-        _imageBackground.color = lootColorAccordingToType[(int)lootData.lootType];
-
+        _imageBackground.color = lootColorAccordingToRarity[(int)lootData.rarityType];
         slotsOccupied = new InventorySlot[0];
 
         InventoriesManager.Instance.OnInventoryClose += BecomeWorldItem;
@@ -238,7 +237,13 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void DestroyItem()
     {
+        InventoriesManager.Instance.RemoveItem(this);
         InventoriesManager.Instance.OnInventoryClose -= BecomeWorldItem;
+
+        if (isEquipped)
+        {
+            Unequip();
+        }
 
         for (int i = 0; i < slotsOccupied.Length; i++)
         {

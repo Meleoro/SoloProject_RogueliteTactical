@@ -13,7 +13,8 @@ public enum TutoHighlightType
     HighlightCollection,
     HighlightExpedition,
     HighlightCampLevel,
-    HighlightReturnToCamp
+    HighlightReturnToCamp,
+    HighlightEquipmentMenu
 }
 
 public enum TutoEndCondition
@@ -25,7 +26,8 @@ public enum TutoEndCondition
     Interact,
     ClickEnemy,
     AddShield,
-    ReturnToCamp
+    ReturnToCamp,
+    EquipEquiment
 }
 
 

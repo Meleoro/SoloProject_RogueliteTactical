@@ -36,7 +36,11 @@ public class EnviroData : ScriptableObject
     public Room[] possibleFirstBossRooms;
     public Room[] possibleSecondBossRooms;
 
-    [Header("Loot")]
+    [Header("Balancing")]
+    public PossibleLootData[] possibleCommonLoot;
+    public PossibleLootData[] possibleRareLoot;
+    public PossibleLootData[] possibleEpicLoot;
+    public PossibleLootData[] possibleMysticLoot;
     public FloorLootData[] lootPerFloors;
     public EnemySpawnData[] enemySpawnsPerFloor;
 }

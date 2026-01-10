@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Headset2
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: CRISTAL HEADSET
-  lootDescription: When you get hit, you have a 50% chance to inflict Unlucky
+  lootDescription: WHEN THIS UNIT GETS HIT, 50% CHANCES TO INFLICT UNLUCKY III
   lootType: 1
   rarityType: 2
   sprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -22,15 +23,13 @@ MonoBehaviour:
   - row: 01
   equipmentType: 1
   equipmentSprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 1
+  healthUpgrade: 0
   strengthUpgrade: 0
   speedUpgrade: 0
-  luckUpgrade: 2
+  luckUpgrade: 1
   mpUpgrade: 0
   spUpgrade: 0
-  equipmentEffectType: 2
-  equipmentEffectAlteration: {fileID: 11400000, guid: 69245b854151af14396500e9975c69b1, type: 2}
-  equipmentEffectPower: 50
+  appliedPassive: {fileID: 11400000, guid: 9dfeae7447f01234b943c83c57d1e581, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0

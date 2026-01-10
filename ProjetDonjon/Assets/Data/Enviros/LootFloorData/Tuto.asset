@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79dd46977732774e8de2f5811e5f0c1, type: 3}
   m_Name: Tuto
   m_EditorClassIdentifier: 
+  probaPerTierChest: 64000000000000000000000000000000
   chestPossibleLoots:
   - probability: 100
     loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
@@ -25,6 +26,7 @@ MonoBehaviour:
     loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
   minChestCoins: 4
   maxChestCoins: 7
+  probaPerTierBattle: 64000000000000000000000000000000
   battleEndPossibleLoots:
   - probability: 100
     loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
@@ -36,6 +38,7 @@ MonoBehaviour:
     loot: {fileID: 11400000, guid: b34ba33fc8826fd44a2ea8b0b5747196, type: 2}
   minBattleCoins: 2
   maxBattleCoins: 5
+  probaPerTierChallenge: 
   challengeEndPossibleLoots:
   - probability: 20
     loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}

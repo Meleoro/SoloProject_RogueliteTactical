@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Boots3
   m_EditorClassIdentifier: 
-  lootName: METAL SHOES
-  lootDescription: 
+  lootID: 0
+  lootName: METAL BOOTS
+  lootDescription: 'EACH TIME THIS UNIT APPLIES SHIELD, APPLY +1 SHIELD '
   lootType: 1
   rarityType: 1
   sprite: {fileID: 6190414075492916589, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
@@ -28,11 +29,9 @@ MonoBehaviour:
   luckUpgrade: 0
   mpUpgrade: 0
   spUpgrade: 0
-  equipmentEffectType: 0
-  equipmentEffectAlteration: {fileID: 0}
-  equipmentEffectPower: 0
+  appliedPassive: {fileID: 11400000, guid: cdb164c719c973346a55ec6979b2eb08, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0
   additionalTooltipDatas:
-  - {fileID: 11400000, guid: a3293f9b618695047ab630581c3aefb3, type: 2}
+  - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}

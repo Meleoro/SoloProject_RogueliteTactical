@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Breast2
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: CRISTAL ARMOR
-  lootDescription: Gives you Thorns II
+  lootDescription: THIS UNIT STARTS EACH FIGHT WITH THORNS
   lootType: 1
   rarityType: 2
   sprite: {fileID: 1213750802, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -29,9 +30,7 @@ MonoBehaviour:
   luckUpgrade: 3
   mpUpgrade: 0
   spUpgrade: 0
-  equipmentEffectType: 1
-  equipmentEffectAlteration: {fileID: 11400000, guid: 413d1159baf8d47469e3d3c47bb1a95b, type: 2}
-  equipmentEffectPower: 0
+  appliedPassive: {fileID: 11400000, guid: 5a437db92a5ae704eaf2ddfdbae84be0, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0

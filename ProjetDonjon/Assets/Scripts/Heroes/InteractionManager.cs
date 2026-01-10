@@ -32,6 +32,12 @@ public class InteractionManager : MonoBehaviour
         currentHeroTransform = newTr;
     }
 
+    // Called when every hero is dead
+    public void DisableInteractions()
+    {
+        isSetup = false;
+    }
+
 
     #region Detect Interactibles
 

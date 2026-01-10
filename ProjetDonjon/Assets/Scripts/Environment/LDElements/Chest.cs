@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Utilities;
@@ -30,21 +31,8 @@ public class Chest : MonoBehaviour, IInteractible
 
     private void GenerateLoot()
     {
-        int pickedPercentage = Random.Range(0, 100);
-        int currentSum = 0;
-
-        for(int i = 0; i < possibleLoots.Length; i++)
-        {
-            currentSum += possibleLoots[i].probability;
-
-            if(currentSum > pickedPercentage)
-            {
-                Loot newLoot = Instantiate(lootPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-                newLoot.Initialise(possibleLoots[i].loot);
-
-                break;
-            }
-        }
+        LootManager.Instance.SpawnLootChest(transform.position);
+        if(Random.Range(0, 2) == 0) LootManager.Instance.SpawnLootChest(transform.position);    // 50% chance to get second loot
 
         int pickedCoinsAmount = Random.Range(ProceduralGenerationManager.Instance.EnviroData.lootPerFloors[ProceduralGenerationManager.Instance.CurrentFloor].minChestCoins,
             ProceduralGenerationManager.Instance.EnviroData.lootPerFloors[ProceduralGenerationManager.Instance.CurrentFloor].maxChestCoins);

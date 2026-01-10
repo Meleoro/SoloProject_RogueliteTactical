@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f51d3c135e2eb44b0a2bc3502c2e38, type: 3}
+  m_Name: EP_03
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveData
+  passiveName: Crystal Weapon
+  passiveDescription: WHEN THIS UNIT DEALS A CRITICAL HIT, DEALS +50% DAMAGES
+  passiveIcon: {fileID: 0}
+  passiveHighlightIcon: {fileID: 0}
+  additionalTooltipDatas: []
+  passiveTriggerType: 7
+  neededAlteration: {fileID: 0}
+  passiveTriggerProba: 100
+  passiveEffects:
+  - passiveEffectType: 4
+    appliedAlteration: {fileID: 0}
+    additivePower: 0
+    multipliedPower: 1.5

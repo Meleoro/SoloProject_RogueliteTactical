@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -54,6 +55,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     [SerializeField] private CoinUI _coinUI;
     [SerializeField] private Inventory _chestInventory;
 
+
+    #region Setup
 
     private void Start()
     {
@@ -120,6 +123,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
     }
 
+    #endregion
+
 
     #region Main Functions
 
@@ -155,7 +160,6 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
             if (allLoots[i].LootData == item)
             {
                 Loot loot = allLoots[i];
-                RemoveItem(loot);
                 loot.DestroyItem();
                 break;
             }
@@ -167,6 +171,18 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         yield return new WaitForSeconds(0.05f);
 
         OnInventoryChange?.Invoke();
+    }
+
+    // Called on death
+    public void EmptyCurrentHeroesInventories()
+    {
+        for(int i = allLoots.Count - 1; i >= 0; i--)
+        {
+            if (!allLoots[i].AssociatedHero) continue;
+            if (!currentHeroesInventories.Contains(allLoots[i].AssociatedHero.Inventory)) continue;
+
+            allLoots[i].DestroyItem();
+        }
     }
 
     #endregion

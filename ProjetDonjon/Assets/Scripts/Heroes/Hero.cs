@@ -24,6 +24,7 @@ public class Hero : Unit
 
     [Header("Public Infos")]
     public Loot[] EquippedLoot { get { return equippedLoot; } }
+    public PassiveData[] EquippedLootPassives { get { return equippedLootPassives; } }
     public SkillData[] EquippedSkills { get { return equippedSkills; } }
     public Inventory Inventory { get { return inventory; } }
     public HeroData HeroData { get { return heroData; } }
@@ -43,6 +44,7 @@ public class Hero : Unit
 
     [Header("Private Infos")]
     private Loot[] equippedLoot = new Loot[6];
+    private PassiveData[] equippedLootPassives = new PassiveData[6];
     private SkillData[] equippedSkills = new SkillData[6];
     private Inventory inventory;
     private bool isHidden;
@@ -92,7 +94,7 @@ public class Hero : Unit
         {
             transform.position = currentDisplayedHeroTr.transform.position;
         }
-        else
+        else if (!isDead)
         {
             _controller.UpdateController();
         }
@@ -152,14 +154,6 @@ public class Hero : Unit
 
         CurrentSkillPoints = heroData.startSkillPoints;
 
-        foreach (Loot equipment in equippedLoot)
-        {
-            if (equipment is null) continue;
-            if (equipment.LootData.equipmentEffectType != SpecialEquipmentEffectType.Alteration) continue;
-
-            AddAlteration(equipment.LootData.equipmentEffectAlteration, this);
-        }
-
         if(CurrentHealth <= 0)
         {
             _animator.SetBool("IsDead", true);
@@ -198,6 +192,8 @@ public class Hero : Unit
 
     public override void TakeDamage(int damageAmount, Unit originUnit)
     {
+        if (isDead) return;
+
         base.TakeDamage(damageAmount, originUnit);
         
         // For no damages when the hero explores in the tuto
@@ -210,42 +206,22 @@ public class Hero : Unit
         OnHeroInfosChange?.Invoke();
 
         AudioManager.Instance.PlaySoundOneShot(2, 0);
-
-        LootData[] hitLootEffects = GetEquippedLootOfEffectType(SpecialEquipmentEffectType.HitAlteration);
-
-        for(int i = 0; i < hitLootEffects.Length; i++)
-        {
-            if (hitLootEffects[i].equipmentEffectAlteration.isPositive)
-            {
-                int pickedProba = Random.Range(0, 100);
-                if (pickedProba > hitLootEffects[i].equipmentEffectPower) continue;
-
-                AddAlteration(hitLootEffects[i].equipmentEffectAlteration, this);
-            }
-            else
-            {
-                int pickedProba = Random.Range(0, 100);
-                if (pickedProba > hitLootEffects[i].equipmentEffectPower) continue;
-
-                originUnit.AddAlteration(hitLootEffects[i].equipmentEffectAlteration, this);
-            }
-        }
     }
 
     protected override void Die()
     {
         _animator.SetBool("IsDead", true);
 
-        currentTile.UnitLeaveTile();
         AudioManager.Instance.PlaySoundOneShot(2, 9);
-
-        StartCoroutine(DisappearCoroutine(1.0f));
+        StartCoroutine(DisappearCoroutine(1.0f, false));
 
         if (BattleManager.Instance.IsInBattle)
+        {
+            currentTile.UnitLeaveTile();
             BattleManager.Instance.RemoveUnit(this);
+        }
 
         OnDead.Invoke();
-
         isDead = true;
     }
 
@@ -287,26 +263,13 @@ public class Hero : Unit
     public void AddEquipment(Loot loot, int equipSlotIndex)
     {
         equippedLoot[equipSlotIndex] = loot;
+        equippedLootPassives[equipSlotIndex] = loot.LootData.appliedPassive;
     }
 
     public void RemoveEquipment(Loot removedLoot, int unequipSlotIndex)
     {
         equippedLoot[unequipSlotIndex] = null;
-    }
-
-    public LootData[] GetEquippedLootOfEffectType(SpecialEquipmentEffectType effectType)
-    {
-        List<LootData> result = new List<LootData>();
-
-        for(int i = 0; i < 6; i++)
-        {
-            if (equippedLoot[i] is null) continue;
-            if (equippedLoot[i].LootData.equipmentEffectType != effectType) continue;
-
-            result.Add(equippedLoot[i].LootData);
-        }
-
-        return result.ToArray();
+        equippedLootPassives[unequipSlotIndex] = null;
     }
 
     #endregion
@@ -357,7 +320,10 @@ public class Hero : Unit
 
     public void StartExploration()
     {
-        currentHealth = currentMaxHealth;
+        CurrentHealth = currentMaxHealth;
+        _spriteRenderer.material.ULerpMaterialFloat(0.05f, 3.0f, "_DitherProgress");
+
+        _animator.SetBool("IsDead", false);
     }
 
     public override void ActualiseUnitInfos(int addedMaxHealth, int addedStrength, int addedSpeed, int addedLuck, int addedMovePoints, int addedSP)

@@ -119,7 +119,6 @@ public class InventoryActionPanel : MonoBehaviour
     {
         InventoriesManager.Instance.AddCoins((int)(currentLoot.LootData.value * 0.5f));
 
-        InventoriesManager.Instance.RemoveItem(currentLoot);
         currentLoot.DestroyItem();
 
         ClosePanel();
