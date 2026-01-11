@@ -422,7 +422,7 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // Camera Movement + Boss Anim
-        CameraManager.Instance.FocusOnTr(newEnemy.transform, 3);
+        CameraManager.Instance.FocusOnTransform(newEnemy.transform, 3);
         newEnemy._animator.SetTrigger("Intro");
 
         yield return new WaitForSeconds(4f);

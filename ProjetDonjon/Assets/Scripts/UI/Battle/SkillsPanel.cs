@@ -86,7 +86,17 @@ public class SkillsPanel : MonoBehaviour
     // For tuto 
     public void LockOption(int index)
     {
-        lockedButton = _skillButtons[index];
+        if (lockedButton)
+        {
+            lockedButton.UnlockButton();
+            lockedButton = null;
+        }
+
+        if(index != -1)
+        {
+            _skillButtons[index].LockButton();
+            lockedButton = _skillButtons[index];
+        }
     }
 
 

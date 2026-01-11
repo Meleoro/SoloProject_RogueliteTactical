@@ -38,7 +38,7 @@ public class ChallengeChest : MonoBehaviour, IInteractible
 
     private IEnumerator InteractCoroutine(float openDuration)
     {
-        CameraManager.Instance.FocusOnTr(transform, 3f);
+        CameraManager.Instance.FocusOnTransform(transform, 3f);
 
         transform.UShakePosition(openDuration * 0.3f, 0.2f, 0.04f);
 

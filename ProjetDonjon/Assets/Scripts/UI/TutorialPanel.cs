@@ -207,6 +207,7 @@ public class TutorialPanel : MonoBehaviour
             highlightedImages[i].rectTransform.SetParent(originalParent);
             highlightedImages[i].rectTransform.localPosition = originalLocalPositions[i];
         }
+        highlightedImages = new Image[0];
 
         if (isDisplayingTileHighlight)
         {

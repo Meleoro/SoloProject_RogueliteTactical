@@ -121,7 +121,7 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
     public void UnlockCameraInputs()
     {
-        isInputLocked = true;
+        isInputLocked = false;
     }
 
 
@@ -180,12 +180,26 @@ public class CameraManager : GenericSingletonClass<CameraManager>
         currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
     }
 
-    public void FocusOnTr(Transform focusedTr, float cameraSize)
+    public void FocusOnTransform(Transform focusedTr, float cameraSize)
     {
         if (isLocked) return;
 
         currentWantedPos = focusedTr.position + followOffset;
         currentWantedSize = cameraSize;
+    }
+
+    public void FocusOnTransforms(Transform[] focusedTr)
+    {
+        Vector3 middlePos = Vector2.zero;
+        float maxDist = 0;
+        foreach (Transform transform in focusedTr)
+        {
+            middlePos += transform.position;
+            maxDist = Mathf.Max(maxDist, Vector2.Distance(focusedTr[0].transform.position, transform.position));
+        }
+        middlePos /= focusedTr.Length;
+
+        FocusOnPosition(middlePos, maxDist * 2f);
     }
 
     public IEnumerator FocusOnTrCoroutine(Transform focusedTr, float cameraSize, float duration)
@@ -206,45 +220,6 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
         currentWantedPos = focusedTr.position + followOffset;
         currentWantedSize = cameraSize;
-    }
-
-    public IEnumerator DoAttackFeelCoroutine(BattleTile[] concernedTiles, UnitAnimsInfos animInfos, bool isCrit)
-    {
-        Vector3 middlePos = Vector2.zero;
-        float maxDist = 0;
-        foreach(BattleTile tile in concernedTiles)
-        {
-            middlePos += tile.transform.position;
-            maxDist = Mathf.Max(maxDist, Vector2.Distance(concernedTiles[0].transform.position, tile.transform.position));
-        }
-        middlePos /= concernedTiles.Length;
-
-        FocusOnPosition(middlePos, maxDist * 2f);
-
-        yield return new WaitForEndOfFrame();
-
-        /*while (true)
-        {
-            if (animInfos.PlaySkillEffect)
-                break;
-
-            currentWantedSize -= Time.deltaTime;
-            currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        //currentWantedSize = _camera.orthographicSize + 1.5f;
-
-        float timer = 0;
-        while (timer < 0.5f)
-        {
-            currentWantedSize -= Time.deltaTime * (_camera.orthographicSize - 4);
-
-            timer += Time.deltaTime;
-
-            yield return new WaitForEndOfFrame();
-        }*/
     }
 
     public void FocusOnPosition(Vector3 focusedPos, float cameraSize)

@@ -15,9 +15,9 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [Header("Public Infos")]
     public bool DidTutorial { get {  return didTutorial || disableTuto; } }
     public bool[] DidTutorialStep { get {  return didTutorialStep; } }
-    public bool DidBattleTuto { get {  return didTutorialStep[4]; } }
+    public bool DidBattleTuto { get {  return didTutorialStep[5]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
-    public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[10]; } }
+    public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[12]; } }
 
     [Header("Private Infos")]
     private bool[] didTutorialStep;
@@ -31,7 +31,9 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [SerializeField] private RectTransform _leftPosRef;
     [SerializeField] private RectTransform _rightPosRef;
     [SerializeField] private TutorialPanel _tutorialPanel;
-    
+
+
+    #region Tutorial Begin
 
     public void StartTutorial()
     {
@@ -98,12 +100,14 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 break;
 
             case TutoEndCondition.Attack:
+                UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(1);
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction += ValidateEndCondition;
                 BattleManager.Instance.CurrentEnemies[0].OnDamageTaken += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
                 break;
 
             case TutoEndCondition.AddShield:
+                UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(0);
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction += ValidateEndCondition;
                 BattleManager.Instance.CurrentHeroes[0].OnAlterationAdded += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
@@ -116,6 +120,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.ClickEnemy:
                 BattleManager.Instance.CurrentEnemies[0].OnClickUnit += ValidateEndCondition;
+                BattleManager.Instance.OnBattleEnd += DoRelicTutorial;
                 endConditionsValidated = new bool[1];
                 break;
 
@@ -138,6 +143,29 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 break;
         }
     }
+
+    private void DoEquipmentTutorial()
+    {
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(3, 0.6f));
+    }
+    private void DoSecondBattleTutorial()
+    {
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(7, 0.6f));
+    }
+    private void DoThirdBattleTutorial()
+    {
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 0.5f));
+    }
+    private void DoRelicTutorial()
+    {
+        BattleManager.Instance.OnBattleEnd -= DoRelicTutorial;
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(11, 1f));
+    }
+
+    #endregion
+
+
+    #region Tutorial End 
 
     private void ValidateEndCondition()
     {
@@ -170,6 +198,8 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         isDisplayingTuto = false;
         _tutorialPanel.OnHide -= EndTutorialStep;
+
+        UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(-1);
 
         CameraManager.Instance.UnlockCameraInputs();
 
@@ -232,19 +262,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         StartCoroutine(DisplayTutorialWithDelayCoroutine(++currentTutoID, currentStep.playNextStepDelay));
     }
 
-
-    private void DoEquipmentTutorial()
-    {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(3, 0.6f));
-    }
-    private void DoSecondBattleTutorial()
-    {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(7, 0.6f));
-    }
-    private void DoThirdBattleTutorial()
-    {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 0.5f));
-    }
+    #endregion
 
 
     #region Save Interface

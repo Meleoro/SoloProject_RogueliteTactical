@@ -162,13 +162,14 @@ public class AIUnit : Unit
 
     private IEnumerator LastEnemyDisappearCoroutine(float duration)
     {
-        CameraManager.Instance.FocusOnTr(transform, 3f);
+        CameraManager.Instance.FocusOnTransform(transform, 3f);
         transform.UShakePosition(duration * 0.75f, 0.2f, 0.03f);
 
         BattleManager.Instance.StartBattleEndCutscene();
 
         yield return new WaitForSeconds(duration * 0.75f);
 
+        BattleManager.Instance.EndBattle();
         BattleManager.Instance.BattleEndRewards(this);
 
         StartCoroutine(DisappearCoroutine(duration * 0.25f));

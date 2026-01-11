@@ -279,7 +279,7 @@ public class BattleTile : MonoBehaviour
             if (unitOnTile is not null && BattleManager.Instance.CurrentUnit is not null && BattleManager.Instance.CurrentActionType != MenuType.LaunchSkill)
             {
                 unitOnTile.DisplayOverlayOutline();
-                if (unitOnTile.GetType() != typeof(Hero) && BattleManager.Instance.CurrentUnit.GetType() == typeof(Hero))
+                if (unitOnTile.GetType() != typeof(Hero))
                 {
                     BattleManager.Instance.TilesManager.DisplayPossibleTiles(unitOnTile as AIUnit);
                 }
@@ -312,7 +312,11 @@ public class BattleTile : MonoBehaviour
         if (!isHovered) return;
         isHovered = false;
 
-        StartCoroutine(VerifyQuitOverlayTile());
+        if (unitOnTile)
+            StartCoroutine(VerifyQuitOverlayTile());
+
+        else
+            QuitOverlayTile();
     }
 
     private IEnumerator VerifyQuitOverlayTile()

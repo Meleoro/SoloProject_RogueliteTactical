@@ -45,6 +45,7 @@ public class PlayerActionsMenu : MonoBehaviour
     public Image[] ActionPointImages { get { return _actionPointImages; } }
     public Image[] SkillPointImages { get { return _skillPointImages; } }
     public Image[] ButtonImages { get { return _buttonImages; } }
+    public SkillsPanel SkillsPanel { get { return _skillsPanel; } }
 
     [Header("References")]
     [SerializeField] private Animator _animator;
@@ -92,7 +93,7 @@ public class PlayerActionsMenu : MonoBehaviour
         if (currentHero.CurrentActionPoints == 0) return;
         if (!BattleManager.Instance.IsInBattle) return;
 
-        CameraManager.Instance.FocusOnTr(currentHero.transform, 5f);
+        CameraManager.Instance.FocusOnTransform(currentHero.transform, 5f);
         CameraManager.Instance.OnCameraMouseInput += CloseActionsMenu;
         currentHero.OnClickUnit -= OpenActionsMenu;
         if (currentMenu == MenuType.Move) currentHero.OnClickUnit -= ReturnPreviousBattleMenu;
@@ -262,13 +263,13 @@ public class PlayerActionsMenu : MonoBehaviour
         {
             case MenuType.Move:
                 OpenActionsMenu();
-                CameraManager.Instance.FocusOnTr(currentHero.transform, 5f);
+                CameraManager.Instance.FocusOnTransform(currentHero.transform, 5.5f);
                 BattleManager.Instance.TilesManager.ResetTiles();
                 break;
 
             case MenuType.Skills:
                 OpenActionsMenu();
-                CameraManager.Instance.FocusOnTr(currentHero.transform, 5f);
+                CameraManager.Instance.FocusOnTransform(currentHero.transform, 5.5f);
                 BattleManager.Instance.TilesManager.ResetTiles();
                 _skillsPanel.CloseSkillsPanel();
                 break;

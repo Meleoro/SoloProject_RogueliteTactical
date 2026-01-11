@@ -236,6 +236,8 @@ public class MainMetaMenu : MonoBehaviour
             _smithLock.Unlock(true);
         }
 
+        if (currentCampLevel == campLevels.Length) return;
+
         _campLevelProgressBar.fillAmount = currentRelicCount / campLevels[currentCampLevel].neededRelicCount;
         _campLevelProgressText.text = currentRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
         _campLevelMainText.text = "CAMP LEVEL " + currentCampLevel;

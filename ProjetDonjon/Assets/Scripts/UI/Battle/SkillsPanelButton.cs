@@ -72,6 +72,17 @@ public class SkillsPanelButton : MonoBehaviour
     }
 
 
+    public void LockButton()
+    {
+        canBeUsed = false;
+    }
+
+    public void UnlockButton()
+    {
+        canBeUsed = true;
+    }
+
+
     #region Overlay / Click Functions
 
     public void OverlayButton()
@@ -102,7 +113,7 @@ public class SkillsPanelButton : MonoBehaviour
         }
 
         averageDist /= concernedTiles.Count;
-        CameraManager.Instance.FocusOnTr(BattleManager.Instance.CurrentUnit.transform, averageDist * 2f);
+        CameraManager.Instance.FocusOnTransform(BattleManager.Instance.CurrentUnit.transform, averageDist * 2f);
     }
 
     public void QuitOverlayButton(bool noActionCall = false)

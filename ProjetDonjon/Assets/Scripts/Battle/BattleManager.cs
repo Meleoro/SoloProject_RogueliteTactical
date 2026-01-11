@@ -1,13 +1,17 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utilities;
-using static Enums;
-using Random = UnityEngine.Random;
+
+public enum BattleEventType
+{
+    NextTurn,
+    NextPlayerAction,
+    GainXP
+}
+
 
 public class BattleManager : GenericSingletonClass<BattleManager>
 {
@@ -35,6 +39,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     private Room battleRoom;
     private Unit currentUnit;
     private int currentVFXIndex;
+    private Queue<BattleEventType> eventQueue;
 
     [Header("Public Infos")]
     public Room BattleRoom { get {  return battleRoom; } }
@@ -118,6 +123,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             if ((unit as AIUnit).IsEnemy)
             {
                 currentEnemies.Remove((AIUnit)unit);
+                AddBattleEventToQueue(BattleEventType.GainXP);
             }
             else
             {
@@ -141,6 +147,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         _pathCalculator.InitialisePathCalculator(battleRoom.PlacedBattleTiles);
 
         OnBattleStart.Invoke();
+
+        eventQueue = new Queue<BattleEventType>();
 
         isInBattle = true;
         this.battleRoom = battleRoom;
@@ -233,6 +241,48 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     #region Battle Events
 
+    public void AddBattleEventToQueue(BattleEventType eventType) 
+    {
+        eventQueue.Enqueue(eventType);
+    }
+
+    public void PlayNextBattleEvent()
+    {
+        BattleEventType eventType = eventQueue.Dequeue();
+
+        switch (eventType)
+        {
+            case BattleEventType.NextTurn:
+                StartCoroutine(NextTurnCoroutine(0, true));
+                break;
+
+            case BattleEventType.NextPlayerAction:
+                _playerActionsMenu.OpenActionsMenu();
+                break;
+
+            case BattleEventType.GainXP:
+                StartCoroutine(GainXPEventCoroutine());
+                break;
+        }
+    }
+
+
+    public IEnumerator GainXPEventCoroutine()
+    {
+        Transform[] transforms = new Transform[currentHeroes.Count];
+        for(int i = 0; i < currentHeroes.Count; i++)
+        {
+            transforms[i] = currentHeroes[i].transform; 
+        }
+
+        CameraManager.Instance.FocusOnTransforms(transforms);
+
+        yield return new WaitForSeconds(1.0f);
+
+        PlayNextBattleEvent();
+    }
+
+
     public IEnumerator NextTurnCoroutine(float delay = 0, bool endTurn = true)
     {
         yield return new WaitForSeconds(delay);
@@ -255,7 +305,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         else
         {
             isEnemyTurn = true;
-            CameraManager.Instance.FocusOnTr(CurrentUnit.transform, 5f);
+            CameraManager.Instance.FocusOnTransform(CurrentUnit.transform, 5f);
             AIUnit enemy = CurrentUnit as AIUnit;
             StartCoroutine(enemy.PlayEnemyTurnCoroutine());
         }
@@ -299,11 +349,13 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             (CurrentUnit as Hero).DoAction();
             if ((currentUnit as Hero).CurrentActionPoints > 0)
             {
-                _playerActionsMenu.OpenActionsMenu();
+                AddBattleEventToQueue(BattleEventType.NextPlayerAction);
+                PlayNextBattleEvent();
                 yield break;
             }
 
-            currentUnit.EndTurn(0.5f);
+            AddBattleEventToQueue(BattleEventType.NextTurn);
+            PlayNextBattleEvent();
         }
     }
 
@@ -318,12 +370,15 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         OnSkillUsed.Invoke();
 
         BattleTile[] skillBattleTiles = _tilesManager.GetAllSkillTiles().ToArray();
-        BattleTile[] cameraTiles = new BattleTile[skillBattleTiles.Length + 1];
+
+        // Camera Part
+        Transform[] cameraTiles = new Transform[skillBattleTiles.Length + 1];
         for(int i = 0; i < skillBattleTiles.Length; i++)
         {
-            cameraTiles[i] = skillBattleTiles[i];
+            cameraTiles[i] = skillBattleTiles[i].transform;
         }
-        cameraTiles[cameraTiles.Length - 1] = currentUnit.CurrentTile;
+        cameraTiles[cameraTiles.Length - 1] = currentUnit.CurrentTile.transform;
+        CameraManager.Instance.FocusOnTransforms(cameraTiles);
 
         currentVFXIndex = 0;
 
@@ -336,7 +391,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         }
 
         // We launch the animations / others effects
-        StartCoroutine(CameraManager.Instance.DoAttackFeelCoroutine(cameraTiles, CurrentUnit._unitAnimsInfos, isCrit));
         CurrentUnit._animator.SetBool("IsCrit", isCrit);
         CurrentUnit._animator.SetTrigger(usedSkill.animName);
         CurrentUnit.RotateTowardTarget(skillBattleTiles[0].transform);
@@ -383,10 +437,14 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             {
                 yield return new WaitForSeconds(0.5f);
 
-                _playerActionsMenu.OpenActionsMenu();
+                AddBattleEventToQueue(BattleEventType.NextPlayerAction);
+                PlayNextBattleEvent();
+
                 yield break;
             }
         }
+
+        yield return new WaitForSeconds(0.5f);
 
         currentUnit.EndTurn(0.5f);
     }

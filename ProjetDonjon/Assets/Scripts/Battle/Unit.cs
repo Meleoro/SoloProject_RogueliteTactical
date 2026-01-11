@@ -790,8 +790,6 @@ public class Unit : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        BattleManager.Instance.EndBattle();
-
         if (destroy)
             Destroy(gameObject);
     }
@@ -838,7 +836,9 @@ public class Unit : MonoBehaviour
 
         ActualiseAlterations(true);
 
-        StartCoroutine(BattleManager.Instance.NextTurnCoroutine(delay));
+        BattleManager.Instance.AddBattleEventToQueue(BattleEventType.NextTurn);
+        BattleManager.Instance.PlayNextBattleEvent(); 
+        //StartCoroutine(BattleManager.Instance.NextTurnCoroutine(delay));
     }
 
     #endregion
