@@ -289,7 +289,7 @@ public class AIUnit : Unit
                 pickedSkillTile = currentSkillTile;
             }
 
-            // If we need to test skills
+            // If we need to test skills (max depth)
             else 
             {
                 BattleTile[] possibleSkillTiles;
@@ -303,21 +303,21 @@ public class AIUnit : Unit
                     BattleTile[] dangerTiles = GetDangerTiles(possibleMoves[i].TileCoordinates, possibleSkillTiles[j].TileCoordinates);
                     int moveGrade = GetMoveGrade(possibleMoves[i].TileCoordinates, dangerTiles, depth);
 
-                    if (moveGrade > bestGrade)
+                    if (moveGrade <= bestGrade) continue;
+                    
+                    bestGrade = moveGrade;
+                    pickedMoveTile = possibleMoves[i];
+
+                    foreach (var dangerTile in dangerTiles)
                     {
-                        bestGrade = moveGrade;
-                        pickedMoveTile = possibleMoves[i];
+                        if (dangerTile.UnitOnTile is null && pickedMoveTile != dangerTile) continue;
+                        if (!aimedTiles.Contains(dangerTile) && (pickedMoveTile != dangerTile 
+                            || currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Allies)) continue;
 
-                        foreach (var dangerTile in dangerTiles)
-                        {
-                            if (dangerTile.UnitOnTile is null && pickedMoveTile != dangerTile) continue;
-                            if (!aimedTiles.Contains(dangerTile) && (pickedMoveTile != dangerTile 
-                                || currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Allies)) continue;
-
-                            pickedSkillTile = possibleSkillTiles[j];
-                            break;
-                        }
+                        pickedSkillTile = possibleSkillTiles[j];
+                        break;
                     }
+                    
                 }
             }
         }
@@ -340,19 +340,19 @@ public class AIUnit : Unit
 
             if (coordinateDif.y > 0)
                 skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternUp,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternUp.Length), false, Enums.ObstacleType.UnitsIncluded).ToArray();
+                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternUp.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
 
             else if(coordinateDif.y < 0)
                 skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternDown,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternDown.Length), false, Enums.ObstacleType.UnitsIncluded).ToArray();
+                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternDown.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
 
             else if (coordinateDif.x > 0)
                 skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternRight,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternRight.Length), false, Enums.ObstacleType.UnitsIncluded).ToArray();
+                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternRight.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
 
             else
                 skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternLeft,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternLeft.Length), false, Enums.ObstacleType.UnitsIncluded).ToArray();
+                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternLeft.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
         }
         else
         {

@@ -280,22 +280,18 @@ public class Hero : Unit
     public void GainXP(int quantity)
     {
         CurrentXP += quantity;
-        _ui.GainXP(Mathf.Clamp((float)currentXP / XPToReach, 0f, 1f));
+        _ui.GainXP((float)currentXP / XPToReach);
 
-        if (currentXP >= XPToReach) StartCoroutine(GainLevelCoroutine(0.5f));
+        if (currentXP >= XPToReach) StartCoroutine(GainLevelCoroutine(0.9f));
     }
     
     private IEnumerator GainLevelCoroutine(float delay)
     {
+        GainLevel();
+
         yield return new WaitForSeconds(delay);
 
         StartCoroutine(_ui.DoLevelUpEffectCoroutine(1f));
-
-        currentLevel++;
-        currentSkillTreePoints++;
-
-        CurrentXP = currentXP - XPToReach;
-        CurrentXPToReach = (int)(XPToReach * neededXPMultiplicator);
 
         _ui.ResetXPProgress();
 

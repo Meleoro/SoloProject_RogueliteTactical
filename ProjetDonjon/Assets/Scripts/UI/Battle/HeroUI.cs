@@ -98,6 +98,7 @@ public class UnitUI : MonoBehaviour
 
     public void GainXP(float newRatio)
     {
+        newRatio = Mathf.Clamp(newRatio, 0, 1);
         StartCoroutine(GainXPCoroutine(newRatio));
     }
 
@@ -109,9 +110,9 @@ public class UnitUI : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        _xpFillableImage.ULerpFillAmount(1, newRatio, CurveType.EaseOutCubic);
+        _xpFillableImage.ULerpFillAmount(0.6f, newRatio, CurveType.EaseOutCubic);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.6f);
 
         if (newRatio == 1)
         {

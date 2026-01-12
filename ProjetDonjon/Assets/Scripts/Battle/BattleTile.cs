@@ -368,9 +368,10 @@ public class BattleTile : MonoBehaviour
 
         if (BattleManager.Instance.IsEnemyTurn) return;
         if (InputManager.wantsToRightClick) return;
-
-        if (unitOnTile && unitOnTile.GetType() == typeof(AIUnit) && BattleManager.Instance.TilesManager.CurrentSkill.mustTargetAlly
-            && (unitOnTile as AIUnit).IsEnemy) return;
+        
+        // To avoid missclick buffs to enemies
+        if (BattleManager.Instance.CurrentActionType == MenuType.Skills && BattleManager.Instance.TilesManager.CurrentSkill.mustTargetAlly
+            && unitOnTile.GetType() == typeof(AIUnit) && (unitOnTile as AIUnit).IsEnemy) return;
 
         switch (currentTileState)
         {

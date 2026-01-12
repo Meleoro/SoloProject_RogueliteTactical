@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static Enums;
 
@@ -40,7 +41,7 @@ public class TilesManager
         {
             if (!patern[i]) continue;
 
-            Vector2Int currentCoord = new Vector2Int(i % paternSize, i / paternSize);
+            Vector2Int currentCoord = new Vector2Int(i % paternSize, paternSize - (i / paternSize + 1));
             Vector2Int coordAccordingToCenter = new Vector2Int(currentCoord.x - (int)(paternSize * 0.5f), currentCoord.y - (int)(paternSize * 0.5f));
             BattleTile battleTile = battleRoom.GetBattleTile(paternMiddle + coordAccordingToCenter);
 
@@ -51,6 +52,39 @@ public class TilesManager
                 && ignoredTile != battleTile) continue;
 
             returnedTiles.Add(battleTile);
+        }
+
+        return returnedTiles;
+    }
+
+    public List<BattleTile> GetPatternAOETiles(BattleTile overlayedTile, BattleTile baseTile, SkillData skill)
+    {
+        List<BattleTile> returnedTiles;
+
+        if (skill.useOrientatedAOE)
+        {
+            Vector2Int coordinateDif = overlayedTile.TileCoordinates - baseTile.TileCoordinates;
+
+            if (coordinateDif.y > 0)
+                returnedTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternUp,
+                    (int)Mathf.Sqrt(skill.skillAOEPaternUp.Length), false, Enums.ObstacleType.Nothing, null, true);
+
+            else if (coordinateDif.y < 0)
+                returnedTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternDown,
+                    (int)Mathf.Sqrt(skill.skillAOEPaternDown.Length), false, Enums.ObstacleType.Nothing, null, true);
+
+            else if (coordinateDif.x > 0)
+                returnedTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternRight,
+                    (int)Mathf.Sqrt(skill.skillAOEPaternRight.Length), false, Enums.ObstacleType.Nothing, null, true);
+
+            else
+                returnedTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternLeft,
+                    (int)Mathf.Sqrt(skill.skillAOEPaternLeft.Length), false, Enums.ObstacleType.Nothing, null, true);
+        }
+        else
+        {
+            returnedTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPatern, (int)Mathf.Sqrt(skill.skillAOEPatern.Length), false,
+                ObstacleType.UnitsIncluded);
         }
 
         return returnedTiles;
@@ -164,31 +198,7 @@ public class TilesManager
         switch (skill.skillType)
         {
             case SkillType.AOEPaternTiles:
-                if (skill.useOrientatedAOE)
-                {
-                    Vector2Int coordinateDif = overlayedTile.TileCoordinates - currentUnit.CurrentTile.TileCoordinates;
-
-                    if (coordinateDif.y > 0)
-                        skillTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternUp,
-                            (int)Mathf.Sqrt(skill.skillAOEPaternUp.Length), false, Enums.ObstacleType.UnitsIncluded);
-
-                    else if (coordinateDif.y < 0)
-                        skillTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternDown,
-                            (int)Mathf.Sqrt(skill.skillAOEPaternDown.Length), false, Enums.ObstacleType.UnitsIncluded);
-
-                    else if (coordinateDif.x > 0)
-                        skillTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternRight,
-                            (int)Mathf.Sqrt(skill.skillAOEPaternRight.Length), false, Enums.ObstacleType.UnitsIncluded);
-
-                    else
-                        skillTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPaternLeft,
-                            (int)Mathf.Sqrt(skill.skillAOEPaternLeft.Length), false, Enums.ObstacleType.UnitsIncluded);
-                }
-                else
-                {
-                    skillTiles = GetPaternTiles(overlayedTile.TileCoordinates, skill.skillAOEPatern, (int)Mathf.Sqrt(skill.skillAOEPatern.Length), false,
-                        ObstacleType.UnitsIncluded);
-                }
+                skillTiles = GetPatternAOETiles(overlayedTile, currentUnit.CurrentTile, skill);
                 break;
 
             case SkillType.SkillArea:
@@ -237,6 +247,18 @@ public class TilesManager
                 tiles = GetPaternTiles(enemy.CurrentTile.TileCoordinates, enemy.CurrentSkillData.skillPatern,
                     (int)Mathf.Sqrt(enemy.CurrentSkillData.skillPatern.Length), true);
 
+                if(enemy.CurrentSkillData.skillType == SkillType.AOEPaternTiles)
+                {
+                    List<BattleTile> addedTiles = new List<BattleTile>();
+
+                    for (int i = 0; i < tiles.Count; i++)
+                    {
+                        addedTiles.AddRange(GetPatternAOETiles(tiles[i], enemy.CurrentTile, enemy.CurrentSkillData));
+                    }
+
+                    tiles.AddRange(addedTiles);
+                }
+
                 for (int i = 0; i < tiles.Count; i++)
                 {
                     tiles[i].DisplayPossibleAttackTile(true);
@@ -252,6 +274,16 @@ public class TilesManager
                     if (tiles[i].CantStopHere) continue;
                     secondaryTiles = GetPaternTiles(tiles[i].TileCoordinates, enemy.CurrentSkillData.skillPatern,
                         (int)Mathf.Sqrt(enemy.CurrentSkillData.skillPatern.Length), true, ObstacleType.UnitsIncluded);
+
+                    if (enemy.CurrentSkillData.skillType == SkillType.AOEPaternTiles)
+                    {
+                        List<BattleTile> addedTiles = new List<BattleTile>();
+                        for (int j = 0; j < secondaryTiles.Count; j++)
+                        {
+                            addedTiles.AddRange(GetPatternAOETiles(secondaryTiles[j], tiles[i], enemy.CurrentSkillData));
+                        }
+                        secondaryTiles.AddRange(addedTiles);
+                    }
 
                     for (int j = 0; j < secondaryTiles.Count; j++)
                     {
