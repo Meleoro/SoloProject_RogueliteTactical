@@ -59,6 +59,8 @@ public class FloorTransition : MonoBehaviour
         _mainDeathText.gameObject.SetActive(false);
         _secondaryDeathText.gameObject.SetActive(false);
 
+        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b);
+
         if (floorIndex == 0)
         {
             _recommandedLevelText.gameObject.SetActive(false);

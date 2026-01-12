@@ -48,7 +48,6 @@ public class Hero : Unit
     private SkillData[] equippedSkills = new SkillData[6];
     private Inventory inventory;
     private bool isHidden;
-    private bool isDead;
     private Transform currentDisplayedHeroTr;
     private int currentSkillPoints;
     private int currentMaxSkillPoints;
@@ -211,6 +210,8 @@ public class Hero : Unit
     protected override void Die()
     {
         _animator.SetBool("IsDead", true);
+        UnHoverUnit();
+        HideOutline();
 
         AudioManager.Instance.PlaySoundOneShot(2, 9);
         StartCoroutine(DisappearCoroutine(1.0f, false));
@@ -219,6 +220,8 @@ public class Hero : Unit
         {
             currentTile.UnitLeaveTile();
             BattleManager.Instance.RemoveUnit(this);
+
+            _ui.HideUnitUI();
         }
 
         OnDead.Invoke();
@@ -232,6 +235,9 @@ public class Hero : Unit
         if (isDead)
         {
             OnRevive.Invoke();
+
+            Debug.Log("Revied");
+
 
             isDead = false;
             BattleManager.Instance.AddUnit(this);
@@ -317,7 +323,11 @@ public class Hero : Unit
     public void StartExploration()
     {
         CurrentHealth = currentMaxHealth;
+        isDead = false;
+
         _spriteRenderer.material.ULerpMaterialFloat(0.05f, 3.0f, "_DitherProgress");
+
+        _controller.ExitBattle();
 
         _animator.SetBool("IsDead", false);
     }

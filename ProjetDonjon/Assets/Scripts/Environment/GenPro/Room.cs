@@ -33,12 +33,11 @@ public class Room : MonoBehaviour
     [SerializeField] private BattleTile battleTilePrefab;
     [SerializeField] private Vector3 battleTilesOffset;
     [SerializeField] private float startCameraSize;
-    [SerializeField] private int minDangerAmount;
-    [SerializeField] private int maxDangerAmount;
     [SerializeField] private Tile[] holeTiles;
     [SerializeField] private Hole holePrefab;
     [SerializeField] private bool isDebugRoom;
     [SerializeField] private bool isBossRoom;
+    [SerializeField] private bool isChallengeRoom;
 
     [Header("Private Infos")]
     private Vector2Int roomCoordinates;
@@ -307,7 +306,6 @@ public class Room : MonoBehaviour
 
     #region Battle Functions
 
-
     public void StartBattle()
     {
         battleIsDone = true;
@@ -408,8 +406,12 @@ public class Room : MonoBehaviour
         BattleManager.Instance.StartBattle(battleTiles, transform.position, startCameraSize, this, 5.5f);
         SetupSpawners(HeroesManager.Instance.Heroes);
 
+        EnemySpawnData enemySpawnData = ProceduralGenerationManager.Instance.EnviroData.enemySpawnsPerFloor[ProceduralGenerationManager.Instance.CurrentFloor];
+        int currentMin = isChallengeRoom ? enemySpawnData.minDangerAmountPerChallenge : enemySpawnData.minDangerAmountPerBattle;
+        int currentMax = isChallengeRoom ? enemySpawnData.maxDangerAmountPerChallenge : enemySpawnData.maxDangerAmountPerBattle;
+
         // We spawn the boss
-        (EnemySpawn boss, bool isElite) = _bossSpawner.GetSpawnedEnemy(maxDangerAmount);
+        (EnemySpawn boss, bool isElite) = _bossSpawner.GetSpawnedEnemy(currentMax);
         AIUnit newEnemy = Instantiate(boss.enemyPrefab as AIUnit, transform);
         newEnemy.Initialise(isElite);
         newEnemy.MoveUnit(_bossSpawner.AssociatedTile);
@@ -456,13 +458,16 @@ public class Room : MonoBehaviour
         int antiCrashCounter = 0;
         Dictionary<Unit, int> spawnCountPerEnemy = new Dictionary<Unit, int>();
         if (roomEnemySpawners.Count == 0) return;
+        EnemySpawnData enemySpawnData = ProceduralGenerationManager.Instance.EnviroData.enemySpawnsPerFloor[ProceduralGenerationManager.Instance.CurrentFloor];
+        int currentMin = isChallengeRoom ? enemySpawnData.minDangerAmountPerChallenge : enemySpawnData.minDangerAmountPerBattle;
+        int currentMax = isChallengeRoom ? enemySpawnData.maxDangerAmountPerChallenge : enemySpawnData.maxDangerAmountPerBattle;
 
-        while(currentDangerAmount < minDangerAmount && antiCrashCounter++ < 100 && roomEnemySpawners.Count > 0)
+        while (currentDangerAmount < currentMin && antiCrashCounter++ < 100 && roomEnemySpawners.Count > 0)
         {
             int pickedSpawnerIndex = Random.Range(0, roomEnemySpawners.Count);
             EnemySpawner currentSpawner = roomEnemySpawners[pickedSpawnerIndex];
 
-            (EnemySpawn wantedUnit, bool isElite) = currentSpawner.GetSpawnedEnemy(maxDangerAmount - currentDangerAmount);
+            (EnemySpawn wantedUnit, bool isElite) = currentSpawner.GetSpawnedEnemy(currentMax - currentDangerAmount);
             if (!isDebugRoom)
             {
                 if (wantedUnit is null) continue;

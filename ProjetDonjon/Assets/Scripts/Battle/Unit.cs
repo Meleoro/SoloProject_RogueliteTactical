@@ -57,7 +57,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected Color negativeColor = Color.red;
     [SerializeField] protected Color unitsTurnColor = Color.yellow; 
  
-    [Header("Private Infos")]
+    [Header("Protected Infos")]
     protected int currentHealth;
     protected int currentMaxHealth;
     protected int currentStrength;
@@ -67,6 +67,7 @@ public class Unit : MonoBehaviour
     protected int currentShield;
     protected bool restartTurnOutlineNext;
     protected bool isHovered;
+    protected bool isDead;
 
     [Header("Private Stats Modificators")]
     private int strengthModificatorAdditive;
@@ -216,7 +217,7 @@ public class Unit : MonoBehaviour
         MoveUnit(previousTile);
         _spriteRenderer.transform.localScale = Vector3.one;
 
-        HeroesManager.Instance.TakeDamage(1);
+        HeroesManager.Instance.TakeDamage(2);
         BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
     }
 
@@ -381,6 +382,8 @@ public class Unit : MonoBehaviour
     protected virtual void Die()
     {
         currentTile.UnitLeaveTile();
+        UnHoverUnit();
+
         BattleManager.Instance.RemoveUnit(this);
         Destroy(gameObject);
     }
@@ -659,7 +662,7 @@ public class Unit : MonoBehaviour
 
     #region Mouse Inputs
 
-    private void HoverUnit()
+    protected void HoverUnit()
     {
         if (BattleManager.Instance.IsEnemyTurn || !BattleManager.Instance.IsInBattle) return;
 
@@ -668,9 +671,9 @@ public class Unit : MonoBehaviour
         CurrentTile?.OverlayTile();
     }
 
-    private void UnHoverUnit()
+    protected void UnHoverUnit()
     {
-        if (BattleManager.Instance.IsEnemyTurn || !BattleManager.Instance.IsInBattle) return;
+        if (!BattleManager.Instance.IsInBattle) return;
 
         isHovered = false;
 
@@ -728,6 +731,8 @@ public class Unit : MonoBehaviour
 
     public void DisplayOverlayOutline()
     {
+        if (isDead) return;
+
         DisplayOutline(overlayColor);
     }
 

@@ -83,6 +83,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public void AddUnit(Unit unit)
     {
+        if (!isInBattle) return;
+
         currentUnits.Add(unit);
 
         if (unit.GetType() == typeof(Hero))

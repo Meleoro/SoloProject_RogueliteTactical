@@ -419,6 +419,7 @@ public class AIUnit : Unit
     protected override void Die()
     {
         currentTile.UnitLeaveTile();
+        UnHoverUnit();
 
         AudioManager.Instance.PlaySoundOneShot(2, 10);
         HeroesManager.Instance.SpawnXP(AIData.minXpDrop, transform.position);
