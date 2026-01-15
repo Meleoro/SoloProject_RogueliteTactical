@@ -262,6 +262,8 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         for(int i = 0; i < heroes.Length; i++)
         {
+            if (heroes[i].CurrentHealth <= 0) continue;
+
             BattleTile pickedTile = possibleTiles[0];
             float bestDist = Mathf.Infinity;
 

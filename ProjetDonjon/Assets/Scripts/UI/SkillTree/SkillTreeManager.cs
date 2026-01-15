@@ -32,7 +32,6 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private RectTransform _rightArrowPosRef;
     [SerializeField] private TextMeshProUGUI _heroNameText;
     [SerializeField] private TextMeshProUGUI _heroAvailablePointsText;
-    [SerializeField] private GenericDetailsPanel _details;
 
 
     private void Start()
@@ -223,12 +222,12 @@ public class SkillTreeManager : MonoBehaviour
 
     private void HoverNode(SkillTreeNode node)
     {
-        _details.LoadDetails(node.Data, node.transform.position, node.RectTr.localPosition.x < 0);
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(node.Data, node.transform.position, node.RectTr.localPosition.x < 0);
     }
 
     private void UnhoverNode(SkillTreeNode node)
     {
-        _details.HideDetails();
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
     }
 
     private void ClickNode(SkillTreeNode node)

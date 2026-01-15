@@ -19,9 +19,11 @@ public class ShopItem : MonoBehaviour
     [Header("Private Infos")]
     private Vector3 originalPos;
     private Color baseColor;
+    private Coroutine textBuyCoroutine;
 
     [Header("References")]
     [SerializeField] private TextMeshProUGUI _priceText;
+    [SerializeField] private TextMeshProUGUI _buyText;
     [SerializeField] private Image _itemImage;
     [SerializeField] private Image _itemColliderImage;
 
@@ -98,6 +100,14 @@ public class ShopItem : MonoBehaviour
 
         StartCoroutine(BouncePriceColorCoroutine(validColor));
         StartCoroutine(BounceBuyCoroutine());
+
+        if (textBuyCoroutine != null) 
+        { 
+            StopCoroutine(textBuyCoroutine);
+            _buyText.DOComplete();
+        }
+
+        textBuyCoroutine = StartCoroutine(TextBuyCoroutine());
     }
 
     #endregion
@@ -123,6 +133,22 @@ public class ShopItem : MonoBehaviour
 
         _priceText.DOColor(baseColor, 0.15f).SetEase(Ease.OutCubic);
         _priceText.rectTransform.DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.OutCubic);
+    }
+
+    private IEnumerator TextBuyCoroutine()
+    {
+        _buyText.enabled = true;
+        _buyText.DOFade(1, 0.1f);
+        _buyText.rectTransform.localPosition = Vector3.zero;
+        _buyText.rectTransform.DOLocalMove(new Vector3(0, 50, 0), 0.5f).SetEase(Ease.OutCirc);
+
+        yield return new WaitForSeconds(0.5f);
+
+        _buyText.DOFade(0, 0.1f);
+
+        yield return new WaitForSeconds(0.1f);
+
+        _buyText.enabled = true;
     }
 
     #endregion

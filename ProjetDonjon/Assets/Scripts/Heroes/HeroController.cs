@@ -73,8 +73,6 @@ public class HeroController : MonoBehaviour
         }
         if (noControl) return;
 
-        Debug.Log(12);
-
         Move(InputManager.moveDir);
 
         if (InputManager.wantsToJump)

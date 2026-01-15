@@ -487,7 +487,7 @@ public class Loot : MonoBehaviour, IInteractible
     public void OverlayLoot()
     {
         UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, 
-            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.65f);
+            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.6f);
 
         AudioManager.Instance.PlaySoundOneShot(0, 0);
 

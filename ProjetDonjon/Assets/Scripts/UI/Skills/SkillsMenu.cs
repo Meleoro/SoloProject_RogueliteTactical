@@ -47,7 +47,6 @@ public class SkillsMenu : MonoBehaviour
     [SerializeField] private RectTransform _leftArrowPosRef;
     [SerializeField] private RectTransform _rightArrowRectTr;
     [SerializeField] private RectTransform _rightArrowPosRef;
-    [SerializeField] private GenericDetailsPanel _detailsPanel;
 
 
     private void Start()
@@ -71,15 +70,15 @@ public class SkillsMenu : MonoBehaviour
     private void HoverEquippableSkill(EquippableSkill equippableSkill)
     {
         if(equippableSkill.PassiveData is null) 
-            _detailsPanel.LoadDetails(equippableSkill.SkillData, equippableSkill.transform.position);
+            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(equippableSkill.SkillData, equippableSkill.transform.position);
 
         else
-            _detailsPanel.LoadDetails(equippableSkill.PassiveData, equippableSkill.transform.position);
+            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(equippableSkill.PassiveData, equippableSkill.transform.position);
     }
 
     private void UnhoverEquippableSkill()
     {
-        _detailsPanel.HideDetails();
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
     }
 
     private void ClickEquippableSkill(EquippableSkill equippableSkill)

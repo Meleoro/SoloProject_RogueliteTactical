@@ -66,12 +66,12 @@ public class Alteration : MonoBehaviour
     
     public void OverlayAlteration()
     {
-        UIManager.Instance.AlterationDetailsPanel.OpenDetails(transform.position, currentData, attachedUnit);
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(currentData, transform.position, attachedUnit);
     }
 
     public void QuitOverlayAlteration()
     {
-        UIManager.Instance.AlterationDetailsPanel.CloseDetails();
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
     }
 
     #endregion

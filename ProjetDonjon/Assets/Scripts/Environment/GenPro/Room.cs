@@ -306,7 +306,7 @@ public class Room : MonoBehaviour
 
     #region Battle Functions
 
-    public void StartBattle()
+    public void StartBattle(bool isChallenge = false)
     {
         battleIsDone = true;
 
@@ -314,7 +314,7 @@ public class Room : MonoBehaviour
         {
             BattleManager.Instance.StartBattle(battleTiles, transform.position, startCameraSize, this);
             SetupSpawners(HeroesManager.Instance.Heroes);
-            SetupEnemies();
+            SetupEnemies(isChallenge);
 
             StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(4, 3.4f));
         }
@@ -390,6 +390,8 @@ public class Room : MonoBehaviour
 
             for (int j = 0; j < heroes.Length; j++) 
             {
+                if (heroes[j].CurrentHealth <= 0) continue;
+
                 int dist = (int)Vector2Int.Distance(heroes[j].CurrentTile.TileCoordinates, roomEnemySpawners[i].AssociatedTile.TileCoordinates);
                 if (dist <= 2 && TutoManager.Instance.DidBattleTuto) 
                 {
@@ -430,7 +432,7 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         CameraManager.Instance.FocusOnPosition(transform.position, startCameraSize);
-        SetupEnemies();
+        SetupEnemies(false);
     }
 
 
@@ -452,12 +454,10 @@ public class Room : MonoBehaviour
         return pickedTile;
     }
 
-    private void SetupEnemies()
+    private void SetupEnemies(bool isChallenge)
     {
-        int currentDangerAmount = 0, currentSpawnedCount = 0;
-        int antiCrashCounter = 0;
+        int currentDangerAmount = 0, currentSpawnedCount = 0, antiCrashCounter = 0;
         Dictionary<Unit, int> spawnCountPerEnemy = new Dictionary<Unit, int>();
-        if (roomEnemySpawners.Count == 0) return;
         EnemySpawnData enemySpawnData = ProceduralGenerationManager.Instance.EnviroData.enemySpawnsPerFloor[ProceduralGenerationManager.Instance.CurrentFloor];
         int currentMin = isChallengeRoom ? enemySpawnData.minDangerAmountPerChallenge : enemySpawnData.minDangerAmountPerBattle;
         int currentMax = isChallengeRoom ? enemySpawnData.maxDangerAmountPerChallenge : enemySpawnData.maxDangerAmountPerBattle;
@@ -467,7 +467,7 @@ public class Room : MonoBehaviour
             int pickedSpawnerIndex = Random.Range(0, roomEnemySpawners.Count);
             EnemySpawner currentSpawner = roomEnemySpawners[pickedSpawnerIndex];
 
-            (EnemySpawn wantedUnit, bool isElite) = currentSpawner.GetSpawnedEnemy(currentMax - currentDangerAmount);
+            (EnemySpawn wantedUnit, bool isElite) = currentSpawner.GetSpawnedEnemy(currentMax - currentDangerAmount, isChallenge);
             if (!isDebugRoom)
             {
                 if (wantedUnit is null) continue;

@@ -8,6 +8,7 @@ public class InventoryActionPanel : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private Vector3 offset;
+    [SerializeField] private Sprite[] possibleMainActionsBackImage;
 
     [Header("Private Infos")]
     private Loot currentLoot;
@@ -15,6 +16,7 @@ public class InventoryActionPanel : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
+    [SerializeField] private Image _mainActionsBackImage;
     [SerializeField] private RectTransform[] _buttonsRectTr;
     [SerializeField] private TextMeshProUGUI[] _buttonsTexts;
     [SerializeField] private VerticalLayoutGroup _verticalLayoutGroup;
@@ -32,6 +34,8 @@ public class InventoryActionPanel : MonoBehaviour
             return;
         }
 
+        int buttonCount = 1;
+
         currentLoot = associatedLoot;
         _animator.SetBool("IsOpened", true);
         isOpened = true;
@@ -43,6 +47,8 @@ public class InventoryActionPanel : MonoBehaviour
                 _buttonsRectTr[0].gameObject.SetActive(true);
                 if(associatedLoot.IsEquipped) _buttonsTexts[0].text = "UNEQUIP";
                 else _buttonsTexts[0].text = "EQUIP";
+
+                buttonCount++;
                 break;
 
             case LootType.Consumable:
@@ -50,6 +56,8 @@ public class InventoryActionPanel : MonoBehaviour
 
                 _buttonsRectTr[0].gameObject.SetActive(true);
                 _buttonsTexts[0].text = "USE";
+
+                buttonCount++;
                 break;
         }
 
@@ -64,7 +72,12 @@ public class InventoryActionPanel : MonoBehaviour
         {
             _buttonsRectTr[6].gameObject.SetActive(true);
             _buttonsTexts[6].text = "SELL (" + (int)(associatedLoot.LootData.value * 0.5f) + ")";
+
+            buttonCount++;
         }
+
+        _mainActionsBackImage.sprite = possibleMainActionsBackImage[buttonCount - 1];
+        _mainActionsBackImage.SetNativeSize();
     }
 
     public void ClosePanel()

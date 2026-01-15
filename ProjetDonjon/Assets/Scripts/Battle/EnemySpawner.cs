@@ -17,16 +17,20 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Private Infos")]
     private EnemySpawn[] possibleSpawns;
+    private EnemySpawn[] possibleSpawnsChallenge;
 
 
     private void Start()
     {
         possibleSpawns = ProceduralGenerationManager.Instance?.EnviroData.
             enemySpawnsPerFloor[ProceduralGenerationManager.Instance.CurrentFloor].possibleEnemies;
+
+        possibleSpawnsChallenge = ProceduralGenerationManager.Instance?.EnviroData.
+            enemySpawnsPerFloor[ProceduralGenerationManager.Instance.CurrentFloor].possibleChallengeEnemies;
     }
 
 
-    public (EnemySpawn, bool) GetSpawnedEnemy(int dangerAmountToFill)
+    public (EnemySpawn, bool) GetSpawnedEnemy(int dangerAmountToFill, bool isChallenge = false)
     {
         if (isDebugSpawer)
         {
@@ -40,13 +44,14 @@ public class EnemySpawner : MonoBehaviour
 
         int pickedProba = Random.Range(0, 100);
         int cumulatedProba = 0;
+        EnemySpawn[] currentSpawns = isChallenge ? possibleSpawnsChallenge : possibleSpawns;
 
-        for(int i = 0; i < possibleSpawns.Length; i++)
+        for (int i = 0; i < currentSpawns.Length; i++)
         {
-            cumulatedProba += possibleSpawns[i].proba;
+            cumulatedProba += currentSpawns[i].proba;
             if(cumulatedProba >= pickedProba)
             {
-                return (possibleSpawns[i], Random.Range(0, 100) < possibleSpawns[i].eliteProba);
+                return (currentSpawns[i], Random.Range(0, 100) < currentSpawns[i].eliteProba);
             }
         }
 

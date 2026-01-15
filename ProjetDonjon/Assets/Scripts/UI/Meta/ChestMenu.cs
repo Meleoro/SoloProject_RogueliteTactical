@@ -150,6 +150,7 @@ public class ChestMenu : MonoBehaviour, ISaveable
         OnHide.Invoke();
 
         _mainMetaMenu.Show(false);
+        InventoriesManager.Instance.InventoryActionPanel.ClosePanel();
 
         StartCoroutine(HideCoroutine());
     }

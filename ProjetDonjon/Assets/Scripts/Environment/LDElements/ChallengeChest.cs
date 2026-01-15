@@ -115,7 +115,7 @@ public class ChallengeChest : MonoBehaviour, IInteractible
         _collider.enabled = false;
 
         Hide();
-        _room.StartBattle();
+        _room.StartBattle(true);
     }
 
     #endregion

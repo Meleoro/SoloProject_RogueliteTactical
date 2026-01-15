@@ -54,5 +54,6 @@ public enum PassiveTriggerType
     OnAttacked,
     OnCrit,
     OnKill,
-    OnSummon
+    OnSummon,
+    OnBattleStarted
 }

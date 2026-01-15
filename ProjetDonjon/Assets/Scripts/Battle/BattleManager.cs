@@ -160,6 +160,9 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         {
             if (HeroesManager.Instance.Heroes[i].CurrentHealth <= 0) continue;
             AddUnit(HeroesManager.Instance.Heroes[i]);
+
+            PassiveData[] prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnBattleStarted, HeroesManager.Instance.Heroes[i]).ToArray();
+            _passivesManager.ApplyPassives(prokedPassives, HeroesManager.Instance.Heroes[i], null);
         }
         for (int i = 0; i < battleRoom.RoomEnemies.Count; i++)
         {
@@ -255,7 +258,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         switch (eventType)
         {
             case BattleEventType.NextTurn:
-                StartCoroutine(NextTurnCoroutine(0, true));
+                StartCoroutine(NextTurnCoroutine(0.5f, true));
                 break;
 
             case BattleEventType.NextPlayerAction:

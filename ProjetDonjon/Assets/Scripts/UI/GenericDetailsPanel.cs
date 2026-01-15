@@ -11,6 +11,7 @@ public class GenericDetailsPanel : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 offsetSkillTree;
     [SerializeField] private Vector3 offsetInventory;
+    [SerializeField] private Vector3 offsetAlteration;
 
     [Header("Private Infos")]
     private Coroutine appearCoroutine;
@@ -34,21 +35,32 @@ public class GenericDetailsPanel : MonoBehaviour
         HideDetails();
     }
 
+    private void SetPosition(Vector3 mainPosition, Vector3 offset)
+    {
+        Vector3 finalPosition = CameraManager.Instance.Camera.WorldToViewportPoint(mainPosition);
+        finalPosition += offset;
+
+        _mainRectTr.localPosition = Vector3.zero;
+        transform.position = CameraManager.Instance.Camera.ViewportToWorldPoint(finalPosition);
+    }
+
+    #region All Load Functions
+
     public void LoadDetails(LootData lootData, Vector3 position, bool mirrorHorizontal)
     {
         _mainRectTr.gameObject.SetActive(true);
 
-        if (mirrorHorizontal) _mainRectTr.position = position + offsetInventory;
-        else _mainRectTr.position = position - offsetInventory;
+        SetPosition(position, mirrorHorizontal ? offsetInventory : -offsetInventory);
 
         _nameText.text = lootData.lootName;
         _descriptionText.text = lootData.lootDescription;
+        _numberText.text = "";
 
-        if(lootData.lootType != LootType.Equipment)
+        if (lootData.lootType != LootType.Equipment)
         {
             _statGlobalParent.gameObject.SetActive(false);
         }
-        else
+        else    // Equipment side stats panel
         {
             _statGlobalParent.gameObject.SetActive(true);
 
@@ -98,8 +110,7 @@ public class GenericDetailsPanel : MonoBehaviour
     {
         _mainRectTr.gameObject.SetActive(true);
 
-        if(mirrorHorizontal) _mainRectTr.position = position + offsetSkillTree;
-        else _mainRectTr.position = position - offsetSkillTree;
+        SetPosition(position, mirrorHorizontal ? offsetSkillTree : -offsetSkillTree);
 
         _treeNodeTypeText.enabled = true;
 
@@ -149,7 +160,7 @@ public class GenericDetailsPanel : MonoBehaviour
     public void LoadDetails(SkillData skillData, Vector3 position)
     {
         _mainRectTr.gameObject.SetActive(true);
-        _mainRectTr.position = position + offset;
+        SetPosition(position, offset);
 
         _nameText.text = skillData.skillName;
         _descriptionText.text = skillData.skillDescription;
@@ -170,7 +181,7 @@ public class GenericDetailsPanel : MonoBehaviour
     public void LoadDetails(PassiveData passiveData, Vector3 position)
     {
         _mainRectTr.gameObject.SetActive(true);
-        _mainRectTr.position = position + offset;
+        SetPosition(position, offset);
 
         _nameText.text = passiveData.passiveName;
         _descriptionText.text = passiveData.passiveDescription;
@@ -188,16 +199,36 @@ public class GenericDetailsPanel : MonoBehaviour
         appearCoroutine = StartCoroutine(AppearEffectCoroutine());
     }
 
-    public void LoadDetails(AlterationData alterationData, Vector3 position)
+    public void LoadDetails(AlterationStruct alterationData, Vector3 position, Unit attachedUnit)
     {
         _mainRectTr.gameObject.SetActive(true);
-        _mainRectTr.position = position + offset;
+        SetPosition(position, offsetAlteration);
 
-        _nameText.text = alterationData.alterationName;
-        _descriptionText.text = alterationData.alterationDescription;
+        _nameText.text = alterationData.alteration.alterationName;
+        _descriptionText.text = alterationData.alteration.alterationDescription;
+
+        if (!alterationData.alteration.isInfinite)
+        {
+            _numberText.text = alterationData.duration.ToString();
+        }
+        else
+        {
+            _numberText.text = "";
+            switch (alterationData.alteration.alterationType)
+            {
+                case AlterationType.Shield:
+                    _numberText.text = attachedUnit.CurrentShield.ToString();
+                    break;
+            }
+        }
 
         appearCoroutine = StartCoroutine(AppearEffectCoroutine());
     }
+
+    #endregion
+
+
+    #region Appear / Disappear
 
     public void HideDetails()
     {
@@ -215,7 +246,6 @@ public class GenericDetailsPanel : MonoBehaviour
         }
     }
 
-
     private IEnumerator AppearEffectCoroutine()
     {
         _mainRectTr.localScale = Vector3.zero;
@@ -232,5 +262,7 @@ public class GenericDetailsPanel : MonoBehaviour
     {
         yield return null;
     }
+
+    #endregion
 }
 

@@ -21,7 +21,7 @@ public class Timeline : MonoBehaviour
     [SerializeField] private float spaceBetweenSlots;
 
     [Header("Private Infos")]
-    private List<TimelineSlot> slots;
+    private List<TimelineSlot> slots = new List<TimelineSlot>();
     public List<TimelineUnit> timelineUnits;
     public List<TimelineUnit> currentTimelineUnits;
 
@@ -52,7 +52,7 @@ public class Timeline : MonoBehaviour
             TimelineUnit newTilemineUnit = new TimelineUnit();
 
             newTilemineUnit.unit = units[i];
-            newTilemineUnit.progress = 0;
+            newTilemineUnit.progress = units[i].GetType() == typeof(Hero) ? 40 : 0;   // Heroes start with an advantage
 
             timelineUnits.Add(newTilemineUnit);
             currentTimelineUnits.Add(newTilemineUnit);
@@ -71,7 +71,7 @@ public class Timeline : MonoBehaviour
         TimelineUnit newTilemineUnit = new TimelineUnit();
 
         newTilemineUnit.unit = unit;
-        newTilemineUnit.progress = 0;
+        newTilemineUnit.progress = 100;
 
         timelineUnits.Add(newTilemineUnit);
         currentTimelineUnits.Add(newTilemineUnit);
@@ -156,6 +156,12 @@ public class Timeline : MonoBehaviour
     public void Disappear()
     {
         _mainTr.UChangeLocalPosition(0.5f, _hiddenTrPos.localPosition, CurveType.EaseOutCubic);
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (!slots[i]) continue;
+            slots[i].DestroySlot();
+        }
     }
 
     #endregion
@@ -243,7 +249,7 @@ public class Timeline : MonoBehaviour
             for (int i = 0; i < timelineUnits.Count; i++)
             {
                 TimelineUnit current = timelineUnits[i];
-                current.progress += timelineUnits[i].unit.CurrentSpeed;
+                current.progress += timelineUnits[i].unit.CurrentSpeed + 5;
                 timelineUnits[i] = current;
 
                 if (timelineUnits[i].progress >= 100)

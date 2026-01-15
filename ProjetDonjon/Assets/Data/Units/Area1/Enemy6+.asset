@@ -17,11 +17,11 @@ MonoBehaviour:
   unitImageHighlight: {fileID: -631791876, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   baseHealth: 8
   baseStrength: 1
-  baseSpeed: 8
+  baseSpeed: 7
   baseLuck: 6
   startAlterations: []
   AI: 1
-  dangerLevel: 10
+  dangerLevel: 8
   skills:
   - {fileID: 11400000, guid: 5b30d8c3d4a06a346ab866a67961f39d, type: 2}
   - {fileID: 11400000, guid: f4d2ccd0c977b974f979fb443d2f824a, type: 2}

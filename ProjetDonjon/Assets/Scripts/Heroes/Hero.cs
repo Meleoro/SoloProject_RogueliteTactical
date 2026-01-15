@@ -101,7 +101,7 @@ public class Hero : Unit
         // For Debug
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GainLevel();
+            //GainLevel();
         }
     }
 
@@ -268,12 +268,22 @@ public class Hero : Unit
 
     public void AddEquipment(Loot loot, int equipSlotIndex)
     {
+        if (equippedLoot[equipSlotIndex] != null)
+        {
+            equippedLoot[equipSlotIndex].Unequip();
+        }
+
         equippedLoot[equipSlotIndex] = loot;
         equippedLootPassives[equipSlotIndex] = loot.LootData.appliedPassive;
     }
 
     public void RemoveEquipment(Loot removedLoot, int unequipSlotIndex)
     {
+        if (equippedLoot[unequipSlotIndex] != null)
+        {
+            equippedLoot[unequipSlotIndex].Unequip();
+        }
+
         equippedLoot[unequipSlotIndex] = null;
         equippedLootPassives[unequipSlotIndex] = null;
     }

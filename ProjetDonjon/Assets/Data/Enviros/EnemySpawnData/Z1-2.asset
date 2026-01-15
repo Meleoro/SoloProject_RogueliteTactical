@@ -43,7 +43,27 @@ MonoBehaviour:
     eliteProba: 0
     maxCountPerBattle: 1
     minEnemyCountBeforeSpawn: 0
-  possibleChallengeEnemies: []
+  possibleChallengeEnemies:
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 8c5a024bd4f75674fbbcb27a947021c7, type: 3}
+    proba: 50
+    eliteProba: 0
+    maxCountPerBattle: 1
+    minEnemyCountBeforeSpawn: 0
+  - enemyPrefab: {fileID: 4534582793652375552, guid: d59a313854ee6834ea9851116f4d7131, type: 3}
+    proba: 20
+    eliteProba: 10
+    maxCountPerBattle: 2
+    minEnemyCountBeforeSpawn: 1
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 33d5baa09d638fe459cb3820acd8ee12, type: 3}
+    proba: 20
+    eliteProba: 0
+    maxCountPerBattle: 1
+    minEnemyCountBeforeSpawn: 0
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 7065f3b729656cf42a533cb15a42bdc1, type: 3}
+    proba: 10
+    eliteProba: 15
+    maxCountPerBattle: 0
+    minEnemyCountBeforeSpawn: 0
   minDangerAmountPerBattle: 6
   maxDangerAmountPerBattle: 10
   minDangerAmountPerChallenge: 10

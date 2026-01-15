@@ -26,7 +26,6 @@ public class UIManager : GenericSingletonClass<UIManager>
             else OnStartDrag?.Invoke();
         } 
     }
-    public AlterationDetailsPanel AlterationDetailsPanel { get { return _alterationDetailsPanel; } }
     public CoinUI CoinUI { get { return _coinUI; } }
     public Minimap Minimap { get { return _minimap; } }
     public FloorTransition FloorTransition { get { return _floorTransition; } }
@@ -52,7 +51,6 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private HeroInfosScreen _heroInfosScreen;
     [SerializeField] private SkillTreeManager _skillTreesManager;
     [SerializeField] private SkillsMenu _skillsMenu;
-    [SerializeField] private AlterationDetailsPanel _alterationDetailsPanel;
     [SerializeField] private CollectionMenu _collectionMenu;
     [SerializeField] private CoinUI _coinUI;
     [SerializeField] private Minimap _minimap;

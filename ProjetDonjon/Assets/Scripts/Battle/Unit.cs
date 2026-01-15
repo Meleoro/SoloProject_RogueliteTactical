@@ -754,8 +754,8 @@ public class Unit : MonoBehaviour
         {
             StopCoroutine(turnOutlineCoroutine);
         }
-
-        if (!isUnitsTurn) return;
+        
+        if (!isUnitsTurn || !BattleManager.Instance.IsInBattle) return;
 
         turnOutlineCoroutine = StartCoroutine(TurnOutlineCoroutine());
     }
