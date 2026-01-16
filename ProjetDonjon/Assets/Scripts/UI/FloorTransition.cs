@@ -95,6 +95,8 @@ public class FloorTransition : MonoBehaviour
 
     public void StartDeathTransition()
     {
+        OnTransitionStart?.Invoke();
+
         _recommandedLevelText.gameObject.SetActive(false);
         _recommandedLevelCounterText.gameObject.SetActive(false);
 

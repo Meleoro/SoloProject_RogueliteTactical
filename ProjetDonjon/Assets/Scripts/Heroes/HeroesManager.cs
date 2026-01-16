@@ -100,6 +100,13 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         currentHeroIndex = ++currentHeroIndex % heroes.Length;
 
+        int antiCrash = 0;
+        while (heroes[currentHeroIndex].CurrentHealth <= 0 && antiCrash++ < 5)
+        {
+            currentHeroIndex = ++currentHeroIndex % heroes.Length;
+        }
+        if (antiCrash == 5) return;
+
         _spriteLayererManager.InitialiseAll();
         ActualiseDisplayedHero();
     }

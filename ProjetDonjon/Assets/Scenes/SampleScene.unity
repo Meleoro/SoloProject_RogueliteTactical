@@ -8071,10 +8071,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.0010845987
+    y: 0.0019267823
+    width: 0.9978308
+    height: 0.99421966
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -16675,7 +16675,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f4d1302f7cbe3e46a72d09e0397c7d5, type: 2}
   - {fileID: 11400000, guid: aa1d9bc3bb7e0464bbd670f8a961ba8e, type: 2}
   relicsPerArea: 12
-  unlockAllDebug: 1
+  unlockAllDebug: 0
 --- !u!114 &1460704118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23263,7 +23263,7 @@ MonoBehaviour:
   - {fileID: 5147144464119487728, guid: 20b9a202d0ff2e844a575212d4f8ebb1, type: 3}
   - {fileID: 5147144464119487728, guid: 555eb51a069d2f04ead14c8876a4ddf3, type: 3}
   debugSpawnPos: {fileID: 1887892335}
-  unlockAllSkills: 1
+  unlockAllSkills: 0
   xpPrefab: {fileID: 267858152307957160, guid: ff3618ca85721d04194134c822d018b7, type: 3}
   _interactionManager: {fileID: 402190537}
   _inventoryManager: {fileID: 1046422283}
@@ -24698,7 +24698,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1541126b3b2abc4b8f2e28686d398e9, type: 2}
   - {fileID: 11400000, guid: 649c69c6c63355048acd838b92039ef3, type: 2}
   - {fileID: 11400000, guid: feebf14128cfa05409831113d8765ebb, type: 2}
-  disableTuto: 1
+  disableTuto: 0
   _leftPosRef: {fileID: 1921454748}
   _rightPosRef: {fileID: 1359650930}
   _tutorialPanel: {fileID: 805319899}

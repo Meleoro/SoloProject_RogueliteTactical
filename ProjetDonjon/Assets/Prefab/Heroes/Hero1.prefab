@@ -80,9 +80,7 @@ MonoBehaviour:
   heroData: {fileID: 11400000, guid: ddc5147c270dbe441be6fc095e8d0423, type: 2}
   skillTreeData: {fileID: 11400000, guid: a8b4c8c4e0bf3ed4f8a1f0d2f2486129, type: 2}
   heroIndex: 0
-  startLoot:
-  - {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
-  - {fileID: 11400000, guid: aa4d0709758515249b72ea99be866219, type: 2}
+  startLoot: []
   neededXPLevelZero: 8
   neededXPMultiplicator: 1.25
   _controller: {fileID: 7159339506722094448}

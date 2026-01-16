@@ -18,7 +18,7 @@ public class GameManager : GenericSingletonClass<GameManager>
 
     private void Start()
     {
-        if (startGameInExplo)
+        if (startGameInExplo || !TutoManager.Instance.DidTutorial)
         {
             StartExploration(startEnviroData);
         }

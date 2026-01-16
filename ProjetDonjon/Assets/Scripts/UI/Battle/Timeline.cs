@@ -76,7 +76,7 @@ public class Timeline : MonoBehaviour
         timelineUnits.Add(newTilemineUnit);
         currentTimelineUnits.Add(newTilemineUnit);
 
-        RecalculateTimeline();
+        //RecalculateTimeline();
     }
 
 

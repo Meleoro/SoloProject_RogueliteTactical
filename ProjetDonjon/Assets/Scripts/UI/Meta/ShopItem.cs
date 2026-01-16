@@ -138,16 +138,17 @@ public class ShopItem : MonoBehaviour
     private IEnumerator TextBuyCoroutine()
     {
         _buyText.enabled = true;
-        _buyText.DOFade(1, 0.1f);
+        _buyText.DOColor(new Color(_buyText.color.r, _buyText.color.g, _buyText.color.b, 1), 0.1f);
         _buyText.rectTransform.localPosition = Vector3.zero;
         _buyText.rectTransform.DOLocalMove(new Vector3(0, 50, 0), 0.5f).SetEase(Ease.OutCirc);
 
         yield return new WaitForSeconds(0.5f);
 
-        _buyText.DOFade(0, 0.1f);
+        _buyText.DOColor(new Color(_buyText.color.r, _buyText.color.g, _buyText.color.b, 0), 0.1f);
 
         yield return new WaitForSeconds(0.1f);
 
+        _buyText.color = new Color(_buyText.color.r, _buyText.color.g, _buyText.color.b, 0);
         _buyText.enabled = true;
     }
 

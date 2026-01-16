@@ -74,7 +74,7 @@ public class PlayerActionsMenu : MonoBehaviour
         if (BattleManager.Instance.CurrentUnit is null) return;
         if (BattleManager.Instance.CurrentUnit.GetType() != typeof(Hero)) return;
 
-        if (InputManager.wantsToReturn)
+        if (InputManager.wantsToReturn && !TutoManager.Instance.IsDisplayingTuto)
         {
             ReturnPreviousBattleMenu();
         }

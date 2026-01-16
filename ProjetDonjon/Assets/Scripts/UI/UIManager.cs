@@ -70,7 +70,7 @@ public class UIManager : GenericSingletonClass<UIManager>
 
     private void Update()
     {
-        if (BattleManager.Instance.IsInBattle) return;
+        if (BattleManager.Instance.IsInBattle || !GameManager.Instance.IsInExplo) return;
 
         switch (currentState)
         {

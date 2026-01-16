@@ -18,7 +18,7 @@ MonoBehaviour:
   baseHealth: 3
   baseStrength: 1
   baseSpeed: 4
-  baseLuck: 10
+  baseLuck: 3
   startAlterations: []
   baseMovePoints: 3
   maxSkillPoints: 3

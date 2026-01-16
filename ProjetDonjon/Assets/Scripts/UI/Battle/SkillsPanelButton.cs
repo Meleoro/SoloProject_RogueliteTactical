@@ -27,6 +27,7 @@ public class SkillsPanelButton : MonoBehaviour
     private SkillData skillData;
     private Color colorSave;
     private bool canBeUsed;
+    private bool isLocked;
     private bool isClicked;
     private float skillAreaSize;
 
@@ -74,12 +75,12 @@ public class SkillsPanelButton : MonoBehaviour
 
     public void LockButton()
     {
-        canBeUsed = false;
+        isLocked = true;
     }
 
     public void UnlockButton()
     {
-        canBeUsed = true;
+        isLocked = false;
     }
 
 
@@ -154,7 +155,7 @@ public class SkillsPanelButton : MonoBehaviour
 
     public void ClickButton()
     {
-        if (!canBeUsed) return;
+        if (!canBeUsed || isLocked) return;
 
         StartCoroutine(ClickEffectCoroutine());
 

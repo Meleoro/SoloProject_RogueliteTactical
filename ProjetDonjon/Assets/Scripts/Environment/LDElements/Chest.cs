@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -59,9 +60,14 @@ public class Chest : MonoBehaviour, IInteractible
         GenerateLoot();
         _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
 
-        yield return new WaitForSeconds(openDuration * 0.03f);
+        yield return new WaitForSeconds(openDuration * 0.05f);
 
         _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
+        _spriteRenderer.material.DOColor(new Color(1, 1, 1, 0), "_Color", 0.2f);
+
+        yield return new WaitForSeconds(0.2f);
+
+        Destroy(gameObject);
     }
 
 

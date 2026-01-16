@@ -90,10 +90,29 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
 
     public void EnterMetaMenu()
     {
-        currentMetaMenu = CurrentMetaMenu.Main;
-
         _globalParent.gameObject.SetActive(true);
         isActive = true;
+
+        switch (currentMetaMenu)
+        {
+            case CurrentMetaMenu.Expeditions:
+                _expeditionsMenu.Hide(false);
+                break;
+
+            case CurrentMetaMenu.Chest:
+                _chestMenu.Hide();
+                break;
+
+            case CurrentMetaMenu.Collection:
+                _collectionMenu.Hide();
+                break;
+
+            case CurrentMetaMenu.Shop:
+                _shopMenu.Hide();
+                break;
+        }
+
+        currentMetaMenu = CurrentMetaMenu.Main;
 
         _collectionMenu.OnStartTransition += StartTransition;
         _collectionMenu.OnEndTransition += EndTransition;
