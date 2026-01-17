@@ -57,6 +57,9 @@ public class Relic : MonoBehaviour, IInteractible
         _rays1SpriteRenderer.material.DOFloat(0.5f, "_MaxDistance", 0.1f);
         _rays2SpriteRenderer.material.DOFloat(0.4f, "_MaxDistance", 0.1f);
 
+        _rays1SpriteRenderer.material.SetColor("_Color", colorAccordingToRarity[(int)relicData.rarityType]);
+        _rays2SpriteRenderer.material.SetColor("_Color", colorAccordingToRarity[(int)relicData.rarityType]);
+
         _nameText.enabled = true;
         _nameText.text = relicData.relicName;
         _secondaryText.enabled = true;

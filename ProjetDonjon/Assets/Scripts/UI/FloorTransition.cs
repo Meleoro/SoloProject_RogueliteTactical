@@ -46,6 +46,16 @@ public class FloorTransition : MonoBehaviour
         buttonsRectTr[1] = _stopButtonText.GetComponent<RectTransform>();
         buttonsRectTr[2] = _backToCampText.GetComponent<RectTransform>();
 
+        _recommandedLevelText.gameObject.SetActive(false);
+        _recommandedLevelCounterText.gameObject.SetActive(false);
+
+        _backToCampText.gameObject.SetActive(false);
+        _mainDeathText.gameObject.SetActive(false);
+        _secondaryDeathText.gameObject.SetActive(false);
+
+        _floorText.gameObject.SetActive(false);
+        _flootCounterText.gameObject.SetActive(false);
+
         _continueButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(false);
         _backToCampButton.gameObject.SetActive(false);
@@ -59,7 +69,10 @@ public class FloorTransition : MonoBehaviour
         _mainDeathText.gameObject.SetActive(false);
         _secondaryDeathText.gameObject.SetActive(false);
 
-        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b);
+        _floorText.gameObject.SetActive(true);
+        _flootCounterText.gameObject.SetActive(true);
+
+        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 0);
 
         if (floorIndex == 0)
         {
@@ -136,6 +149,7 @@ public class FloorTransition : MonoBehaviour
     {
         _floorText.DOFade(1, duration * 0.2f);
         _flootCounterText.DOFade(1, duration * 0.2f);
+        FadeScreen(duration * 0.2f, 1.0f);
 
         yield return new WaitForSeconds(duration * 0.6f);
 
@@ -215,6 +229,9 @@ public class FloorTransition : MonoBehaviour
         _secondaryDeathText.DOFade(0, duration);
 
         yield return new WaitForSeconds(duration);
+
+        _continueButton.gameObject.SetActive(false);
+        _stopButton.gameObject.SetActive(false);
 
         StartCoroutine(GameManager.Instance.EndExplorationCoroutine());
     }

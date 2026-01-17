@@ -528,7 +528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b73bc3844e71c49bc2bf20afcc0d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorAccordingToRarity: []
+  colorAccordingToRarity:
+  - {r: 0.8627451, g: 0.88235295, b: 0.8980392, a: 1}
+  - {r: 0.7176471, g: 1, b: 0.58431375, a: 1}
+  - {r: 0.95686275, g: 0.7372549, b: 1, a: 1}
+  - {r: 1, g: 0.7647059, b: 0.5411765, a: 1}
   _spriteRenderer: {fileID: 7913384047305089635}
   _nameText: {fileID: 5381285300469533757}
   _secondaryText: {fileID: 6437461284446446123}

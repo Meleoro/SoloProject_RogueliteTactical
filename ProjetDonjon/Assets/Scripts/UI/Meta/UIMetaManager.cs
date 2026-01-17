@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Utilities;
 
@@ -93,6 +94,8 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _globalParent.gameObject.SetActive(true);
         isActive = true;
 
+        UIManager.Instance.FloorTransition.FadeScreen(0.5f, 0);
+
         switch (currentMetaMenu)
         {
             case CurrentMetaMenu.Expeditions:
@@ -123,18 +126,24 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _mainMetaMenu.Show(true);
 
         _expeditionsMenu.Hide(true);
-
     }
 
     public void QuitMetaMenu()
     {
-        _globalParent.gameObject.SetActive(false);
-        isActive = false;
+        StartCoroutine(QuitMetaMenuCoroutine());
 
         _collectionMenu.OnStartTransition -= StartTransition;
         _collectionMenu.OnEndTransition -= EndTransition;
         _collectionMenu.OnShow -= () => currentMetaMenu = CurrentMetaMenu.Collection;
         _collectionMenu.OnHide -= () => currentMetaMenu = CurrentMetaMenu.Main;
+    }
+
+    private IEnumerator QuitMetaMenuCoroutine()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        _globalParent.gameObject.SetActive(false);
+        isActive = false;
     }
 
     #endregion
