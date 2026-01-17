@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
@@ -201,6 +204,7 @@ GameObject:
   - component: {fileID: 1779067453305049884}
   - component: {fileID: 5627380343414885049}
   - component: {fileID: 7876218612217213343}
+  - component: {fileID: 8101614873594736206}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -243,6 +247,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -264,6 +270,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
@@ -290,11 +297,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbb5062570442049b2a104140c9c5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundCategoryIndex: 0
+  minSoundIndex: 0
+  maxSoundIndex: 0
   PlaySkillEffect: 0
   PlayVFX: 0
   PlayCritVFX: 0
+  PlaySound: 0
   _vfxToPlay: {fileID: 1161416890620217689}
   _critVFXAnim: {fileID: 0}
+--- !u!114 &8101614873594736206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316287589026260607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ff6927587203042a7dc7582845c5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteLayerer
+  offset: 0
+  autoInitialise: 0
+  PublicOffset: 0
+  _spriteRenderer: {fileID: 5627380343414885049}
+  _heroParentTr: {fileID: 0}
 --- !u!1 &5613758231470035035
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +368,22 @@ PrefabInstance:
     - target: {fileID: 321023419946939784, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644439990872083851, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 86.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644439990872083851, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644439990872083851, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644439990872083851, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -57.375
       objectReference: {fileID: 0}
     - target: {fileID: 2459058724137948486, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
       propertyPath: m_Name

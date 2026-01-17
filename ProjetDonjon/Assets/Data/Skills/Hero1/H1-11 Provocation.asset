@@ -19,7 +19,8 @@ MonoBehaviour:
   mustTargetAlly: 0
   skillIcon: {fileID: 1812084220, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 465495736, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
-  additionalTooltipDatas: []
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 0a9680ac58c51dd46a6e344a1db2a2fa, type: 2}
   skillType: 2
   skillEffects:
   - skillEffectType: 0

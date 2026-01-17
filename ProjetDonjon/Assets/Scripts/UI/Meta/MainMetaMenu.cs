@@ -246,13 +246,20 @@ public class MainMetaMenu : MonoBehaviour
     public void ActualiseCampProgress()
     {
         if (!loadedCampProgress) return;
+        if (campLevels == null) return;
 
         int previousCampLevel = RelicsManager.Instance.CurrentCampLevel;
         int previousRelicCount = RelicsManager.Instance.CurrentCampRelicCount;
 
-        if (campLevels == null) return;
-
-        _campLevelProgressBar.fillAmount = previousRelicCount / campLevels[previousCampLevel].neededRelicCount;
+        if(previousCampLevel == 0)
+        {
+            _campLevelProgressBar.fillAmount = previousRelicCount / campLevels[previousCampLevel].neededRelicCount;
+        }
+        else
+        {
+            _campLevelProgressBar.fillAmount = previousRelicCount - campLevels[previousCampLevel - 1].neededRelicCount / 
+                campLevels[previousCampLevel - 1].neededRelicCount;
+        }
         _campLevelProgressText.text = previousRelicCount + "/" + campLevels[previousCampLevel].neededRelicCount;
         _campLevelMainText.text = "CAMP LEVEL " + previousCampLevel;
 
@@ -265,13 +272,19 @@ public class MainMetaMenu : MonoBehaviour
             _darkBackground.DOFade(0.6f, 0.2f);
             _darkBackground.raycastTarget = true;
 
-            StartCoroutine(PlayProgressCoroutine((float)currentRelicCount / campLevels[previousCampLevel].neededRelicCount));
+            if(previousCampLevel == 0)
+                StartCoroutine(PlayProgressCoroutine((float)currentRelicCount / campLevels[previousCampLevel].neededRelicCount));
+
+            else
+                StartCoroutine(PlayProgressCoroutine((float)currentRelicCount - campLevels[previousCampLevel - 1].neededRelicCount / 
+                    campLevels[previousCampLevel - 1].neededRelicCount));
         }
     }
 
     private IEnumerator PlayProgressCoroutine(float endProgress)
     {
         _campLevelProgressBar.DOFillAmount(endProgress, 0.5f);
+        _campLevelProgressText.text = campLevels[currentCampLevel].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
 
         yield return new WaitForSeconds(0.5f);
 
@@ -316,7 +329,8 @@ public class MainMetaMenu : MonoBehaviour
 
         if(currentRelicCount != campLevels[currentCampLevel - 1].neededRelicCount)
         {
-            StartCoroutine(PlayProgressCoroutine((float)currentRelicCount / campLevels[currentCampLevel].neededRelicCount));
+            StartCoroutine(PlayProgressCoroutine((float)currentRelicCount - campLevels[currentCampLevel - 1].neededRelicCount / 
+                campLevels[currentCampLevel - 1].neededRelicCount));
             return;
         }
 

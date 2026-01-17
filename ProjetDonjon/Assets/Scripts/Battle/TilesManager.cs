@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static Enums;
 
@@ -144,7 +143,7 @@ public class TilesManager
 
         for (int i = 0; i < battleRoom.BattleTiles.Count; i++)
         {
-            if (battleRoom.BattleTiles[i].CurrentTileState == BattleTileState.Danger)
+            if (battleRoom.BattleTiles[i].CurrentTileState == BattleTileState.Danger && !battleRoom.BattleTiles[i].IsHole)
             {
                 returnedTiles.Add(battleRoom.BattleTiles[i]);
             }
@@ -157,6 +156,14 @@ public class TilesManager
 
 
     #region Tiles Functions
+
+    public void UnhoverAll()
+    {
+        for (int i = 0; i < battleRoom.BattleTiles.Count; i++)
+        {
+            battleRoom.BattleTiles[i].QuitOverlayTile();
+        }
+    }
 
     public List<BattleTile> DisplayPossibleSkillTiles(SkillData skill, BattleTile baseTile, bool doBounce = true)
     {

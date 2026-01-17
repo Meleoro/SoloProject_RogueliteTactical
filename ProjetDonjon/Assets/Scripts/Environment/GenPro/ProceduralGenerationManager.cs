@@ -25,6 +25,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     [SerializeField] private Vector2Int roomSizeUnits;
     [SerializeField] private Vector2 offsetRoomCenter;
     [SerializeField] private bool noGeneration;
+    [SerializeField] private int startFloorIndex;    // For debug, normally at 0
     
     [Header("Private Infos")]
     private int wantedRoomAmount;
@@ -51,7 +52,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         this.enviroData = enviroData;
         _heroesManager.StartExploration(spawnPos);
 
-        currentFloor = 0;
+        currentFloor = startFloorIndex;
 
         LootManager.Instance.ActualiseInfos(enviroData, enviroData.lootPerFloors[currentFloor]);
 
@@ -74,7 +75,11 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         }
 
         if (!noGeneration)
-            GenerateFloor(enviroData);
+        {
+            if (currentFloor == 2) GenerateBossFloor(true);
+            else if (currentFloor == 5) GenerateBossFloor(false);
+            else GenerateFloor(enviroData);
+        }
 
         StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.15f));
     }
@@ -118,8 +123,6 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     public void GenerateFloor(EnviroData enviroData)
     {
         generatedRooms = new List<Room>();
-
-        this.enviroData = enviroData;
         wantedRoomAmount = Random.Range(enviroData.minRoomAmount, enviroData.maxRoomAmount);
 
         int tabSize = wantedRoomAmount * 2;
@@ -142,6 +145,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     public void GenerateBossFloor(bool isFirstBoss)
     {
         generatedRooms = new List<Room>();
+        _pathCalculator = new GenProPathCalculator(10);
 
         Room[] possibleBossRooms = isFirstBoss ? enviroData.possibleFirstBossRooms : enviroData.possibleSecondBossRooms;
 

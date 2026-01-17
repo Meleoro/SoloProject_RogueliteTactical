@@ -75,7 +75,8 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 7f1c262d991c12f48bffac1db4436036, type: 3}
   possibleFirstBossRooms:
   - {fileID: 2917294264406634095, guid: 5cbe374aae63ec84195d013e30bd5ad4, type: 3}
-  possibleSecondBossRooms: []
+  possibleSecondBossRooms:
+  - {fileID: 2917294264406634095, guid: 718af3d54e6547044988292b3bb1bf85, type: 3}
   possibleCommonLoot:
   - probability: 25
     loot: {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}

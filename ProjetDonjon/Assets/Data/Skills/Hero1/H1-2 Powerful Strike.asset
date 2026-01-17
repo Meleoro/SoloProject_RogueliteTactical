@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: H1-2 Powerful Strike
   m_EditorClassIdentifier: 
   skillName: POWERFUL STRIKE
-  skillDescription: POWERFUL ATTACK ON ONE TILE, STUNS WHEN CRIT
+  skillDescription: DEALS HEAVY DAMAGES ON ONE TILE, STUNS WHEN CRIT
   animName: Skill1
-  skillPointCost: 2
+  skillPointCost: 3
+  mustTargetAlly: 0
   skillIcon: {fileID: 1719542924, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 309539153, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
@@ -43,6 +44,7 @@ MonoBehaviour:
   mirrorVerticalVFX: 0
   VFXs:
   - {fileID: 3618301063144830387, guid: 718e9a41ce933de49b67e9ca7d626cee, type: 3}
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

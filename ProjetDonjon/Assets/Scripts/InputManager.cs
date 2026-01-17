@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
         wantsToRotateLeft = _playerInput.actions["RotateLeft"].WasPressedThisFrame();
         wantsToRotateRight = _playerInput.actions["RotateRight"].WasPressedThisFrame();
         wantsToReturn = _playerInput.actions["Return"].WasPressedThisFrame();
-        wantsToRightClick = _playerInput.actions["RightClick"].WasPressedThisFrame();
+        wantsToRightClick = _playerInput.actions["RightClick"].IsPressed();
         wantsToDrag = _playerInput.actions["Drag"].IsPressed();
     }
 }

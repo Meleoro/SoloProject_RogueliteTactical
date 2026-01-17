@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lucky
   m_EditorClassIdentifier: 
   tooltipName: LUCKY
-  tooltipDescription: MULTIPLY BY 2 THE UNIT'S CHANCE
+  tooltipDescription: LUCKY UNITS HAVE +50% LUCK

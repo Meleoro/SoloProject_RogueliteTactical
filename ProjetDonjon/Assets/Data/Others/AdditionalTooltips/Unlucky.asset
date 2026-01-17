@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Unlucky
   m_EditorClassIdentifier: 
   tooltipName: UNLUCKY
-  tooltipDescription: DIVIDE BY TWO THE UNIT'S CHANCE
+  tooltipDescription: UNLUCKY UNITS HAVE -50% LUCK

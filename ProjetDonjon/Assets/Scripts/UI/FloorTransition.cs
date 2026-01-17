@@ -135,9 +135,9 @@ public class FloorTransition : MonoBehaviour
 
         if(endValue == 0)
         {
-            _continueButton.enabled = false;
-            _stopButton.enabled = false;
-            _backToCampButton.enabled = false;
+            _continueButton.gameObject.SetActive(false);
+            _stopButton.gameObject.SetActive(false);
+            _backToCampButton.gameObject.SetActive(false);
         }
     }
 
@@ -190,6 +190,8 @@ public class FloorTransition : MonoBehaviour
 
         _continueButtonText.DOFade(1, duration * 0.2f);
         _stopButtonText.DOFade(1, duration * 0.2f);
+
+        if (floorIndex == currentEnviroData.recommandedLevels.Length) yield break;
 
         _recommandedLevelCounterText.text = currentEnviroData.recommandedLevels[floorIndex].ToString();
         _flootCounterText.text = (floorIndex + 1).ToString();

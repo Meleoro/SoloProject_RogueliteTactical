@@ -41,7 +41,6 @@ public class Hero : Unit
     public int CurrentXP { get { return currentXP; } set { currentXP = value; OnHeroInfosChange?.Invoke(); } }
     public int CurrentXPToReach { get { return XPToReach; } set { XPToReach = value; OnHeroInfosChange?.Invoke(); } }
 
-
     [Header("Private Infos")]
     private Loot[] equippedLoot = new Loot[6];
     private PassiveData[] equippedLootPassives = new PassiveData[6];
@@ -101,7 +100,7 @@ public class Hero : Unit
         // For Debug
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //GainLevel();
+            GainLevel();
         }
     }
 
@@ -111,6 +110,8 @@ public class Hero : Unit
     public void ShowHero(bool isFromHeroSwitch = false)
     {
         isHidden = false;
+
+        _spriteRenderer.transform.position = Vector3.zero;
 
         _spriteRendererParent.gameObject.SetActive(true);
         _shadowTransform.gameObject.SetActive(true);
@@ -125,6 +126,8 @@ public class Hero : Unit
     public void HideHero()
     {
         isHidden = true;
+
+        _spriteRenderer.transform.position = Vector3.zero;
 
         _spriteRendererParent.gameObject.SetActive(false);
         _shadowTransform.gameObject.SetActive(false);

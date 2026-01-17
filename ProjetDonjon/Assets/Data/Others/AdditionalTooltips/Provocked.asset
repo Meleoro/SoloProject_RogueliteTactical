@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
-  m_Name: Sturdiness
+  m_Name: Provocked
   m_EditorClassIdentifier: 
-  tooltipName: STURDINESS
-  tooltipDescription: WHEN AN UNT HAS STURDINESS, IT RECEIVES 50% LESS DAMAGES
+  tooltipName: PROVOCKED
+  tooltipDescription: PROVOCKED UNITS CAN ONLY ATTACK THE UNIT AT THE ORIGIN OF THE
+    PROVOCATION

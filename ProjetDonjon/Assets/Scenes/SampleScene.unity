@@ -8125,10 +8125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followSpeed: 10
-  sizeFollowSpeed: 2.5
+  sizeFollowSpeed: 3
   followOffset: {x: 0, y: 0, z: -10}
-  battleMinSize: 4
-  battleMaxSize: 6.5
+  battleMinSize: 5
+  battleMaxSize: 8
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -16589,6 +16589,7 @@ MonoBehaviour:
   roomSizeUnits: {x: 14, y: 14}
   offsetRoomCenter: {x: 0, y: 0}
   noGeneration: 0
+  startFloorIndex: 0
   trailFloorsIndexes: 
   _heroesManager: {fileID: 1887892336}
   _spriteLayererManager: {fileID: 1460704115}
@@ -16675,7 +16676,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f4d1302f7cbe3e46a72d09e0397c7d5, type: 2}
   - {fileID: 11400000, guid: aa1d9bc3bb7e0464bbd670f8a961ba8e, type: 2}
   relicsPerArea: 12
-  unlockAllDebug: 0
+  unlockAllDebug: 1
 --- !u!114 &1460704118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20485,6 +20486,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3101794240545711542, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3169006502548589947, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21579,6 +21584,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6636595498554136249, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6700223655114723561, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6714220992511711737, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
@@ -24674,7 +24683,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 322
+  m_SortingOrder: 330
   m_TargetDisplay: 0
 --- !u!114 &1996307551
 MonoBehaviour:

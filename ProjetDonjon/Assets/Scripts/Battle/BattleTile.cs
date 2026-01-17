@@ -270,10 +270,9 @@ public class BattleTile : MonoBehaviour
 
     public void HoverTile()
     {
-        if (BattleManager.Instance.IsEnemyTurn) return;
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
 
         isHovered = true;
-
         OverlayTile();
     }
 
@@ -320,7 +319,7 @@ public class BattleTile : MonoBehaviour
 
     public void UnhoverTile()
     {
-        if (!isHovered) return;
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
         isHovered = false;
 
         if (unitOnTile)
@@ -388,6 +387,7 @@ public class BattleTile : MonoBehaviour
         {
             case BattleTileState.Move:
                 if (BattleManager.Instance.CurrentActionType != MenuType.Move) break;
+                if (unitOnTile is not null) break;
                 StartCoroutine(BattleManager.Instance.MoveUnitCoroutine(this, false));
                 break;
 

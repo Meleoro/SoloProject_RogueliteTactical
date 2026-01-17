@@ -22,7 +22,7 @@ public class SaveManager : GenericSingletonClass<SaveManager>
         LoadGame();
     }
 
-
+    [ContextMenu("New Game")]
     public void NewGame()
     {
         gameData = new GameData();

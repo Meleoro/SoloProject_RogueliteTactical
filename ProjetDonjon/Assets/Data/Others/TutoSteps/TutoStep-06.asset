@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TutoStep-06
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: SKILLS
-  stepDescription: NOW, WE CAN ATTACK THE ENEMY USING YOUR FIRST SKILL.
+  stepDescription: NOW, YOU CAN ATTACK THE ENEMY USING YOUR FIRST SKILL.
   highlightType: 4
   endCondition: 3
   leftSidePanel: 0
   playNextStepOnFinished: 0
+  playNextStepDelay: 0.2

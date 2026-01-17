@@ -31,6 +31,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     [Header("Private Infos")]
     private bool isInBattle;
     private bool isEnemyTurn;
+    private bool noMouseControls;
     private List<Unit> currentHeroes = new();
     private List<Unit> deadHeroes = new();
     private List<AIUnit> currentEnemies = new();
@@ -48,6 +49,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     public List<AIUnit> CurrentEnemies { get { return currentEnemies; } }
     public bool IsInBattle {  get { return isInBattle; } }
     public bool IsEnemyTurn { get { return isEnemyTurn; } }
+    public bool NoMouseControls { get { return noMouseControls; } }
     public MenuType CurrentActionType { get { return _playerActionsMenu.CurrentMenu; } }
     public Tile[] HoleTiles { get { return holeTiles; } }
     public PathCalculator PathCalculator { get { return _pathCalculator; } }
@@ -290,8 +292,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public IEnumerator NextTurnCoroutine(float delay = 0, bool endTurn = true)
     {
+        noMouseControls = true;
+
         yield return new WaitForSeconds(delay);
 
+        noMouseControls = false;
         if (!isInBattle) yield break;
 
         if(endTurn) _timeline.NextTurn();
@@ -306,9 +311,12 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             isEnemyTurn = false;
             OnHeroTurnStart?.Invoke();
             _playerActionsMenu.SetupHeroActionsUI(CurrentUnit as Hero);
+            noMouseControls = false;
         }
         else
         {
+            TilesManager.UnhoverAll();
+
             isEnemyTurn = true;
             CameraManager.Instance.FocusOnTransform(CurrentUnit.transform, 5f);
             AIUnit enemy = CurrentUnit as AIUnit;
@@ -319,6 +327,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public IEnumerator MoveUnitCoroutine(BattleTile aimedTile, bool useDiagonals) 
     {
+        noMouseControls = true;
+
         _pathCalculator.ActualisePathCalculatorTiles(battleRoom.PlacedBattleTiles);
 
         if(currentUnit.CurrentTile.TileCoordinates == aimedTile.TileCoordinates)
@@ -328,6 +338,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             if (CurrentUnit.GetType() == typeof(Hero))
                 OnMoveUnit.Invoke();
 
+            noMouseControls = false;
             yield break;
         }
 
@@ -356,13 +367,18 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             {
                 AddBattleEventToQueue(BattleEventType.NextPlayerAction);
                 PlayNextBattleEvent();
+
+                noMouseControls = false;
                 yield break;
             }
 
             yield return new WaitForSeconds(0.5f);
 
             currentUnit.EndTurn(0.5f);
+            yield break;
         }
+
+        noMouseControls = false;
     }
 
     #endregion
@@ -399,7 +415,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         // We launch the animations / others effects
         CurrentUnit._animator.SetBool("IsCrit", isCrit);
         CurrentUnit._animator.SetTrigger(usedSkill.animName);
-        CurrentUnit.RotateTowardTarget(skillBattleTiles[0].transform);
+        CurrentUnit.RotateTowardTarget(skillBattleTiles[0]?.transform);
         StartCoroutine(CurrentUnit.UseSkillCoroutine());
 
         // We wait the moment the skill applies it's effect

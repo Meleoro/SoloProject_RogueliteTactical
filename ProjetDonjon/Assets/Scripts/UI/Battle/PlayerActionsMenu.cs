@@ -134,7 +134,7 @@ public class PlayerActionsMenu : MonoBehaviour
         CameraManager.Instance.OnCameraMouseInput -= CloseActionsMenu;
 
         if (currentMenu != MenuType.Skills && currentMenu != MenuType.Move) currentHero.OnClickUnit += OpenActionsMenu;
-        else if (currentMenu == MenuType.Move) currentHero.OnClickUnit += ReturnPreviousBattleMenu;
+        //else if (currentMenu == MenuType.Move) currentHero.OnClickUnit += ReturnPreviousBattleMenu;
 
         _animator.SetBool("IsOpenned", false);
         isOpened = false;
@@ -186,6 +186,7 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         currentHero.EndTurn(0.5f);
 
+        BattleManager.Instance.TilesManager.UnhoverAll();
         CloseActionsMenu();
     }
 

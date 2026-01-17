@@ -188,6 +188,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -209,6 +211,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
@@ -234,6 +237,7 @@ GameObject:
   - component: {fileID: 8534483398930969137}
   - component: {fileID: 8929217451348358929}
   - component: {fileID: 4674991809401278559}
+  - component: {fileID: 52470186645804629}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -276,6 +280,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -297,6 +303,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
@@ -323,11 +330,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbb5062570442049b2a104140c9c5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundCategoryIndex: 0
+  minSoundIndex: 0
+  maxSoundIndex: 0
   PlaySkillEffect: 0
   PlayVFX: 0
   PlayCritVFX: 0
+  PlaySound: 0
   _vfxToPlay: {fileID: 0}
   _critVFXAnim: {fileID: 0}
+--- !u!114 &52470186645804629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946960069964644675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ff6927587203042a7dc7582845c5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteLayerer
+  offset: 0
+  autoInitialise: 0
+  PublicOffset: 0
+  _spriteRenderer: {fileID: 8929217451348358929}
+  _heroParentTr: {fileID: 0}
 --- !u!1001 &2240825503224344738
 PrefabInstance:
   m_ObjectHideFlags: 0

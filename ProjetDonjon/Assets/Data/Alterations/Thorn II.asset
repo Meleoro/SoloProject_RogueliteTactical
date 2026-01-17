@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbdbd1fa00c0946929de6036460233, type: 3}
   m_Name: Thorn II
   m_EditorClassIdentifier: 
-  alterationName: Thorn II
-  alterationDescription: When the unit is attacked, inflicts 2 damage to the attacking
-    unit
+  alterationName: THORNS II
+  alterationDescription: WHEN ATTACKED, INFLICTS 2 DAMAGES TO THE ATTACKER
   alterationIcon: {fileID: 9173838155161804395, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   alterationType: 6
   isPositive: 1

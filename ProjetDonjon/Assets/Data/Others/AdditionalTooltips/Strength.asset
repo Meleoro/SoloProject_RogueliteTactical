@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: 
   tooltipName: STRENGTH
-  tooltipDescription: STRENGTH GIVES THE UNIT'S ATTACKS 50% MORE DAMAGES
+  tooltipDescription: STRENGTH GIVES THE UNIT'S ATTACKS +50% DAMAGES

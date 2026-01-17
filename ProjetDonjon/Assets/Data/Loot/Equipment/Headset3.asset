@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootID: 0
   lootName: METAL HEADSET
-  lootDescription: WHEN THIS UNIT GETS HIT, 25% CHANCES TO GET STRENGTH III
+  lootDescription: WHEN THIS UNIT GETS HIT, 25% CHANCES TO GET STRENGTH FOR 3 TURNS
   lootType: 1
   rarityType: 1
   sprite: {fileID: 3511361126315343885, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}

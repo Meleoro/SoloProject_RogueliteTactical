@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: H1-3 Slash
   m_EditorClassIdentifier: 
   skillName: SLASH
-  skillDescription: DEALS MEDIUM DAMAGES ON THREE ADJACENT TILES
+  skillDescription: DEALS DAMAGES ON THREE ADJACENT TILES
   animName: Skill4
   skillPointCost: 2
+  mustTargetAlly: 0
   skillIcon: {fileID: 553366629, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 311212683, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
@@ -35,6 +36,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 1
   mirrorVerticalVFX: 1
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 1752444311645277086, guid: e6ebadaa5bbbec64fb8332051ff08a27, type: 3}
   rightVFX: {fileID: 1752444311645277086, guid: e6ebadaa5bbbec64fb8332051ff08a27, type: 3}
   upVFX: {fileID: 7653601226576397995, guid: 4638a1505ccd38b4896ce241d639e65b, type: 3}

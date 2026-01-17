@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: H1-4 Triple Strike
   m_EditorClassIdentifier: 
   skillName: TRIPLE STRIKE
-  skillDescription: DEALS SMALL DAMAGES 3 TIMES ON ONE TARGET
+  skillDescription: DEALS SMALL DAMAGES 3 TIMES ON ONE TILE
   animName: Skill5
   skillPointCost: 2
+  mustTargetAlly: 0
   skillIcon: {fileID: 1719542924, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 309539153, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
@@ -38,6 +39,7 @@ MonoBehaviour:
   - {fileID: 3618301063144830387, guid: 718e9a41ce933de49b67e9ca7d626cee, type: 3}
   - {fileID: 3618301063144830387, guid: 718e9a41ce933de49b67e9ca7d626cee, type: 3}
   - {fileID: 3618301063144830387, guid: 718e9a41ce933de49b67e9ca7d626cee, type: 3}
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

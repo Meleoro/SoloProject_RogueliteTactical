@@ -69,7 +69,7 @@ public class UnitUI : MonoBehaviour
     {
         currentHeartState = HeartState.Normal;
 
-        HideUnitUI();
+        //HideUnitUI();
         ResetXPProgress();
 
         saveLevelUpTextPos = _levelUpTextTr.localPosition;

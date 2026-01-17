@@ -2,7 +2,6 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using UnityEngine;
 using Utilities;
@@ -70,9 +69,9 @@ public class Unit : MonoBehaviour
     protected bool isDead;
 
     [Header("Private Stats Modificators")]
-    private int strengthModificatorAdditive;
-    private int speedModificatorAdditive;
-    private int luckModificatorAdditive;
+    private float strengthModificator = 1;
+    private float speedModificator = 1;
+    private float luckModificator = 1;
     private int movePointsModificatorAdditive;
     private float critModificatorAdditive;
     private List<AlterationStruct> currentAlterations = new List<AlterationStruct>(); 
@@ -93,9 +92,9 @@ public class Unit : MonoBehaviour
             OnHeroInfosChange?.Invoke(); } }
     public int CurrentShield { get { return currentShield; } set { currentShield = value; } }
     public int CurrentMaxHealth { get { return currentMaxHealth; } }
-    public int CurrentStrength { get { return currentStrength + strengthModificatorAdditive; } }
-    public int CurrentSpeed { get { return currentSpeed + speedModificatorAdditive; } }
-    public int CurrentLuck { get { return currentLuck + luckModificatorAdditive; } }
+    public int CurrentStrength { get { return (int)(currentStrength * strengthModificator); } }
+    public int CurrentSpeed { get { return (int)(currentSpeed * speedModificator); } }
+    public int CurrentLuck { get { return (int)(currentLuck * luckModificator); } }
     public int CurrentMovePoints { get { return currentMovePoints + movePointsModificatorAdditive; } }
     public float CurrentCritMultiplier { get { return 2 + critModificatorAdditive; } }
     public UnitData UnitData { get { return unitData; } }
@@ -319,10 +318,9 @@ public class Unit : MonoBehaviour
     public virtual void TakeDamage(int damageAmount, Unit originUnit)
     {
         PassiveData[] triggeredPassives = BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnDamageReceived, this).ToArray();
-        for(int i = 0; i <= triggeredPassives.Length; i++)
-        {
-            BattleManager.Instance.PassivesManager.ApplyPassives(triggeredPassives, this, originUnit);
-        }
+        BattleManager.Instance.PassivesManager.ApplyPassives(triggeredPassives, this, originUnit);
+
+        damageAmount += BattleManager.Instance.PassivesManager.GetBonusDamages(originUnit, this);
 
         _animator.SetTrigger("Damage");
         CameraManager.Instance.DoCameraShake(0.2f, Mathf.Lerp(0.5f, 1f, damageAmount / 15f), 50);
@@ -623,9 +621,9 @@ public class Unit : MonoBehaviour
         }
 
         movePointsModificatorAdditive = 0;
-        strengthModificatorAdditive = 0;
-        speedModificatorAdditive = 0;
-        luckModificatorAdditive = 0;
+        strengthModificator = 1;
+        speedModificator = 1;
+        luckModificator = 1;
         provocationTarget = null;
 
         for (int i = 0; i < currentAlterations.Count; i++)
@@ -633,11 +631,11 @@ public class Unit : MonoBehaviour
             switch (currentAlterations[i].alteration.alterationType)
             {
                 case AlterationType.Strength:
-                    strengthModificatorAdditive += (int)(currentStrength * currentAlterations[i].currentStrength);
+                    strengthModificator += currentAlterations[i].currentStrength;
                     break;
 
                 case AlterationType.Weakened:
-                    strengthModificatorAdditive -= (int)(currentStrength * currentAlterations[i].currentStrength);
+                    strengthModificator -= currentAlterations[i].currentStrength;
                     break;
 
                 case AlterationType.Provocked:
@@ -645,11 +643,15 @@ public class Unit : MonoBehaviour
                     break;
 
                 case AlterationType.Lucky:
-                    luckModificatorAdditive += (int)(currentLuck * currentAlterations[i].currentStrength);
+                    luckModificator += currentAlterations[i].currentStrength;
                     break;
 
                 case AlterationType.Unlucky:
-                    luckModificatorAdditive -= (int)(currentLuck * currentAlterations[i].currentStrength);
+                    luckModificator -= currentAlterations[i].currentStrength;
+                    break;
+
+                case AlterationType.Slowed:
+                    speedModificator -= currentAlterations[i].currentStrength;
                     break;
             }
         }
@@ -664,7 +666,8 @@ public class Unit : MonoBehaviour
 
     protected void HoverUnit()
     {
-        if (BattleManager.Instance.IsEnemyTurn || !BattleManager.Instance.IsInBattle) return;
+        if (!BattleManager.Instance.IsInBattle) return;
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
 
         isHovered = true;
 
@@ -673,8 +676,8 @@ public class Unit : MonoBehaviour
 
     protected void UnHoverUnit()
     {
-        if (!BattleManager.Instance.IsInBattle) return;
-
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
+        if (!isHovered) return;
         isHovered = false;
 
         StartCoroutine(VerifyQuitOverlayTile());
@@ -691,6 +694,8 @@ public class Unit : MonoBehaviour
 
     protected virtual async void ClickUnit()
     {
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
+
         await Task.Delay((int)(Time.deltaTime * 1000));
 
         if (BattleManager.Instance.IsEnemyTurn) return;

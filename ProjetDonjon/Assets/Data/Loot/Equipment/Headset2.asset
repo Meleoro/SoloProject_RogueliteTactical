@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootID: 0
   lootName: CRISTAL HEADSET
-  lootDescription: WHEN THIS UNIT GETS HIT, 50% CHANCES TO INFLICT UNLUCKY III
+  lootDescription: WHEN THIS UNIT GETS HIT, 50% CHANCES TO INFLICT UNLUCKY FOR 3
+    TURNS TO ATTACKER
   lootType: 1
   rarityType: 2
   sprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -23,7 +24,7 @@ MonoBehaviour:
   - row: 01
   equipmentType: 1
   equipmentSprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 0
+  healthUpgrade: 1
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 1

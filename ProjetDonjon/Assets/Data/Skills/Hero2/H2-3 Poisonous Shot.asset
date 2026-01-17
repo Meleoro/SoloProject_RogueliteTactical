@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: H2-3 Poisonous Shot
   m_EditorClassIdentifier: 
   skillName: POISONOUS SHOT
-  skillDescription: DEALS SMALL DAMAGES AND POISONS THE TARGET
+  skillDescription: DEALS SMALL DAMAGES ON ONE TILE AND POISONS THE TARGET
   animName: Skill1
   skillPointCost: 2
+  mustTargetAlly: 0
   skillIcon: {fileID: -112064891, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -382150790, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
-  additionalTooltipDatas: []
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: bdd1cd386b28d51469bd606f8f387012, type: 2}
   skillType: 1
   skillEffects:
   - skillEffectType: 1
@@ -35,6 +37,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

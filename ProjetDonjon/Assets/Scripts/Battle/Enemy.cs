@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,7 +97,17 @@ public class AIUnit : Unit
 
             else if (currentSkillData.skillEffects[0].skillEffectTargetType == SkillEffectTargetType.Empty)
             {
-                aimedTiles = BattleManager.Instance.BattleRoom.BattleTiles.ToArray();
+                List<BattleTile> temp = new List<BattleTile>();
+
+                foreach(BattleTile tile in BattleManager.Instance.BattleRoom.BattleTiles)
+                {
+                    if (tile.UnitOnTile is not null) continue;
+                    if (tile.IsHole) continue;
+
+                    temp.Add(tile);
+                }
+
+                aimedTiles = temp.ToArray();
             }
 
             else
@@ -153,7 +164,7 @@ public class AIUnit : Unit
     {
         _spriteRenderer.material.SetFloat("_DitherProgress", -2);
 
-        _spriteRenderer.material.ULerpMaterialFloat(duration, 3.5f, "_DitherProgress");
+        _spriteRenderer.material.DOFloat(3.5f, "_DitherProgress", duration).SetEase(Ease.OutFlash);
 
         yield return new WaitForSeconds(duration);
 
@@ -211,7 +222,7 @@ public class AIUnit : Unit
 
         StartCoroutine(BattleManager.Instance.MoveUnitCoroutine(moveTile, true));
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.55f);
 
         if(skillTile is not null)
         {
@@ -275,7 +286,7 @@ public class AIUnit : Unit
 
                 // If we didn't find any usable skill tile we skip
                 if (currentSkillTile is null) continue;
-                if (currentSkillTile.UnitOnTile is null) continue;
+                if (currentSkillTile.UnitOnTile is null && currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Empty) continue;
                 if (currentSkillTile.UnitOnTile == this && currentSkillData.skillType != SkillType.SkillArea) continue;
                 if (!aimedTiles.Contains(currentSkillTile) && currentSkillData.skillType != SkillType.SkillArea) continue;
 
@@ -310,7 +321,8 @@ public class AIUnit : Unit
 
                     foreach (var dangerTile in dangerTiles)
                     {
-                        if (dangerTile.UnitOnTile is null && pickedMoveTile != dangerTile) continue;
+                        if (dangerTile.UnitOnTile is null && pickedMoveTile != dangerTile 
+                            && currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Empty) continue;
                         if (!aimedTiles.Contains(dangerTile) && (pickedMoveTile != dangerTile 
                             || currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Allies)) continue;
 
@@ -404,6 +416,7 @@ public class AIUnit : Unit
     {
         await Task.Delay((int)(Time.deltaTime * 1000));
         if (InputManager.wantsToRightClick) return;
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
 
         int newPreviewIndex = ((int)currentPreviewType + 1) % 3;
         currentPreviewType = (PreviewType)newPreviewIndex;
@@ -422,11 +435,11 @@ public class AIUnit : Unit
         UnHoverUnit();
 
         AudioManager.Instance.PlaySoundOneShot(2, 10);
-        HeroesManager.Instance.SpawnXP(AIData.minXpDrop, transform.position);
+        if(isEnemy) HeroesManager.Instance.SpawnXP(AIData.minXpDrop, transform.position);
 
         BattleManager.Instance.RemoveUnit(this);
 
-        if (BattleManager.Instance.CurrentEnemies.Count == 0 || isBoss)
+        if ((BattleManager.Instance.CurrentEnemies.Count == 0 || isBoss) && isEnemy)
         {
             StartCoroutine(LastEnemyDisappearCoroutine(2f));
         }

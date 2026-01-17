@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootID: 0
   lootName: CRISTAL ARMOR
-  lootDescription: THIS UNIT STARTS EACH FIGHT WITH THORNS
+  lootDescription: THIS UNIT STARTS EACH FIGHT WITH THORNS II
   lootType: 1
   rarityType: 2
   sprite: {fileID: 1213750802, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - row: 0101
   equipmentType: 2
   equipmentSprite: {fileID: 1176501172, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 1
+  healthUpgrade: 2
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 3

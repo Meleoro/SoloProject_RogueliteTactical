@@ -76,7 +76,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TakeStairs();
+            //TakeStairs();
         }
     }
 

@@ -154,7 +154,11 @@ public class SkillTreeNode : MonoBehaviour
 
     public void ActualiseVisuals()
     {
-        if (availableCoroutine is not null) StopCoroutine(availableCoroutine);
+        if (availableCoroutine != null) StopCoroutine(availableCoroutine);
+        _rectTr.DOComplete();
+        _outlineImage.DOComplete();
+        _mainImage.DOComplete();
+        _iconImage.DOComplete();
 
         if (isPossessed)
         {

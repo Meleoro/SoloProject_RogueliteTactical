@@ -536,6 +536,8 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void ClickLoot()
     {
+        if (!isPlacedInInventory) return;
+
         UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
         AudioManager.Instance.PlaySoundOneShot(0, 1);

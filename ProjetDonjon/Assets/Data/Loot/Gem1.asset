@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Gem1
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: RUBIS
   lootDescription: Can be sell at good prices
   lootType: 0
+  rarityType: 0
   sprite: {fileID: 1978074720126056595, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 5
+  value: 10
   spaceTaken:
   - row: 01
   equipmentType: 0
@@ -25,5 +27,10 @@ MonoBehaviour:
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  appliedPassive: {fileID: 0}
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas: []

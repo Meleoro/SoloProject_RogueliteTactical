@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: SkillPotion1
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: WEAK SKILL POTION
-  lootDescription: Restores 1 Skill Point
+  lootDescription: RESTORES ONE SKILL POINT
   lootType: 2
+  rarityType: 0
   sprite: {fileID: -810453201, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
   value: 5
   spaceTaken:
@@ -25,5 +27,10 @@ MonoBehaviour:
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  appliedPassive: {fileID: 0}
   consumableType: 1
   consumablePower: 1
+  usableOutsideBattle: 0
+  additionalTooltipDatas: []

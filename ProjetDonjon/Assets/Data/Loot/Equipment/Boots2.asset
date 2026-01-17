@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootID: 0
   lootName: CRISTAL BOOTS
-  lootDescription: EACH TIME THIS UNIT GETS HIT, 50% CHANCES TO GAIN LUCKY III
+  lootDescription: EACH TIME THIS UNIT GETS HIT, 50% CHANCES TO GAIN LUCKY FOR 3
+    TURNS
   lootType: 1
   rarityType: 2
   sprite: {fileID: 2072245860, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   - row: 01
   equipmentType: 3
   equipmentSprite: {fileID: 161968315, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 0
+  healthUpgrade: 1
   strengthUpgrade: 0
   speedUpgrade: 1
   luckUpgrade: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TutoStep-10
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: DEATH
-  stepDescription: BE SURE TO PAY ATTENTION TO THOSE ENEMIES, SINCE IF ALL THE HEROES
-    IN YOUR TEAM DIE, YOU LOSE EVERYTHING YOU HAD IN YOUR INVENTORIES
+  stepDescription: BE SURE TO PAY ATTENTION TO ENEMIES, SINCE IF ALL THE HEROES IN
+    YOUR TEAM DIE, YOU LOSE EVERYTHING YOU HAD IN YOUR INVENTORIES.
   highlightType: 0
   endCondition: 0
   leftSidePanel: 0

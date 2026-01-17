@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: H2-5 WeakeningShot
   m_EditorClassIdentifier: 
   skillName: WEAKENING SHOT
-  skillDescription: DEALS SMALL DAMAGES AND WEAKENS THE TARGET
+  skillDescription: DEALS SMALL DAMAGES ON ONE TILE AND WEAKENS THE TARGET
   animName: Skill1
   skillPointCost: 1
+  mustTargetAlly: 0
   skillIcon: {fileID: -1854112359, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -2001667901, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:
@@ -36,6 +37,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

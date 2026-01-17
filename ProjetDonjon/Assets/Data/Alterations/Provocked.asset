@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbdbd1fa00c0946929de6036460233, type: 3}
   m_Name: Provocked
   m_EditorClassIdentifier: 
-  alterationName: Provocked
-  alterationDescription: The unit can only attack the unit who provocked it
+  alterationName: PROVOCKED
+  alterationDescription: CAN ONLY ATTACK THE UNIT AT THE ORIGIN OF THE PROVOCATION
   alterationIcon: {fileID: 7988679433831818700, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   alterationType: 3
   isPositive: 0

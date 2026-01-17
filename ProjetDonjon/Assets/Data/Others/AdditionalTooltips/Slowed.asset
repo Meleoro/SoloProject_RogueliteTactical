@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
-  m_Name: Sturdiness
+  m_Name: Slowed
   m_EditorClassIdentifier: 
-  tooltipName: STURDINESS
-  tooltipDescription: WHEN AN UNT HAS STURDINESS, IT RECEIVES 50% LESS DAMAGES
+  tooltipName: SLOWED
+  tooltipDescription: SLOWED UNITS HAVE -50% SPEED

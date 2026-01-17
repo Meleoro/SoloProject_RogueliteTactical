@@ -196,5 +196,28 @@ public class PassivesManager
         return 0;
     }
 
+    public int GetBonusDamages(Unit unit, Unit attackedUnit)
+    {
+        if (!unit) return 0;
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        int bonus = 0;
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttack) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeDamages ||
+                !unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType)) continue;
+
+            bonus += (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return bonus;
+    }
+
     #endregion
 }

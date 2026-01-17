@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: ActionPotion1
   m_EditorClassIdentifier: 
+  lootID: 0
   lootName: ACTION
-  lootDescription: Adds 1 Action Point for this turn
+  lootDescription: +1 ACTION POINT THIS TURN
   lootType: 2
   rarityType: 1
   sprite: {fileID: 914660964, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -28,9 +29,7 @@ MonoBehaviour:
   luckUpgrade: 0
   mpUpgrade: 0
   spUpgrade: 0
-  equipmentEffectType: 0
-  equipmentEffectAlteration: {fileID: 0}
-  equipmentEffectPower: 0
+  appliedPassive: {fileID: 0}
   consumableType: 2
   consumablePower: 1
   usableOutsideBattle: 0

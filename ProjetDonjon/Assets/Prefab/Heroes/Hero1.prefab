@@ -5323,6 +5323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+  autoInitialise: 1
   PublicOffset: 0
   _spriteRenderer: {fileID: 2102602649195524311}
   _heroParentTr: {fileID: 3105457969320036442}

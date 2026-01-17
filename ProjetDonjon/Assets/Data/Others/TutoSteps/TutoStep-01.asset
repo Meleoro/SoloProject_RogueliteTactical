@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TutoStep-01
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: CHESTS
-  stepDescription: 'DURING YOUR EXPLORATION, YOU WILL FIND LOTS OF TREASURES !
+  stepDescription: 'IN CHESTS, YOU''LL FIND A LOT OF VALUABLE ITEMS.
 
 
-    YOU
-    CAN PRESS [E] TO INTERACT WITH IT.'
+    YOU CAN
+    PRESS [E] TO INTERACT WITH IT.'
   highlightType: 0
   endCondition: 4
   leftSidePanel: 1

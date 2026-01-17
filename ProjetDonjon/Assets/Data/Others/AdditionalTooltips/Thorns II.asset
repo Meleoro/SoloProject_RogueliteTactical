@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
-  m_Name: Thorns
+  m_Name: Thorns II
   m_EditorClassIdentifier: 
-  tooltipName: THORNS
+  tooltipName: THORNS II
   tooltipDescription: DEALS 2 DAMAGE TO THE ENEMY WHO ATTACKS THIS UNIT

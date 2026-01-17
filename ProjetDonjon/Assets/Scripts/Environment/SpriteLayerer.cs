@@ -4,6 +4,7 @@ public class SpriteLayerer : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private int offset;
+    [SerializeField] private bool autoInitialise = true;
 
     [Header("Public Infos")]
     [HideInInspector] public int PublicOffset;
@@ -16,6 +17,13 @@ public class SpriteLayerer : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Transform _heroParentTr;   // Needed to avoid to apply the update on the reference sprite
 
+
+    private void Start()
+    {
+        if (autoInitialise) return;
+
+        Initialise(HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].transform);
+    }
 
     public void Initialise(Transform referenceTr)
     {

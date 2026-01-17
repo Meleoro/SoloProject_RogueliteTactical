@@ -20,4 +20,4 @@ MonoBehaviour:
   isInfinite: 0
   isStackable: 0
   duration: 3
-  strength: 1.5
+  strength: 0.5

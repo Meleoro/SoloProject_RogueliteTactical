@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: ACTION POINTS
   stepDescription: "IN BATTLES, EACH HERO HAS TWO ACTION POINTS PER TURN. \n\nTHEY
-    CAN BE SPENT ON ANY : MOVE, USE A SKILL OR USE AN OBJECT."
+    CAN BE SPENT ON ANY ACTION : MOVE, USE A SKILL OR USE AN OBJECT."
   highlightType: 1
   endCondition: 0
   leftSidePanel: 0

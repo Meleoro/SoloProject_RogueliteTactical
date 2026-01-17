@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TutoStep-09
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: PATTERNS
-  stepDescription: 'FINALLY, THE ENEMIES MOVE AND ATTACK ACCORDING TO PATTERNS.
+  stepDescription: 'THE ENEMIES MOVE AND ATTACK ACCORDING TO PATTERNS.
 
 
     YOU
-    CAN SEE THOSE BY HOVERING THE ENEMY (AND CLICK TO SWITCH WHICH PATTERN IS SHOWN)'
+    CAN SEE THOSE BY HOVERING THE ENEMY (AND CLICK TO SWITCH WHICH PATTERN TYPE IS
+    SHOWN)'
   highlightType: 5
   endCondition: 5
   leftSidePanel: 0

@@ -44,7 +44,7 @@ public class LootData : ScriptableObject
     [Header("Main Infos")]
     public int lootID;
     public string lootName;
-    public string lootDescription;
+    [TextArea] public string lootDescription;
     public LootType lootType;
     public RarityType rarityType;
     public Sprite sprite;

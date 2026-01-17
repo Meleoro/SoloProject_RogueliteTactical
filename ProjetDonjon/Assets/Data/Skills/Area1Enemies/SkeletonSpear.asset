@@ -16,6 +16,7 @@ MonoBehaviour:
   skillDescription: Attacks on 2 tiles on a straight line
   animName: Skill1
   skillPointCost: 0
+  mustTargetAlly: 0
   skillIcon: {fileID: 0}
   skillHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
@@ -28,7 +29,7 @@ MonoBehaviour:
     multipliedPower: 1
     onlyOnCrit: 0
     summonPrefab: {fileID: 0}
-  attackCount: 0
+  attackCount: 1
   onTargetVFX: 0
   oneVFXPerTile: 0
   rotateVFX: 0
