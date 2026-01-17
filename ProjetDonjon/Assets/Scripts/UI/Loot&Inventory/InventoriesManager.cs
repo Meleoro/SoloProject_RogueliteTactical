@@ -220,6 +220,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
             _backInventoriesImage.rectTransform.parent.InverseTransformPoint(_shownPosition.position + Vector3.up), CurveType.EaseOutSin);
         _backFadeImage.UFadeImage(openEffectDuration, 0.5f, CurveType.EaseOutCubic);
 
+        UIManager.Instance.CoinUI.Show();
+
         await Task.Delay(20);
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
@@ -240,6 +242,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         OnInventoryClose?.Invoke();
 
         _inventoryActionsPanel.ClosePanel();
+
+        UIManager.Instance.CoinUI.Hide();
 
         _backInventoriesImage.rectTransform.UChangeLocalPosition(closeEffectDuration, 
             _backInventoriesImage.rectTransform.parent.InverseTransformPoint(_hiddenPosition.position), CurveType.EaseOutCubic);

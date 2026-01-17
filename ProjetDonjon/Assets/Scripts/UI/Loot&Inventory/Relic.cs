@@ -7,6 +7,9 @@ using Utilities;
 
 public class Relic : MonoBehaviour, IInteractible
 {
+    [Header("Parameters")]
+    [SerializeField] private Color[] colorAccordingToRarity;
+
     [Header("Private Infos")]
     private RelicData relicData;
     private bool hovered;
@@ -57,6 +60,9 @@ public class Relic : MonoBehaviour, IInteractible
         _nameText.enabled = true;
         _nameText.text = relicData.relicName;
         _secondaryText.enabled = true;
+        _secondaryText.text = relicData.rarityType.ToString().ToUpper() + " RELIC";
+
+        _secondaryText.color = colorAccordingToRarity[(int)relicData.rarityType];
     }
 
     public void CannotBePicked()

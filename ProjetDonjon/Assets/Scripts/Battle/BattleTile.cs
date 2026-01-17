@@ -208,6 +208,16 @@ public class BattleTile : MonoBehaviour
             transform.DOMove(savePos, randomDelay).SetEase(Ease.InOutCubic);
             transform.DOScale(Vector3.one, randomDelay).SetEase(Ease.InOutCubic);
 
+            if (isHovered)
+            {
+                _mainSpriteRenderer.color = currentColorOutline + addedColorOverlayOutline;
+                _backSpriteRenderer.color = currentColorBack + addedColorOverlayBack;
+                _mainSpriteRenderer.DOColor(currentColorOutline + addedColorOverlayOutline, randomDelay).SetEase(Ease.InOutCubic);
+                _backSpriteRenderer.DOColor(currentColorBack + addedColorOverlayBack, randomDelay).SetEase(Ease.InOutCubic);
+
+                yield break;
+            }
+
             _mainSpriteRenderer.DOColor(outlineColor, randomDelay).SetEase(Ease.InOutCubic);
             _backSpriteRenderer.DOColor(backColor, randomDelay).SetEase(Ease.InOutCubic);
         }
@@ -295,7 +305,8 @@ public class BattleTile : MonoBehaviour
             if (BattleManager.Instance.CurrentUnit.CurrentTile.TileCoordinates == TileCoordinates) return;
 
             BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
-            Vector2Int[] path = BattleManager.Instance.PathCalculator.GetPath(BattleManager.Instance.CurrentUnit.CurrentTile.TileCoordinates, TileCoordinates, false).ToArray();
+            Vector2Int[] path = BattleManager.Instance.PathCalculator.GetPath(BattleManager.Instance.CurrentUnit.CurrentTile.TileCoordinates, 
+                TileCoordinates, false).ToArray();
             if (path.Length <= 1) return;
             highlightedTiles = new BattleTile[path.Length - 1];
 
@@ -370,7 +381,7 @@ public class BattleTile : MonoBehaviour
         if (InputManager.wantsToRightClick) return;
         
         // To avoid missclick buffs to enemies
-        if (BattleManager.Instance.CurrentActionType == MenuType.Skills && BattleManager.Instance.TilesManager.CurrentSkill.mustTargetAlly
+        if (BattleManager.Instance.CurrentActionType == MenuType.LaunchSkill && BattleManager.Instance.TilesManager.CurrentSkill.mustTargetAlly
             && unitOnTile.GetType() == typeof(AIUnit) && (unitOnTile as AIUnit).IsEnemy) return;
 
         switch (currentTileState)

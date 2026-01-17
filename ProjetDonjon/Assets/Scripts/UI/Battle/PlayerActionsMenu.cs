@@ -169,6 +169,8 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         currentMenu = MenuType.LaunchSkill;
 
+        currentHero.OnClickUnit -= OpenActionsMenu;
+
         _skillsPanel.CloseSkillsPanel();
     }
 

@@ -109,7 +109,10 @@ public class Loot : MonoBehaviour, IInteractible
         _nameText.enabled = false;
         _secondaryText.enabled = false;
 
-        if(!noAppear) StartCoroutine(AppearCoroutine());
+        _secondaryText.text = lootData.rarityType.ToString().ToUpper();
+        _secondaryText.color = lootColorAccordingToRarity[(int)lootData.rarityType];
+
+        if (!noAppear) StartCoroutine(AppearCoroutine());
     }
 
 
@@ -120,10 +123,14 @@ public class Loot : MonoBehaviour, IInteractible
         _collider.enabled = false;
         float sign = Random.Range(0, 2) == 0 ? -1 : 1;
 
+        _rays1SpriteRenderer.material.SetColor("_Color", lootColorAccordingToRarity[(int)lootData.rarityType]);
+        _rays2SpriteRenderer.material.SetColor("_Color", lootColorAccordingToRarity[(int)lootData.rarityType]);
+
         Vector2 finalPos = transform.position + new Vector3(Random.Range(minAppearAddedX, maxAppearAddedX) * sign, Random.Range(-minAppearAddedY, minAppearAddedY));
 
         transform.UChangeLocalPosition(appearDuration, finalPos, CurveType.None);
-        _spriteRenderer.transform.UChangeLocalPosition(appearDuration * 0.6f, new Vector3(0, Random.Range(minAppearAddedY, maxAppearAddedY)), CurveType.EaseOutSin);
+        _spriteRenderer.transform.UChangeLocalPosition(appearDuration * 0.6f, new Vector3(0, Random.Range(minAppearAddedY, maxAppearAddedY)), 
+            CurveType.EaseOutSin);
         _spriteRenderer.material.SetColor("_Color", Color.black);
         _spriteRenderer.material.ULerpMaterialColor(appearDuration * 0.8f, Color.white, "_Color");
 

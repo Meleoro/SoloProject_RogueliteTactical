@@ -359,8 +359,9 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 yield break;
             }
 
-            AddBattleEventToQueue(BattleEventType.NextTurn);
-            PlayNextBattleEvent();
+            yield return new WaitForSeconds(0.5f);
+
+            currentUnit.EndTurn(0.5f);
         }
     }
 

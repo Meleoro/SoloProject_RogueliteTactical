@@ -21,7 +21,7 @@ MonoBehaviour:
   neededAlteration: {fileID: 0}
   passiveTriggerProba: 25
   passiveEffects:
-  - passiveEffectType: 1
+  - passiveEffectType: 0
     appliedAlteration: {fileID: 11400000, guid: 449ed391ee20c6b41ae5ef502741728b, type: 2}
     additivePower: 0
     multipliedPower: 0
