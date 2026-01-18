@@ -72,8 +72,6 @@ public class ShopItem : MonoBehaviour
 
         UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
-        StopAllCoroutines();
-
         _itemImage.rectTransform.DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.OutCubic);
         _itemImage.rectTransform.DOLocalMove(originalPos, 0.15f).SetEase(Ease.OutCubic);
         _itemImage.material.DOFloat(0f, "_OutlineSize", 0.15f).SetEase(Ease.OutCubic);

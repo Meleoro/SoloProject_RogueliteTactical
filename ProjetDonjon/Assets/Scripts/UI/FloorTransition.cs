@@ -61,7 +61,7 @@ public class FloorTransition : MonoBehaviour
         _backToCampButton.gameObject.SetActive(false);
     }
 
-    public void StartTransition(EnviroData enviroData, int floorIndex)
+    public void StartTransition(EnviroData enviroData, int floorIndex, bool instantFade)
     {
         currentEnviroData = enviroData;
 
@@ -72,7 +72,7 @@ public class FloorTransition : MonoBehaviour
         _floorText.gameObject.SetActive(true);
         _flootCounterText.gameObject.SetActive(true);
 
-        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 0);
+        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, instantFade ? 1 : 0);
 
         if (floorIndex == 0)
         {

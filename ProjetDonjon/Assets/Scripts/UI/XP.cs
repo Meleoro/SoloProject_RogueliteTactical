@@ -38,7 +38,7 @@ public class XP : MonoBehaviour
         Vector2 dir = Vector3.zero - _rectTr.localPosition;
         _rb.AddForce(dir.normalized * goToAimedForce);
 
-        if (30 > Mathf.Abs(dir.y) && 30f > Mathf.Abs(dir.x))
+        if (40f > Mathf.Abs(dir.y) && 40f > Mathf.Abs(dir.x))
         {
             _aimedHero.GainXP(xpValue);
             Destroy(gameObject);

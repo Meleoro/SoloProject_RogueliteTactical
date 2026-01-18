@@ -186,6 +186,8 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
         currentWantedPos = focusedTr.position + followOffset;
         currentWantedSize = cameraSize;
+
+        currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
     }
 
     public void FocusOnTransforms(Transform[] focusedTr)
@@ -220,12 +222,14 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
         currentWantedPos = focusedTr.position + followOffset;
         currentWantedSize = cameraSize;
+
+        currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
     }
 
     public void FocusOnPosition(Vector3 focusedPos, float cameraSize)
     {
         currentWantedPos = focusedPos + followOffset;
-        currentWantedSize = Mathf.Clamp(cameraSize, battleMinSize, battleMaxSize); ;
+        currentWantedSize = Mathf.Clamp(cameraSize, battleMinSize, battleMaxSize); 
     }
 
     #endregion

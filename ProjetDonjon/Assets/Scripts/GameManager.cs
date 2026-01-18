@@ -20,7 +20,7 @@ public class GameManager : GenericSingletonClass<GameManager>
     {
         if (startGameInExplo || !TutoManager.Instance.DidTutorial)
         {
-            StartExploration(startEnviroData);
+            StartExploration(startEnviroData, true);
         }
         else
         {
@@ -32,19 +32,19 @@ public class GameManager : GenericSingletonClass<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            StartCoroutine(EndExplorationCoroutine());
+            //StartCoroutine(EndExplorationCoroutine());
         }
     }
 
 
     #region Start / End Exploration
 
-    public void StartExploration(EnviroData enviroData)
+    public void StartExploration(EnviroData enviroData, bool isStart)
     {
         UIMetaManager.Instance.QuitMetaMenu();
         IsInExplo = true;
 
-        UIManager.Instance.StartExploration(enviroData);
+        UIManager.Instance.StartExploration(enviroData, isStart);
         RelicsManager.Instance.StartExploration(enviroData.enviroIndex);
 
         ProceduralGenerationManager.Instance.StartExploration(enviroData, !TutoManager.Instance.DidTutorial);

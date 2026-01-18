@@ -155,7 +155,7 @@ MonoBehaviour:
   heroIndex: 1
   startLoot: []
   neededXPLevelZero: 8
-  neededXPMultiplicator: 1.25
+  neededXPMultiplicator: 1.4
   _controller: {fileID: 7159339506722094448}
   _spriteRendererParent: {fileID: 5050220775268981595}
   _shadowTransform: {fileID: 316598353547619335}

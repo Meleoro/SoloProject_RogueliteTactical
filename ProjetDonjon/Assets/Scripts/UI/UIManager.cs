@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -137,9 +139,15 @@ public class UIManager : GenericSingletonClass<UIManager>
     }
 
 
-    public void StartExploration(EnviroData enviroData)
+    public void StartExploration(EnviroData enviroData, bool isTuto)
     {
-        OnExplorationStart?.Invoke();
+        if (OnExplorationStart == null)  // If what need to be bind isn't
+        { 
+            StartCoroutine(DelayStartExploration(enviroData, isTuto));
+            return;
+        }
+
+        OnExplorationStart.Invoke();
 
         _collectionMenu.OnShow += () => currentState = UIState.Collection;
         _collectionMenu.OnHide += () => currentState = UIState.Nothing;
@@ -155,7 +163,14 @@ public class UIManager : GenericSingletonClass<UIManager>
         _skillsMenu.OnShow += () => currentState = UIState.Skills;
         _skillsMenu.OnHide += () => currentState = UIState.Nothing;
 
-        _floorTransition.StartTransition(enviroData, 0);
+        _floorTransition.StartTransition(enviroData, 0, isTuto);
+    }
+
+    private IEnumerator DelayStartExploration(EnviroData enviroData, bool isTuto)
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        StartExploration(enviroData, isTuto);
     }
 
     public void EndExploration()

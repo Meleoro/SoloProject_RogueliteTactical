@@ -100,7 +100,7 @@ public class Hero : Unit
         // For Debug
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GainLevel();
+            //GainLevel();
         }
     }
 
@@ -111,7 +111,8 @@ public class Hero : Unit
     {
         isHidden = false;
 
-        _spriteRenderer.transform.position = Vector3.zero;
+        _spriteRenderer.transform.localPosition = Vector3.zero;
+        _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         _spriteRendererParent.gameObject.SetActive(true);
         _shadowTransform.gameObject.SetActive(true);
@@ -127,7 +128,8 @@ public class Hero : Unit
     {
         isHidden = true;
 
-        _spriteRenderer.transform.position = Vector3.zero;
+        _spriteRenderer.transform.localPosition = Vector3.zero;
+        _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         _spriteRendererParent.gameObject.SetActive(false);
         _shadowTransform.gameObject.SetActive(false);

@@ -48,7 +48,7 @@ public class PathCalculator
             {
                 if (tiles[x, y] is null)
                 {
-                    pathCalculatorTiles[x, y].isBlocked = false;
+                    pathCalculatorTiles[x, y].isBlocked = true;
                     continue;
                 }
 

@@ -111,7 +111,7 @@ public class ExpeditionsMenu : MonoBehaviour
     {
         if(index == 0)
         {
-            GameManager.Instance.StartExploration(enviroDatas[currentEnviroIndex]);
+            GameManager.Instance.StartExploration(enviroDatas[currentEnviroIndex], false);
         }
     }
 

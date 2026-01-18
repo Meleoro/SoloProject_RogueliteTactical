@@ -250,7 +250,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         heroes[currentHeroIndex].Controller.AutoMove(heroes[currentHeroIndex].transform.position + Vector3.up * 2f);
 
-        UIManager.Instance.FloorTransition.StartTransition(_genProScript.EnviroData, _genProScript.CurrentFloor + 1);
+        UIManager.Instance.FloorTransition.StartTransition(_genProScript.EnviroData, _genProScript.CurrentFloor + 1, false);
 
         yield return new WaitForSeconds(1);
 

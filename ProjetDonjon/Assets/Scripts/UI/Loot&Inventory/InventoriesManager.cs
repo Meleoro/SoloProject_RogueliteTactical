@@ -62,6 +62,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     private void Start()
     {
         _backInventoriesImage.rectTransform.position = _hiddenPosition.position;
+
+        //AddCoins(50);
     }
 
     public Inventory InitialiseInventory(Inventory inventoryPrefab, int index, Hero hero)
@@ -324,7 +326,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         if (alreadyLoadedSave) return;
         alreadyLoadedSave = true;
 
-        StartCoroutine(LoadGameWithDelayCoroutine(0.25f, data));
+        StartCoroutine(LoadGameWithDelayCoroutine(0.3f, data));
     }
 
     private IEnumerator LoadGameWithDelayCoroutine(float delay, GameData data)

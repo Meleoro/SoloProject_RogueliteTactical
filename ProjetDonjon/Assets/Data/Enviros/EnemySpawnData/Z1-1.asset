@@ -59,7 +59,7 @@ MonoBehaviour:
     eliteProba: 0
     maxCountPerBattle: 1
     minEnemyCountBeforeSpawn: 0
-  minDangerAmountPerBattle: 4
-  maxDangerAmountPerBattle: 8
-  minDangerAmountPerChallenge: 8
-  maxDangerAmountPerChallenge: 12
+  minDangerAmountPerBattle: 3
+  maxDangerAmountPerBattle: 6
+  minDangerAmountPerChallenge: 6
+  maxDangerAmountPerChallenge: 10

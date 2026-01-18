@@ -789,12 +789,11 @@ MonoBehaviour:
   battleTilePrefab: {fileID: 9084654784566164501, guid: e950f2b08a81ec248b20f6d3ca670eab, type: 3}
   battleTilesOffset: {x: 1, y: 0.75, z: 0}
   startCameraSize: 6
-  minDangerAmount: 2
-  maxDangerAmount: 4
   holeTiles: []
   holePrefab: {fileID: 0}
   isDebugRoom: 0
   isBossRoom: 0
+  isChallengeRoom: 0
   _groundTilemap: {fileID: 3654010563077959481}
   _battleGroundTilemap: {fileID: 8633615801790892311}
   _wallsTilemap: {fileID: 7660288885118121577}

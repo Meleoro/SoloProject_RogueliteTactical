@@ -388,6 +388,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public IEnumerator UseSkillCoroutine(SkillData usedSkill)
     {
+        noMouseControls = true;
+
         if (usedSkill == null) usedSkill = _tilesManager.CurrentSkill;
         OnSkillUsed.Invoke();
 
@@ -461,6 +463,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
                 AddBattleEventToQueue(BattleEventType.NextPlayerAction);
                 PlayNextBattleEvent();
+
+                noMouseControls = false;
 
                 yield break;
             }
