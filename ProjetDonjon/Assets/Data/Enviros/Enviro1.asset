@@ -46,6 +46,8 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: d0712f18a6c113748a718bea172b2827, type: 3}
   - {fileID: 2917294264406634095, guid: fe3cf7f00058be14ab178e75e85752fe, type: 3}
   - {fileID: 2917294264406634095, guid: 45f20c2edfd7b814794b0f68b04cda39, type: 3}
+  - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
+  - {fileID: 2917294264406634095, guid: 4600d616a4a13e240a97279da1eb9ee8, type: 3}
   possibleCorridorPlateformRooms:
   - {fileID: 2917294264406634095, guid: 6616e4c47be786b42a4f5a3e40966387, type: 3}
   - {fileID: 2917294264406634095, guid: ada4e059088f9a24c8e4d7787d6220d5, type: 3}
@@ -60,6 +62,8 @@ MonoBehaviour:
   possibleTrapRooms:
   - {fileID: 2917294264406634095, guid: e19b037d6cb7802489ab86828f7b52e1, type: 3}
   - {fileID: 2917294264406634095, guid: 0dc7e514750cd7548a917b3cf49001aa, type: 3}
+  - {fileID: 2917294264406634095, guid: fa4bc56fd84534348ac1f27b2a25c902, type: 3}
+  - {fileID: 2917294264406634095, guid: e5b996a8a2f8abc4b90543f37d6206b2, type: 3}
   possiblePuzzleRooms:
   - {fileID: 2917294264406634095, guid: 4e1c9c053424a984d814e594755a3ded, type: 3}
   - {fileID: 2917294264406634095, guid: 156a46d7ea7d6124b802ffed2bfe3346, type: 3}
