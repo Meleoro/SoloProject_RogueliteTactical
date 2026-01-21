@@ -35,6 +35,8 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 8a9c6d9302b53524588329c27380022e, type: 3}
   - {fileID: 2917294264406634095, guid: 43999d5fd2398684893d30c85f0f1a3f, type: 3}
   - {fileID: 2917294264406634095, guid: 7a80536822c8da443b249570fd073869, type: 3}
+  - {fileID: 2917294264406634095, guid: 05c78ccda8e89cc4bbf04d294ad56e55, type: 3}
+  - {fileID: 2917294264406634095, guid: 26011d838b4ded648ba964957d534530, type: 3}
   possibleCorridorRooms:
   - {fileID: 2917294264406634095, guid: 3fb2efc6eb1d84c4e9c70404e1922f11, type: 3}
   - {fileID: 1856086751064925117, guid: 7abfbe6e3f513954494e647f8b38976c, type: 3}
@@ -48,6 +50,7 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 45f20c2edfd7b814794b0f68b04cda39, type: 3}
   - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
   - {fileID: 2917294264406634095, guid: 4600d616a4a13e240a97279da1eb9ee8, type: 3}
+  - {fileID: 2917294264406634095, guid: 59c1b160dd442704981b3477fdaba786, type: 3}
   possibleCorridorPlateformRooms:
   - {fileID: 2917294264406634095, guid: 6616e4c47be786b42a4f5a3e40966387, type: 3}
   - {fileID: 2917294264406634095, guid: ada4e059088f9a24c8e4d7787d6220d5, type: 3}
@@ -81,6 +84,11 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 5cbe374aae63ec84195d013e30bd5ad4, type: 3}
   possibleSecondBossRooms:
   - {fileID: 2917294264406634095, guid: 718af3d54e6547044988292b3bb1bf85, type: 3}
+  possibleCorridorTrapRoomsHard:
+  - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
+  - {fileID: 2917294264406634095, guid: 59c1b160dd442704981b3477fdaba786, type: 3}
+  - {fileID: 2917294264406634095, guid: 1c07978d9f72a6d4f9908ee354f9b6f4, type: 3}
+  possibleTrapRoomsHard: []
   possibleCommonLoot:
   - probability: 25
     loot: {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}

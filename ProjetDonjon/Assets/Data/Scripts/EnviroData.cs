@@ -36,6 +36,10 @@ public class EnviroData : ScriptableObject
     public Room[] possibleFirstBossRooms;
     public Room[] possibleSecondBossRooms;
 
+    [Header("Hard Rooms")]
+    public Room[] possibleCorridorTrapRoomsHard;
+    public Room[] possibleTrapRoomsHard;
+
     [Header("Balancing")]
     public PossibleLootData[] possibleCommonLoot;
     public PossibleLootData[] possibleRareLoot;
