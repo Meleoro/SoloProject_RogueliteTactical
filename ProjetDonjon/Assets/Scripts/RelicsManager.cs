@@ -43,9 +43,9 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            //int index = Random.Range(0, currentAvailableRelics.Count);
-            //Relic newRelic = Instantiate(relicPrefab, HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].transform.position, Quaternion.Euler(0, 0, 0));
-            //newRelic.Initialise(currentAvailableRelics[index]);
+            int index = Random.Range(0, currentAvailableRelics.Count);
+            Relic newRelic = Instantiate(relicPrefab, HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].transform.position, Quaternion.Euler(0, 0, 0));
+            newRelic.Initialise(currentAvailableRelics[index]);
         }
     }
 

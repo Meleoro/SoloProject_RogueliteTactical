@@ -249,7 +249,7 @@ public class Timeline : MonoBehaviour
             for (int i = 0; i < timelineUnits.Count; i++)
             {
                 TimelineUnit current = timelineUnits[i];
-                current.progress += timelineUnits[i].unit.CurrentSpeed + 5;
+                current.progress += timelineUnits[i].unit.CurrentSpeed + 7;    // The 7 is here to nerf the speed stat
                 timelineUnits[i] = current;
 
                 if (timelineUnits[i].progress >= 100)

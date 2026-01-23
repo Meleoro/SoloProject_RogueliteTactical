@@ -105,7 +105,7 @@ public class UIManager : GenericSingletonClass<UIManager>
             case UIState.Inventories:
                 if (InputManager.wantsToInventory || InputManager.wantsToReturn)
                 {
-                    if (!_inventoriesManager.VerifyCanOpenCloseInventory()) return;
+                    if (!_inventoriesManager.VerifyCanOpenCloseInventory(false)) return;
                     _inventoriesManager.CloseInventories();
                     currentState = UIState.Nothing;
                 }

@@ -284,7 +284,8 @@ public class MainMetaMenu : MonoBehaviour
     private IEnumerator PlayProgressCoroutine(float endProgress)
     {
         _campLevelProgressBar.DOFillAmount(endProgress, 0.5f);
-        _campLevelProgressText.text = campLevels[currentCampLevel].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
+        _campLevelProgressText.text = Mathf.Clamp(currentRelicCount, 0, campLevels[currentCampLevel].neededRelicCount) 
+            + "/" + campLevels[currentCampLevel].neededRelicCount;
 
         yield return new WaitForSeconds(0.5f);
 
@@ -327,10 +328,10 @@ public class MainMetaMenu : MonoBehaviour
         _campLevelProgressText.text = campLevels[currentCampLevel - 1].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
         _campLevelMainText.text = "CAMP LEVEL " + currentCampLevel;
 
-        if(currentRelicCount != campLevels[currentCampLevel - 1].neededRelicCount)
+        if(currentRelicCount > campLevels[currentCampLevel - 1].neededRelicCount)
         {
-            StartCoroutine(PlayProgressCoroutine((float)currentRelicCount - campLevels[currentCampLevel - 1].neededRelicCount / 
-                campLevels[currentCampLevel - 1].neededRelicCount));
+            StartCoroutine(PlayProgressCoroutine((float)(currentRelicCount - campLevels[currentCampLevel - 1].neededRelicCount) / 
+                (campLevels[currentCampLevel].neededRelicCount - campLevels[currentCampLevel - 1].neededRelicCount)));
             return;
         }
 

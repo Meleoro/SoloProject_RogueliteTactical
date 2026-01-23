@@ -191,10 +191,13 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     #endregion
 
 
-    #region Open / Close Functions
+    
+#region Open / Close Functions
 
-    public bool VerifyCanOpenCloseInventory()
+    public bool VerifyCanOpenCloseInventory(bool enterInventory = true)
     {
+        if (lockedInInventory && !enterInventory) return false;
+
         for(int i = 0; i < inventoryInstantiatedAmount; i++)
         {
             if (!currentHeroesInventories[i].GetCanOpenOrClose())
@@ -276,7 +279,6 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     }
 
     #endregion
-
 
     #region GameFeel
 

@@ -13,7 +13,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     public Action OnFirstStepValidated;
 
     [Header("Public Infos")]
-    public bool DidTutorial { get {  return didTutorial || disableTuto; } }
+    public bool DidTutorial { get {  return (didTutorialStep[0] && didTutorialStep[12]) || disableTuto; } }
     public bool[] DidTutorialStep { get {  return didTutorialStep; } }
     public bool DidBattleTuto { get {  return didTutorialStep[5]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
@@ -38,6 +38,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     public void StartTutorial()
     {
         didTutorial = true;
+
+        for(int i = 0; i <= 12; i++)
+        {
+            didTutorialStep[i] = false;
+        }
     }
 
 
@@ -56,7 +61,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
         isDisplayingTuto = true;
 
-        // To avoid having the camera moving in battle
+        // To avoid having the camera moving while focusing on one element
         if (BattleManager.Instance.IsInBattle)
             CameraManager.Instance.LockCameraInputs();
 

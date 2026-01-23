@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.json
-  newGameOnStart: 0
+  newGameOnStart: 1
 --- !u!1001 &37283156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16589,7 +16589,7 @@ MonoBehaviour:
   roomSizeUnits: {x: 14, y: 14}
   offsetRoomCenter: {x: 0, y: 0}
   noGeneration: 0
-  startFloorIndex: 0
+  startFloorIndex: 4
   trailFloorsIndexes: 
   _heroesManager: {fileID: 1887892336}
   _spriteLayererManager: {fileID: 1460704115}
@@ -16639,7 +16639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c2535909f1d4b4da9c5eba2603000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameInExplo: 0
+  startGameInExplo: 1
   startEnviroData: {fileID: 11400000, guid: 59fdfdcea8206904799269feb13b0cfa, type: 2}
 --- !u!114 &1460704117
 MonoBehaviour:
@@ -16676,7 +16676,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f4d1302f7cbe3e46a72d09e0397c7d5, type: 2}
   - {fileID: 11400000, guid: aa1d9bc3bb7e0464bbd670f8a961ba8e, type: 2}
   relicsPerArea: 12
-  unlockAllDebug: 0
+  unlockAllDebug: 1
 --- !u!114 &1460704118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18626,7 +18626,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 804431307}
   m_HandleRect: {fileID: 804431306}
   m_Direction: 2
-  m_Value: 0.9396707
+  m_Value: 0.9396709
   m_Size: 0.7595015
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21536,7 +21536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6537920207254496290, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -504.9995
+      value: -504.99948
       objectReference: {fileID: 0}
     - target: {fileID: 6586957245964185369, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21876,7 +21876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760944051009081212, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 476.9995
+      value: 476.99948
       objectReference: {fileID: 0}
     - target: {fileID: 7777384955102529824, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -24711,7 +24711,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1541126b3b2abc4b8f2e28686d398e9, type: 2}
   - {fileID: 11400000, guid: 649c69c6c63355048acd838b92039ef3, type: 2}
   - {fileID: 11400000, guid: feebf14128cfa05409831113d8765ebb, type: 2}
-  disableTuto: 0
+  disableTuto: 1
   _leftPosRef: {fileID: 1921454748}
   _rightPosRef: {fileID: 1359650930}
   _tutorialPanel: {fileID: 805319899}

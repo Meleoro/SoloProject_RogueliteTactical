@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillTreeRows:
   - rowNodes:
-    - skillData: {fileID: 11400000, guid: 3e9e6851cb1de5f4881e4da65eeb70be, type: 2}
+    - skillData: {fileID: 11400000, guid: 16a518b41d4dd22409252b310935aa88, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: 1485900190, guid: c9f013acfd912164c907920db08e81f5, type: 3}
       connectedNextNodeIndexes: 0000000001000000
