@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-05
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: MOVEMENT
-  stepDescription: LET'S START BY USING THE FIRST ACTION POINT MOVING NEAR THE ENEMY.
-  highlightType: 3
-  endCondition: 2
+  stepName: SKILLS
+  stepDescription: NOW, YOU CAN ATTACK THE ENEMY USING YOUR FIRST SKILL.
+  highlightType: 4
+  endCondition: 3
+  tutoType: 1
   leftSidePanel: 0
-  playNextStepOnFinished: 1
-  playNextStepDelay: 1
+  playNextStepOnFinished: 0
+  playNextStepDelay: 0.2
+  waitDuration: 0

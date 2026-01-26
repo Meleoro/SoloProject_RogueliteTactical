@@ -10,19 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-11
+  m_Name: TutoStep-03
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: RELICS
-  stepDescription: 'RELICS ARE WHAT YOU ARE SEARCHING FOR TO FILL YOUR COLLECTION
-    !
-
-
-    SOME WILL SPAWN AT THE END OF BATTLES, OTHERS IN CHESTS... IT WILL BE
-    UP TO YOU TO COLLECT THEM ALL !
-
-
-    PRESS [E] TO INTERACT WITH IT.'
-  highlightType: 0
-  endCondition: 4
+  stepName: ACTION POINTS
+  stepDescription: "IN BATTLES, EACH HERO HAS TWO ACTION POINTS PER TURN. \n\nTHEY
+    CAN BE SPENT ON ANY ACTION : MOVE, USE A SKILL OR USE AN OBJECT."
+  highlightType: 1
+  endCondition: 0
   leftSidePanel: 0
-  playNextStepOnFinished: 0
+  playNextStepOnFinished: 1
+  playNextStepDelay: 0.2

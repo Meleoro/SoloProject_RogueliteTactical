@@ -7,20 +7,22 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 {
     [Header("Parameters")]
     [SerializeField] private TutoStepData[] mainTutoSteps;
+    [SerializeField] private TutoStepData[] additionalTutoSteps;
     [SerializeField] private bool disableTuto;
 
     [Header("Actions")]
     public Action OnFirstStepValidated;
 
     [Header("Public Infos")]
-    public bool DidTutorial { get {  return (didTutorialStep[0] && didTutorialStep[12]) || disableTuto; } }
+    public bool DidTutorial { get {  return (didTutorialStep[0] && didTutorialStep[10]) || disableTuto; } }
     public bool[] DidTutorialStep { get {  return didTutorialStep; } }
-    public bool DidBattleTuto { get {  return didTutorialStep[5]; } }
+    public bool DidBattleTuto { get {  return didTutorialStep[4]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
-    public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[12]; } }
+    public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[10]; } }
 
     [Header("Private Infos")]
     private bool[] didTutorialStep;
+    private bool[] didAdditionalTutorialSteps;
     private bool didTutorial;
     private bool isDisplayingTuto;
     private TutoStepData currentStep;
@@ -30,7 +32,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [Header("References")]
     [SerializeField] private RectTransform _leftPosRef;
     [SerializeField] private RectTransform _rightPosRef;
+    [SerializeField] private RectTransform _upLeftPosRef;
+    [SerializeField] private RectTransform _upRightPosRef;
     [SerializeField] private TutorialPanel _tutorialPanel;
+    [SerializeField] private TutorialPanel _smallTutorialPanel;
 
 
     #region Tutorial Begin
@@ -39,24 +44,24 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         didTutorial = true;
 
-        for(int i = 0; i <= 12; i++)
+        for(int i = 0; i < didTutorialStep.Length; i++)
         {
             didTutorialStep[i] = false;
         }
     }
 
 
-    public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay)
+    public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay, bool isAdditionalStep = false)
     {
         yield return new WaitForSeconds(delay);
 
-        DisplayTutorial(tutoID);
+        DisplayTutorial(tutoID, isAdditionalStep);
     }
 
 
-    public void DisplayTutorial(int tutoID)
+    public void DisplayTutorial(int tutoID, bool isAdditionalStep = false)
     {
-        if (didTutorialStep[tutoID]) return;
+        if (isAdditionalStep ? additionalTutoSteps[tutoID] : didTutorialStep[tutoID] ) return;
         if (disableTuto) return;
 
         isDisplayingTuto = true;
@@ -65,24 +70,47 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         if (BattleManager.Instance.IsInBattle)
             CameraManager.Instance.LockCameraInputs();
 
-        didTutorialStep[tutoID] = true;
+        if(isAdditionalStep) didAdditionalTutorialSteps[tutoID] = true;
+        else didTutorialStep[tutoID] = true;
 
-        currentStep = mainTutoSteps[tutoID];
+        currentStep = isAdditionalStep ? additionalTutoSteps[tutoID] : mainTutoSteps[tutoID];
         currentTutoID = tutoID;
 
-        if (currentStep.leftSidePanel)
+        // Classic Panel
+        if(currentStep.tutoType == TutoType.ClassicPanel)
         {
-            _tutorialPanel.RectTr.localPosition = _leftPosRef.localPosition;
-            _tutorialPanel.DisplayTutorial(currentStep);
-        }
-        else
-        {
-            _tutorialPanel.RectTr.localPosition = _rightPosRef.localPosition;
-            _tutorialPanel.DisplayTutorial(currentStep);
+            if (currentStep.leftSidePanel)
+            {
+                _tutorialPanel.RectTr.localPosition = _leftPosRef.localPosition;
+                _tutorialPanel.DisplayTutorial(currentStep);
+            }
+            else
+            {
+                _tutorialPanel.RectTr.localPosition = _rightPosRef.localPosition;
+                _tutorialPanel.DisplayTutorial(currentStep);
+            }
+
+            _tutorialPanel.OnHide += EndTutorialStep;
         }
 
-        _tutorialPanel.OnHide += EndTutorialStep;
-        ObserveEndConditions();
+        // Small Panel
+        else
+        {
+            if (currentStep.leftSidePanel)
+            {
+                _smallTutorialPanel.RectTr.localPosition = _upLeftPosRef.localPosition;
+                _smallTutorialPanel.DisplayTutorial(currentStep);
+            }
+            else
+            {
+                _smallTutorialPanel.RectTr.localPosition = _upRightPosRef.localPosition;
+                _smallTutorialPanel.DisplayTutorial(currentStep);
+            }
+
+            _smallTutorialPanel.OnHide += EndTutorialStep;
+        }
+
+            ObserveEndConditions();
     }
 
 
@@ -111,10 +139,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 endConditionsValidated = new bool[2];
                 break;
 
-            case TutoEndCondition.AddShield:
+            case TutoEndCondition.UseSecondSkill:
                 UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(0);
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction += ValidateEndCondition;
-                BattleManager.Instance.CurrentHeroes[0].OnAlterationAdded += ValidateEndCondition;
+                BattleManager.Instance.CurrentEnemies[0].OnDamageTaken += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
                 break;
 
@@ -143,28 +171,24 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.EquipEquiment:
                 UIManager.Instance.HeroInfosScreen.OnShow += ValidateEndCondition;
-                InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
+                //InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
                 endConditionsValidated = new bool[1];
                 break;
         }
     }
 
-    private void DoEquipmentTutorial()
-    {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(3, 0.6f));
-    }
     private void DoSecondBattleTutorial()
     {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(7, 0.6f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(6, 0.6f));
     }
     private void DoThirdBattleTutorial()
     {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 0.5f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(8, 0.5f));
     }
     private void DoRelicTutorial()
     {
         BattleManager.Instance.OnBattleEnd -= DoRelicTutorial;
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(11, 1f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 1f));
     }
 
     #endregion
@@ -182,6 +206,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         }
 
         _tutorialPanel.HideTutorial();
+        _smallTutorialPanel.HideTutorial();
     }
 
     private void ValidateEndCondition(int actionType)
@@ -196,6 +221,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         }
 
         _tutorialPanel.HideTutorial();
+        _smallTutorialPanel.HideTutorial();
     }
 
 
@@ -203,6 +229,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         isDisplayingTuto = false;
         _tutorialPanel.OnHide -= EndTutorialStep;
+        _smallTutorialPanel.OnHide -= EndTutorialStep;
 
         UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(-1);
 
@@ -229,9 +256,9 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 BattleManager.Instance.CurrentEnemies[0].OnDamageTaken -= ValidateEndCondition;
                 break;
 
-            case TutoEndCondition.AddShield:
+            case TutoEndCondition.UseSecondSkill:
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction -= ValidateEndCondition;
-                BattleManager.Instance.CurrentHeroes[0].OnAlterationAdded -= ValidateEndCondition;
+                BattleManager.Instance.CurrentEnemies[0].OnDamageTaken -= ValidateEndCondition;
                 BattleManager.Instance.OnHeroTurnStart += DoThirdBattleTutorial;
                 break;
 
@@ -249,7 +276,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.PlaceItemInInventory:
                 FindAnyObjectByType<Loot>().OnPlaceInInventory -= ValidateEndCondition;
-                InventoriesManager.Instance.OnInventoryClose += DoEquipmentTutorial;
+                //InventoriesManager.Instance.OnInventoryClose += DoEquipmentTutorial;
 
                 InventoriesManager.Instance.UnlockInventory();
                 break;
@@ -275,12 +302,14 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     public void LoadGame(GameData data)
     {
         didTutorialStep = data.finishedTutorialSteps;
+        didAdditionalTutorialSteps = data.finishedAdditionalTutorialSteps;
         didTutorial = data.launchedTutorial;
     }
 
     public void SaveGame(ref GameData data)
     {
         data.finishedTutorialSteps = didTutorialStep;
+        data.finishedAdditionalTutorialSteps = didAdditionalTutorialSteps;
         data.launchedTutorial = didTutorial;
     }
 

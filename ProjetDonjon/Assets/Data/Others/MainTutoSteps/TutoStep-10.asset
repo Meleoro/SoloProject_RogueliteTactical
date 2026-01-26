@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-01
+  m_Name: TutoStep-10
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: CHESTS
-  stepDescription: 'IN CHESTS, YOU''LL FIND A LOT OF VALUABLE ITEMS.
+  stepName: EXTRACTION
+  stepDescription: 'ONCE YOU FINISH TO EXPLORE A FLOOR, YOU GET THE CHOICE EITHER
+    TO CONTINUE, OR TO GO BACK TO YOUR CAMP.
 
 
-    YOU CAN
-    PRESS [E] TO INTERACT WITH IT.'
-  highlightType: 0
-  endCondition: 4
+    THE DEEPER YOU GO, THE BETTER
+    THE LOOT ! BUT CAREFUL, BECAUSE THE DUNGEON ALSO GETS MORE DANGEROUS.
+
+
+    FOR
+    NOW, LETS GET BACK THE CAMP !'
+  highlightType: 11
+  endCondition: 7
   leftSidePanel: 1
-  playNextStepOnFinished: 1
-  playNextStepDelay: 1
+  playNextStepOnFinished: 0
+  playNextStepDelay: 0.2

@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-08
+  m_Name: TutoStep-ShowAllPatterns
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: SHIELD
-  stepDescription: 'LET''S USE THOSE BY ACTIVATING THE SECOND SKILL OF YOUR HERO.
-
-
-    IT
-    GIVES HIM A SHIELD TO TANK THE NEXT ENEMY ATTACKS.'
-  highlightType: 4
-  endCondition: 6
-  leftSidePanel: 0
-  playNextStepOnFinished: 0
+  stepName: SHOW ALL PATTERNS
+  stepDescription: THERE ARE A LOT OF ENEMIES IN THIS BATTLE, YOU CAN PRESS [TAB]
+    TO SEE ALL THE DANGEROUS TILES AT ONCE
+  highlightType: 0
+  endCondition: 12
+  tutoType: 1
+  leftSidePanel: 1
+  playNextStepOnFinished: 1
   playNextStepDelay: 0.2
+  waitDuration: 10

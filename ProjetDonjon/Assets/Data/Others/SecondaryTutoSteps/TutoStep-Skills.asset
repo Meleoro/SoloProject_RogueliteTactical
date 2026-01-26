@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-06
+  m_Name: TutoStep-Skills
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: SKILLS
-  stepDescription: NOW, YOU CAN ATTACK THE ENEMY USING YOUR FIRST SKILL.
-  highlightType: 4
-  endCondition: 3
-  leftSidePanel: 0
+  stepDescription: NOW THAT YOU HAVE A NEW SKILL, YOU CAN EQUIP IT IN YOUR SKILLS
+    MENU
+  highlightType: 14
+  endCondition: 11
+  tutoType: 1
+  leftSidePanel: 1
   playNextStepOnFinished: 0
   playNextStepDelay: 0.2
+  waitDuration: 0

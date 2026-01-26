@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-00
+  m_Name: TutoStep-08
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: MOVEMENT
-  stepDescription: 'WELCOME INTO THE DUNGEON !
+  stepName: PATTERNS
+  stepDescription: 'THE ENEMIES MOVE AND ATTACK ACCORDING TO PATTERNS.
 
 
-    YOU CAN USE THE KEYS [ZQSD]
-    TO MOVE AROUND [SPACE] TO JUMP.'
-  highlightType: 0
-  endCondition: 1
-  leftSidePanel: 1
+    YOU
+    CAN SEE THOSE BY HOVERING THE ENEMY (AND CLICK TO SWITCH WHICH PATTERN TYPE IS
+    SHOWN)'
+  highlightType: 5
+  endCondition: 5
+  tutoType: 0
+  leftSidePanel: 0
   playNextStepOnFinished: 0
   playNextStepDelay: 0.2
+  waitDuration: 0

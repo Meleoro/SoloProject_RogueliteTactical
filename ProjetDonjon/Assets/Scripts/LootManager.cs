@@ -89,7 +89,6 @@ public class LootManager : GenericSingletonClass<LootManager>
 
     private void SpawnLoot(int[] probabilityPerRarity, Vector2 spawnPosition)
     {
-
         // First we get the loot pool according to the rarity spawned
         PossibleLootData[] possibleLoots = new PossibleLootData[0];
 

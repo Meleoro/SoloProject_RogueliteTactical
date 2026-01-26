@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-04
+  m_Name: TutoStep-TrialChest
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: ACTION POINTS
-  stepDescription: "IN BATTLES, EACH HERO HAS TWO ACTION POINTS PER TURN. \n\nTHEY
-    CAN BE SPENT ON ANY ACTION : MOVE, USE A SKILL OR USE AN OBJECT."
-  highlightType: 1
-  endCondition: 0
-  leftSidePanel: 0
+  stepName: TRIALS
+  stepDescription: THIS BLUE CHEST IS A TRIAL CHEST, IT MEANS THAT YOU WILL HAVE
+    TO GO THROUGH SOME SORT OF TRIAL TO WIN IT
+  highlightType: 0
+  endCondition: 12
+  tutoType: 1
+  leftSidePanel: 1
   playNextStepOnFinished: 1
   playNextStepDelay: 0.2
+  waitDuration: 10

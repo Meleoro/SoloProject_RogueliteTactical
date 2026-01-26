@@ -14,7 +14,9 @@ public enum TutoHighlightType
     HighlightExpedition,
     HighlightCampLevel,
     HighlightReturnToCamp,
-    HighlightEquipmentMenu
+    HighlightEquipmentMenu,
+    HighlightSkillTreeMenu,
+    HighlightSkillsMenu
 }
 
 public enum TutoEndCondition
@@ -25,10 +27,20 @@ public enum TutoEndCondition
     Attack,
     Interact,
     ClickEnemy,
-    AddShield,
+    UseSecondSkill,
     ReturnToCamp,
     EquipEquiment,
-    PlaceItemInInventory
+    PlaceItemInInventory,
+    OpenSkillTree,
+    OpenSkills,
+    WaitDuration
+}
+
+
+public enum TutoType
+{
+    ClassicPanel,
+    SmallPanel
 }
 
 
@@ -39,7 +51,9 @@ public class TutoStepData : ScriptableObject
     [TextArea] public string stepDescription;
     public TutoHighlightType highlightType;
     public TutoEndCondition endCondition;
+    public TutoType tutoType;
     public bool leftSidePanel;
     public bool playNextStepOnFinished;
     public float playNextStepDelay = 0.2f;
+    public float waitDuration = 0f;
 }

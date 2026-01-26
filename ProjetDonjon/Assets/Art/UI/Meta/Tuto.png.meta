@@ -111,7 +111,7 @@ TextureImporter:
         width: 98
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -133,7 +133,7 @@ TextureImporter:
         width: 73
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,11 +146,77 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Tuto_2
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 111
+        width: 98
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11bf5758cc7e21e4bb5591f3d604330f
+      internalID: -458058429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tuto_3
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 101
+        width: 88
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dcfb72a1be715a4e9692875f85659f3
+      internalID: 1480122217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tuto_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 92
+        width: 86
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7964232dad67b0b4fa601d78fc490ab6
+      internalID: 896495653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fda9650ae4a1c814e93e1407577ec21f
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +228,9 @@ TextureImporter:
     nameFileIdTable:
       Tuto_0: -1817558909277469638
       Tuto_1: -7141850532169132563
+      Tuto_2: -458058429
+      Tuto_3: 1480122217
+      Tuto_4: 896495653
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

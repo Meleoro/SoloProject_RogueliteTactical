@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-09
+  m_Name: TutoStep-Death
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: PATTERNS
-  stepDescription: 'THE ENEMIES MOVE AND ATTACK ACCORDING TO PATTERNS.
-
-
-    YOU
-    CAN SEE THOSE BY HOVERING THE ENEMY (AND CLICK TO SWITCH WHICH PATTERN TYPE IS
-    SHOWN)'
-  highlightType: 5
-  endCondition: 5
+  stepName: DEATH
+  stepDescription: BE SURE TO PAY ATTENTION TO ENEMIES, SINCE IF ALL THE HEROES IN
+    YOUR TEAM DIE, YOU LOSE EVERYTHING YOU HAD IN YOUR INVENTORIES.
+  highlightType: 0
+  endCondition: 0
   leftSidePanel: 0
-  playNextStepOnFinished: 1
+  playNextStepOnFinished: 0
   playNextStepDelay: 0.2

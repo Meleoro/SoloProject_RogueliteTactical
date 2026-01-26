@@ -6324,7 +6324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutoTrigger
   tutoID: 1
-  neededTutoIDToContinue: 3
+  neededTutoIDToContinue: 2
   blockCollider: {fileID: 4223722359164054939}
 --- !u!1 &7554140977536479968
 GameObject:

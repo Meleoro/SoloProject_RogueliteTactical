@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
-  m_Name: TutoStep-03
+  m_Name: TutoStep-04
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: EQUIPMENT
-  stepDescription: 'YOU FOUND A PIECE OF EQUIPMENT YOU CAN EQUIP IT IN THE EQUIPMENT
-    MENU (PRESS [2] OR CLICK ON THE ARMOR TO OPEN IT)
-
-
-    TO EQUIP IT YOU CAN DRAG
-    AND DROP IT, OR CLICK IT AND CLICK ON EQUIP'
-  highlightType: 12
-  endCondition: 8
+  stepName: MOVEMENT
+  stepDescription: LET'S START BY USING THE FIRST ACTION POINT MOVING NEAR THE ENEMY.
+  highlightType: 3
+  endCondition: 2
+  tutoType: 1
   leftSidePanel: 0
-  playNextStepOnFinished: 0
-  playNextStepDelay: 0.2
+  playNextStepOnFinished: 1
+  playNextStepDelay: 1
+  waitDuration: 0

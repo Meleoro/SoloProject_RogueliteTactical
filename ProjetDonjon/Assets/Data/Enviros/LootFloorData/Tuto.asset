@@ -15,45 +15,19 @@ MonoBehaviour:
   probaPerTierChest: 64000000000000000000000000000000
   chestPossibleLoots:
   - probability: 100
-    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 8c619ec65573b5b4b89ce41ad5d53ee7, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 7256e143e98fdac43bba6a109d0b0f9c, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
+    loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}
   minChestCoins: 4
   maxChestCoins: 7
   minLootAmountPerChest: 1
   maxLootAmountPerChest: 1
   probaPerTierBattle: 64000000000000000000000000000000
-  battleEndPossibleLoots:
-  - probability: 100
-    loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
-  - probability: 25
-    loot: {fileID: 11400000, guid: 6a19da2e9de63b94d98a3dfd2959074d, type: 2}
-  - probability: 25
-    loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: b34ba33fc8826fd44a2ea8b0b5747196, type: 2}
+  battleEndPossibleLoots: []
   minBattleCoins: 2
   maxBattleCoins: 5
   minLootAmountPerBattle: 0
   maxLootAmountPerBattle: 0
   probaPerTierChallenge: 
-  challengeEndPossibleLoots:
-  - probability: 20
-    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+  challengeEndPossibleLoots: []
   minChallengeCoins: 6
   maxChallengeCoins: 9
   minLootAmountPerChallenge: 0

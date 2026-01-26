@@ -316,7 +316,7 @@ public class Room : MonoBehaviour
             SetupSpawners(HeroesManager.Instance.Heroes);
             SetupEnemies(isChallenge);
 
-            StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(4, 3.4f));
+            StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(3, 3.4f));
         }
         else
             StartCoroutine(DoBossIntroCoroutine());

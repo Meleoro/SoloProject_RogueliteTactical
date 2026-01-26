@@ -44,6 +44,7 @@ public class GameData
 
     // Others
     public bool[] finishedTutorialSteps;
+    public bool[] finishedAdditionalTutorialSteps;
     public bool launchedTutorial;
 
 
@@ -65,6 +66,7 @@ public class GameData
 
         savedInventoryItems = new List<ItemSaveStruct>();
 
-        finishedTutorialSteps = new bool[30];
+        finishedTutorialSteps = new bool[20];
+        finishedAdditionalTutorialSteps = new bool[30];
     }
 }

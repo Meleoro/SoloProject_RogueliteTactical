@@ -22,6 +22,8 @@ public class TutorialPanel : MonoBehaviour
     private bool isDisplayingTileHighlight;
     private bool isDisplayingSkillHighlight;
     private bool maintainPosition;
+    private bool isDisplayed;
+    private float currentProgress;
 
     [Header("References")]
     [SerializeField] private TextMeshProUGUI _stepNameText;
@@ -30,6 +32,8 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private RectTransform _rectTr;
     [SerializeField] private RectTransform _highlightParent;
     [SerializeField] private Image _backDarkImage;
+    [SerializeField] private Image _progressImage;
+    [SerializeField] private Image _progressImageBack;
 
     [Header("Outside References")]
     [SerializeField] private SkillsPanelButton _skillsPanelFirstButton;
@@ -39,6 +43,15 @@ public class TutorialPanel : MonoBehaviour
 
     private void Update()
     {
+        if (!isDisplayed) return;
+
+        if (currentProgress > 0)
+        {
+            currentProgress -= Time.deltaTime;
+            _progressImage.fillAmount = 1 - currentProgress / currentTutoData.waitDuration;
+            if (currentProgress <= 0) HideTutorial();
+        }
+
         // To maintain the right depth
         for (int i = 0; i < highlightedImages.Length; i++)
         {
@@ -59,24 +72,49 @@ public class TutorialPanel : MonoBehaviour
     {
         currentTutoData = tutoData;
 
-        if(tutoData.endCondition == TutoEndCondition.ClickContinue)
+        _progressImageBack.gameObject.SetActive(false);
+        _progressImage.gameObject.SetActive(false);
+        _continueButton.gameObject.SetActive(false);
+
+        isDisplayed = true;
+
+        if (tutoData.endCondition == TutoEndCondition.ClickContinue)
         {
             _continueButton.gameObject.SetActive(true);
         }
-        else
+        else if(tutoData.endCondition == TutoEndCondition.WaitDuration)
         {
-            _continueButton.gameObject.SetActive(false);
+            _progressImage.gameObject.SetActive(true);
+            _progressImageBack.gameObject.SetActive(true);
+
+            currentProgress = tutoData.waitDuration;
         }
 
         _stepNameText.text = tutoData.stepName;
         _stepDescriptionText.text = tutoData.stepDescription;
 
-        _rectTr.DOScale(Vector3.one * 1, 0.2f).SetEase(Ease.OutBack);
+        _rectTr.DOScale(Vector3.one * 0.8f, 0.2f).SetEase(Ease.OutBack);
         _backDarkImage.raycastTarget = true;
 
         StartHighlight();
     }
 
+    public void HideTutorial()
+    {
+        if (!isDisplayed) return;
+        isDisplayed = false;
+
+        _rectTr.DOScale(Vector3.one * 0, 0.2f).SetEase(Ease.InBack);
+        _backDarkImage.DOFade(0f, 0.2f).SetEase(Ease.OutBack);
+        _backDarkImage.raycastTarget = false;
+
+        OnHide?.Invoke();
+
+        StopHighlight();
+    }
+
+
+    #region Highlights
 
     private void StartHighlight()
     {
@@ -228,17 +266,7 @@ public class TutorialPanel : MonoBehaviour
         }
     }
 
-
-    public void HideTutorial()
-    {
-        _rectTr.DOScale(Vector3.one * 0, 0.2f).SetEase(Ease.InBack);
-        _backDarkImage.DOFade(0f, 0.2f).SetEase(Ease.OutBack);
-        _backDarkImage.raycastTarget = false;
-
-        OnHide?.Invoke();
-
-        StopHighlight();
-    }
+    #endregion
 
 
     #region Mouse Inputs
