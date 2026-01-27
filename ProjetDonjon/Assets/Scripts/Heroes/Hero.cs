@@ -21,6 +21,7 @@ public class Hero : Unit
     public Action OnClickUnit;
     public Action OnDead;
     public Action OnRevive;
+    public Action OnLevelUp;
 
     [Header("Public Infos")]
     public Loot[] EquippedLoot { get { return equippedLoot; } }
@@ -325,6 +326,8 @@ public class Hero : Unit
     {
         currentLevel++;
         currentSkillTreePoints++;
+
+        OnLevelUp?.Invoke();
 
         currentXP = currentXP - XPToReach;
         XPToReach = (int)(XPToReach * neededXPMultiplicator);

@@ -16,6 +16,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [Header("Public Infos")]
     public bool DidTutorial { get {  return (didTutorialStep[0] && didTutorialStep[10]) || disableTuto; } }
     public bool[] DidTutorialStep { get {  return didTutorialStep; } }
+    public bool[] DidAdditionalTutorialStep { get {  return didAdditionalTutorialSteps; } }
     public bool DidBattleTuto { get {  return didTutorialStep[4]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
     public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[10]; } }
@@ -38,7 +39,32 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [SerializeField] private TutorialPanel _smallTutorialPanel;
 
 
-    #region Tutorial Begin
+    private void Start()
+    {
+        StartCoroutine(BindTutorialsDelayCoroutine());
+    }
+
+    private IEnumerator BindTutorialsDelayCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        BindTutorials();
+    }
+
+    // Called at the start to bind the tutorial steps the player hasn't done
+    private void BindTutorials()
+    {
+        if (!didAdditionalTutorialSteps[3])
+        {
+            for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
+            {
+                HeroesManager.Instance.Heroes[i].OnLevelUp += BindLevelUpTurorialToBattleEnd;
+            }
+        }
+    }
+
+
+    #region Tutorial Launch
 
     public void StartTutorial()
     {
@@ -61,8 +87,8 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     public void DisplayTutorial(int tutoID, bool isAdditionalStep = false)
     {
-        if (isAdditionalStep ? additionalTutoSteps[tutoID] : didTutorialStep[tutoID] ) return;
-        if (disableTuto) return;
+        if (isAdditionalStep ? didAdditionalTutorialSteps[tutoID] : didTutorialStep[tutoID] ) return;
+        //if (disableTuto) return;
 
         isDisplayingTuto = true;
 
@@ -181,14 +207,33 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         StartCoroutine(DisplayTutorialWithDelayCoroutine(6, 0.6f));
     }
+
     private void DoThirdBattleTutorial()
     {
         StartCoroutine(DisplayTutorialWithDelayCoroutine(8, 0.5f));
     }
+
     private void DoRelicTutorial()
     {
         BattleManager.Instance.OnBattleEnd -= DoRelicTutorial;
         StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 1f));
+    }
+
+    private void BindLevelUpTurorialToBattleEnd()
+    {
+        for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
+        {
+            HeroesManager.Instance.Heroes[i].OnLevelUp -= DoLevelUpTutorial;
+        }
+
+        BattleManager.Instance.OnBattleEnd += DoLevelUpTutorial;
+    }
+
+    private void DoLevelUpTutorial()
+    {
+        BattleManager.Instance.OnBattleEnd -= DoLevelUpTutorial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(1, 1f, true));
     }
 
     #endregion
