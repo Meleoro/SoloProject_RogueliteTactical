@@ -224,6 +224,44 @@ public class TilesManager
         }
     }
 
+    // Displayes all the tiles the enemies can reach on this turn
+    public void DisplayAllDangerTiles()
+    {
+        AIUnit[] enemies = BattleManager.Instance.CurrentEnemies.ToArray();
+        List<BattleTile> moveTiles = new List<BattleTile>();
+        List<BattleTile> skillTiles = new List<BattleTile>();
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            moveTiles = GetPaternTiles(enemies[i].CurrentTile.TileCoordinates, enemies[i].AIData.movePatern,
+                (int)Mathf.Sqrt(enemies[i].AIData.movePatern.Length), true, ObstacleType.All, null, true);
+
+            moveTiles.Add(enemies[i].CurrentTile);
+
+            for (int j = 0; j < moveTiles.Count; j++)
+            {
+                if (moveTiles[j].CantStopHere) continue;
+                skillTiles = GetPaternTiles(moveTiles[j].TileCoordinates, enemies[i].CurrentSkillData.skillPatern,
+                    (int)Mathf.Sqrt(enemies[i].CurrentSkillData.skillPatern.Length), true, ObstacleType.UnitsIncluded);
+
+                if (enemies[i].CurrentSkillData.skillType == SkillType.AOEPaternTiles)
+                {
+                    List<BattleTile> addedTiles = new List<BattleTile>();
+                    for (int k = 0; k < skillTiles.Count; k++)
+                    {
+                        addedTiles.AddRange(GetPatternAOETiles(skillTiles[k], moveTiles[j], enemies[i].CurrentSkillData));
+                    }
+                    skillTiles.AddRange(addedTiles);
+                }
+
+                for (int k = 0; k < skillTiles.Count; k++)
+                {
+                    //if (skillTiles[k].CurrentTileState == BattleTileState.Move) continue;
+                    skillTiles[k].DisplayPossibleAttackTile(true);
+                }
+            }
+        }
+    }
 
     // FOR ENEMIES, SHOWS THE POSSIBLE MOVE / SKILL TILES 
     public void DisplayPossibleTiles(AIUnit enemy)

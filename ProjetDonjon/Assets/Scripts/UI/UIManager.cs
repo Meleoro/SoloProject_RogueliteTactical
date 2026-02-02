@@ -32,6 +32,8 @@ public class UIManager : GenericSingletonClass<UIManager>
     public Minimap Minimap { get { return _minimap; } }
     public FloorTransition FloorTransition { get { return _floorTransition; } }
     public HeroInfosScreen HeroInfosScreen { get { return _heroInfosScreen; } }
+    public SkillTreeManager SkillTreeManager { get { return _skillTreesManager; } }
+    public SkillsMenu SkillsMenu { get { return _skillsMenu; } }
     public PlayerActionsMenu PlayerActionsMenu { get { return _playerActionsMenu; } }
     public HUDExploration HUDExploration { get { return _hudExploration; } }
     public UIState CurrentUIState { get { return currentState; } }

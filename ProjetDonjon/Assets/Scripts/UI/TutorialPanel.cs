@@ -139,7 +139,7 @@ public class TutorialPanel : MonoBehaviour
                 maintainPosition = true;
                 highlightedImages = UIManager.Instance.PlayerActionsMenu.SkillPointImages;
                 break;
-
+                
             case TutoHighlightType.HighlightMoveButton:
                 //maintainPosition = true;
                 highlightedImages = new Image[] { UIManager.Instance.PlayerActionsMenu.ButtonImages[0] };
@@ -162,17 +162,21 @@ public class TutorialPanel : MonoBehaviour
 
             case TutoHighlightType.HighlightReturnToCamp:
                 highlightedImages = new Image[] { UIManager.Instance.FloorTransition.StopButton.image };
-
-                _backDarkImage.DOComplete();
-                _backDarkImage.DOFade(0.7f, 0.2f).SetEase(Ease.OutBack);
                 break;
 
             case TutoHighlightType.HighlightEquipmentMenu:
                 UIManager.Instance.HUDExploration.Animator.enabled = false;
                 highlightedImages = new Image[] { UIManager.Instance.HUDExploration.EquipmentMenuImage };
+                break;
 
-                _backDarkImage.DOComplete();
-                _backDarkImage.DOFade(0.7f, 0.2f).SetEase(Ease.OutBack);
+            case TutoHighlightType.HighlightSkillTreeMenu:
+                UIManager.Instance.HUDExploration.Animator.enabled = false;
+                highlightedImages = new Image[] { UIManager.Instance.HUDExploration.SkillTreeMenu };
+                break;
+
+            case TutoHighlightType.HighlightSkillsMenu:
+                UIManager.Instance.HUDExploration.Animator.enabled = false;
+                highlightedImages = new Image[] { UIManager.Instance.HUDExploration.SkillsMenu };
                 break;
         }
 

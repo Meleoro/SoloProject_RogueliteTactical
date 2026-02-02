@@ -15,8 +15,8 @@ MonoBehaviour:
   stepName: LEVEL UP
   stepDescription: ONE OF YOUR HEROES GAINED A LEVEL, IT MEANS YOU CAN OBTAIN A NEW
     SKILL OR PASSIVE IN IT'S SKILL TREE
-  highlightType: 0
-  endCondition: 12
+  highlightType: 13
+  endCondition: 10
   tutoType: 1
   leftSidePanel: 1
   playNextStepOnFinished: 0

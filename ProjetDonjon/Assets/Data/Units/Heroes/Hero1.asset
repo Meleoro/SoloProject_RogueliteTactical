@@ -26,7 +26,7 @@ MonoBehaviour:
   heroInventoryPrefab: {fileID: 4803297770596504823, guid: 631feea1674ffbb4fa06dc5b02c9d019, type: 3}
   heroBaseSkills:
   - {fileID: 11400000, guid: 9adbc46d5d2b7644ba3a2c4d1114e811, type: 2}
-  - {fileID: 11400000, guid: 3e9e6851cb1de5f4881e4da65eeb70be, type: 2}
+  - {fileID: 11400000, guid: 16a518b41d4dd22409252b310935aa88, type: 2}
   heroSkillPool:
   - {fileID: 11400000, guid: 9adbc46d5d2b7644ba3a2c4d1114e811, type: 2}
   - {fileID: 11400000, guid: 5cd70294ab216df4d9a27b744eb270d7, type: 2}

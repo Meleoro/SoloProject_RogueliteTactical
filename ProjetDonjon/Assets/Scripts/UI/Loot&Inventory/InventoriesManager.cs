@@ -23,6 +23,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public Action OnInventoryOpen;
     public Action OnInventoryClose;
     public Action OnInventoryChange;
+    public Action OnEquipmentAdded;
 
     [Header("Private Infos")]
     private Inventory[] allHeroesInventories = new Inventory[4];
@@ -136,6 +137,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         if (!VerifyCanOpenCloseInventory()) return;
 
+        if (loot.LootData.lootType == LootType.Equipment) OnEquipmentAdded?.Invoke();
+
         OpenInventories();
     }
 
@@ -190,9 +193,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     #endregion
 
-
     
-#region Open / Close Functions
+    #region Open / Close Functions
 
     public bool VerifyCanOpenCloseInventory(bool enterInventory = true)
     {
@@ -279,6 +281,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     }
 
     #endregion
+
 
     #region GameFeel
 

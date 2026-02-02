@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     [Header("Parameters")]
     [SerializeField] private XP xpPrefab;
+
+    [Header("Actions")]
+    public Action OnHeroLevelUp;
 
     [Header("Public Infos")]
     public Hero[] Heroes { get { return heroes; } }
@@ -156,6 +160,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
             allHeroes[i].OnDead += HeroDies;
             allHeroes[i].OnRevive += HeroRevives;
+            allHeroes[i].OnLevelUp += OnHeroLevelUp;
         }
 
         List<Hero> heroesList = new List<Hero>();

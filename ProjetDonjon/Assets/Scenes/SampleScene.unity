@@ -8208,9 +8208,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.0019120459
+    width: 0.99856544
+    height: 0.9942638
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -17443,7 +17443,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f4d1302f7cbe3e46a72d09e0397c7d5, type: 2}
   - {fileID: 11400000, guid: aa1d9bc3bb7e0464bbd670f8a961ba8e, type: 2}
   relicsPerArea: 12
-  unlockAllDebug: 0
+  unlockAllDebug: 1
 --- !u!114 &1460704118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20902,6 +20902,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1653424314387022047, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickSkillTree
+      objectReference: {fileID: 0}
     - target: {fileID: 1657072215421294862, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21762,6 +21766,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4019421086634028924, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4025115369748441895, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22041,6 +22049,10 @@ PrefabInstance:
     - target: {fileID: 4984624809348007231, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_Name
       value: UIExploration
+      objectReference: {fileID: 0}
+    - target: {fileID: 4987641504215733351, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickSkills
       objectReference: {fileID: 0}
     - target: {fileID: 5045859684543409173, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22454,6 +22466,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6283850508246355928, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: overlayEffectDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6348300855692581671, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22488,7 +22504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6537920207254496290, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -504.99945
+      value: -504.99948
       objectReference: {fileID: 0}
     - target: {fileID: 6586957245964185369, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22828,7 +22844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760944051009081212, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 476.99945
+      value: 476.99948
       objectReference: {fileID: 0}
     - target: {fileID: 7777384955102529824, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
@@ -25666,8 +25682,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1541126b3b2abc4b8f2e28686d398e9, type: 2}
   - {fileID: 11400000, guid: 45d2d15510a89914292d50b9aba18dfd, type: 2}
   - {fileID: 11400000, guid: ae6a5d6e18798524eb3dbb5acd410ac7, type: 2}
-  - {fileID: 11400000, guid: f62258254721f684ea9dd172530c961a, type: 2}
   - {fileID: 11400000, guid: a6a03e96f1d157d4dbff59ba10c17667, type: 2}
+  - {fileID: 11400000, guid: f62258254721f684ea9dd172530c961a, type: 2}
   - {fileID: 11400000, guid: 183248e573507c943a0a135eac44120f, type: 2}
   disableTuto: 1
   _leftPosRef: {fileID: 1921454748}

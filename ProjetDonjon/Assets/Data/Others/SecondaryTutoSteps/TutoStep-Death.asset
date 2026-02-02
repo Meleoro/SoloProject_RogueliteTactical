@@ -17,6 +17,8 @@ MonoBehaviour:
     YOUR TEAM DIE, YOU LOSE EVERYTHING YOU HAD IN YOUR INVENTORIES.
   highlightType: 0
   endCondition: 0
+  tutoType: 1
   leftSidePanel: 0
   playNextStepOnFinished: 0
   playNextStepDelay: 0.2
+  waitDuration: 0

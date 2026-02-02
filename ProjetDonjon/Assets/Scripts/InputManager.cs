@@ -21,6 +21,8 @@ public class InputManager : MonoBehaviour
     public static bool wantsToReturn;
     public static bool wantsToRightClick;
     public static bool wantsToDrag;
+    public static bool wantsToDisplayAllDangerTiles;
+    public static bool wantsToStopDisplayAllDangerTiles;
 
     private void Update()
     {
@@ -40,5 +42,7 @@ public class InputManager : MonoBehaviour
         wantsToReturn = _playerInput.actions["Return"].WasPressedThisFrame();
         wantsToRightClick = _playerInput.actions["RightClick"].IsPressed();
         wantsToDrag = _playerInput.actions["Drag"].IsPressed();
+        wantsToDisplayAllDangerTiles = _playerInput.actions["ShowAllPaterns"].WasPressedThisFrame();
+        wantsToStopDisplayAllDangerTiles = _playerInput.actions["ShowAllPaterns"].WasReleasedThisFrame();
     }
 }

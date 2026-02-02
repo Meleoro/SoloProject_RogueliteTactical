@@ -101,7 +101,7 @@ public class Hero : Unit
         // For Debug
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //GainLevel();
+            GainLevel();
         }
     }
 

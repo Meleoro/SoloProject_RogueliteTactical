@@ -19,6 +19,6 @@ MonoBehaviour:
   endCondition: 12
   tutoType: 1
   leftSidePanel: 1
-  playNextStepOnFinished: 1
+  playNextStepOnFinished: 0
   playNextStepDelay: 0.2
-  waitDuration: 10
+  waitDuration: 12

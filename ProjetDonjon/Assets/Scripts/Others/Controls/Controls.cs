@@ -226,6 +226,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ShowAllPaterns"",
+                    ""type"": ""Button"",
+                    ""id"": ""395c0dcd-bd5c-4423-b339-62870470b8ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -503,6 +512,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4ce4045-7ada-445d-bbd1-ecd5f485cfec"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowAllPaterns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -526,6 +546,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_BaseActionMap_MouseDelta = m_BaseActionMap.FindAction("MouseDelta", throwIfNotFound: true);
         m_BaseActionMap_MousePosition = m_BaseActionMap.FindAction("MousePosition", throwIfNotFound: true);
         m_BaseActionMap_MouseScroll = m_BaseActionMap.FindAction("MouseScroll", throwIfNotFound: true);
+        m_BaseActionMap_ShowAllPaterns = m_BaseActionMap.FindAction("ShowAllPaterns", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -621,6 +642,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_BaseActionMap_MouseDelta;
     private readonly InputAction m_BaseActionMap_MousePosition;
     private readonly InputAction m_BaseActionMap_MouseScroll;
+    private readonly InputAction m_BaseActionMap_ShowAllPaterns;
     /// <summary>
     /// Provides access to input actions defined in input action map "BaseActionMap".
     /// </summary>
@@ -693,6 +715,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MouseScroll => m_Wrapper.m_BaseActionMap_MouseScroll;
         /// <summary>
+        /// Provides access to the underlying input action "BaseActionMap/ShowAllPaterns".
+        /// </summary>
+        public InputAction @ShowAllPaterns => m_Wrapper.m_BaseActionMap_ShowAllPaterns;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_BaseActionMap; }
@@ -763,6 +789,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started += instance.OnMouseScroll;
             @MouseScroll.performed += instance.OnMouseScroll;
             @MouseScroll.canceled += instance.OnMouseScroll;
+            @ShowAllPaterns.started += instance.OnShowAllPaterns;
+            @ShowAllPaterns.performed += instance.OnShowAllPaterns;
+            @ShowAllPaterns.canceled += instance.OnShowAllPaterns;
         }
 
         /// <summary>
@@ -819,6 +848,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseScroll.started -= instance.OnMouseScroll;
             @MouseScroll.performed -= instance.OnMouseScroll;
             @MouseScroll.canceled -= instance.OnMouseScroll;
+            @ShowAllPaterns.started -= instance.OnShowAllPaterns;
+            @ShowAllPaterns.performed -= instance.OnShowAllPaterns;
+            @ShowAllPaterns.canceled -= instance.OnShowAllPaterns;
         }
 
         /// <summary>
@@ -964,5 +996,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMouseScroll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShowAllPaterns" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShowAllPaterns(InputAction.CallbackContext context);
     }
 }

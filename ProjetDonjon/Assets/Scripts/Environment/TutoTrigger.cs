@@ -15,8 +15,6 @@ public class TutoTrigger : MonoBehaviour
     {
         if (collision.gameObject.tag != "Hero") return;
 
-        Debug.Log(12);
-
         TutoManager.Instance.DisplayTutorial(tutoID, isAdditional);
     }
 

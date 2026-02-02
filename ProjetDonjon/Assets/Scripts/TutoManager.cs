@@ -54,12 +54,22 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     // Called at the start to bind the tutorial steps the player hasn't done
     private void BindTutorials()
     {
+        if (!didAdditionalTutorialSteps[2])
+        {
+            InventoriesManager.Instance.OnEquipmentAdded += BindEquipmentTutorial;
+        }
+
         if (!didAdditionalTutorialSteps[3])
         {
             for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
             {
                 HeroesManager.Instance.Heroes[i].OnLevelUp += BindLevelUpTurorialToBattleEnd;
             }
+        }
+
+        if (!didAdditionalTutorialSteps[4])
+        {
+            BattleManager.Instance.OnBattleStart += DoAllPatternsTutorial;
         }
     }
 
@@ -76,7 +86,6 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         }
     }
 
-
     public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay, bool isAdditionalStep = false)
     {
         yield return new WaitForSeconds(delay);
@@ -84,11 +93,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         DisplayTutorial(tutoID, isAdditionalStep);
     }
 
-
     public void DisplayTutorial(int tutoID, bool isAdditionalStep = false)
     {
         if (isAdditionalStep ? didAdditionalTutorialSteps[tutoID] : didTutorialStep[tutoID] ) return;
-        //if (disableTuto) return;
+        if (disableTuto && !isAdditionalStep) return;
 
         isDisplayingTuto = true;
 
@@ -136,9 +144,8 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             _smallTutorialPanel.OnHide += EndTutorialStep;
         }
 
-            ObserveEndConditions();
+        ObserveEndConditions();
     }
-
 
     private void ObserveEndConditions()
     {
@@ -197,11 +204,25 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.EquipEquiment:
                 UIManager.Instance.HeroInfosScreen.OnShow += ValidateEndCondition;
-                //InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
+                endConditionsValidated = new bool[1];
+                break;
+
+            case TutoEndCondition.OpenSkillTree:
+                UIManager.Instance.SkillTreeManager.OnShow += ValidateEndCondition;
+                endConditionsValidated = new bool[1];
+                break;
+
+            case TutoEndCondition.OpenSkills:
+                UIManager.Instance.SkillsMenu.OnShow += ValidateEndCondition;
                 endConditionsValidated = new bool[1];
                 break;
         }
     }
+
+    #endregion
+
+
+    #region Specific Starts
 
     private void DoSecondBattleTutorial()
     {
@@ -233,7 +254,34 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         BattleManager.Instance.OnBattleEnd -= DoLevelUpTutorial;
 
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(1, 1f, true));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(3, 1f, true));
+    }
+
+    private void DoSkillsMenuTutorial()
+    {
+        UIManager.Instance.SkillTreeManager.OnHide -= DoSkillsMenuTutorial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(4, 0.7f, true));
+    }
+
+    private void DoAllPatternsTutorial()
+    {
+        BattleManager.Instance.OnBattleStart -= DoAllPatternsTutorial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(5, 2f, true));
+    }
+
+    private void BindEquipmentTutorial()
+    {
+        InventoriesManager.Instance.OnEquipmentAdded -= BindEquipmentTutorial;
+        InventoriesManager.Instance.OnInventoryClose += DoEquipmentTutorial;
+    }
+
+    private void DoEquipmentTutorial()
+    {
+        InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(2, 1f, true));
     }
 
     #endregion
@@ -268,7 +316,6 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         _tutorialPanel.HideTutorial();
         _smallTutorialPanel.HideTutorial();
     }
-
 
     private void EndTutorialStep()
     {
@@ -321,13 +368,20 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.PlaceItemInInventory:
                 FindAnyObjectByType<Loot>().OnPlaceInInventory -= ValidateEndCondition;
-                //InventoriesManager.Instance.OnInventoryClose += DoEquipmentTutorial;
-
                 InventoriesManager.Instance.UnlockInventory();
                 break;
 
             case TutoEndCondition.EquipEquiment:
                 UIManager.Instance.HeroInfosScreen.OnShow -= ValidateEndCondition;
+                break;
+
+            case TutoEndCondition.OpenSkillTree:
+                UIManager.Instance.SkillTreeManager.OnShow -= ValidateEndCondition;
+                UIManager.Instance.SkillTreeManager.OnHide += DoSkillsMenuTutorial;
+                break;
+
+            case TutoEndCondition.OpenSkills:
+                UIManager.Instance.SkillsMenu.OnShow -= ValidateEndCondition;
                 break;
         }
 

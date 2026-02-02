@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +11,14 @@ public class HUDExploration : MonoBehaviour
 
     [Header("Public Infos")]
     public Image EquipmentMenuImage { get { return _buttonsImages[1]; } }
+    public Image SkillsMenu { get { return _buttonsImages[2]; } }
+    public Image SkillTreeMenu { get { return _buttonsImages[3]; } }
     public Animator Animator { get { return _animator; } }
 
     [Header("Private Infos")]
     private bool isDisplayed;
+    private bool isBouncing;
+    private Coroutine bounceCoroutine;
 
     [Header("References")]
     [SerializeField] private Image[] _buttonsImages;
@@ -45,6 +50,8 @@ public class HUDExploration : MonoBehaviour
         UIManager.Instance.FloorTransition.OnTransitionStart += Hide;
         UIManager.Instance.FloorTransition.OnTransitionEnd += Show;
 
+        HeroesManager.Instance.OnHeroLevelUp += DoBounceSkillTree;
+
         foreach (var button in _buttonsImages)
         {
             Material material = button.material;
@@ -54,6 +61,8 @@ public class HUDExploration : MonoBehaviour
         }
     }
 
+
+    #region Show
 
     private void Show()
     {
@@ -78,6 +87,11 @@ public class HUDExploration : MonoBehaviour
         Show();
     }
 
+    #endregion
+
+
+    #region Hide
+
     private void Hide()
     {
         if (!isDisplayed) return;
@@ -96,19 +110,38 @@ public class HUDExploration : MonoBehaviour
         _animator.SetBool("IsDisplayed", false);
     }
 
+    #endregion
+
 
     #region Buttons Functions
 
     public void OverlayButton(int index)
     {
+        _buttonsImages[index].rectTransform.DOComplete();
+
         _buttonsImages[index].material.ULerpMaterialFloat(overlayEffectDuration, 1, "_OutlineSize");
-        _buttonsImages[index].rectTransform.UChangeScale(overlayEffectDuration, Vector3.one * 1.1f, CurveType.EaseOutCubic);
+        _buttonsImages[index].rectTransform.DOScale(Vector3.one * 1.15f, overlayEffectDuration).SetEase(Ease.OutBack);
+
+        if (isBouncing && index == 3)
+        {
+            StopCoroutine(bounceCoroutine);
+            bounceCoroutine = null;
+        }
     }
 
     public void QuitOverlayButton(int index)
     {
+        _buttonsImages[index].rectTransform.DOComplete();
+
         _buttonsImages[index].material.ULerpMaterialFloat(overlayEffectDuration, 0, "_OutlineSize");
-        _buttonsImages[index].rectTransform.UChangeScale(overlayEffectDuration, Vector3.one * 1f, CurveType.EaseOutCubic);
+        _buttonsImages[index].rectTransform.DOScale(Vector3.one, overlayEffectDuration).SetEase(Ease.OutBack);
+
+        if (isBouncing && index == 3)
+        {
+            _buttonsImages[index].rectTransform.DOComplete();
+
+            DoBounceSkillTree();
+        }
     }
 
     public void ClickInventory()
@@ -125,18 +158,52 @@ public class HUDExploration : MonoBehaviour
         StartCoroutine(_heroInfosScreen.OpenInfosScreenCoroutine());
     }
 
-    public void ClickSkill()
-    {
-        if (!isDisplayed) return;
-
-        _skillTreeScreen.Show();
-    }
-
     public void ClickSkillTree()
     {
         if (!isDisplayed) return;
 
+        _skillTreeScreen.Show();
+
+        if (isBouncing)
+        {
+            isBouncing = false;
+        }
+    }
+
+    public void ClickSkills()
+    {
+        if (!isDisplayed) return;
+
         _skillsMenu.Show();
+    }
+
+    #endregion
+
+
+    #region Others
+
+    private void DoBounceSkillTree()
+    {
+        if (bounceCoroutine != null) return;
+
+        isBouncing = true;
+        bounceCoroutine = StartCoroutine(DoBounceSkillTreeCoroutine());
+    }
+
+    private IEnumerator DoBounceSkillTreeCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        while (true)
+        {
+            _buttonsImages[3].rectTransform.DOScale(Vector3.one * 1.15f, 0.5f).SetEase(Ease.InOutSine);
+
+            yield return new WaitForSeconds(0.6f);
+
+            _buttonsImages[3].rectTransform.DOScale(Vector3.one * 1f, 0.5f).SetEase(Ease.InOutSine);
+
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 
     #endregion

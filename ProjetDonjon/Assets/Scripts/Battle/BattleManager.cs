@@ -78,6 +78,17 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     private void Update()
     {
         if (!isInBattle) return;
+        if (IsEnemyTurn || NoMouseControls) return;
+
+        if (InputManager.wantsToDisplayAllDangerTiles)
+        {
+            TilesManager.ResetTiles();
+            TilesManager.DisplayAllDangerTiles();
+        }
+        else if (InputManager.wantsToStopDisplayAllDangerTiles)
+        {
+            TilesManager.StopDisplayPossibleMoveTiles();
+        }
     }
 
 
