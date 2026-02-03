@@ -32,13 +32,6 @@ public class SaveManager : GenericSingletonClass<SaveManager>
         LoadGame();
     }
 
-    private IEnumerator LoadGameWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        LoadGame();
-    }
-
     [ContextMenu("New Game")]
     public void NewGame()
     {

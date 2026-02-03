@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652680011429492105}
   - component: {fileID: 3570154875044011960}
+  - component: {fileID: 5645458415927221812}
   m_Layer: 0
   m_Name: Candle1
   m_TagString: Untagged
@@ -92,6 +93,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5645458415927221812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345273752858396487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ff6927587203042a7dc7582845c5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteLayerer
+  offset: 0
+  autoInitialise: 1
+  PublicOffset: 0
+  _spriteRenderer: {fileID: 3570154875044011960}
+  _heroParentTr: {fileID: 0}
 --- !u!1 &9158378181514303225
 GameObject:
   m_ObjectHideFlags: 0

@@ -73,7 +73,6 @@ public class Loot : MonoBehaviour, IInteractible
     [SerializeField] private Image _equippedImage;
 
 
-
     private void Start()
     {
         if(debug)
@@ -335,6 +334,7 @@ public class Loot : MonoBehaviour, IInteractible
             isDragged = true;
             UIManager.Instance.DraggedLoot = this;
             ActualiseOverlayedSlots();
+            _imageBackground.rectTransform.SetParent(InventoriesManager.Instance.FrontLootParent);
 
             _imageBackground.raycastTarget = false;
 
@@ -493,6 +493,8 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void OverlayLoot()
     {
+        if (UIManager.Instance.DraggedLoot != null) return;
+
         UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, 
             CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.6f);
 

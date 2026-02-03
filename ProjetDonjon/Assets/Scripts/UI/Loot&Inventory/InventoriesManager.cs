@@ -38,10 +38,11 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     [Header("Public Infos")]
     public RectTransform MainLootParent { get { return _mainLootParent; } }
+    public RectTransform FrontLootParent { get { return _frontLootPaent; } }
     public InventoryActionPanel InventoryActionPanel { get { return _inventoryActionsPanel; } }  
     public int CurrentCoins { get { return currentCoins; } }
 
-    [Header("References")]
+    [Header("References Positions")]
     [SerializeField] private RectTransform[] _hiddenInventoryPositions;
     [SerializeField] private RectTransform[] _shownInventoryPositions;
     [SerializeField] private RectTransform _mainLootParent;
@@ -49,8 +50,11 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     [SerializeField] private RectTransform _shownPosition;
     [SerializeField] private RectTransform _leftHiddenPosition;
     [SerializeField] private RectTransform _leftShownPosition;
+
+    [Header("References")]
     [SerializeField] private RectTransform[] _lootParents;
     [SerializeField] private RectTransform _inventoriesParent;
+    [SerializeField] private RectTransform _frontLootPaent;
     [SerializeField] private Image _backInventoriesImage;
     [SerializeField] private Image _backFadeImage;
     [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
