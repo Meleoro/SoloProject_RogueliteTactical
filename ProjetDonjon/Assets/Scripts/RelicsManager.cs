@@ -29,6 +29,7 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
     private int currentCampRelicCount;
     private int currentCampLevel;
     private int currentPossessedRelicCount;
+    private bool isSaveSetup;
 
     [Header("Public Infos")]
     public bool[] PossessedRelicIndexes { get { return possessedRelicIndexes; } }
@@ -36,6 +37,16 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
     public int CurrentCampLevel { get { return currentCampLevel; } }
     public int CurrentCampRelicCount { get { return currentCampRelicCount; } } 
     public CampLevelData[] CampLevels { get { return campLevels; } }
+
+
+    private void Start()
+    {
+        if (!isSaveSetup)
+        {
+            SaveManager.Instance.AddSaveableObject(this);
+            isSaveSetup = true;
+        }
+    }
 
 
     // For Debug
@@ -54,6 +65,12 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
 
     public void StartExploration(int enviroIndex)
     {
+        if (!isSaveSetup)
+        {
+            SaveManager.Instance.AddSaveableObject(this);
+            isSaveSetup = true;
+        }
+
         int startIndex = enviroIndex * relicsPerArea;
         currentAvailableRelics = new List<RelicData>();
 

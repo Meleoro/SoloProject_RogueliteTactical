@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,12 +12,29 @@ public class SaveManager : GenericSingletonClass<SaveManager>
     private GameData gameData;
     private List<ISaveable> saveableObjects;
 
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        handler = new SaveFileHandler(Application.persistentDataPath, fileName);
+        saveableObjects = new List<ISaveable>();
+
+        LoadGame();
+    }
+
     private void Start()
     {
-        handler = new SaveFileHandler(Application.persistentDataPath, fileName);
         SetupSaveableObjects();
 
         if (newGameOnStart) NewGame();
+
+        LoadGame();
+    }
+
+    private IEnumerator LoadGameWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
         LoadGame();
     }

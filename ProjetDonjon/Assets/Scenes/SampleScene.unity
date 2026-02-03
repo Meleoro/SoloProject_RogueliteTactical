@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.json
-  newGameOnStart: 1
+  newGameOnStart: 0
 --- !u!1001 &37283156
 PrefabInstance:
   m_ObjectHideFlags: 0

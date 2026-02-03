@@ -64,7 +64,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         _backInventoriesImage.rectTransform.position = _hiddenPosition.position;
 
-        //AddCoins(50);
+        SaveManager.Instance.AddSaveableObject(this);
     }
 
     public Inventory InitialiseInventory(Inventory inventoryPrefab, int index, Hero hero)
