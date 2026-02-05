@@ -30,7 +30,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     }
     public CoinUI CoinUI { get { return _coinUI; } }
     public Minimap Minimap { get { return _minimap; } }
-    public FloorTransition FloorTransition { get { return _floorTransition; } }
+    public Transition Transition { get { return _transition; } }
     public HeroInfosScreen HeroInfosScreen { get { return _heroInfosScreen; } }
     public SkillTreeManager SkillTreeManager { get { return _skillTreesManager; } }
     public SkillsMenu SkillsMenu { get { return _skillsMenu; } }
@@ -58,7 +58,7 @@ public class UIManager : GenericSingletonClass<UIManager>
     [SerializeField] private CollectionMenu _collectionMenu;
     [SerializeField] private CoinUI _coinUI;
     [SerializeField] private Minimap _minimap;
-    [SerializeField] private FloorTransition _floorTransition;
+    [SerializeField] private Transition _transition;
     [SerializeField] private PlayerActionsMenu _playerActionsMenu;
     [SerializeField] private HUDExploration _hudExploration;
 
@@ -165,7 +165,7 @@ public class UIManager : GenericSingletonClass<UIManager>
         _skillsMenu.OnShow += () => currentState = UIState.Skills;
         _skillsMenu.OnHide += () => currentState = UIState.Nothing;
 
-        _floorTransition.StartTransition(enviroData, 0, isTuto);
+        _transition.StartTransition(enviroData, 0, isTuto);
     }
 
     private IEnumerator DelayStartExploration(EnviroData enviroData, bool isTuto)

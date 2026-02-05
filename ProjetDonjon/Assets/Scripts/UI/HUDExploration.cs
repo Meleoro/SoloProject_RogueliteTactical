@@ -47,8 +47,8 @@ public class HUDExploration : MonoBehaviour
         _skillsMenu.OnHide += Show;
 
         UIManager.Instance.OnExplorationStart += ShowWithDelay;
-        UIManager.Instance.FloorTransition.OnTransitionStart += Hide;
-        UIManager.Instance.FloorTransition.OnTransitionEnd += Show;
+        UIManager.Instance.Transition.OnTransitionStart += Hide;
+        UIManager.Instance.Transition.OnTransitionEnd += Show;
 
         HeroesManager.Instance.OnHeroLevelUp += DoBounceSkillTree;
 

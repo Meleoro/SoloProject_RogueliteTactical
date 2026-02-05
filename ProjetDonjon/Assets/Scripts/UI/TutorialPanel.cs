@@ -161,7 +161,7 @@ public class TutorialPanel : MonoBehaviour
                 break;
 
             case TutoHighlightType.HighlightReturnToCamp:
-                highlightedImages = new Image[] { UIManager.Instance.FloorTransition.StopButton.image };
+                highlightedImages = new Image[] { UIManager.Instance.Transition.StopButton.image };
                 break;
 
             case TutoHighlightType.HighlightEquipmentMenu:

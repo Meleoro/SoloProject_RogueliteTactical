@@ -94,7 +94,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _globalParent.gameObject.SetActive(true);
         isActive = true;
 
-        UIManager.Instance.FloorTransition.FadeScreen(0.5f, 0);
+        UIManager.Instance.Transition.FadeScreen(0.5f, 0);
 
         switch (currentMetaMenu)
         {

@@ -55,11 +55,11 @@ public class GameManager : GenericSingletonClass<GameManager>
     {
         OnReturnToCamp?.Invoke(0);
 
-        UIManager.Instance.FloorTransition.FadeScreen(0.8f, 1);
+        UIManager.Instance.Transition.FadeScreen(0.8f, 1);
 
         yield return new WaitForSeconds(1);
 
-        UIManager.Instance.FloorTransition.FadeScreen(0.8f, 0);
+        UIManager.Instance.Transition.FadeScreen(0.8f, 0);
 
         ProceduralGenerationManager.Instance.EndExploration();
         HeroesManager.Instance.EndExploration();

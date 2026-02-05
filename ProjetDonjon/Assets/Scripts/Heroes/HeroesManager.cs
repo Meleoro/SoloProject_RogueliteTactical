@@ -255,7 +255,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         heroes[currentHeroIndex].Controller.AutoMove(heroes[currentHeroIndex].transform.position + Vector3.up * 2f);
 
-        UIManager.Instance.FloorTransition.StartTransition(_genProScript.EnviroData, _genProScript.CurrentFloor + 1, false);
+        UIManager.Instance.Transition.StartTransition(_genProScript.EnviroData, _genProScript.CurrentFloor + 1, false);
 
         yield return new WaitForSeconds(1);
 
@@ -362,7 +362,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             StopControl();
             CameraManager.Instance.ExitBattle();
 
-            UIManager.Instance.FloorTransition.StartDeathTransition();
+            UIManager.Instance.Transition.StartDeathTransition();
             InventoriesManager.Instance.EmptyCurrentHeroesInventories();
 
             BattleManager.Instance.AllHeroDefeatEndBattle();
