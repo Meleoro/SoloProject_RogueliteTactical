@@ -8514,9 +8514,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.0019120459
+    width: 0.99856544
+    height: 0.9942638
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -9418,6 +9418,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4852344227393277730, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
   m_PrefabInstance: {fileID: 8372812632984305530}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &640378227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 8372812632984305530}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!114 &648406151 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1707005644024420563, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
@@ -10871,13 +10882,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785815728}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11318,6 +11329,7 @@ GameObject:
   - component: {fileID: 813185134}
   - component: {fileID: 813185136}
   - component: {fileID: 813185135}
+  - component: {fileID: 813185137}
   m_Layer: 0
   m_Name: Continue
   m_TagString: Untagged
@@ -11383,6 +11395,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813185133}
   m_CullTransparentMesh: 1
+--- !u!114 &813185137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813185133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: UnhoverButton
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: UnhoverButton
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: ClickContinue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &823684990
 GameObject:
   m_ObjectHideFlags: 0
@@ -14385,6 +14458,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063765591}
   m_CullTransparentMesh: 1
+--- !u!114 &1066695413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 51045271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!1 &1075070166
 GameObject:
   m_ObjectHideFlags: 0
@@ -16034,6 +16118,7 @@ GameObject:
   - component: {fileID: 1268212465}
   - component: {fileID: 1268212467}
   - component: {fileID: 1268212466}
+  - component: {fileID: 1268212468}
   m_Layer: 0
   m_Name: Stop
   m_TagString: Untagged
@@ -16099,6 +16184,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268212464}
   m_CullTransparentMesh: 1
+--- !u!114 &1268212468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268212464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: HoverButton
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: UnhoverButton
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2135703014}
+          m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+          m_MethodName: ClickStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1273083359
 GameObject:
   m_ObjectHideFlags: 0
@@ -17967,6 +18113,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430147884}
   m_CullTransparentMesh: 1
+--- !u!114 &1444311185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 907193171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!1 &1449884792
 GameObject:
   m_ObjectHideFlags: 0
@@ -18011,13 +18168,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449884792}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20264,6 +20421,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4852344227393277730, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
   m_PrefabInstance: {fileID: 1646908975}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1646908977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 1646908975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!1 &1652405881
 GameObject:
   m_ObjectHideFlags: 0
@@ -22008,6 +22176,70 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _mainRectTr
+      value: 
+      objectReference: {fileID: 1429404431}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _stopButton
+      value: 
+      objectReference: {fileID: 1268212466}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _floorsRectTr
+      value: 
+      objectReference: {fileID: 316347802}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _continueButton
+      value: 
+      objectReference: {fileID: 813185135}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _stopButtonText
+      value: 
+      objectReference: {fileID: 405344527}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _arrows.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _continueButtonText
+      value: 
+      objectReference: {fileID: 1605910746}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_arrows.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1449884794}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_arrows.Array.data[1]'
+      value: 
+      objectReference: {fileID: 785815730}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _floorTransitions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 640378227}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1066695413}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1646908977}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1837673156}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1444311185}
+    - target: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: '_floorTransitions.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2070013685}
     - target: {fileID: 1070888251840669722, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22912,6 +23144,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3628952918357129850, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+      propertyPath: _transition
+      value: 
+      objectReference: {fileID: 2135703014}
     - target: {fileID: 3628952918357129850, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       propertyPath: _collectionMenu
       value: 
@@ -24659,12 +24895,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4669886793785324763, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+    - {fileID: 4084806798285032369, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+    - {fileID: 2052422422288182074, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2424855055316654196, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
       insertIndex: -1
       addedObject: {fileID: 723319539}
     - targetCorrespondingSourceObject: {fileID: 6652801072659697551, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 1429404431}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
@@ -24770,6 +25008,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826052073}
   m_CullTransparentMesh: 1
+--- !u!114 &1837673156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 1655694373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!1 &1851411411
 GameObject:
   m_ObjectHideFlags: 0
@@ -27593,6 +27842,17 @@ MonoBehaviour:
   - {fileID: 1499265497}
   - {fileID: 1494284025}
   - {fileID: 836549544}
+--- !u!114 &2070013685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3812193591935467156, guid: 9fa22d3c913658147b1c24feae461bfd, type: 3}
+  m_PrefabInstance: {fileID: 2012586890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d93a2a97acf24e821ff02290da9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionFloor
 --- !u!1 &2071012490
 GameObject:
   m_ObjectHideFlags: 0
@@ -27853,6 +28113,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115832186}
   m_CullTransparentMesh: 1
+--- !u!114 &2135703014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 939981192782512149, guid: 7c1cc99ad1b0cb44e85a9427e7c4a134, type: 3}
+  m_PrefabInstance: {fileID: 1816425686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d698cfee8ac7e644ba6180aa7d60d7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &499150670113669801
 PrefabInstance:
   m_ObjectHideFlags: 0

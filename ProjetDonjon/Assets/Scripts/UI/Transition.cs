@@ -13,21 +13,23 @@ public class Transition : MonoBehaviour
 
     [Header("Public Infos")]
     public TextMeshProUGUI StopButtonText { get { return _stopButtonText; } }
-    public Button StopButton { get { return _stopButton; } }
+    public Image StopButton { get { return _stopButton; } }
 
     [Header("Private Infos")]
     private EnviroData currentEnviroData;
     private RectTransform[] buttonsRectTr;
     private Coroutine arrowsCoroutine;
+    private int currentFloor;
 
     [Header("References")]
     [SerializeField] private Image _fadeImage;
     [SerializeField] private TransitionFloor[] _floorTransitions;
     [SerializeField] private RectTransform _mainRectTr;
+    [SerializeField] private RectTransform _floorsRectTr;
     [SerializeField] private TextMeshProUGUI _continueButtonText;
     [SerializeField] private TextMeshProUGUI _stopButtonText;
-    [SerializeField] private Button _continueButton;
-    [SerializeField] private Button _stopButton;
+    [SerializeField] private Image _continueButton;
+    [SerializeField] private Image _stopButton;
     [SerializeField] private Image[] _arrows;
 
 
@@ -60,9 +62,6 @@ public class Transition : MonoBehaviour
         {
             _continueButton.gameObject.SetActive(true);
             _stopButton.gameObject.SetActive(true);
-
-            _continueButtonText.color = new Color(_continueButtonText.color.r, _continueButtonText.color.g, _continueButtonText.color.b, 0);
-            _stopButtonText.color = new Color(_continueButtonText.color.r, _continueButtonText.color.g, _continueButtonText.color.b, 0);
 
             StartCoroutine(ChangeFloorCoroutine(floorIndex, 1.75f));
         }
@@ -107,6 +106,7 @@ public class Transition : MonoBehaviour
     {
         OnTransitionStart?.Invoke();
 
+        HighlightFloor(floorIndex);
         FadeScreen(1, duration * 0.6f);
 
         yield return new WaitForSeconds(duration * 0.6f);
@@ -115,16 +115,22 @@ public class Transition : MonoBehaviour
 
         yield return new WaitForSeconds(duration * 0.4f);
 
+        DisplayArrows();
+
         TutoManager.Instance.DisplayTutorial(12);
     }
 
     private IEnumerator ContinueCoroutine(float duration)
     {
+        yield return new WaitForSeconds(duration * 0.5f);
+
         _mainRectTr.DOScale(Vector3.zero, duration);
 
+        ChangeFloor(currentFloor + 1, duration * 0.5f);
+        HighlightFloor(currentFloor + 1);
         FadeScreen(duration, 0);
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 0.5f);
 
         OnTransitionEnd?.Invoke();
     }
@@ -148,7 +154,9 @@ public class Transition : MonoBehaviour
 
     private void HighlightFloor(int currentFloor)
     {
-        for(int i = 0; i < _floorTransitions.Length; i++)
+        this.currentFloor = currentFloor;
+
+        for (int i = 0; i < _floorTransitions.Length; i++)
         {
             if(i == currentFloor)
                 _floorTransitions[i].Highlight();
@@ -158,9 +166,10 @@ public class Transition : MonoBehaviour
         }
     }
 
-    private void ChangeFloorCoroutine(int newFloor)
+    private void ChangeFloor(int newFloor, float duration)
     {
-
+        Vector3 dif = _floorTransitions[newFloor].transform.position - _floorTransitions[currentFloor].transform.position;
+        _floorsRectTr.DOMove(_floorsRectTr.position + dif, duration).SetEase(Ease.OutBack);
     }
 
     private void DisplayArrows()
@@ -214,7 +223,7 @@ public class Transition : MonoBehaviour
     public void HoverButton(int buttonIndex)
     {
         buttonsRectTr[buttonIndex].DOKill();
-        buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1.2f, 0.15f).SetEase(Ease.OutCubic);
+        buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1.15f, 0.15f).SetEase(Ease.OutCubic);
     }
 
     public void UnhoverButton(int buttonIndex)
@@ -227,16 +236,14 @@ public class Transition : MonoBehaviour
     {
         _continueButton.enabled = false;
         _stopButton.enabled = false;
-        _backToCampButton.enabled = false;
 
-        StartCoroutine(ContinueCoroutine(1f));
+        StartCoroutine(ContinueCoroutine(2f));
     }
 
     public void ClickStop()
     {
         _continueButton.enabled = false;
         _stopButton.enabled = false;
-        _backToCampButton.enabled = false;
 
         StartCoroutine(StopCoroutine(1f));
     }
