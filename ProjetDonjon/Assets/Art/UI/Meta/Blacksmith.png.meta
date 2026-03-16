@@ -1,22 +1,37 @@
 fileFormatVersion: 2
-guid: 38d4f958ac051f54099b46b4ecdbaf01
+guid: f037e9ecea502f34ca1dbaf2b74b3de9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -308361656066796550
-    second: Transition_0
+      213: 1944592574858670343
+    second: Blacksmith_0
   - first:
-      213: -7424878231080687243
-    second: Transition_1
+      213: 6923145930665914332
+    second: Blacksmith_1
   - first:
-      213: -7418211097746893002
-    second: Transition_2
+      213: 2519558717104666162
+    second: Blacksmith_2
   - first:
-      213: -5120422719492145513
-    second: Transition_3
+      213: 7572660796457402651
+    second: Blacksmith_3
   - first:
-      213: 6212022559610932868
-    second: Transition_4
+      213: -7453021727624417130
+    second: Blacksmith_4
+  - first:
+      213: 6847936352404834406
+    second: Blacksmith_5
+  - first:
+      213: 4646163119760411409
+    second: Blacksmith_6
+  - first:
+      213: -2814047891446599966
+    second: Blacksmith_7
+  - first:
+      213: 8757652382889036284
+    second: Blacksmith_8
+  - first:
+      213: -674379807127012284
+    second: Blacksmith_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,13 +127,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Transition_0
+      name: Blacksmith_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 332
-        width: 269
-        height: 155
+        x: 179
+        y: 293
+        width: 151
+        height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af399c325ba78bbf0800000000000000
-      internalID: -308361656066796550
+      spriteID: 7013059d4a49cfa10800000000000000
+      internalID: 1944592574858670343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_1
+      name: Blacksmith_1
       rect:
         serializedVersion: 2
-        x: 299
-        y: 467
-        width: 15
-        height: 20
+        x: 347
+        y: 220
+        width: 148
+        height: 223
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 579a7e7669885f890800000000000000
-      internalID: -7424878231080687243
+      spriteID: cdf68852b84f31060800000000000000
+      internalID: 6923145930665914332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_2
+      name: Blacksmith_2
       rect:
         serializedVersion: 2
-        x: 322
-        y: 467
-        width: 21
-        height: 21
+        x: 62
+        y: 215
+        width: 22
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6379fe95f483d0990800000000000000
-      internalID: -7418211097746893002
+      spriteID: 23633c3dd4547f220800000000000000
+      internalID: 2519558717104666162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_3
+      name: Blacksmith_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 391
-        width: 179
-        height: 52
+        x: 30
+        y: 176
+        width: 28
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79eb4d07aaa90f8b0800000000000000
-      internalID: -5120422719492145513
+      spriteID: b11ce596fde771960800000000000000
+      internalID: 7572660796457402651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_4
+      name: Blacksmith_4
       rect:
         serializedVersion: 2
-        x: 304
-        y: 351
-        width: 71
-        height: 26
+        x: 63
+        y: 180
+        width: 27
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,129 +230,85 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 48e8252fa99853650800000000000000
-      internalID: 6212022559610932868
+      spriteID: 690bdadf93c819890800000000000000
+      internalID: -7453021727624417130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_5
+      name: Blacksmith_5
       rect:
         serializedVersion: 2
-        x: 233
-        y: 257
-        width: 46
-        height: 29
+        x: 95
+        y: 176
+        width: 28
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 54152602531878e4fbdb9a8f5401b843
-      internalID: 257642906
+      spriteID: 6680391a4d1c80f50800000000000000
+      internalID: 6847936352404834406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_6
+      name: Blacksmith_6
       rect:
         serializedVersion: 2
-        x: 285
-        y: 261
-        width: 20
-        height: 21
+        x: 17
+        y: 75
+        width: 133
+        height: 90
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3e55aaf9fe478754597ab252269f67c2
-      internalID: -1632408997
+      spriteID: 11b07d1bdbc7a7040800000000000000
+      internalID: 4646163119760411409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_7
+      name: Blacksmith_7
       rect:
         serializedVersion: 2
-        x: 321
-        y: 264
-        width: 35
-        height: 41
+        x: 163
+        y: 146
+        width: 64
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 628c58c3b1ffc7e4a8fb91ace8703780
-      internalID: 1974733361
+      spriteID: 2ee63692a5e72f8d0800000000000000
+      internalID: -2814047891446599966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_8
+      name: Blacksmith_8
       rect:
         serializedVersion: 2
-        x: 370
-        y: 264
-        width: 23
-        height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ecd501acaa3a0764bbbc58a18fa01648
-      internalID: -2090362925
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Transition_9
-      rect:
-        serializedVersion: 2
-        x: 403
-        y: 265
-        width: 23
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a129e7950d45ba4985eb499a36e3f69
-      internalID: -179880935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Transition_10
-      rect:
-        serializedVersion: 2
-        x: 437
-        y: 257
-        width: 25
+        x: 228
+        y: 142
+        width: 56
         height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -345,76 +316,32 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2dd3bee92fdc72b468c4f4942451dfca
-      internalID: 374158756
+      spriteID: cf94474317e698970800000000000000
+      internalID: 8757652382889036284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transition_11
+      name: Blacksmith_9
       rect:
         serializedVersion: 2
-        x: 238
-        y: 223
-        width: 47
-        height: 27
+        x: 158
+        y: 76
+        width: 133
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 09b08c9f7de0e3742a7c8f74e0511dc2
-      internalID: -648866517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Transition_12
-      rect:
-        serializedVersion: 2
-        x: 292
-        y: 213
-        width: 78
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ff4e25561bef514e8ade31b25c89293
-      internalID: 1843420121
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Transition_13
-      rect:
-        serializedVersion: 2
-        x: 376
-        y: 213
-        width: 63
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8aa777ac1e80df44b9bd13fb83e84dbd
-      internalID: -770022962
+      spriteID: 44c7f70732f14a6f0800000000000000
+      internalID: -674379807127012284
       vertices: []
       indices: 
       edges: []
@@ -423,7 +350,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cfeb3208b6b2c8f4c80ee9cacaa291a8
+    spriteID: 5f8cc1241c318ec488a5de800a9107d8
     internalID: 0
     vertices: []
     indices: 
@@ -433,20 +360,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Transition_0: -308361656066796550
-      Transition_1: -7424878231080687243
-      Transition_10: 374158756
-      Transition_11: -648866517
-      Transition_12: 1843420121
-      Transition_13: -770022962
-      Transition_2: -7418211097746893002
-      Transition_3: -5120422719492145513
-      Transition_4: 6212022559610932868
-      Transition_5: 257642906
-      Transition_6: -1632408997
-      Transition_7: 1974733361
-      Transition_8: -2090362925
-      Transition_9: -179880935
+      Blacksmith_0: 1944592574858670343
+      Blacksmith_1: 6923145930665914332
+      Blacksmith_2: 2519558717104666162
+      Blacksmith_3: 7572660796457402651
+      Blacksmith_4: -7453021727624417130
+      Blacksmith_5: 6847936352404834406
+      Blacksmith_6: 4646163119760411409
+      Blacksmith_7: -2814047891446599966
+      Blacksmith_8: 8757652382889036284
+      Blacksmith_9: -674379807127012284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

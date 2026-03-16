@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private Color buttonTextColorHover;
+    [SerializeField] private Color buttonTextColorUnhover;
+    [SerializeField] private Color buttonColorHover;
+    [SerializeField] private Color buttonColorUnhover;
+
     [Header("Actions")]
     public Action OnTransitionStart;
     public Action OnTransitionEnd;
@@ -18,12 +24,15 @@ public class Transition : MonoBehaviour
     [Header("Private Infos")]
     private EnviroData currentEnviroData;
     private RectTransform[] buttonsRectTr;
+    private Image[] buttonsImages;
+    private TextMeshProUGUI[] buttonsTexts;
     private Coroutine arrowsCoroutine;
     private int currentFloor;
 
     [Header("References")]
     [SerializeField] private Image _fadeImage;
     [SerializeField] private TransitionFloor[] _floorTransitions;
+    [SerializeField] private TextMeshProUGUI[] _statsTexts;
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private RectTransform _floorsRectTr;
     [SerializeField] private TextMeshProUGUI _continueButtonText;
@@ -40,6 +49,14 @@ public class Transition : MonoBehaviour
         buttonsRectTr = new RectTransform[2];
         buttonsRectTr[0] = _continueButtonText.GetComponent<RectTransform>();
         buttonsRectTr[1] = _stopButtonText.GetComponent<RectTransform>();
+
+        buttonsImages = new Image[2];
+        buttonsImages[0] = _continueButton;
+        buttonsImages[1] = _stopButton;
+
+        buttonsTexts = new TextMeshProUGUI[2];
+        buttonsTexts[0] = _continueButtonText;
+        buttonsTexts[1] = _stopButtonText;
 
         _continueButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(false);
@@ -60,6 +77,13 @@ public class Transition : MonoBehaviour
         }
         else
         {
+            ActualiseFloorsTexts(enviroData);
+
+            _statsTexts[0].text = " " + GameManager.Instance.ExpeditionCoinsCount;
+            _statsTexts[1].text = " " + GameManager.Instance.ExpeditionKillCount;
+            _statsTexts[2].text = " " + GameManager.Instance.ExpeditionRelicCount;
+            _statsTexts[3].text = " " + GameManager.Instance.ExpeditionChestCount;
+
             _continueButton.gameObject.SetActive(true);
             _stopButton.gameObject.SetActive(true);
 
@@ -106,7 +130,7 @@ public class Transition : MonoBehaviour
     {
         OnTransitionStart?.Invoke();
 
-        HighlightFloor(floorIndex);
+        HighlightFloor(floorIndex - 1);
         FadeScreen(1, duration * 0.6f);
 
         yield return new WaitForSeconds(duration * 0.6f);
@@ -115,20 +139,25 @@ public class Transition : MonoBehaviour
 
         yield return new WaitForSeconds(duration * 0.4f);
 
+        StartCoroutine(_floorTransitions[floorIndex - 1].DoClearedEffectCoroutine());
+        _floorTransitions[floorIndex].StartNextEffect();
+
         DisplayArrows();
 
-        TutoManager.Instance.DisplayTutorial(12);
+        TutoManager.Instance.DisplayTutorial(10);
     }
 
     private IEnumerator ContinueCoroutine(float duration)
     {
+        ChangeFloor(currentFloor + 1, duration * 0.5f);
+        _floorTransitions[currentFloor + 1].EndNextEffect();
+
+        HighlightFloor(currentFloor + 1);
+
         yield return new WaitForSeconds(duration * 0.5f);
 
-        _mainRectTr.DOScale(Vector3.zero, duration);
-
-        ChangeFloor(currentFloor + 1, duration * 0.5f);
-        HighlightFloor(currentFloor + 1);
-        FadeScreen(duration, 0);
+        FadeScreen(duration * 0.5f, 0);
+        _mainRectTr.DOScale(Vector3.zero, duration * 0.3f);
 
         yield return new WaitForSeconds(duration * 0.5f);
 
@@ -138,6 +167,7 @@ public class Transition : MonoBehaviour
     private IEnumerator StopCoroutine(float duration)
     {
         _mainRectTr.DOScale(Vector3.zero, duration);
+        _floorTransitions[currentFloor + 1].EndNextEffect();
 
         yield return new WaitForSeconds(duration);
 
@@ -151,6 +181,14 @@ public class Transition : MonoBehaviour
 
 
     #region Floors 
+
+    private void ActualiseFloorsTexts(EnviroData data)
+    {
+        for (int i = 0; i < _floorTransitions.Length; i++)
+        {
+            _floorTransitions[i].Initialise(data, i);
+        }
+    }
 
     private void HighlightFloor(int currentFloor)
     {
@@ -169,7 +207,7 @@ public class Transition : MonoBehaviour
     private void ChangeFloor(int newFloor, float duration)
     {
         Vector3 dif = _floorTransitions[newFloor].transform.position - _floorTransitions[currentFloor].transform.position;
-        _floorsRectTr.DOMove(_floorsRectTr.position + dif, duration).SetEase(Ease.OutBack);
+        _floorsRectTr.DOMove(_floorsRectTr.position - dif, duration).SetEase(Ease.OutBack);
     }
 
     private void DisplayArrows()
@@ -223,13 +261,23 @@ public class Transition : MonoBehaviour
     public void HoverButton(int buttonIndex)
     {
         buttonsRectTr[buttonIndex].DOKill();
+        buttonsImages[buttonIndex].DOKill();
+        buttonsTexts[buttonIndex].DOKill();
+
         buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1.15f, 0.15f).SetEase(Ease.OutCubic);
+        buttonsImages[buttonIndex].DOColor(buttonColorHover, 0.15f).SetEase(Ease.OutCubic);
+        buttonsTexts[buttonIndex].DOColor(buttonTextColorHover, 0.15f).SetEase(Ease.OutCubic);
     }
 
     public void UnhoverButton(int buttonIndex)
     {
         buttonsRectTr[buttonIndex].DOKill();
+        buttonsImages[buttonIndex].DOKill();
+        buttonsTexts[buttonIndex].DOKill();
+
         buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.InCubic);
+        buttonsImages[buttonIndex].DOColor(buttonColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+        buttonsTexts[buttonIndex].DOColor(buttonTextColorUnhover, 0.15f).SetEase(Ease.OutCubic);
     }
 
     public void ClickContinue()
@@ -237,7 +285,7 @@ public class Transition : MonoBehaviour
         _continueButton.enabled = false;
         _stopButton.enabled = false;
 
-        StartCoroutine(ContinueCoroutine(2f));
+        StartCoroutine(ContinueCoroutine(2.5f));
     }
 
     public void ClickStop()

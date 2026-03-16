@@ -701,7 +701,7 @@ public class Unit : MonoBehaviour
         if (BattleManager.Instance.IsEnemyTurn) return;
         if (InputManager.wantsToRightClick) return;
 
-        OnClickUnit?.Invoke(0);
+        OnClickUnit?.Invoke(1);
 
         StartCoroutine(SquishCoroutine(0.15f));
         CurrentTile?.ClickTile();

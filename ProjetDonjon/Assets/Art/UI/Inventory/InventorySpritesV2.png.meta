@@ -509,7 +509,7 @@ TextureImporter:
         width: 41
         height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -531,7 +531,7 @@ TextureImporter:
         width: 47
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -553,7 +553,7 @@ TextureImporter:
         width: 47
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -575,7 +575,7 @@ TextureImporter:
         width: 47
         height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -584,6 +584,116 @@ TextureImporter:
       bones: []
       spriteID: af01c47549668f448b427c7eaa921cb9
       internalID: -239132172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySpritesV2_21
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 560
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 917dec19522a76c448c3815f309ba150
+      internalID: -1088622953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySpritesV2_22
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 560
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c3a90abc0d9604c8c9dbbf11290709
+      internalID: -1558426819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySpritesV2_23
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 561
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8013cad223776e84380dc70138f55d7b
+      internalID: -557770530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySpritesV2_24
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 561
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb6cf92603cbc58429cfce121a839d19
+      internalID: -858768240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySpritesV2_25
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 561
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9606a3a1048c3648b93a1195a49452d
+      internalID: 46063462
       vertices: []
       indices: 
       edges: []
@@ -616,6 +726,11 @@ TextureImporter:
       InventorySpritesV2_19: 12928352
       InventorySpritesV2_2: -6174585982209360121
       InventorySpritesV2_20: -239132172
+      InventorySpritesV2_21: -1088622953
+      InventorySpritesV2_22: -1558426819
+      InventorySpritesV2_23: -557770530
+      InventorySpritesV2_24: -858768240
+      InventorySpritesV2_25: 46063462
       InventorySpritesV2_3: -3765119502541032652
       InventorySpritesV2_4: -7462308826667701173
       InventorySpritesV2_5: -8508707726565330220

@@ -69,7 +69,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
         if (!didAdditionalTutorialSteps[4])
         {
-            BattleManager.Instance.OnBattleStart += DoAllPatternsTutorial;
+            BattleManager.Instance.OnBattleWithManyEnemiesStart += DoAllPatternsTutorial;
         }
     }
 
@@ -175,7 +175,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             case TutoEndCondition.UseSecondSkill:
                 UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(0);
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction += ValidateEndCondition;
-                BattleManager.Instance.CurrentEnemies[0].OnDamageTaken += ValidateEndCondition;
+                BattleManager.Instance.CurrentHeroes[0].OnClickUnit += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
                 break;
 
@@ -350,7 +350,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
             case TutoEndCondition.UseSecondSkill:
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction -= ValidateEndCondition;
-                BattleManager.Instance.CurrentEnemies[0].OnDamageTaken -= ValidateEndCondition;
+                BattleManager.Instance.CurrentHeroes[0].OnClickUnit -= ValidateEndCondition;
                 BattleManager.Instance.OnHeroTurnStart += DoThirdBattleTutorial;
                 break;
 

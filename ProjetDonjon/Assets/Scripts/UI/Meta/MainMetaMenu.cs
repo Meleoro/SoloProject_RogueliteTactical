@@ -26,10 +26,12 @@ public class MainMetaMenu : MonoBehaviour
     [SerializeField] private ChestMenu _chestMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
     [SerializeField] private ShopMenu _shopMenu;
+    [SerializeField] private BlacksmithMenu _smithMenu;
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private Transform _globalRectTr;
     [SerializeField] private RectTransform _shownPosRef;
     [SerializeField] private RectTransform _bottomHiddenPos;
+    [SerializeField] private RectTransform _topHiddenPos;
     [SerializeField] private RectTransform _leftHiddenPos;
     [SerializeField] private RectTransform _rightHiddenPos;
 
@@ -67,19 +69,6 @@ public class MainMetaMenu : MonoBehaviour
     {
         Vector3 dir = _mainRectTr.position - hidePos;
 
-        //_mainRectTr.DOMove(_mainRectTr.position + dir.normalized * 0.4f, 0.3f, false).SetEase(Ease.InOutSine);
-        //_globalRectTr.DOScale(Vector3.one * 0.9f, 0.4f).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.3f);
-
-        //_mainRectTr.DOMove(hidePos - dir.normalized * 0.4f, 0.3f, false).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.15f);
-
-        //_globalRectTr.DOScale(Vector3.one * 1f, 0.4f).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.15f);
-
         _mainRectTr.DOMove(hidePos, 0.3f, false).SetEase(Ease.OutCubic);
 
         yield return new WaitForSeconds(0.15f);
@@ -100,19 +89,6 @@ public class MainMetaMenu : MonoBehaviour
     private IEnumerator ShowCoroutine()
     {
         Vector3 dir = _mainRectTr.position - _shownPosRef.position;
-
-        //_mainRectTr.DOMove(_mainRectTr.position + dir.normalized * 0.4f, 0.3f, false).SetEase(Ease.InOutSine);
-        //_globalRectTr.DOScale(Vector3.one * 0.9f, 0.4f).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.3f);
-
-        //_mainRectTr.DOLocalMove(Vector3.zero - _mainRectTr.parent.InverseTransformVector(dir.normalized * 0.4f), 0.3f, false).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.15f);
-
-        //_globalRectTr.DOScale(Vector3.one * 1f, 0.4f).SetEase(Ease.InOutSine);
-
-        //yield return new WaitForSeconds(0.15f);
 
         _mainRectTr.DOLocalMove(Vector3.zero, 0.3f, false).SetEase(Ease.OutCubic);
 
@@ -159,6 +135,9 @@ public class MainMetaMenu : MonoBehaviour
     public void ClickSmith()
     {
         if (UIMetaManager.Instance.IsInTransition) return;
+
+        Hide(_topHiddenPos.position);
+        _smithMenu.Show();
 
     }
 

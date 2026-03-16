@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
+  m_Name: Bow1-2
+  m_EditorClassIdentifier: 
+  lootID: 0
+  lootName: CLASSIC BOW II
+  lootDescription: DOES NOTHING SPECIAL
+  lootType: 1
+  rarityType: 0
+  sprite: {fileID: -2035620461, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
+  value: 20
+  spaceTaken:
+  - row: 01
+  - row: 01
+  equipmentType: 0
+  equipmentSprite: {fileID: 2102498540, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
+  healthUpgrade: 0
+  strengthUpgrade: 2
+  speedUpgrade: 1
+  luckUpgrade: 1
+  mpUpgrade: 0
+  spUpgrade: 0
+  upgradedVersion: {fileID: 0}
+  upgradeCost:
+    neededMaterials: []
+    neededMatQuantities: 
+  appliedPassive: {fileID: 0}
+  consumableType: 0
+  consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas: []

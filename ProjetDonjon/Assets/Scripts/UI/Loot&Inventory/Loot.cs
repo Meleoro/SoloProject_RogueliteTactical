@@ -114,6 +114,11 @@ public class Loot : MonoBehaviour, IInteractible
         if (!noAppear) StartCoroutine(AppearCoroutine());
     }
 
+    public void UpgradeLoot()
+    {
+        lootData = lootData.upgradedVersion;
+    }
+
 
     #region World Private Functions
 
@@ -539,12 +544,24 @@ public class Loot : MonoBehaviour, IInteractible
     public void ClickLoot()
     {
         if (!isPlacedInInventory) return;
+        
+        if (slotsOccupied.Length > 0 && slotsOccupied[0].IsInBlacksmith)
+        {
+            UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
-        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
+            AudioManager.Instance.PlaySoundOneShot(0, 1);
 
-        AudioManager.Instance.PlaySoundOneShot(0, 1);
+            UIMetaManager.Instance.BlacksmithMenu.ClickEquipment(this);
+        }
 
-        InventoriesManager.Instance.InventoryActionPanel.OpenPanel(this);
+        else
+        {
+            UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
+
+            AudioManager.Instance.PlaySoundOneShot(0, 1);
+
+            InventoriesManager.Instance.InventoryActionPanel.OpenPanel(this);
+        }
     }
 
     #endregion

@@ -22,6 +22,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [Header("Public Infos")]
     public bool IsInTransition { get { return isInTransition; } }
     public CollectionMenu CollectionMenu { get { return _collectionMenu; } }
+    public BlacksmithMenu BlacksmithMenu { get { return _smithMenu; } }
     public MainMetaMenu MainMetaMenu { get { return _mainMetaMenu; } }
     public GenericDetailsPanel GenericDetailsPanel { get { return _genericDetailsPanel; } }
 
@@ -31,6 +32,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [SerializeField] private ExpeditionsMenu _expeditionsMenu;
     [SerializeField] private ChestMenu _chestMenu;
     [SerializeField] private ShopMenu _shopMenu;
+    [SerializeField] private BlacksmithMenu _smithMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
     [SerializeField] private GenericDetailsPanel _genericDetailsPanel;
     
@@ -57,6 +59,11 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _shopMenu.OnEndTransition += EndTransition;
         _shopMenu.OnShow += () => currentMetaMenu = CurrentMetaMenu.Shop;
         _shopMenu.OnHide += () => currentMetaMenu = CurrentMetaMenu.Main;
+
+        _smithMenu.OnStartTransition += StartTransition;
+        _smithMenu.OnEndTransition += EndTransition;
+        _smithMenu.OnShow += () => currentMetaMenu = CurrentMetaMenu.Smith;
+        _smithMenu.OnHide += () => currentMetaMenu = CurrentMetaMenu.Main;
     }
 
 
@@ -81,6 +88,10 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
 
                 case CurrentMetaMenu.Shop:
                     _shopMenu.Hide();
+                    break;
+
+                case CurrentMetaMenu.Smith:
+                    _smithMenu.Hide();
                     break;
             }
         }
@@ -112,6 +123,10 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
 
             case CurrentMetaMenu.Shop:
                 _shopMenu.Hide();
+                break;
+
+            case CurrentMetaMenu.Smith:
+                _smithMenu.Hide();
                 break;
         }
 

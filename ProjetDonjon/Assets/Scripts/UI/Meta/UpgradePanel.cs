@@ -4,15 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
+public struct UpgradeCost
+{
+    public LootData[] neededMaterials;
+    public int[] neededMatQuantities;
+}
+
 public class UpgradePanel : MonoBehaviour
 {
-    [Serializable]
-    public struct UpgradeCost
-    {
-        public LootData[] neededMaterials;
-        public int[] neededMatQuantities;
-    }
-
     [Header("Parameters")]
     [SerializeField] private UpgradeCost[] neededUpgradeCosts;
     [SerializeField] private Color validColor;
@@ -30,6 +30,7 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _matTexts;
     [SerializeField] private Image[] _matIcons;
     [SerializeField] private Image _upgradeButton;
+    [SerializeField] private TextMeshProUGUI _buttonText;
 
 
 
@@ -38,14 +39,44 @@ public class UpgradePanel : MonoBehaviour
         InventoriesManager.Instance.OnInventoryChange += ActualiseResourcesFeedbacks;
     }
 
+    public void SetUpgradeCost(UpgradeCost upgrade)
+    {
+        currentUpgradeData = upgrade;
+
+        if(currentUpgradeData.neededMaterials.Length > 0)    // If the upgrade is valid
+        {
+            neededUpgradeCosts = new UpgradeCost[1];
+            neededUpgradeCosts[0] = upgrade;
+        }
+
+        else      // If no upgrade available
+        { 
+            neededUpgradeCosts = new UpgradeCost[0];
+        }
+
+        DisplayLevel(0);
+    }
+
+
     public void DisplayLevel(int currentLevel)
     {
+        // If no upgrade available
         if(currentLevel >= neededUpgradeCosts.Length)
         {
             hasUpgradeAvailable = false;
+            _buttonText.text = "LEVEL MAX";
+
+            for (int i = 0; i < _matTexts.Length; i++)
+            {
+                _matTexts[i].text = " ";
+                _matIcons[i].enabled = false;
+            }
 
             return;
         }
+
+        // If upgrade available
+        _buttonText.text = "UPGRADE";
 
         hasUpgradeAvailable = true;
         currentUpgradeData = neededUpgradeCosts[currentLevel];

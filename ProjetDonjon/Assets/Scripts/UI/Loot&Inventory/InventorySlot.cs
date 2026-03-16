@@ -15,6 +15,7 @@ public class InventorySlot : MonoBehaviour
     private Vector3 baseSize;
     private bool isOverlayed;
     private bool isAvailable;
+    private bool isInBlacksmith;
     private int overlayCount;
     private Loot attachedLoot;
     private Inventory associatedInventory;
@@ -25,6 +26,7 @@ public class InventorySlot : MonoBehaviour
     public Loot AttachedLoot { get { return attachedLoot; } }
     public Inventory AssociatedInventory { get { return associatedInventory; } }
     public bool IsAvailable { get { return isAvailable; } }
+    public bool IsInBlacksmith { get { return isInBlacksmith; } }
 
     [Header("References")]
     [SerializeField] private RectTransform _rectTr;
@@ -57,6 +59,11 @@ public class InventorySlot : MonoBehaviour
         this.isAvailable = isAvailable;
     }
 
+    public void SetIsInBlacksmith(bool isInBlacksmith)
+    {
+        this.isInBlacksmith = isInBlacksmith;
+    }
+
 
     #region Manage Slot Content Functions
 
@@ -77,7 +84,6 @@ public class InventorySlot : MonoBehaviour
         attachedLoot = null;
         return returnedLoot;
     }
-
 
     #endregion
 

@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 175, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5441036780481787351
 CanvasRenderer:
@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -311,7 +311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 182.1, y: 0}
+  m_AnchoredPosition: {x: 170, y: 0}
   m_SizeDelta: {x: 175, y: 103.125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7055837990958969267
@@ -556,6 +556,7 @@ MonoBehaviour:
   - {fileID: 2838578980420189470}
   - {fileID: 1853076524341662858}
   _upgradeButton: {fileID: 913983185557248403}
+  _buttonText: {fileID: 5918008407914254551}
 --- !u!1 &5264920097084239338
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,8 +804,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -31.7, y: 0}
-  m_SizeDelta: {x: 237.5, y: 81.25}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 200, y: 68.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6298011351017008497
 CanvasRenderer:
@@ -834,7 +835,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1378698551, guid: de69a5b65421a014bb5babbca98472a1, type: 3}
+  m_Sprite: {fileID: -2814047891446599966, guid: f037e9ecea502f34ca1dbaf2b74b3de9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -39,6 +39,7 @@ public class Chest : MonoBehaviour, IInteractible
     private IEnumerator InteractCoroutine(float openDuration)
     {
         CameraManager.Instance.FocusOnTransform(transform, 3f);
+        GameManager.Instance.OpenChest();
 
         transform.UShakePosition(openDuration * 0.3f, 0.2f, 0.04f);
 

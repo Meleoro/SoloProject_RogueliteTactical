@@ -26,7 +26,9 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     public Action OnSkillUsed;
     public Action OnBattleEnd;
     public Action OnBattleStart;
+    public Action OnBattleWithManyEnemiesStart;     // For Tuto
     public Action OnHeroTurnStart;    // For tuto
+    public Action OnEnemyKilled;  
 
     [Header("Private Infos")]
     private bool isInBattle;
@@ -137,6 +139,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         {
             if ((unit as AIUnit).IsEnemy)
             {
+                OnEnemyKilled.Invoke();
+
                 currentEnemies.Remove((AIUnit)unit);
                 AddBattleEventToQueue(BattleEventType.GainXP);
             }
@@ -182,6 +186,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             AddUnit(battleRoom.RoomEnemies[i]);
             battleRoom.RoomEnemies[i].EnterBattle(battleRoom.RoomEnemies[i].CurrentTile);
         }
+
+        if (battleRoom.RoomEnemies.Count > 2) OnBattleWithManyEnemiesStart?.Invoke();
 
         CameraManager.Instance.EnterBattle(battleCenterPos, cameraSize);
         HeroesManager.Instance.EnterBattle(possibleTiles);

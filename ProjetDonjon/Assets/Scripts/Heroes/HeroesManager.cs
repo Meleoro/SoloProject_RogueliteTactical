@@ -78,7 +78,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             SwitchHero();
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) && GameManager.Instance.EnableDebugCommands)
         {
             TakeStairs();
         }

@@ -68,8 +68,7 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
     private void UpgradeChestInventory()
     {
-        currentLevel++;
-        _chestInventory.UpdateInventoryLevel(currentLevel);
+        _chestInventory.UpgradeInventory();
 
         _upgradePanel.DisplayLevel(currentLevel);
     }

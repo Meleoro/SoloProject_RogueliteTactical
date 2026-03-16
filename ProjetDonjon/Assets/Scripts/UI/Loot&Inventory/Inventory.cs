@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float distanceBetweenSlots;
     [SerializeField] private float inventoryScale;
     [SerializeField] private bool isChest;
+    [SerializeField] private UpgradeCost[] upgradeCosts;
 
     [Header("Public Infos")]
     public RectTransform RectTransform { get { return _rectTransform; } }
@@ -18,6 +19,9 @@ public class Inventory : MonoBehaviour
     public Hero AssociatedHero { get { return associatedHero; } }
     public InventorySlot[,] InventorySlotsTab { get { return inventorySlotsTab; } }
     public bool IsChest { get { return isChest; } }
+    public int CurrentLevel { get { return currentLevel; } }
+    public RectTransform[] QuickChangeButtonsPositions { get { return _quickChangeButtonsPositions; } }
+    public UpgradeCost[] UpgradeCosts { get { return upgradeCosts; } }
 
     [Header("Private Infos")]
     private InventorySlot[,] inventorySlotsTab = new InventorySlot[0, 0];
@@ -36,6 +40,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private RectTransform _overlayedSlotsParent;
     [SerializeField] private RectTransform _upgrade1SlotsParent;
     [SerializeField] private RectTransform _upgrade2SlotsParent;
+    [SerializeField] private RectTransform[] _quickChangeButtonsPositions;
     private RectTransform _rectTransform;
     private RectTransform _hiddenRectTr;
     private RectTransform _showedRectTr;
@@ -310,6 +315,13 @@ public class Inventory : MonoBehaviour
         return inventorySlots;
     }
 
+    public void UpgradeInventory()
+    {
+        currentLevel++;
+
+        UpdateInventoryLevel(currentLevel);
+    }
+
     public void UpdateInventoryLevel(int newLevel)
     {
         currentLevel = newLevel;
@@ -393,6 +405,22 @@ public class Inventory : MonoBehaviour
 
         _rectTransform.localScale = Vector3.one * inventoryScale;
         _lootParent.localScale = Vector3.one;
+    }
+
+    public void EnterBlacksmith()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].SetIsInBlacksmith(true);
+        }
+    }
+
+    public void ExitBlacksmith()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].SetIsInBlacksmith(false);
+        }
     }
 
     #endregion

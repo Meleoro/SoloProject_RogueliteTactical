@@ -24,10 +24,12 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public Action OnInventoryClose;
     public Action OnInventoryChange;
     public Action OnEquipmentAdded;
+    public Action<int> OnQuickChange;
+    public Action<int> OnCoinsObtained;
 
     [Header("Private Infos")]
     private Inventory[] allHeroesInventories = new Inventory[4];
-    private Inventory[] currentHeroesInventories = new Inventory[3];
+    private Inventory[] currentHeroesInventories = new Inventory[2];
     private bool[] enabledInventories = new bool[4];
     private List<InventorySlot> allSlots = new List<InventorySlot>();
     private List<Loot> allLoots = new List<Loot>();
@@ -41,6 +43,17 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public RectTransform FrontLootParent { get { return _frontLootPaent; } }
     public InventoryActionPanel InventoryActionPanel { get { return _inventoryActionsPanel; } }  
     public int CurrentCoins { get { return currentCoins; } }
+    public Inventory[] CurrentHeroesInventories { get { return currentHeroesInventories; } }
+
+    [Header("References Main")]
+    [SerializeField] private RectTransform[] _lootParents;
+    [SerializeField] private RectTransform _inventoriesParent;
+    [SerializeField] private RectTransform _frontLootPaent;
+    [SerializeField] private Image _backInventoriesImage;
+    [SerializeField] private Image _backFadeImage;
+    [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
+    [SerializeField] private CoinUI _coinUI;
+    [SerializeField] private Inventory _chestInventory;
 
     [Header("References Positions")]
     [SerializeField] private RectTransform[] _hiddenInventoryPositions;
@@ -51,15 +64,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     [SerializeField] private RectTransform _leftHiddenPosition;
     [SerializeField] private RectTransform _leftShownPosition;
 
-    [Header("References")]
-    [SerializeField] private RectTransform[] _lootParents;
-    [SerializeField] private RectTransform _inventoriesParent;
-    [SerializeField] private RectTransform _frontLootPaent;
-    [SerializeField] private Image _backInventoriesImage;
-    [SerializeField] private Image _backFadeImage;
-    [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
-    [SerializeField] private CoinUI _coinUI;
-    [SerializeField] private Inventory _chestInventory;
+    [Header("References Quick Change")]
+    [SerializeField] private QuickChangeButton[] _quickChangeButtons;
+    
 
 
     #region Setup
@@ -67,6 +74,11 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     private void Start()
     {
         _backInventoriesImage.rectTransform.position = _hiddenPosition.position;
+
+        for(int i = 0; i < _quickChangeButtons.Length; i++)
+        {
+            _quickChangeButtons[i].OnClick += ClickQuickChange;
+        }
 
         SaveManager.Instance.AddSaveableObject(this);
     }
@@ -314,6 +326,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     public void AddCoins(int quantity)
     {
+        OnCoinsObtained.Invoke(quantity);
+
         currentCoins += quantity;
         _coinUI.ActualiseCoins(currentCoins);
     }
@@ -322,6 +336,61 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         currentCoins -= quantity;
         _coinUI.ActualiseCoins(currentCoins);
+    }
+
+    #endregion
+
+
+    #region Quick Change Buttons
+
+    public void DisplayQuickChangeButtons(int inventoryIndex)
+    {
+        Inventory inventory = currentHeroesInventories[inventoryIndex];
+
+        for(int i = 0; i < _quickChangeButtons.Length; i++)
+        {
+            if(i >= currentHeroesInventories.Length)     // If the hero isn't unlocked yet
+            {
+                _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], false);
+                continue;
+            }
+
+            _quickChangeButtons[i].Show();
+            _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], true);
+
+            if (i == inventoryIndex) _quickChangeButtons[i].SelectHero();
+            else _quickChangeButtons[i].UnselectHero();
+        }
+    }
+
+    public void HideQuickChangeButtons()
+    {
+        for (int i = 0; i < currentHeroesInventories.Length; i++)
+        {
+            _quickChangeButtons[i].Hide();
+            _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[i].QuickChangeButtonsPositions[i], false);
+        }
+    }
+
+    public void ClickQuickChange(int inventoryIndex)
+    {
+        Inventory inventory = currentHeroesInventories[inventoryIndex];
+
+        for (int i = 0; i < _quickChangeButtons.Length; i++)
+        {
+            if (i >= currentHeroesInventories.Length)     // If the hero isn't unlocked yet
+            {
+                _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], false);
+                continue;
+            }
+
+            _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], true);
+
+            if (i == inventoryIndex) _quickChangeButtons[i].SelectHero();
+            else _quickChangeButtons[i].UnselectHero();
+        }
+
+        OnQuickChange?.Invoke(inventoryIndex);
     }
 
     #endregion
@@ -444,6 +513,23 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
 
         return bestSlot;
+    }
+
+
+    public void EnterBlacksmith()
+    {
+        for(int i = 0; i < currentHeroesInventories.Count(); i++)
+        {
+            currentHeroesInventories[i].EnterBlacksmith();
+        }
+    }
+
+    public void ExitBlacksmith()
+    {
+        for (int i = 0; i < currentHeroesInventories.Count(); i++)
+        {
+            currentHeroesInventories[i].ExitBlacksmith();
+        }
     }
 
     #endregion
