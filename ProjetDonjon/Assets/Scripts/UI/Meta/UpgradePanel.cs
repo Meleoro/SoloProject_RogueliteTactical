@@ -132,7 +132,7 @@ public class UpgradePanel : MonoBehaviour
 
     public void ClickUpgrade()
     {
-        if (!hasEnoughResources) return;
+        if (!hasEnoughResources || !hasUpgradeAvailable) return;
 
         for(int i = 0; i < currentUpgradeData.neededMaterials.Length; i++)
         {

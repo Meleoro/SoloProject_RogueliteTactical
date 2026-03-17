@@ -9,8 +9,8 @@ public class QuickChangeButton : MonoBehaviour
     [SerializeField] private int heroIndex;
     [SerializeField] private Sprite selectedSprite;
     [SerializeField] private Sprite unselectedSprite;
-    [SerializeField] private Color selectedIconColor;
-    [SerializeField] private Color unselectedIconColor;
+    [SerializeField] private Sprite selectedIconSprite;
+    [SerializeField] private Sprite unselectedIconSprite;
 
     [Header("Actions")]
     public Action<int> OnClick;
@@ -67,6 +67,12 @@ public class QuickChangeButton : MonoBehaviour
 
         _mainImage.sprite = selectedSprite;
         _mainImage.SetNativeSize();
+
+        _heroIconImage.sprite = selectedIconSprite;
+        _heroIconImage.SetNativeSize();
+
+        _rectTr.DOLocalMoveY(5, 0.2f).SetEase(Ease.OutBack);
+        _heroIconImage.rectTransform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void UnselectHero()
@@ -76,6 +82,12 @@ public class QuickChangeButton : MonoBehaviour
 
         _mainImage.sprite = unselectedSprite;
         _mainImage.SetNativeSize();
+
+        _heroIconImage.sprite = unselectedIconSprite;
+        _heroIconImage.SetNativeSize();
+
+        _rectTr.DOLocalMoveY(0, 0.2f).SetEase(Ease.OutBack);
+        _heroIconImage.rectTransform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
     }
 
     #endregion

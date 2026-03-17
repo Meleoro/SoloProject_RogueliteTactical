@@ -25,8 +25,9 @@ public class BlacksmithMenu : MonoBehaviour
     [SerializeField] private Image _upgradedEquipmentImage;
     [SerializeField] private UpgradePanel _upgradeInventory;
     [SerializeField] private UpgradePanel _upgradeEquipment;
-    [SerializeField] private DetailsPanel _detailsBase;
-    [SerializeField] private DetailsPanel _detailsUpgrade;
+    [SerializeField] private GenericDetailsPanel _detailsBase;
+    [SerializeField] private GenericDetailsPanel _detailsUpgrade;
+    [SerializeField] private RectTransform _detailsArrow;
     
 
     private void Start()
@@ -74,6 +75,8 @@ public class BlacksmithMenu : MonoBehaviour
         InventoriesManager.Instance.HideQuickChangeButtons();
         InventoriesManager.Instance.ExitBlacksmith();
 
+        HideDetails();
+
         StartCoroutine(HideCoroutine());
     }
 
@@ -102,6 +105,8 @@ public class BlacksmithMenu : MonoBehaviour
         _upgradedEquipmentImage.SetNativeSize(); 
 
         _upgradeEquipment.SetUpgradeCost(clickedLoot.LootData.upgradeCost);
+
+        ShowDetails(clickedLoot.LootData, clickedLoot.LootData.upgradedVersion);
     }
 
     private void UpgradeEquipment()
@@ -110,6 +115,27 @@ public class BlacksmithMenu : MonoBehaviour
 
         currentLoot.UpgradeLoot();
         _upgradeEquipment.SetUpgradeCost(currentLoot.LootData.upgradeCost);
+        ShowDetails(currentLoot.LootData, currentLoot.LootData.upgradedVersion);
+    }
+
+    private void ShowDetails(LootData baseLoot, LootData upgradedLoot)
+    {
+        if (!upgradedLoot) 
+        {
+            HideDetails();
+            return;
+        }
+
+        _detailsBase.LoadDetails(baseLoot, Vector3.zero, false, true);
+        _detailsUpgrade.LoadDetails(upgradedLoot, Vector3.zero, false, true);
+        _detailsArrow.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+    }
+
+    private void HideDetails()
+    {
+        _detailsBase.HideDetails();
+        _detailsUpgrade.HideDetails();
+        _detailsArrow.DOScale(Vector3.zero, 0.2f).SetEase(Ease.OutBack);
     }
 
     #endregion
@@ -139,6 +165,7 @@ public class BlacksmithMenu : MonoBehaviour
     private void UpgradeInventory()
     {
         currentInventory.UpgradeInventory();
+        _upgradeInventory.SetUpgradeCost(currentInventory.UpgradeCosts[currentInventory.CurrentLevel]);
     }
 
     #endregion

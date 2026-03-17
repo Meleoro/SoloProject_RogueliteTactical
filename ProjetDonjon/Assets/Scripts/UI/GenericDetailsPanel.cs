@@ -44,13 +44,15 @@ public class GenericDetailsPanel : MonoBehaviour
         transform.position = CameraManager.Instance.Camera.ViewportToWorldPoint(finalPosition);
     }
 
+
     #region All Load Functions
 
-    public void LoadDetails(LootData lootData, Vector3 position, bool mirrorHorizontal)
+    public void LoadDetails(LootData lootData, Vector3 position, bool mirrorHorizontal, bool noAdditionalDetails = false)
     {
         _mainRectTr.gameObject.SetActive(true);
 
-        SetPosition(position, mirrorHorizontal ? offsetInventory : -offsetInventory);
+        if(position != Vector3.zero) 
+            SetPosition(position, mirrorHorizontal ? offsetInventory : -offsetInventory);
 
         _nameText.text = lootData.lootName;
         _descriptionText.text = lootData.lootDescription;
@@ -94,6 +96,10 @@ public class GenericDetailsPanel : MonoBehaviour
             }
         }
 
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+
+        if (noAdditionalDetails) return;
+
         for (int i = 0; i < _additionalTooltips.Length; i++)
         {
             if (i < lootData.additionalTooltipDatas.Length)
@@ -102,8 +108,6 @@ public class GenericDetailsPanel : MonoBehaviour
             else
                 _additionalTooltips[i].Hide();
         }
-
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
     }
 
     public void LoadDetails(SkillTreeNodeData nodeData, Vector3 position, bool mirrorHorizontal)
