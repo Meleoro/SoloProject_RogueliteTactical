@@ -34,13 +34,8 @@ public class HeroInfosScreen : MonoBehaviour
     [SerializeField] private RectTransform _shownInventoryPosition;
     [SerializeField] private RectTransform _hiddenInventoryPosition;
     [SerializeField] private RectTransform _mainRectParent;
+    [SerializeField] private RectTransform _inventoryParent;
     [SerializeField] private EquipmentSlot[] _equipmentSlots;
-
-    [Header("References Buttons")]
-    [SerializeField] private RectTransform _leftButton;
-    [SerializeField] private RectTransform _rightButton;
-    [SerializeField] private RectTransform _shownLeftButtonPosition;
-    [SerializeField] private RectTransform _shownRightButtonPosition;
 
 
     private void Start()
@@ -58,25 +53,22 @@ public class HeroInfosScreen : MonoBehaviour
     }
 
 
-    public void ChangeHero(bool left)
+    public void ChangeHero(int index)
     {
-        if(left) currentHeroIndex = (--currentHeroIndex) % _heroesManager.Heroes.Length;
-        else currentHeroIndex = (++currentHeroIndex) % _heroesManager.Heroes.Length;
+        currentHeroIndex = index;
 
-        if (currentHeroIndex < 0) currentHeroIndex += _heroesManager.Heroes.Length;
+        //StartCoroutine(ChangeHeroCoroutine(left));
 
-        StartCoroutine(ChangeHeroCoroutine(left));
-
-        //ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex]);
-        //ActualiseInventory();
+        ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex]);
+        ActualiseInventory();
     }
 
-    private IEnumerator ChangeHeroCoroutine(bool goLeft)
+    private IEnumerator ChangeHeroCoroutine(int index)
     {
         isOpenning = true;
 
-        Vector3 pos1 = goLeft ? new Vector3(-800, 0, 0) : new Vector3(800, 0, 0);
-        Quaternion rot1 = goLeft ? Quaternion.Euler(0, 0, 15) : Quaternion.Euler(0, 0, -15);
+        Vector3 pos1 = new Vector3(-800, 0, 0);
+        Quaternion rot1 = Quaternion.Euler(0, 0, 15);
         currentInventory.RectTransform.DOLocalMove(pos1, 0.2f).SetEase(Ease.InCubic);
         currentInventory.RectTransform.DOLocalRotate(rot1.eulerAngles, 0.2f).SetEase(Ease.InCubic);
         currentInventory.LootParent.DOLocalMove(pos1, 0.2f).SetEase(Ease.InCubic);
@@ -123,21 +115,19 @@ public class HeroInfosScreen : MonoBehaviour
         ActualiseInfoScreen(_heroesManager.Heroes[_heroesManager.CurrentHeroIndex], false);
         currentHeroIndex = _heroesManager.CurrentHeroIndex;
 
+        ActualiseInventory();
+
         HeroesManager.Instance.Heroes[currentHeroIndex].Controller.StopControl();
+
+        InventoriesManager.Instance.OnQuickChange += ChangeHero;
+        InventoriesManager.Instance.DisplayQuickChangeButtons(0);
 
         OnShow.Invoke();
 
         isOpenning = true;
-        currentInventory = hero.Inventory;
 
-        currentInventory.RectTransform.position = _hiddenInventoryPosition.position;
-        currentInventory.LootParent.position = _hiddenInventoryPosition.position;
         _mainRectParent.UChangePosition(openDuration, _shownInfoScreenPosition.position, CurveType.EaseOutCubic);
-        currentInventory.RectTransform.UChangePosition(openDuration, _shownInventoryPosition.position, CurveType.EaseOutCubic);
-        currentInventory.LootParent.UChangePosition(openDuration, _shownInventoryPosition.position, CurveType.EaseOutCubic);
-
-        _leftButton.UChangePosition(openDuration, _shownLeftButtonPosition.position, CurveType.EaseOutCubic);
-        _rightButton.UChangePosition(openDuration, _shownRightButtonPosition.position, CurveType.EaseOutCubic);
+        _inventoryParent.UChangePosition(openDuration, _shownInventoryPosition.position, CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(openDuration);
 
@@ -151,14 +141,13 @@ public class HeroInfosScreen : MonoBehaviour
         InventoriesManager.Instance.InventoryActionPanel.ClosePanel();
         HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
 
+        InventoriesManager.Instance.OnQuickChange -= ChangeHero;
+        InventoriesManager.Instance.HideQuickChangeButtons();
+
         OnHide.Invoke();
 
         _mainRectParent.UChangePosition(closeDuration, _hiddenInfoScreenPosition.position, CurveType.EaseOutCubic);
-        currentInventory.RectTransform.UChangePosition(closeDuration, _hiddenInventoryPosition.position, CurveType.EaseOutCubic);
-        currentInventory.LootParent.UChangePosition(closeDuration, _hiddenInventoryPosition.position, CurveType.EaseOutCubic);
-
-        _leftButton.UChangePosition(openDuration, _shownLeftButtonPosition.position + new Vector3(-3f, 0, 0), CurveType.EaseOutCubic);
-        _rightButton.UChangePosition(openDuration, _shownRightButtonPosition.position + new Vector3(3f, 0, 0), CurveType.EaseOutCubic);
+        _inventoryParent.UChangePosition(closeDuration, _hiddenInventoryPosition.position, CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(closeDuration);
 
@@ -284,13 +273,6 @@ public class HeroInfosScreen : MonoBehaviour
 
             if (hero.EquippedLoot[i] == null) continue;
 
-            //currentHealth += hero.EquippedLoot[i].LootData.healthUpgrade;
-            //currentStrength += hero.EquippedLoot[i].LootData.strengthUpgrade;
-            //currentSpeed += hero.EquippedLoot[i].LootData.speedUpgrade;
-            //currentLuck += hero.EquippedLoot[i].LootData.luckUpgrade;
-            //currentMovePoints += hero.EquippedLoot[i].LootData.mpUpgrade;
-            //currentMaxSP += hero.EquippedLoot[i].LootData.spUpgrade;
-
             _equipmentSlots[i].AddEquipment(hero.EquippedLoot[i], false, hero);
         }
 
@@ -306,8 +288,6 @@ public class HeroInfosScreen : MonoBehaviour
         _statsTexts[4].text = hero.CurrentMovePoints.ToString();
         _statsTexts[5].text = hero.CurrentMaxSkillPoints.ToString();
     }
-
-
 
     private void VerifyValueChangeEffects(int newMaxHealth, int newStrength, int newSpeed, int newLuck, int newMovePoints, int maxSP)
     {
@@ -332,12 +312,16 @@ public class HeroInfosScreen : MonoBehaviour
 
     private void ActualiseInventory()
     {
-        currentInventory.RebootPosition();
+        if (currentInventory is not null)
+            currentInventory.RebootPosition();
 
-        currentInventory = hero.Inventory;
+        currentInventory = InventoriesManager.Instance.CurrentHeroesInventories[currentHeroIndex];
 
-        currentInventory.RectTransform.position = _shownInventoryPosition.position;
-        currentInventory.LootParent.position = _shownInventoryPosition.position;
+        currentInventory.RectTransform.SetParent(_inventoryParent, true);
+        currentInventory.RectTransform.localPosition = Vector3.zero;
+
+        currentInventory.LootParent.SetParent(_inventoryParent, true);
+        currentInventory.LootParent.localPosition = Vector3.zero;
     }
     
     #endregion

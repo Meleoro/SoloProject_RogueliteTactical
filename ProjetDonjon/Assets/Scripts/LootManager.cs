@@ -82,6 +82,27 @@ public class LootManager : GenericSingletonClass<LootManager>
         }
     }
 
+
+    public void SpawnLootTrialEnd(Vector2 spawnPosition)
+    {
+        // Main loot
+        int spawnedLootAmount = Random.Range(currentFloorLootData.minLootAmountPerChallenge, currentFloorLootData.maxLootAmountPerChallenge + 1);
+
+        for (int i = 0; i < spawnedLootAmount; i++)
+        {
+            SpawnLoot(currentFloorLootData.probaPerTierChallenge, spawnPosition);
+        }
+
+        // Coins
+        int pickedCoinsAmount = Random.Range(currentFloorLootData.minChallengeCoins, currentFloorLootData.maxChallengeCoins);
+
+        for (int i = 0; i < pickedCoinsAmount; i++)
+        {
+            Coin coin = Instantiate(coinPrefab, spawnPosition, Quaternion.Euler(0, 0, 0), UIManager.Instance.CoinUI.transform);
+            coin.transform.position = spawnPosition;
+        }
+    }
+
     #endregion
 
 

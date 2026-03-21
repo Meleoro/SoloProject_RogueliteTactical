@@ -82,6 +82,11 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         {
             TakeStairs();
         }
+
+        if (Input.GetKeyDown(KeyCode.K) && GameManager.Instance.EnableDebugCommands)
+        {
+            HeroDies();
+        }
     }
 
 

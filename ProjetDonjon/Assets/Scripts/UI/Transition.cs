@@ -28,6 +28,7 @@ public class Transition : MonoBehaviour
     private TextMeshProUGUI[] buttonsTexts;
     private Coroutine arrowsCoroutine;
     private int currentFloor;
+    private bool isOnLastFloor;
 
     [Header("References")]
     [SerializeField] private Image _fadeImage;
@@ -71,6 +72,9 @@ public class Transition : MonoBehaviour
 
         _mainRectTr.localScale = Vector3.zero;
 
+        if (floorIndex == (enviroData.floorsAmount - 1)) isOnLastFloor = true;
+        else isOnLastFloor = false;
+
         if (floorIndex == 0)
         {
             StartCoroutine(IntroCoroutine(2f));
@@ -84,7 +88,9 @@ public class Transition : MonoBehaviour
             _statsTexts[2].text = " " + GameManager.Instance.ExpeditionRelicCount;
             _statsTexts[3].text = " " + GameManager.Instance.ExpeditionChestCount;
 
-            _continueButton.gameObject.SetActive(true);
+            if(!isOnLastFloor) _continueButton.gameObject.SetActive(true);
+            else _continueButton.gameObject.SetActive(false);
+
             _stopButton.gameObject.SetActive(true);
 
             StartCoroutine(ChangeFloorCoroutine(floorIndex, 1.75f));
@@ -95,9 +101,19 @@ public class Transition : MonoBehaviour
     {
         OnTransitionStart?.Invoke();
 
-        _mainRectTr.DOScale(Vector3.zero, 0.5f);
+        _mainRectTr.localScale = Vector3.zero;
 
-        FadeScreen(0.2f, 1f);
+        _continueButton.gameObject.SetActive(false);
+        _stopButton.gameObject.SetActive(true);
+
+        ActualiseFloorsTexts(currentEnviroData);
+
+        _statsTexts[0].text = " " + GameManager.Instance.ExpeditionCoinsCount;
+        _statsTexts[1].text = " " + GameManager.Instance.ExpeditionKillCount;
+        _statsTexts[2].text = " " + GameManager.Instance.ExpeditionRelicCount;
+        _statsTexts[3].text = " " + GameManager.Instance.ExpeditionChestCount;
+
+        StartCoroutine(StartDeathCoroutine());
     }
 
 
@@ -140,11 +156,22 @@ public class Transition : MonoBehaviour
         yield return new WaitForSeconds(duration * 0.4f);
 
         StartCoroutine(_floorTransitions[floorIndex - 1].DoClearedEffectCoroutine());
-        _floorTransitions[floorIndex].StartNextEffect();
+        if(!isOnLastFloor) _floorTransitions[floorIndex].StartNextEffect();
 
-        DisplayArrows();
+        if(!isOnLastFloor) DisplayArrows();
 
         TutoManager.Instance.DisplayTutorial(10);
+    }
+
+    private IEnumerator StartDeathCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        FadeScreen(0.2f, 1f);
+
+        yield return new WaitForSeconds(0.3f);
+
+        _mainRectTr.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
     }
 
     private IEnumerator ContinueCoroutine(float duration)
@@ -166,7 +193,7 @@ public class Transition : MonoBehaviour
 
     private IEnumerator StopCoroutine(float duration)
     {
-        _mainRectTr.DOScale(Vector3.zero, duration);
+        _mainRectTr.DOScale(Vector3.zero, duration).SetEase(Ease.InOutSine);
         _floorTransitions[currentFloor + 1].EndNextEffect();
 
         yield return new WaitForSeconds(duration);
@@ -293,7 +320,7 @@ public class Transition : MonoBehaviour
         _continueButton.enabled = false;
         _stopButton.enabled = false;
 
-        StartCoroutine(StopCoroutine(1f));
+        StartCoroutine(StopCoroutine(0.3f));
     }
 
     #endregion

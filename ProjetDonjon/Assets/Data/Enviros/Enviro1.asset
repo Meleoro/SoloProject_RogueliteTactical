@@ -71,10 +71,7 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: e5b996a8a2f8abc4b90543f37d6206b2, type: 3}
   - {fileID: 2917294264406634095, guid: 9b0773dfa9997374aa423a2fac10c827, type: 3}
   possiblePuzzleRooms:
-  - {fileID: 2917294264406634095, guid: 4e1c9c053424a984d814e594755a3ded, type: 3}
-  - {fileID: 2917294264406634095, guid: 156a46d7ea7d6124b802ffed2bfe3346, type: 3}
-  - {fileID: 2917294264406634095, guid: c826b453fc43a35478cd1fd3ac4eb250, type: 3}
-  - {fileID: 2917294264406634095, guid: df77dd622b9431f4294e6b2221fa6a9b, type: 3}
+  - {fileID: 2917294264406634095, guid: 1075ff869e0b00943aac5ffef3c7b6a9, type: 3}
   possibleChallengeRooms:
   - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
   - {fileID: 2917294264406634095, guid: 4701f986ea23a454c9225a52851a083f, type: 3}
