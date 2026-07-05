@@ -29,7 +29,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     [Header("Private Infos")]
     private Inventory[] allHeroesInventories = new Inventory[4];
-    private Inventory[] currentHeroesInventories = new Inventory[2];
+    private Inventory[] currentHeroesInventories = new Inventory[3];
     private bool[] enabledInventories = new bool[4];
     private List<InventorySlot> allSlots = new List<InventorySlot>();
     private List<Loot> allLoots = new List<Loot>();
@@ -52,7 +52,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     [SerializeField] private Image _backInventoriesImage;
     [SerializeField] private Image _backFadeImage;
     [SerializeField] private InventoryActionPanel _inventoryActionsPanel;
-    [SerializeField] private CoinUI _coinUI;
+    [SerializeField] private CoinUI _topRightCointUI;
+    [SerializeField] private CoinUI _hudBarCoinUI;
     [SerializeField] private Inventory _chestInventory;
 
     [Header("References Positions")]
@@ -78,6 +79,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         for(int i = 0; i < _quickChangeButtons.Length; i++)
         {
             _quickChangeButtons[i].OnClick += ClickQuickChange;
+            _quickChangeButtons[i].Hide();
         }
 
         SaveManager.Instance.AddSaveableObject(this);
@@ -329,13 +331,15 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         OnCoinsObtained.Invoke(quantity);
 
         currentCoins += quantity;
-        _coinUI.ActualiseCoins(currentCoins);
+        _topRightCointUI.ActualiseCoins(currentCoins);
+        _hudBarCoinUI.ActualiseCoins(currentCoins);
     }
 
     public void RemoveCoins(int quantity)
     {
         currentCoins -= quantity;
-        _coinUI.ActualiseCoins(currentCoins);
+        _topRightCointUI.ActualiseCoins(currentCoins);
+        _hudBarCoinUI.ActualiseCoins(currentCoins);
     }
 
     #endregion
@@ -349,7 +353,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         for(int i = 0; i < _quickChangeButtons.Length; i++)
         {
-            if(i >= currentHeroesInventories.Length)     // If the hero isn't unlocked yet
+            if (i >= currentHeroesInventories.Length || !currentHeroesInventories[i])     // If the hero isn't unlocked yet
             {
                 _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], false);
                 continue;
@@ -368,6 +372,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         for (int i = 0; i < currentHeroesInventories.Length; i++)
         {
             _quickChangeButtons[i].Hide();
+
+            if (!currentHeroesInventories[i]) continue;
+
             _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[i].QuickChangeButtonsPositions[i], false);
         }
     }
@@ -378,7 +385,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         for (int i = 0; i < _quickChangeButtons.Length; i++)
         {
-            if (i >= currentHeroesInventories.Length)     // If the hero isn't unlocked yet
+            if (i >= currentHeroesInventories.Length || !currentHeroesInventories[i])     // If the hero isn't unlocked yet
             {
                 _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], false);
                 continue;

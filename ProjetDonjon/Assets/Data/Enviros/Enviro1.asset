@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: bc47482e243ce94468c87bc393626d78, type: 3}
   - {fileID: 2917294264406634095, guid: 9cc03ae9ad4105a419c16a8e903adfae, type: 3}
   - {fileID: 2917294264406634095, guid: b749238e1025e1649a06205f509d2f1b, type: 3}
+  - {fileID: 2917294264406634095, guid: fd474c9e72daafd42aa7abcc8fd66eea, type: 3}
   possiblePlateformRooms:
   - {fileID: 2917294264406634095, guid: acd82df5924bf224db9788423c8ed8dc, type: 3}
   - {fileID: 2917294264406634095, guid: f309f058cedd6e24a90942071bb7db5a, type: 3}
@@ -71,7 +72,10 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: e5b996a8a2f8abc4b90543f37d6206b2, type: 3}
   - {fileID: 2917294264406634095, guid: 9b0773dfa9997374aa423a2fac10c827, type: 3}
   possiblePuzzleRooms:
+  - {fileID: 2917294264406634095, guid: 4e1c9c053424a984d814e594755a3ded, type: 3}
+  - {fileID: 2917294264406634095, guid: 156a46d7ea7d6124b802ffed2bfe3346, type: 3}
   - {fileID: 2917294264406634095, guid: 1075ff869e0b00943aac5ffef3c7b6a9, type: 3}
+  - {fileID: 2917294264406634095, guid: 8b67ade2c216ba14694f5280f41ebbd0, type: 3}
   possibleChallengeRooms:
   - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
   - {fileID: 2917294264406634095, guid: 4701f986ea23a454c9225a52851a083f, type: 3}
@@ -92,6 +96,15 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: b7ad3067bb488fd4298a1dc0e58861e6, type: 3}
   - {fileID: 2917294264406634095, guid: 6c5353f7fbddb1e4089c50b1b4dff520, type: 3}
   - {fileID: 2917294264406634095, guid: e18541a798be0a1499007cd0b668cbcc, type: 3}
+  possibleCorridorPlateformRoomsHard:
+  - {fileID: 2917294264406634095, guid: 361e3014fa138844ca03e683e249f769, type: 3}
+  - {fileID: 2917294264406634095, guid: 99f9fd5f0f244a64486ab67d48517fef, type: 3}
+  possiblePlateformRoomsHard: []
+  possiblePuzzleRoomsHard:
+  - {fileID: 2917294264406634095, guid: 1f4958465627865419952408f56cf37e, type: 3}
+  - {fileID: 2917294264406634095, guid: 71b5b5c1b0a64f14ebe0b69e442bd9b6, type: 3}
+  - {fileID: 2917294264406634095, guid: c826b453fc43a35478cd1fd3ac4eb250, type: 3}
+  - {fileID: 2917294264406634095, guid: df77dd622b9431f4294e6b2221fa6a9b, type: 3}
   possibleCommonLoot:
   - probability: 25
     loot: {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}

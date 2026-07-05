@@ -2810,6 +2810,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_122
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 98
+        width: 28
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b24571d4916254e8dbd47bf959f811
+      internalID: 1894895985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -2851,6 +2873,7 @@ TextureImporter:
       Enviro1Props_12: 75099340
       Enviro1Props_120: -871091402
       Enviro1Props_121: 973576604
+      Enviro1Props_122: 1894895985
       Enviro1Props_13: 1927938167
       Enviro1Props_14: 2029704918
       Enviro1Props_15: -109298568

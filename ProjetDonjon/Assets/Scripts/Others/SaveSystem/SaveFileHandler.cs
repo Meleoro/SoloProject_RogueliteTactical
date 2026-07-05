@@ -4,17 +4,17 @@ using UnityEngine;
 public class SaveFileHandler 
 {
     private string dataDirPath = "";
-    private string dataFileName = "";
+    private string[] dataFileNames = new string[3];
 
-    public SaveFileHandler(string dirPath, string fileName)
+    public SaveFileHandler(string dirPath, string[] fileName)
     {
         dataDirPath = dirPath;
-        dataFileName = fileName;
+        dataFileNames = fileName;
     }
 
-    public GameData Load()
+    public GameData Load(int index)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(dataDirPath, dataFileNames[index]);
         GameData loadedData = null;
 
         if(File.Exists(fullPath))
@@ -35,9 +35,9 @@ public class SaveFileHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(GameData data, int index)
     {
-        string fullPath =  Path.Combine(dataDirPath, dataFileName);
+        string fullPath =  Path.Combine(dataDirPath, dataFileNames[index]);
 
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
         string dataToStore = JsonUtility.ToJson(data, true);

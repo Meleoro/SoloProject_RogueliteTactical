@@ -39,6 +39,9 @@ public class EnviroData : ScriptableObject
     [Header("Hard Rooms")]
     public Room[] possibleCorridorTrapRoomsHard;
     public Room[] possibleTrapRoomsHard;
+    public Room[] possibleCorridorPlateformRoomsHard;
+    public Room[] possiblePlateformRoomsHard;
+    public Room[] possiblePuzzleRoomsHard;
 
     [Header("Balancing")]
     public PossibleLootData[] possibleCommonLoot;

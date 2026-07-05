@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,70 +8,104 @@ using Utilities;
 
 public class SaveManager : GenericSingletonClass<SaveManager>
 {
-    [SerializeField] private string fileName;
+    [Header("Paramaters")]
+    [SerializeField] private int fileCount;
+    [SerializeField] private string[] fileNames;
     [SerializeField] private bool newGameOnStart;
+
+    [Header("Public Infos")]
+    public bool[] HasSaveFile { private set; get; }
+    public int CurrentFileIndex { private set; get; }
+    public GameData[] GameDatas { private set; get; }
+
+    [Header("Private Infos")]
     private SaveFileHandler handler;
-    private GameData gameData;
     private List<ISaveable> saveableObjects;
 
+
+    #region Start Setup
 
     public override void Awake()
     {
         base.Awake();
 
-        handler = new SaveFileHandler(Application.persistentDataPath, fileName);
+        CurrentFileIndex = -1;
+
+        handler = new SaveFileHandler(Application.persistentDataPath, fileNames);
         saveableObjects = new List<ISaveable>();
 
-        LoadGame();
+        //LoadGame();
+        LoadSaves();
     }
 
     private void Start()
     {
         SetupSaveableObjects();
 
-        if (newGameOnStart) NewGame();
+        if (newGameOnStart) NewGame(0);
 
-        LoadGame();
+        //LoadGame();
     }
 
-    [ContextMenu("New Game")]
-    public void NewGame()
+    public void LoadSaves()
     {
-        gameData = new GameData();
+        GameDatas = new GameData[fileCount];
+        HasSaveFile = new bool[fileCount];
 
-        handler.Save(gameData);
+        for (int i = 0; i < fileCount; i++)
+        {
+            GameDatas[i] = handler.Load(i);
+            HasSaveFile[i] = (GameDatas[i] != null);
+        }
     }
 
-    public void SaveGame()
+    #endregion
+
+
+    #region Load / Save / New
+
+    public void NewGame(int index)
     {
+        GameDatas[index] = new GameData();
+
+        handler.Save(GameDatas[index], index);
+    }
+
+    public void SaveGame(int index)
+    {
+        if (index == -1) return;
+
         for (int i = 0; i < saveableObjects.Count; i++)
         {
-            saveableObjects[i].SaveGame(ref gameData);
+            saveableObjects[i].SaveGame(ref GameDatas[index]);
         }
 
-        handler.Save(gameData);
+        handler.Save(GameDatas[index], index);
     }
 
-    public void LoadGame()
+    public void LoadGame(int index)
     {
-        gameData = handler.Load();
+        GameDatas[index] = handler.Load(index);
 
-        if(gameData == null)
+        if (GameDatas[index] == null)
         {
-            NewGame();
+            NewGame(index);
         }
 
-        for(int i= 0; i < saveableObjects.Count; i++)
+        for (int i = 0; i < saveableObjects.Count; i++)
         {
-            saveableObjects[i].LoadGame(gameData);
+            saveableObjects[i].LoadGame(GameDatas[index]);
         }
     }
 
+    #endregion
 
+
+    #region Others 
 
     private void SetupSaveableObjects()
     {
-        saveableObjects = FindObjectsByType<MonoBehaviour>(0).OfType<ISaveable>().ToList();    
+        saveableObjects = FindObjectsByType<MonoBehaviour>().OfType<ISaveable>().ToList();
     }
 
     public void AddSaveableObject(ISaveable obj)
@@ -77,12 +113,15 @@ public class SaveManager : GenericSingletonClass<SaveManager>
         if (saveableObjects.Contains(obj)) return;
         saveableObjects.Add(obj);
 
-        obj.LoadGame(gameData);
+        if (CurrentFileIndex == -1) return;
+        
+        obj.LoadGame(GameDatas[CurrentFileIndex]);
     }
-
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        SaveGame(CurrentFileIndex);
     }
+
+    #endregion
 }

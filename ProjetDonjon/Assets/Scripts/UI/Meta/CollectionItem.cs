@@ -19,6 +19,7 @@ public class CollectionRelic : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image _relicImage;
     [SerializeField] private Image _secondaryImage;
+    [SerializeField] private Image _button;
     [SerializeField] private RectTransform _rectTr;
     [SerializeField] private Animator _animator;
     [SerializeField] private TextMeshProUGUI _nameText;
@@ -30,21 +31,25 @@ public class CollectionRelic : MonoBehaviour
     {
         if (relicData == null)
         {
+            _button.gameObject.SetActive(false);
             _relicImage.gameObject.SetActive(false);
             _rarityText.enabled = false;
             _nameText.enabled = false;
             return;
         }
 
+        _button.gameObject.SetActive(true);
         _relicImage.gameObject.SetActive(true);
         _rarityText.enabled = true;
         _nameText.enabled = true;
 
         _relicImage.sprite = relicData.icon;
         _secondaryImage.sprite = relicData.icon;
+        _button.sprite = relicData.icon;
 
         _relicImage.SetNativeSize();
         _secondaryImage.SetNativeSize();
+        _button.SetNativeSize();
 
         _rarityText.text = relicData.rarityType.ToString().ToUpper();
         _rarityText.color = colorPerRarity[(int)relicData.rarityType];
@@ -64,6 +69,9 @@ public class CollectionRelic : MonoBehaviour
         }
     }
 
+
+    #region Appear + New
+
     public IEnumerator NewRelicEffectCoroutine()
     {
         _animator.SetTrigger("GetNewRelic");
@@ -77,17 +85,38 @@ public class CollectionRelic : MonoBehaviour
         //_rectTr.DOScale(Vector3.one * 1f, 0.2f).SetEase(Ease.InOutCubic);
     }
 
+    public IEnumerator AppearEffectCoroutine(float startDelay)
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        _animator.SetBool("IsDisplayed", true);
+    }
+
+    public IEnumerator DisappearEffectCoroutine(float startDelay)
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        _animator.SetBool("IsDisplayed", false);
+    }
+
+    #endregion
+
 
     #region Mouse Functions
 
     public void Hover()
     {
-        _rectTr.UChangeScale(0.2f, Vector3.one * 1.2f, CurveType.EaseOutSin);
+        if(!isPossessed)
+        {
+            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(relicData, transform.position);
+        }
+        _animator.SetBool("IsHovered", true);
     }
 
     public void Unhover()
     {
-        _rectTr.UChangeScale(0.2f, Vector3.one, CurveType.EaseOutSin);
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
+        _animator.SetBool("IsHovered", false);
     }
 
     #endregion

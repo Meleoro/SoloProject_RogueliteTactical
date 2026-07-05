@@ -52,7 +52,7 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
     // For Debug
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O) && GameManager.Instance.EnableDebugCommands)
         {
             int index = Random.Range(0, currentAvailableRelics.Count);
             Relic newRelic = Instantiate(relicPrefab, HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].transform.position, Quaternion.Euler(0, 0, 0));

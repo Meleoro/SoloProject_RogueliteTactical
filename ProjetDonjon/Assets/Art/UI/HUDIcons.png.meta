@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -538,7 +538,7 @@ TextureImporter:
         width: 28
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -547,6 +547,116 @@ TextureImporter:
       bones: []
       spriteID: 77ad6775c091a3f48a92325677ba5f60
       internalID: -832827744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDIcons_20
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 199
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aad3d91ba1255de43be71b9800863a82
+      internalID: 173758831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDIcons_21
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 199
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7936cf32facbd58418862a45cdc41cb3
+      internalID: -1398061075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDIcons_22
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 199
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69c3de62335740642afab0b2cb2da1c4
+      internalID: 1306097875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDIcons_23
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 199
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d966ce19e774d31468d79f60b7a5ea4a
+      internalID: -1292711102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDIcons_24
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 199
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e118578328de5b43a9e95df1c5a2c46
+      internalID: -1236190033
       vertices: []
       indices: 
       edges: []
@@ -578,6 +688,11 @@ TextureImporter:
       HUDIcons_18: -1036804249
       HUDIcons_19: -832827744
       HUDIcons_2: 8111326630984187781
+      HUDIcons_20: 173758831
+      HUDIcons_21: -1398061075
+      HUDIcons_22: 1306097875
+      HUDIcons_23: -1292711102
+      HUDIcons_24: -1236190033
       HUDIcons_3: -137933233355021695
       HUDIcons_4: -3739061236740458126
       HUDIcons_5: -1330406047

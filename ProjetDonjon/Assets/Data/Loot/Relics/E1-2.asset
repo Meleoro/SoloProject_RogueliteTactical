@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b35908f0dd9829489f2f95c15984d9a, type: 3}
+  m_Name: E1-2
+  m_EditorClassIdentifier: 
+  relicName: BRUTE'S SKULL
+  relicDescription: 
+  relicHint: CAN ONLY BE FOUND WHEN DEFEATING THE BRUTE
+  icon: {fileID: 1066309943, guid: 65bdc79d4d0e3214394972f5a75bd9c6, type: 3}
+  rarityType: 2
+  spawnType: 0
+  spawnProbaPerFloor:
+  - 0
+  - 0
+  - 75
+  - 0
+  - 0
+  - 0

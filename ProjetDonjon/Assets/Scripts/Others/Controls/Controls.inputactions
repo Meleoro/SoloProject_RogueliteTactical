@@ -70,6 +70,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Collection",
+                    "type": "Button",
+                    "id": "5252ca4c-fb4e-48c3-8ad6-779b0c7120f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RotateLeft",
                     "type": "Button",
                     "id": "30809e02-f676-4c4a-bb54-c170be4b4062",
@@ -435,6 +444,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShowAllPaterns",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bd3d66b-f3ca-4aa9-852c-36621541bd4f",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Collection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

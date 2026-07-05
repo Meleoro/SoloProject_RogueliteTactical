@@ -3,11 +3,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 using Utilities;
 
 public class CollectionMenu : MonoBehaviour
 {
-
+    [Header("Parameters")]
+    [SerializeField] private float minOpenRelicAppearDelay;
+    [SerializeField] private float maxOpenRelicAppearDelay;
 
     [Header("Actions")]
     public Action OnStartTransition;
@@ -22,6 +25,7 @@ public class CollectionMenu : MonoBehaviour
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private CollectionRelic[] _collectionRelics;
+    [SerializeField] private Animator _animator;
 
 
 
@@ -54,7 +58,7 @@ public class CollectionMenu : MonoBehaviour
 
     private IEnumerator AddNewRelicCoroutine(RelicData relicData, int relicIndex)
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.7f);
 
         int pageIndex = (relicIndex / 12);
         int pageRelicIndex = relicIndex - (pageIndex * 12);
@@ -83,14 +87,21 @@ public class CollectionMenu : MonoBehaviour
         possessedRelics = RelicsManager.Instance.PossessedRelicIndexes;
         LoadPage(startPage);
 
+        _animator.SetBool("IsDisplayed", true);
+
+        for (int i = 0; i < _collectionRelics.Length; i++)
+        {
+            StartCoroutine(_collectionRelics[i].AppearEffectCoroutine(Random.Range(minOpenRelicAppearDelay, maxOpenRelicAppearDelay)));
+        }
+
         StartCoroutine(ShowCoroutine());
     }
 
     private IEnumerator ShowCoroutine()
     {
-        _mainRectTr.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+        //_mainRectTr.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
 
         OnEndTransition?.Invoke();
     }
@@ -106,14 +117,21 @@ public class CollectionMenu : MonoBehaviour
 
         _backgroundImage.DOFade(0f, 0.3f);
 
+        _animator.SetBool("IsDisplayed", false);
+
+        for (int i = 0; i < _collectionRelics.Length; i++)
+        {
+            StartCoroutine(_collectionRelics[i].DisappearEffectCoroutine(0.01f));
+        }
+
         StartCoroutine(HideCoroutine());
     }
 
     private IEnumerator HideCoroutine()
     {
-        _mainRectTr.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack);
+        //_mainRectTr.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         _mainRectTr.gameObject.SetActive(false);
 

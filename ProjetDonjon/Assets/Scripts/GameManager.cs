@@ -6,6 +6,7 @@ using Utilities;
 public class GameManager : GenericSingletonClass<GameManager>
 {
     [Header("Parameters")]
+    [SerializeField] private bool startGameInMainMenu = true;
     [SerializeField] private bool enableDebugCommands;
     [SerializeField] private bool startGameInExplo;
     [SerializeField] private EnviroData startEnviroData;
@@ -16,6 +17,7 @@ public class GameManager : GenericSingletonClass<GameManager>
     [Header("Public Infos")]
     public bool IsInExplo { get; private set; }
     public bool EnableDebugCommands { get { return enableDebugCommands; } }
+    public bool StartGameInMainMenu { get { return startGameInMainMenu; } }
     public int ExpeditionCoinsCount { get; private set; }
     public int ExpeditionKillCount { get; private set; }
     public int ExpeditionRelicCount { get; private set; }
@@ -27,6 +29,14 @@ public class GameManager : GenericSingletonClass<GameManager>
         BattleManager.Instance.OnEnemyKilled += KillEnemy;
         InventoriesManager.Instance.OnCoinsObtained += ObtainGold;
         RelicsManager.Instance.OnRelicObtained += ObtainRelic;
+        if(startGameInMainMenu)
+        {
+            return;
+        }
+        else
+        {
+            SaveManager.Instance.LoadGame(0);
+        }
 
         if (startGameInExplo || !TutoManager.Instance.DidTutorial)
         {
@@ -47,7 +57,25 @@ public class GameManager : GenericSingletonClass<GameManager>
     }
 
 
-    #region Start / End Expedition
+    #region Change Game State
+
+    public IEnumerator StartGameCoroutine()
+    {
+        UIManager.Instance.Transition.FadeScreen(0.8f, 1);
+
+        yield return new WaitForSeconds(1.0f);
+
+        UIMetaManager.Instance.MainMenu.gameObject.SetActive(false);
+
+        if (!TutoManager.Instance.DidTutorial)
+        {
+            StartExploration(startEnviroData, true);
+        }
+        else
+        {
+            UIMetaManager.Instance.EnterMetaMenu();
+        }
+    }
 
     public void StartExploration(EnviroData enviroData, bool isStart)
     {

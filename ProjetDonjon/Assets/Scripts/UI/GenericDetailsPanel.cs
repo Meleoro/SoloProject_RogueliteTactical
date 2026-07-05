@@ -12,6 +12,7 @@ public class GenericDetailsPanel : MonoBehaviour
     [SerializeField] private Vector3 offsetSkillTree;
     [SerializeField] private Vector3 offsetInventory;
     [SerializeField] private Vector3 offsetAlteration;
+    [SerializeField] private Vector3 offsetRelic;
 
     [Header("Private Infos")]
     private Coroutine appearCoroutine;
@@ -225,6 +226,19 @@ public class GenericDetailsPanel : MonoBehaviour
                     break;
             }
         }
+
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+    }
+
+    public void LoadDetails(RelicData relicData, Vector3 position)
+    {
+        _mainRectTr.gameObject.SetActive(true);
+        SetPosition(position, offsetRelic);
+
+        _numberText.text = "";
+
+        _nameText.text = "?????";
+        _descriptionText.text = relicData.relicHint;
 
         appearCoroutine = StartCoroutine(AppearEffectCoroutine());
     }

@@ -101,6 +101,11 @@ public class UIManager : GenericSingletonClass<UIManager>
                 {
                     _skillsMenu.Show(); 
                 }
+
+                if(InputManager.wantsToCollection)
+                {
+                    _collectionMenu.Show();
+                }
                 break;
 
 

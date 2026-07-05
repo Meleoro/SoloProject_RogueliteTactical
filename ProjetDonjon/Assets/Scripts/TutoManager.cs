@@ -41,14 +41,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     private void Start()
     {
-        StartCoroutine(BindTutorialsDelayCoroutine());
-    }
 
-    private IEnumerator BindTutorialsDelayCoroutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        BindTutorials();
     }
 
     // Called at the start to bind the tutorial steps the player hasn't done
@@ -403,6 +396,8 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         didTutorialStep = data.finishedTutorialSteps;
         didAdditionalTutorialSteps = data.finishedAdditionalTutorialSteps;
         didTutorial = data.launchedTutorial;
+
+        BindTutorials();
     }
 
     public void SaveGame(ref GameData data)

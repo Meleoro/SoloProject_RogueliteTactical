@@ -59,7 +59,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     public void EndExploration()
     {
-        SaveManager.Instance.SaveGame();
+        SaveManager.Instance.SaveGame(SaveManager.Instance.CurrentFileIndex);
 
         StopControl();
 

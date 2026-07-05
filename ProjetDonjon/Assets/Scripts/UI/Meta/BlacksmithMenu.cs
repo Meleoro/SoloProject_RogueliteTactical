@@ -15,6 +15,7 @@ public class BlacksmithMenu : MonoBehaviour
     [Header("Private Infos")]
     private Inventory currentInventory;
     private Loot currentLoot;
+    private bool isDoingUpgradeEffect;
 
     [Header("References")]
     [SerializeField] private MainMetaMenu _mainMetaMenu;
@@ -23,6 +24,7 @@ public class BlacksmithMenu : MonoBehaviour
     [SerializeField] private RectTransform _middlePosRectTr;
     [SerializeField] private RectTransform _bottomPosRectTr;
     [SerializeField] private Image _upgradedEquipmentImage;
+    [SerializeField] private Image _upgradedEquipmentImageFaded;
     [SerializeField] private UpgradePanel _upgradeInventory;
     [SerializeField] private UpgradePanel _upgradeEquipment;
     [SerializeField] private GenericDetailsPanel _detailsBase;
@@ -65,6 +67,8 @@ public class BlacksmithMenu : MonoBehaviour
 
     public void Hide()
     {
+        if (isDoingUpgradeEffect) return;
+
         OnStartTransition.Invoke();
         OnHide.Invoke();
 
@@ -75,7 +79,7 @@ public class BlacksmithMenu : MonoBehaviour
         InventoriesManager.Instance.HideQuickChangeButtons();
         InventoriesManager.Instance.ExitBlacksmith();
 
-        HideDetails();
+        ClickEquipment(null);
 
         StartCoroutine(HideCoroutine());
     }
@@ -96,6 +100,16 @@ public class BlacksmithMenu : MonoBehaviour
 
     public void ClickEquipment(Loot clickedLoot)
     {
+        if(!clickedLoot)
+        {
+            _upgradedEquipmentImage.enabled = false;
+            _upgradeEquipment.Hide();
+            HideDetails();
+
+            return;
+        }
+
+        if (isDoingUpgradeEffect) return;
         if (clickedLoot.LootData.lootType != LootType.Equipment) return;
 
         currentLoot = clickedLoot;
@@ -111,11 +125,42 @@ public class BlacksmithMenu : MonoBehaviour
 
     private void UpgradeEquipment()
     {
+        if (isDoingUpgradeEffect) return;
         if (!currentLoot) return;
 
         currentLoot.UpgradeLoot();
         _upgradeEquipment.SetUpgradeCost(currentLoot.LootData.upgradeCost);
         ShowDetails(currentLoot.LootData, currentLoot.LootData.upgradedVersion);
+
+        StartCoroutine(DoEquipmentUpgradeEffectsCoroutine());
+    }
+
+    private IEnumerator DoEquipmentUpgradeEffectsCoroutine()
+    {
+        isDoingUpgradeEffect = true;
+
+        _upgradedEquipmentImage.rectTransform.DOScale(Vector3.one * 1.2f, 0.3f).SetEase(Ease.OutCirc);
+
+        _upgradedEquipmentImageFaded.enabled = true;
+        _upgradedEquipmentImageFaded.rectTransform.localScale = Vector3.one * 3.0f;
+        _upgradedEquipmentImageFaded.sprite = currentLoot.LootData.equipmentSprite;
+        _upgradedEquipmentImageFaded.rectTransform.DOScale(Vector3.one * 1.2f, 0.3f).SetEase(Ease.InCirc);
+
+        _upgradedEquipmentImageFaded.color = new Color(1, 1, 1, 0);
+        _upgradedEquipmentImageFaded.DOFade(0.4f, 0.3f);
+
+        yield return new WaitForSeconds(0.3f);
+
+        _upgradedEquipmentImage.rectTransform.DOScale(Vector3.one * 0.5f, 0.1f);
+        _upgradedEquipmentImageFaded.enabled = false;
+
+        yield return new WaitForSeconds(0.1f);
+
+        _upgradedEquipmentImage.rectTransform.DOScale(Vector3.one, 0.2f);
+
+        yield return new WaitForSeconds(0.2f);
+
+        isDoingUpgradeEffect = false;
     }
 
     private void ShowDetails(LootData baseLoot, LootData upgradedLoot)
@@ -157,7 +202,7 @@ public class BlacksmithMenu : MonoBehaviour
         currentInventory.LootParent.localPosition = Vector3.zero;
 
         //currentInventory.RectTransform.localScale = Vector3.one;
-        //currentInventory.LootParent.localScale = Vector3.one;
+        //currentInventory.LootParent.localScale = Vector3.one * 0.75f;
 
         _upgradeInventory.SetUpgradeCost(currentInventory.UpgradeCosts[currentInventory.CurrentLevel]);
     }

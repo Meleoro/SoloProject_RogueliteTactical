@@ -23,6 +23,8 @@ public class ChallengeChest : MonoBehaviour, IInteractible
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _chestVFX;
     [SerializeField] private SpriteRenderer _shadowSpriteRenderer;
+    [SerializeField] private Rigidbody2D _lockRigidbody;
+    [SerializeField] private SpriteRenderer _lockSprite;
 
 
     private void Start()
@@ -39,8 +41,14 @@ public class ChallengeChest : MonoBehaviour, IInteractible
 
     private IEnumerator InteractCoroutine(float openDuration)
     {
-        CameraManager.Instance.FocusOnTransform(transform, 3f);
+        yield return new WaitForSeconds(1.5f);
+
+        CameraManager.Instance.LockCamera(transform.position, 6f);
         GameManager.Instance.OpenChest();
+
+        _lockRigidbody.simulated = true;
+        _lockRigidbody.AddForce(new Vector2(-0.4f, 1) * 6, ForceMode2D.Impulse);
+        _lockRigidbody.AddTorque(-15, ForceMode2D.Impulse);
 
         transform.UShakePosition(openDuration * 0.3f, 0.2f, 0.04f);
 
@@ -63,6 +71,7 @@ public class ChallengeChest : MonoBehaviour, IInteractible
 
         yield return new WaitForSeconds(openDuration * 0.03f);
 
+        CameraManager.Instance.UnlockCamera();
         _spriteRenderer.material.DOColor(new Color(1, 1, 1, 0), "_Color", 0.2f);
 
         yield return new WaitForSeconds(0.2f);
@@ -74,6 +83,7 @@ public class ChallengeChest : MonoBehaviour, IInteractible
     public void Show()
     {
         _spriteRenderer.material.ULerpMaterialFloat(0.5f, displayedDitherValue, "_DitherProgress");
+        _lockSprite.DOFade(1, 0.5f);
 
         _shadowSpriteRenderer.enabled = true;
         BattleManager.Instance.OnBattleEnd -= Show;
@@ -87,6 +97,8 @@ public class ChallengeChest : MonoBehaviour, IInteractible
         _spriteRenderer.material.ULerpMaterialFloat(0.5f, hiddenDitherValue, "_DitherProgress");
         //_spriteRenderer.material.ULerpMaterialFloat(0.2f, 0f, "_OutlineSize");
         _spriteRenderer.material.SetFloat("_OutlineSize", 0.2f);
+
+        _lockSprite.DOFade(0, 0.5f);
 
         _chestVFX.Stop();
         _shadowSpriteRenderer.enabled = false;

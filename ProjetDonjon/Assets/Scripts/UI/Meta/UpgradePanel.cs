@@ -37,6 +37,7 @@ public class UpgradePanel : MonoBehaviour
     private void Start()
     {
         InventoriesManager.Instance.OnInventoryChange += ActualiseResourcesFeedbacks;
+        Hide();
     }
 
     public void SetUpgradeCost(UpgradeCost upgrade)
@@ -55,6 +56,15 @@ public class UpgradePanel : MonoBehaviour
         }
 
         DisplayLevel(0);
+    }
+
+    public void Hide()
+    {
+        for (int i = 0; i < _matTexts.Length; i++)
+        {
+            _matTexts[i].text = " ";
+            _matIcons[i].enabled = false;
+        }
     }
 
 

@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     public static bool wantsToHeroInfo;
     public static bool wantsToSkillTree;
     public static bool wantsToSkills;
+    public static bool wantsToCollection;
     public static bool wantsToRotateLeft;
     public static bool wantsToRotateRight;
     public static bool wantsToReturn;
@@ -37,6 +38,7 @@ public class InputManager : MonoBehaviour
         wantsToHeroInfo = _playerInput.actions["HeroInfo"].WasPressedThisFrame();
         wantsToSkillTree = _playerInput.actions["SkillTrees"].WasPressedThisFrame();
         wantsToSkills = _playerInput.actions["Skills"].WasPressedThisFrame();
+        wantsToCollection = _playerInput.actions["Collection"].WasPressedThisFrame();
         wantsToRotateLeft = _playerInput.actions["RotateLeft"].WasPressedThisFrame();
         wantsToRotateRight = _playerInput.actions["RotateRight"].WasPressedThisFrame();
         wantsToReturn = _playerInput.actions["Return"].WasPressedThisFrame();

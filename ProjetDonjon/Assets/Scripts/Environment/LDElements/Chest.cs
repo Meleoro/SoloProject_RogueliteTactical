@@ -37,6 +37,8 @@ public class Chest : MonoBehaviour, IInteractible
     [SerializeField] private Room _activatedRoom;
     [SerializeField] private Trial _activatedTrial;
     [SerializeField] private ParticleSystem _chestVFX;
+    [SerializeField] private Rigidbody2D _lockRigidbody;
+    [SerializeField] private SpriteRenderer _lockSprite;
 
 
     private void Start()
@@ -65,9 +67,15 @@ public class Chest : MonoBehaviour, IInteractible
     }
 
 
-    private IEnumerator InteractCoroutine(float openDuration)
+    private IEnumerator InteractCoroutine(float openDuration, float startDelay = 0)
     {
-        CameraManager.Instance.FocusOnTransform(transform, 3f);
+        yield return new WaitForSeconds(startDelay);
+
+        _lockRigidbody.simulated = true;
+        _lockRigidbody.AddForce(new Vector2(-0.4f, 1) * 6, ForceMode2D.Impulse);
+        _lockRigidbody.AddTorque(-15, ForceMode2D.Impulse);
+
+        CameraManager.Instance.LockCamera(transform.position, 6f);
         GameManager.Instance.OpenChest();
 
         transform.UShakePosition(openDuration * 0.3f, 0.2f, 0.04f);
@@ -78,24 +86,58 @@ public class Chest : MonoBehaviour, IInteractible
 
         yield return new WaitForSeconds(openDuration * 0.25f);
 
-        // Relic Spawn
+        int coinsCount = GetGeneratedCoinCount();
+        PossibleLootData[] lootToGenerate = GetGeneratedLoot();
         RelicData relicData = RelicsManager.Instance.TryRelicSpawn(RelicSpawnType.NormalChestSpawn,
             ProceduralGenerationManager.Instance.CurrentFloor, 0);
-        if (relicData != null)
+
+        for (int i = 0; i < lootToGenerate.Length; i++)
         {
-            Relic newRelic = Instantiate(relicPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-            newRelic.Initialise(relicData);
+            SpawnLoot(lootToGenerate[i], i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
+            SpawnCoins(coinsCount, i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
+
+            _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+
+            yield return new WaitForSeconds(openDuration * 0.05f);
+
+            _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
+
+            if (i >= lootToGenerate.Length - 1) continue;
+
+            _animator.SetTrigger("Open");
+
+            yield return new WaitForSeconds(openDuration * 0.25f);
         }
 
-        GenerateLoot();
-        _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+        // Relic Spawn
+        if (relicData != null)
+        {
+            _animator.SetTrigger("Open");
+
+            yield return new WaitForSeconds(openDuration * 0.25f);
+
+            SpawnCoins(coinsCount, lootToGenerate.Length, lootToGenerate.Length);
+
+            Relic newRelic = Instantiate(relicPrefab, transform.position + Vector3.right * 1.25f, Quaternion.Euler(0, 0, 0));
+            newRelic.Initialise(relicData);
+
+            _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+
+            yield return new WaitForSeconds(openDuration * 0.05f);
+
+            _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
+        }
+
+        yield return new WaitForSeconds(openDuration * 0.5f);
+
+        // end chest opening
+        CameraManager.Instance.UnlockCamera();
 
         yield return new WaitForSeconds(openDuration * 0.05f);
 
-        _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
-        _spriteRenderer.material.DOColor(new Color(1, 1, 1, 0), "_Color", 0.2f);
+        _spriteRenderer.material.DOColor(new Color(1, 1, 1, 0), "_Color", 0.3f);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
 
         Destroy(gameObject);
     }
@@ -103,13 +145,14 @@ public class Chest : MonoBehaviour, IInteractible
     public void Show()
     {
         _spriteRenderer.material.ULerpMaterialFloat(0.5f, displayedDitherValue, "_DitherProgress");
+        _lockSprite.DOFade(1, 0.5f);
 
         _shadowSpriteRenderer.enabled = true;
 
         if(chestType == ChestType.Challenge)
             BattleManager.Instance.OnBattleEnd -= Show;
 
-        StartCoroutine(InteractCoroutine(1.5f));
+        StartCoroutine(InteractCoroutine(1.5f, 1.0f));
     }
 
 
@@ -118,10 +161,89 @@ public class Chest : MonoBehaviour, IInteractible
         _spriteRenderer.material.ULerpMaterialFloat(0.5f, hiddenDitherValue, "_DitherProgress");
         _spriteRenderer.material.SetFloat("_OutlineSize", 0.2f);
 
-        if(_chestVFX) _chestVFX.Stop();
+        _lockSprite.DOFade(0, 0.5f);
+
+        if (_chestVFX) _chestVFX.Stop();
         _shadowSpriteRenderer.enabled = false;
     }
 
+
+    #region Spawn / Generate
+
+    private void SpawnLoot(PossibleLootData lootData, int index, int maxIndex)
+    {
+        if (maxIndex == 0)
+        {
+            Loot newLoot = Instantiate(lootPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+            newLoot.Initialise(lootData.loot, false, transform);
+        }
+        else
+        {
+            Vector3 leftPos = transform.position + Vector3.left * 1.25f;
+            Vector3 rightPos = transform.position + Vector3.right * 1.25f;
+
+            Vector3 lootPos = Vector3.Lerp(leftPos, rightPos, (float)index / maxIndex);
+
+            Loot newLoot = Instantiate(lootPrefab, lootPos, Quaternion.Euler(0, 0, 0));
+            newLoot.Initialise(lootData.loot, false, transform);
+        }
+    }
+
+    private void SpawnCoins(int maxCoins, int index, int maxIndex)
+    {
+        int countToSpawn = 0;
+
+        if (maxIndex == 0)
+            countToSpawn = maxCoins;
+
+        else 
+            countToSpawn = maxCoins / maxIndex;
+
+        for (int i = 0; i < countToSpawn; i++)
+        {
+            Coin coin = Instantiate(coinPrefab, transform.position, Quaternion.Euler(0, 0, 0), UIManager.Instance.CoinUI.transform);
+            coin.transform.position = transform.position;
+        }
+    }
+
+    private PossibleLootData[] GetGeneratedLoot()
+    {
+        switch (chestType)
+        {
+            case ChestType.Normal:
+                return LootManager.Instance.GetSpawnedLootChest();
+
+            case ChestType.Challenge:
+                LootManager.Instance.GetSpawnedLootChallenge();
+                break;
+
+            case ChestType.Trial:
+                LootManager.Instance.GetSpawnedLootTrial();
+                break;
+        }
+
+        return null;
+    }
+
+    private int GetGeneratedCoinCount()
+    {
+        switch (chestType)
+        {
+            case ChestType.Normal:
+                return LootManager.Instance.GetSpawnCoinsChest();
+
+            case ChestType.Challenge:
+                return LootManager.Instance.GetSpawnCoinsChallenge();
+
+            case ChestType.Trial:
+                LootManager.Instance.GetSpawnedLootTrial();
+                break;
+        }
+
+        return 0;
+    }
+
+    #endregion
 
     #region Interface Functions
 

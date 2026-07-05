@@ -31,6 +31,7 @@ public class DancefloorTrial : Trial
 
     [Header("References")]
     [SerializeField] private DancefloorTrapLine[] _lines;
+    [SerializeField] private ActivableWall[] _exitActivableWalls;
     [SerializeField] private BoxCollider2D _exitCollider;
 
 
@@ -39,12 +40,24 @@ public class DancefloorTrial : Trial
         _lineIsActive = new bool[_lines.Length];
         _exitCollider.enabled = true;
 
+        for(int i = 0; i < _exitActivableWalls.Length; i++)
+        {
+            _exitActivableWalls[i].ActivateWall();
+        }
+        CameraManager.Instance.DoCameraShake(1, 0.3f, 30);
+
         StartCoroutine(DoDanceFloorTrialCoroutine());
     }
 
     public override void EndTrial()
     {
         _exitCollider.enabled = false;
+
+        for (int i = 0; i < _exitActivableWalls.Length; i++)
+        {
+            _exitActivableWalls[i].DeactivateWall();
+        }
+        CameraManager.Instance.DoCameraShake(0.8f, 0.2f, 30);
 
         OnTrialEnd?.Invoke();
     }

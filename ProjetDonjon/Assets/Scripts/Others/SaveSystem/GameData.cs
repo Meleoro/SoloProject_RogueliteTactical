@@ -39,8 +39,9 @@ public class GameData
     public int shopLevel;
     public int chestLevel;
 
-    // INVENTORIES ITEMS
+    // INVENTORIES
     public List<ItemSaveStruct> savedInventoryItems;
+    public int gold;
 
     // Others
     public bool[] finishedTutorialSteps;

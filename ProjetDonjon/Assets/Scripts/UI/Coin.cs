@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Coin : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class Coin : MonoBehaviour
     [SerializeField] private float goToAimedForce;
     [SerializeField] private float startEjectForce;
     [SerializeField] private float delayBeforeGoToAim;
+    [SerializeField] private float randomDelayOffset;
+    [SerializeField] private Sprite[] possibleCoinSprites;
 
     [Header("Private Infos")]
     private float timer; 
@@ -14,6 +17,7 @@ public class Coin : MonoBehaviour
     [SerializeField] private RectTransform _aimedTr;
     [SerializeField] private RectTransform _rectTr;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Image _image;
 
 
     private void Start()
@@ -21,7 +25,11 @@ public class Coin : MonoBehaviour
         _aimedTr = UIManager.Instance.CoinUI.CoinAimedTr;
         transform.localScale = Vector3.one;
 
-        _rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(0f, 1f)).normalized * startEjectForce, ForceMode2D.Impulse);
+        _rb.AddForce(new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(0.6f, 1f)).normalized * startEjectForce, ForceMode2D.Impulse);
+        _image.sprite = possibleCoinSprites[Random.Range(0, possibleCoinSprites.Length)];
+        _image.SetNativeSize();
+
+        timer = Random.Range(-randomDelayOffset, randomDelayOffset);
     }
 
 

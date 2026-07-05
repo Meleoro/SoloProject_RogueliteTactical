@@ -24,6 +24,7 @@ public class Loot : MonoBehaviour, IInteractible
     [SerializeField] private BackgroundType[] possibleBackgrounds;
     [SerializeField] private Color[] lootColorAccordingToType;
     [SerializeField] private Color[] lootColorAccordingToRarity;
+    [SerializeField] private Sprite[] levelSprites;
     [SerializeField] private float dragLerpSpeed;
     [SerializeField] private bool debug;
 
@@ -71,6 +72,7 @@ public class Loot : MonoBehaviour, IInteractible
     [SerializeField] private SpriteRenderer _rays1SpriteRenderer;
     [SerializeField] private SpriteRenderer _rays2SpriteRenderer;
     [SerializeField] private Image _equippedImage;
+    [SerializeField] private Image _levelImage;
 
 
     private void Start()
@@ -98,7 +100,7 @@ public class Loot : MonoBehaviour, IInteractible
     }
 
 
-    public void Initialise(LootData data, bool noAppear = false)
+    public void Initialise(LootData data, bool noAppear = false, Transform originTr = null)
     {
         lootData = data;
         _spriteRenderer.sprite = lootData.sprite;
@@ -111,18 +113,21 @@ public class Loot : MonoBehaviour, IInteractible
         _secondaryText.text = lootData.rarityType.ToString().ToUpper();
         _secondaryText.color = lootColorAccordingToRarity[(int)lootData.rarityType];
 
-        if (!noAppear) StartCoroutine(AppearCoroutine());
+        if (!noAppear) StartCoroutine(AppearCoroutine(originTr));
     }
 
     public void UpgradeLoot()
     {
         lootData = lootData.upgradedVersion;
+
+        _levelImage.sprite = levelSprites[lootData.level];
+        _levelImage.SetNativeSize();
     }
 
 
     #region World Private Functions
 
-    private IEnumerator AppearCoroutine()
+    private IEnumerator AppearCoroutine(Transform originTr)
     {
         _collider.enabled = false;
         float sign = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -130,7 +135,17 @@ public class Loot : MonoBehaviour, IInteractible
         _rays1SpriteRenderer.material.SetColor("_Color", lootColorAccordingToRarity[(int)lootData.rarityType]);
         _rays2SpriteRenderer.material.SetColor("_Color", lootColorAccordingToRarity[(int)lootData.rarityType]);
 
-        Vector2 finalPos = transform.position + new Vector3(Random.Range(minAppearAddedX, maxAppearAddedX) * sign, Random.Range(-minAppearAddedY, minAppearAddedY));
+        Vector2 finalPos;
+        if (originTr)
+        {
+            finalPos = transform.position;
+            transform.position = originTr.position;
+        }
+        else
+        {
+            finalPos = transform.position + 
+                new Vector3(Random.Range(minAppearAddedX, maxAppearAddedX) * sign, Random.Range(-minAppearAddedY, minAppearAddedY));
+        }
 
         transform.UChangeLocalPosition(appearDuration, finalPos, CurveType.None);
         _spriteRenderer.transform.UChangeLocalPosition(appearDuration * 0.6f, new Vector3(0, Random.Range(minAppearAddedY, maxAppearAddedY)), 
@@ -210,6 +225,20 @@ public class Loot : MonoBehaviour, IInteractible
         _imageBackground.material.SetColor("_ShineColor", Color.white);
         _image.material.SetColor("_ShineColor", Color.white);
 
+        if(lootData.lootType == LootType.Equipment)
+        {
+            _levelImage.sprite = levelSprites[lootData.level];
+            _levelImage.SetNativeSize();
+
+            _levelImage.rectTransform.localPosition = new Vector3(_imageBackground.rectTransform.rect.width * 0.5f - 10,
+                _imageBackground.rectTransform.rect.height * 0.5f - 10);
+            _levelImage.enabled = true;
+        }
+        else
+        {
+            _levelImage.enabled = false;
+        }
+
         if (isStart) return;
 
         _imageBackground.rectTransform.localScale = Vector3.zero;
@@ -234,11 +263,12 @@ public class Loot : MonoBehaviour, IInteractible
         }
 
         transform.position = HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].transform.position;
-        StartCoroutine(AppearCoroutine());
+        StartCoroutine(AppearCoroutine(null));
 
         _image.enabled = false;
         _imageBackground.enabled = false;
         _equippedImage.enabled = false;
+        _levelImage.enabled = false;
         _spriteRenderer.enabled = true;
         _collider.enabled = true;
     }
@@ -260,36 +290,6 @@ public class Loot : MonoBehaviour, IInteractible
         yield return new WaitForSeconds(duration * 0.25f);
 
         isSquishing = false;
-    }
-
-
-    public void Equip(EquipmentSlot slot)
-    {
-        if(slot is null)
-        {
-            slot = UIManager.Instance.HeroInfosScreen.GetAppropriateEquipmentSlot(LootData.equipmentType);
-        }
-
-        isEquipped = true;
-
-        equipmentSlot = slot;
-        equipmentSlot.AddEquipment(this, true, associatedHero);
-
-        float slotSize = InventoriesManager.Instance.slotSize;
-        _equippedImage.rectTransform.localPosition = new Vector3(-_imageBackground.rectTransform.rect.width * 0.5f + 20, 
-            -_imageBackground.rectTransform.rect.height * 0.5f + 20);
-        _equippedImage.enabled = true;
-    }
-
-    public void Unequip()
-    {
-        if (!isEquipped) return;
-
-        isEquipped = false;
-
-        _equippedImage.enabled = false;
-        equipmentSlot.RemoveEquipment(true, associatedHero);
-        equipmentSlot = null;
     }
 
 
@@ -316,6 +316,35 @@ public class Loot : MonoBehaviour, IInteractible
 
 
     #region Equipment Functions
+
+    public void Equip(EquipmentSlot slot)
+    {
+        if (slot is null)
+        {
+            slot = UIManager.Instance.HeroInfosScreen.GetAppropriateEquipmentSlot(LootData.equipmentType);
+        }
+
+        isEquipped = true;
+
+        equipmentSlot = slot;
+        equipmentSlot.AddEquipment(this, true, associatedHero);
+
+        float slotSize = InventoriesManager.Instance.slotSize;
+        _equippedImage.rectTransform.localPosition = new Vector3(-_imageBackground.rectTransform.rect.width * 0.5f + 20,
+            -_imageBackground.rectTransform.rect.height * 0.5f + 20);
+        _equippedImage.enabled = true;
+    }
+
+    public void Unequip()
+    {
+        if (!isEquipped) return;
+
+        isEquipped = false;
+
+        _equippedImage.enabled = false;
+        equipmentSlot.RemoveEquipment(true, associatedHero);
+        equipmentSlot = null;
+    }
 
     public void EnterEquipmentSlot(EquipmentSlot equimentSlot)
     {
@@ -571,12 +600,15 @@ public class Loot : MonoBehaviour, IInteractible
 
     private IEnumerator RotateLootCoroutine(float duration, Quaternion finalRotation, Quaternion furtherFinalRotation)
     {
-        _imageBackground.rectTransform.UChangeRotation(duration * 0.68f, furtherFinalRotation);
         isRotating = true;
 
+        _imageBackground.rectTransform.DORotate(furtherFinalRotation.eulerAngles, duration * 0.68f);
+        _levelImage.rectTransform.DOLocalRotate(new Vector3(0, 0, -furtherFinalRotation.eulerAngles.z), duration * 0.68f);
+
         yield return new WaitForSeconds(duration * 0.7f);
-        _imageBackground.rectTransform.UStopChangeRotation();
-        _imageBackground.rectTransform.UChangeRotation(duration * 0.28f, finalRotation);
+
+        _imageBackground.rectTransform.DORotate(finalRotation.eulerAngles, duration * 0.28f);
+        _levelImage.rectTransform.DOLocalRotate(new Vector3(0, 0, -finalRotation.eulerAngles.z), duration * 0.28f);
 
         yield return new WaitForSeconds(duration * 0.3f);
 

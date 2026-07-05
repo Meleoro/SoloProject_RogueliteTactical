@@ -25,6 +25,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     public BlacksmithMenu BlacksmithMenu { get { return _smithMenu; } }
     public MainMetaMenu MainMetaMenu { get { return _mainMetaMenu; } }
     public GenericDetailsPanel GenericDetailsPanel { get { return _genericDetailsPanel; } }
+    public MainMenu MainMenu { get { return _mainMenu; } }
 
     [Header("References")]
     [SerializeField] private Transform _globalParent;
@@ -35,6 +36,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     [SerializeField] private BlacksmithMenu _smithMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
     [SerializeField] private GenericDetailsPanel _genericDetailsPanel;
+    [SerializeField] private MainMenu _mainMenu;
     
 
     public override void Awake()

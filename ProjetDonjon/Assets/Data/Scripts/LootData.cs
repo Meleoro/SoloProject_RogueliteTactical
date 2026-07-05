@@ -42,13 +42,13 @@ public enum SpecialEquipmentEffectType
 public class LootData : ScriptableObject
 {
     [Header("Main Infos")]
-    public int lootID;
     public string lootName;
     [TextArea] public string lootDescription;
     public LootType lootType;
     public RarityType rarityType;
     public Sprite sprite;
     public int value;
+    public int level;
     public SpaceTakenRow[] spaceTaken;
 
     [Header("Equipment Infos")]
