@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: 65b69b32148168f4fb57867c45d5549d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4649044692634038617
+    second: NewHeroInfos_0
+  - first:
+      213: -3587041775902667893
+    second: NewHeroInfos_1
+  - first:
+      213: 3472613704703862431
+    second: NewHeroInfos_2
+  - first:
+      213: 4388823080376044700
+    second: NewHeroInfos_3
+  - first:
+      213: 4970245602665293319
+    second: NewHeroInfos_4
+  - first:
+      213: -5420717282129001589
+    second: NewHeroInfos_5
+  - first:
+      213: -6192316287069856184
+    second: NewHeroInfos_6
+  - first:
+      213: -7716543056286899342
+    second: NewHeroInfos_7
+  - first:
+      213: -2551865470087168981
+    second: NewHeroInfos_8
+  - first:
+      213: -5280389078743874799
+    second: NewHeroInfos_9
+  - first:
+      213: 6691184420253070501
+    second: NewHeroInfos_10
+  - first:
+      213: 3563980468931069939
+    second: NewHeroInfos_11
+  - first:
+      213: -1424619253473778368
+    second: NewHeroInfos_12
+  - first:
+      213: 8458781741519440321
+    second: NewHeroInfos_13
+  - first:
+      213: 5108793086917952284
+    second: NewHeroInfos_14
+  - first:
+      213: -239923193798627234
+    second: NewHeroInfos_15
+  - first:
+      213: 4576416563398282373
+    second: NewHeroInfos_16
+  - first:
+      213: -8585292870803320548
+    second: NewHeroInfos_17
+  - first:
+      213: -6366108214875092513
+    second: NewHeroInfos_18
+  - first:
+      213: 1912093856988466238
+    second: NewHeroInfos_19
+  - first:
+      213: -473459370046408312
+    second: NewHeroInfos_20
+  - first:
+      213: 7329981771478060502
+    second: NewHeroInfos_21
+  - first:
+      213: 7473538743964013980
+    second: NewHeroInfos_22
+  - first:
+      213: -5877616249428551686
+    second: NewHeroInfos_23
+  - first:
+      213: 435138606508378118
+    second: NewHeroInfos_24
+  - first:
+      213: 6629065068146228524
+    second: NewHeroInfos_25
+  - first:
+      213: 4441840164970467334
+    second: NewHeroInfos_26
+  - first:
+      213: -1294365657027584388
+    second: NewHeroInfos_27
+  - first:
+      213: 1550591586386699352
+    second: NewHeroInfos_28
+  - first:
+      213: -8247149885001558468
+    second: NewHeroInfos_29
+  - first:
+      213: -67695161291149866
+    second: NewHeroInfos_30
+  - first:
+      213: 5197786597836036140
+    second: NewHeroInfos_31
+  - first:
+      213: 3021076580779861528
+    second: NewHeroInfos_32
+  - first:
+      213: -6630648328330117541
+    second: NewHeroInfos_33
+  - first:
+      213: -3888357400132825913
+    second: NewHeroInfos_34
+  - first:
+      213: 2344153043410033413
+    second: NewHeroInfos_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NewHeroInfos_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 293
+        width: 161
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae02a6db764b7fb0800000000000000
+      internalID: -4649044692634038617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 483
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8bc5d08284483ec0800000000000000
+      internalID: -3587041775902667893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 483
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f96e60704c3313030800000000000000
+      internalID: 3472613704703862431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_3
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 484
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9c89dfa65b38ec30800000000000000
+      internalID: 4388823080376044700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_4
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 483
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 706ef49ca0cd9f440800000000000000
+      internalID: 4970245602665293319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_5
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 483
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8341e22a5eb5c4b0800000000000000
+      internalID: -5420717282129001589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_6
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 483
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ed55c2529701aa0800000000000000
+      internalID: -6192316287069856184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_7
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 463
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273230c69f459e490800000000000000
+      internalID: -7716543056286899342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_8
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 462
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2c7ed410e3f59cd0800000000000000
+      internalID: -2551865470087168981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_9
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 465
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1138e9d0c1a48b6b0800000000000000
+      internalID: -5280389078743874799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_10
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 465
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a4ffcf57ccdbdc50800000000000000
+      internalID: 6691184420253070501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_11
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 466
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f7011d8a5dc57130800000000000000
+      internalID: 3563980468931069939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_12
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 465
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0456380465cba3ce0800000000000000
+      internalID: -1424619253473778368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_13
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 465
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c983d76d21a36570800000000000000
+      internalID: 8458781741519440321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_14
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 465
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1347b8be3416e640800000000000000
+      internalID: 5108793086917952284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_15
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 446
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e50714c502f9bacf0800000000000000
+      internalID: -239923193798627234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_16
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 447
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c81951e92b28f30800000000000000
+      internalID: 4576416563398282373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_17
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 431
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11131fee99ead880800000000000000
+      internalID: -8585292870803320548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_18
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 431
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd98ca2ce4a07a7a0800000000000000
+      internalID: -6366108214875092513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_19
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 437
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3c01037b3f198a10800000000000000
+      internalID: 1912093856988466238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_20
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 438
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889bdc0263fed69f0800000000000000
+      internalID: -473459370046408312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_21
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 422
+        width: 37
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ddc903d59359b560800000000000000
+      internalID: 7329981771478060502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_22
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 413
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c95181124e757b760800000000000000
+      internalID: 7473538743964013980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_23
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 251
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af75fbe79238e6ea0800000000000000
+      internalID: -5877616249428551686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_24
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 274
+        width: 46
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6088df4d14ce90600800000000000000
+      internalID: 435138606508378118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_25
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 262
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2d7ec3ae8b2ffb50800000000000000
+      internalID: 6629065068146228524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_26
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 274
+        width: 42
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600902e981694ad30800000000000000
+      internalID: 4441840164970467334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_27
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 274
+        width: 88
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ed763fa4d790ee0800000000000000
+      internalID: -1294365657027584388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_28
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 274
+        width: 55
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854e94a15dec48510800000000000000
+      internalID: 1550591586386699352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_29
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 265
+        width: 78
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c361417ffdc3c8d80800000000000000
+      internalID: -8247149885001558468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_30
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 258
+        width: 77
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd6a360c9f7f0ff0800000000000000
+      internalID: -67695161291149866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_31
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 244
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c289d462f5f322840800000000000000
+      internalID: 5197786597836036140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_32
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 246
+        width: 77
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 816a2a4d4250de920800000000000000
+      internalID: 3021076580779861528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_33
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 239
+        width: 76
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5e785fd9743bf3a0800000000000000
+      internalID: -6630648328330117541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_34
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 180
+        width: 145
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cc4255cb87c90ac0800000000000000
+      internalID: -3888357400132825913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_35
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 13
+        width: 161
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b1b9be5ca188020800000000000000
+      internalID: 2344153043410033413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a348ea10bcc8d724f816cc740fb1b09c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      NewHeroInfos_0: -4649044692634038617
+      NewHeroInfos_1: -3587041775902667893
+      NewHeroInfos_10: 6691184420253070501
+      NewHeroInfos_11: 3563980468931069939
+      NewHeroInfos_12: -1424619253473778368
+      NewHeroInfos_13: 8458781741519440321
+      NewHeroInfos_14: 5108793086917952284
+      NewHeroInfos_15: -239923193798627234
+      NewHeroInfos_16: 4576416563398282373
+      NewHeroInfos_17: -8585292870803320548
+      NewHeroInfos_18: -6366108214875092513
+      NewHeroInfos_19: 1912093856988466238
+      NewHeroInfos_2: 3472613704703862431
+      NewHeroInfos_20: -473459370046408312
+      NewHeroInfos_21: 7329981771478060502
+      NewHeroInfos_22: 7473538743964013980
+      NewHeroInfos_23: -5877616249428551686
+      NewHeroInfos_24: 435138606508378118
+      NewHeroInfos_25: 6629065068146228524
+      NewHeroInfos_26: 4441840164970467334
+      NewHeroInfos_27: -1294365657027584388
+      NewHeroInfos_28: 1550591586386699352
+      NewHeroInfos_29: -8247149885001558468
+      NewHeroInfos_3: 4388823080376044700
+      NewHeroInfos_30: -67695161291149866
+      NewHeroInfos_31: 5197786597836036140
+      NewHeroInfos_32: 3021076580779861528
+      NewHeroInfos_33: -6630648328330117541
+      NewHeroInfos_34: -3888357400132825913
+      NewHeroInfos_35: 2344153043410033413
+      NewHeroInfos_4: 4970245602665293319
+      NewHeroInfos_5: -5420717282129001589
+      NewHeroInfos_6: -6192316287069856184
+      NewHeroInfos_7: -7716543056286899342
+      NewHeroInfos_8: -2551865470087168981
+      NewHeroInfos_9: -5280389078743874799
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

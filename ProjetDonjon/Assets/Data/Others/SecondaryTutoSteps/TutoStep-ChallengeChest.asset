@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TutoStep-ChallengeChest
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: CHALLENGE
-  stepDescription: THIS RED CHEST IS A CHALLENGE CHEST, IF YOU INTERACT WITH IT,
-    A VERY HARD BATTLE WILL START AND YOU WILL WIN IT'S CONTENT AT THE END
+  stepDescription: THIS IS A <#7A2E00>CHALLENGE CHEST</color>, IF YOU INTERACT WITH
+    IT, A VERY <#7A2E00>HARD BATTLE</color> WILL START AND YOU WILL WIN IT'S CONTENT
+    AT THE END
   highlightType: 0
   endCondition: 12
   tutoType: 1

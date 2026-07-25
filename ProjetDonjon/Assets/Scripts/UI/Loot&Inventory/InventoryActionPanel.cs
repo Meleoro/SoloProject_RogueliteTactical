@@ -44,6 +44,8 @@ public class InventoryActionPanel : MonoBehaviour
         switch (associatedLoot.LootData.lootType)
         {
             case LootType.Equipment:
+                if (!currentLoot.GetCanBeEquipped()) break;
+
                 _buttonsRectTr[0].gameObject.SetActive(true);
                 if(associatedLoot.IsEquipped) _buttonsTexts[0].text = "UNEQUIP";
                 else _buttonsTexts[0].text = "EQUIP";

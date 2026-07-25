@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-01
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: CHESTS
-  stepDescription: 'IN CHESTS, YOU''LL FIND A LOT OF VALUABLE ITEMS.
-
-
-    YOU CAN
-    PRESS [E] TO INTERACT WITH IT.'
+  stepName: JUMP
+  stepDescription: PRESS <#7A2E00>[SPACE]</color> TO JUMP
   highlightType: 0
-  endCondition: 4
+  endCondition: 13
   tutoType: 1
   leftSidePanel: 1
-  playNextStepOnFinished: 1
-  playNextStepDelay: 1
+  playNextStepOnFinished: 0
+  playNextStepDelay: 0.2
   waitDuration: 0

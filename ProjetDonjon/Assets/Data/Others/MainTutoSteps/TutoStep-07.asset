@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-07
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: SPECIAL SKILLS
-  stepDescription: GO AHEAD AND USE YOUR SECOND SKILL, WHICH COSTS ONE SKILL POINT
-    TO USE
-  highlightType: 4
-  endCondition: 6
-  tutoType: 1
+  stepName: SKILL POINTS
+  stepDescription: 'THE SECOND RESSOURCE YOU HAVE TO PAY ATTENTION TO ARE YOUR <#E9A800>SKILL
+    POINTS</color>
+
+
+    EACH HERO GAINS <#7A2E00>ONE PER TURN</color>, AND SOME
+    OF YOUR SKILLS NEED THEM TO BE USED'
+  highlightType: 2
+  endCondition: 0
+  tutoType: 0
   leftSidePanel: 0
-  playNextStepOnFinished: 0
+  playNextStepOnFinished: 1
   playNextStepDelay: 0.2
   waitDuration: 0

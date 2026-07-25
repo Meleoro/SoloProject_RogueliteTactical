@@ -33,7 +33,8 @@ public enum TutoEndCondition
     PlaceItemInInventory,
     OpenSkillTree,
     OpenSkills,
-    WaitDuration
+    WaitDuration,
+    Jump
 }
 
 
@@ -54,6 +55,7 @@ public class TutoStepData : ScriptableObject
     public TutoType tutoType;
     public bool leftSidePanel;
     public bool playNextStepOnFinished;
+    public bool lockPlayerInputs;
     public float playNextStepDelay = 0.2f;
     public float waitDuration = 0f;
 }

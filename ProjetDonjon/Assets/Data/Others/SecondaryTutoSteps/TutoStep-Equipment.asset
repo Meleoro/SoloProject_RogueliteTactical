@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: TutoStep-Equipment
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: EQUIPMENT
-  stepDescription: YOU FOUND A PIECE OF EQUIPMENT, YOU CAN EQUIP IT IN THE EQUIPMENT
-    MENU
+  stepDescription: YOU FOUND A PIECE OF EQUIPMENT, YOU CAN <#7A2E00>EQUIP IT</color>
+    IN THE <#7A2E00>EQUIPMENT MENU</color>
   highlightType: 12
   endCondition: 8
   tutoType: 1
   leftSidePanel: 1
   playNextStepOnFinished: 0
+  lockPlayerInputs: 1
   playNextStepDelay: 0.2
   waitDuration: 0

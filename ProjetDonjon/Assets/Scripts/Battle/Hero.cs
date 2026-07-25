@@ -377,6 +377,7 @@ public class Hero : Unit
         base.ActualiseUnitInfos(currentHealth, currentStrength, currentSpeed, currentLuck, addedMovePoints, addedSP);
 
         UIManager.Instance.HeroInfosScreen.ActualiseInfoScreen(this, true);
+        OnHeroInfosChange.Invoke();
     }
 
     public override void AddStatsModificators(int addedMaxHealth, int addedStrength, int addedSpeed, int addedLuck, int addedMovePoints, int addedSP)
@@ -394,24 +395,21 @@ public class Hero : Unit
             CurrentSkillPoints = Mathf.Clamp(CurrentSkillPoints + quantity, 0, currentMaxSkillPoints);
         else
             CurrentSkillPoints = currentMaxSkillPoints;
-
-
     }
 
 
     public void UseSkillPoints(int quantity)
     {
+        int bonusCount = BattleManager.Instance.PassivesManager.GetConsumedSkillPointsBonus(this, null);
+        quantity = Mathf.Clamp(quantity - bonusCount, 0, int.MaxValue);
+
         CurrentSkillPoints = Mathf.Clamp(CurrentSkillPoints - quantity, 0, currentMaxSkillPoints);
-
-
     }
 
 
     public void AddActionPoints(int quantity)
     {
         currentActionPoints += quantity;
-
-
     }
 
     public void SetupHeroInfosPanel(HeroInfoPanel heroInfoPanel)

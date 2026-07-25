@@ -468,12 +468,12 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         _tilesManager.ResetTiles();
 
-        // We verify if the turn ends
         if (currentUnit.GetType() == typeof(Hero))
         {
-            (currentUnit as Hero).CurrentSkillPoints -= usedSkill.skillPointCost;
-
+            (currentUnit as Hero).UseSkillPoints(usedSkill.skillPointCost);
             (currentUnit as Hero).DoAction();
+
+            // We verify if the turn ends
             if ((currentUnit as Hero).CurrentActionPoints > 0)
             {
                 yield return new WaitForSeconds(0.5f);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -243,6 +244,87 @@ public class UIManager : GenericSingletonClass<UIManager>
     public void HideHeroInfosPanels()
     {
         currentHeroInfoPanelsAnimator.SetBool("IsOpened", false);
+    }
+
+    #endregion
+
+    #region UI Effects
+
+    public IEnumerator DisplayTextProgressivelyCoroutine(string text, TextMeshProUGUI textMeshPro, float duration = 0.75f)
+    {
+        int letterIndex = 0;
+        int count = GetLengthWithoutSymbols(text);
+
+        float timer = 0;
+
+        while (letterIndex < count)
+        {
+            letterIndex = Mathf.RoundToInt(Mathf.Lerp(0, count, (float)timer / (float)duration));
+
+            textMeshPro.text = GetSubstring(text, letterIndex);
+
+            yield return new WaitForEndOfFrame();
+
+            timer += Time.deltaTime;
+        }
+
+        textMeshPro.text = text;
+    } 
+
+    // Takes into account the rich text symbols 
+    private string GetSubstring(string text, int lenght)
+    {
+        string result = "";
+        bool isInSymbol = false;
+
+        int indexNoSymbol = 0;
+
+        for(int i = 0; i < text.Length; i++)
+        {
+            if (text[i] == '<')
+            {
+                isInSymbol = true;
+                result += text[i];
+            } 
+            else if (text[i] == '>')
+            {
+                isInSymbol = false;
+                result += text[i];
+            }
+            else if (indexNoSymbol < lenght || isInSymbol)
+            {
+                if(!isInSymbol)
+                    indexNoSymbol++;
+
+                result += text[i];
+            }
+        }
+
+        return result;
+    }
+
+    private int GetLengthWithoutSymbols(string text)
+    {
+        int result = 0;
+        bool isInSymbol = false;
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (text[i] == '<')
+            {
+                isInSymbol = true;
+            }
+            else if (text[i] == '>')
+            {
+                isInSymbol = false;
+            }
+            else if (!isInSymbol)
+            {
+                result++;
+            }
+        }
+
+        return result;
     }
 
     #endregion

@@ -833,6 +833,11 @@ public class Unit : MonoBehaviour
             _poisonedVFX.PlayApplyPoisonEffect();
         }
 
+        // On turn starts passives
+        PassiveData[] prokedPassives = 
+            BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnTurnStarted, this).ToArray();
+        BattleManager.Instance.PassivesManager.ApplyPassives(prokedPassives, this, null);
+
         StartTurnOutline();
     }
 
@@ -840,6 +845,11 @@ public class Unit : MonoBehaviour
     {
         isUnitsTurn = false;
         restartTurnOutlineNext = false;
+
+        // On turn ends passives
+        PassiveData[] prokedPassives =
+            BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnTurnEnded, this).ToArray();
+        BattleManager.Instance.PassivesManager.ApplyPassives(prokedPassives, this, null);
 
         EndTurnOutline();
         HideOutline();

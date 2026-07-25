@@ -28,7 +28,6 @@ public class HeroInfosScreen : MonoBehaviour
     [Header("References")]
     [SerializeField] private HeroesManager _heroesManager;
     [SerializeField] private TextMeshProUGUI[] _statsTexts;
-    [SerializeField] private TextMeshProUGUI _heroName;
     [SerializeField] private RectTransform _shownInfoScreenPosition;
     [SerializeField] private RectTransform _hiddenInfoScreenPosition;
     [SerializeField] private RectTransform _shownInventoryPosition;
@@ -36,6 +35,16 @@ public class HeroInfosScreen : MonoBehaviour
     [SerializeField] private RectTransform _mainRectParent;
     [SerializeField] private RectTransform _inventoryParent;
     [SerializeField] private EquipmentSlot[] _equipmentSlots;
+    [SerializeField] private Image _backFadeImage;
+
+    [Header("References Main Part")]
+    [SerializeField] private Image[] _heroIcons;
+    [SerializeField] private TextMeshProUGUI _heroName;
+    [SerializeField] private TextMeshProUGUI _heroLevel;
+    [SerializeField] private Image _currentHealthBar;
+    [SerializeField] private TextMeshProUGUI _currentHealthText;
+    [SerializeField] private Image _currentXpBar;
+    [SerializeField] private TextMeshProUGUI _currentXpText;
 
 
     private void Start()
@@ -59,7 +68,7 @@ public class HeroInfosScreen : MonoBehaviour
 
         //StartCoroutine(ChangeHeroCoroutine(left));
 
-        ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex]);
+        ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex], false);
         ActualiseInventory();
     }
 
@@ -126,6 +135,9 @@ public class HeroInfosScreen : MonoBehaviour
 
         isOpenning = true;
 
+        _backFadeImage.enabled = true;
+        _backFadeImage.DOFade(0.7f, openDuration);
+
         _mainRectParent.UChangePosition(openDuration, _shownInfoScreenPosition.position, CurveType.EaseOutCubic);
         _inventoryParent.UChangePosition(openDuration, _shownInventoryPosition.position, CurveType.EaseOutCubic);
 
@@ -146,12 +158,15 @@ public class HeroInfosScreen : MonoBehaviour
 
         OnHide.Invoke();
 
+        _backFadeImage.DOFade(0f, closeDuration);
+
         _mainRectParent.UChangePosition(closeDuration, _hiddenInfoScreenPosition.position, CurveType.EaseOutCubic);
         _inventoryParent.UChangePosition(closeDuration, _hiddenInventoryPosition.position, CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(closeDuration);
 
         currentInventory.RebootPosition();
+        _backFadeImage.enabled = false;
 
         isOpenning = false;
     }
@@ -257,6 +272,11 @@ public class HeroInfosScreen : MonoBehaviour
 
     public void ActualiseInfoScreen(Hero hero, bool doEffect = true)
     {
+        for (int i = 0; i < _heroIcons.Length; i++)
+        {
+            _heroIcons[i].enabled = currentHeroIndex == i;
+        }
+
         this.heroData = hero.HeroData;
         this.hero = hero;   
 
@@ -277,9 +297,17 @@ public class HeroInfosScreen : MonoBehaviour
         }
 
         _heroName.text = heroData.unitName;
+        _heroLevel.text = hero.CurrentLevel.ToString();
+
+        _currentHealthText.text = hero.CurrentHealth + "/" + hero.CurrentMaxHealth;
+        _currentXpText.text = hero.CurrentXP + "/" + hero.CurrentXPToReach;
+
+        _currentHealthBar.fillAmount = (float)hero.CurrentHealth / hero.CurrentMaxHealth;
+        _currentXpBar.fillAmount = (float)hero.CurrentXP / hero.CurrentXPToReach;
 
         if (doEffect) 
-            VerifyValueChangeEffects(currentHealth, currentStrength, currentSpeed, currentLuck, currentMovePoints, currentMaxSP);
+            VerifyValueChangeEffects(hero.CurrentHealth, hero.CurrentStrength, hero.CurrentSpeed, 
+                hero.CurrentLuck, hero.CurrentMovePoints, hero.CurrentMaxSkillPoints);
 
         _statsTexts[0].text = hero.CurrentHealth.ToString();
         _statsTexts[1].text = hero.CurrentStrength.ToString();
@@ -291,7 +319,9 @@ public class HeroInfosScreen : MonoBehaviour
 
     private void VerifyValueChangeEffects(int newMaxHealth, int newStrength, int newSpeed, int newLuck, int newMovePoints, int maxSP)
     {
-        if(newMaxHealth != int.Parse(_statsTexts[0].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[0]));
+        Debug.Log(int.Parse(_statsTexts[0].text));
+
+        if (newMaxHealth != int.Parse(_statsTexts[0].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[0]));
         if(newStrength != int.Parse(_statsTexts[1].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[1]));
         if(newSpeed != int.Parse(_statsTexts[2].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[2]));
         if(newLuck != int.Parse(_statsTexts[3].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[3]));
@@ -325,4 +355,5 @@ public class HeroInfosScreen : MonoBehaviour
     }
     
     #endregion
+
 }

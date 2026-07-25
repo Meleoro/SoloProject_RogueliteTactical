@@ -401,7 +401,7 @@ public class AIUnit : Unit
         {
             if (!aimedTiles.Contains(testedDangerTiles[i])) continue;
 
-            finalGrade += 10;
+            finalGrade += 15;
         }
 
         return finalGrade;

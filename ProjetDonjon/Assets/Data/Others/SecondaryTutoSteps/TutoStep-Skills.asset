@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: TutoStep-Skills
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: SKILLS
-  stepDescription: NOW THAT YOU HAVE A NEW SKILL, YOU CAN EQUIP IT IN YOUR SKILLS
-    MENU
+  stepDescription: NOW THAT YOU HAVE A NEW SKILL, YOU CAN EQUIP IT IN YOUR <#7A2E00>SKILLS
+    MENU</color>
   highlightType: 14
   endCondition: 11
   tutoType: 1
   leftSidePanel: 1
   playNextStepOnFinished: 0
+  lockPlayerInputs: 1
   playNextStepDelay: 0.2
   waitDuration: 0

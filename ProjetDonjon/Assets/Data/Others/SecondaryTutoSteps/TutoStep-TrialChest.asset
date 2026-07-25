@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TutoStep-TrialChest
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: TRIALS
-  stepDescription: THIS BLUE CHEST IS A TRIAL CHEST, IT MEANS THAT YOU WILL HAVE
-    TO GO THROUGH SOME SORT OF TRIAL TO WIN IT
+  stepDescription: THIS IS A <#7A2E00>TRIAL CHEST</color>, YOU WILL HAVE TO GO THROUGH
+    SOME SORT OF TRIAL TO WIN IT'S CONTENT
   highlightType: 0
   endCondition: 12
   tutoType: 1

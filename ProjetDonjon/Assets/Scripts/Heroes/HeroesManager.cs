@@ -57,20 +57,6 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     }
 
 
-    public void EndExploration()
-    {
-        SaveManager.Instance.SaveGame(SaveManager.Instance.CurrentFileIndex);
-
-        StopControl();
-
-        if (!BattleManager.Instance.IsInBattle) return;
-        for (int i = 0; i < heroes.Length; i++)
-        {
-            heroes[i].ExitBattle(heroes[currentHeroIndex]);
-        }
-    }
-
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q) && !noControl)
@@ -235,6 +221,19 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         }
     }
 
+    public void EndExploration()
+    {
+        SaveManager.Instance.SaveGame(SaveManager.Instance.CurrentFileIndex);
+
+        StopControl();
+
+        if (!BattleManager.Instance.IsInBattle) return;
+        for (int i = 0; i < heroes.Length; i++)
+        {
+            heroes[i].ExitBattle(heroes[currentHeroIndex]);
+        }
+    }
+
     private Hero GetHeroObject(Hero wantedHero)
     {
         for(int i = 0; i < allHeroes.Length; i++)
@@ -321,7 +320,12 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         for(int i = 0; i < heroes.Length; i++)
         {
-            for(int j = 0; j < quantity; j++)
+            int heroQuantity = quantity + BattleManager.Instance.PassivesManager.GetBonusXP(heroes[i], quantity);
+
+            Debug.Log(quantity);
+            Debug.Log(heroQuantity);
+
+            for(int j = 0; j < heroQuantity; j++)
             {
                 XP xP = Instantiate(xpPrefab, origin, Quaternion.Euler(0, 0, 0));
                 xP.Initialise(heroes[i], 1);

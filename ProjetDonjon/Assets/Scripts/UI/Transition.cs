@@ -160,7 +160,7 @@ public class Transition : MonoBehaviour
 
         if(!isOnLastFloor) DisplayArrows();
 
-        TutoManager.Instance.DisplayTutorial(10);
+        TutoManager.Instance.DisplayTutorial(11);
     }
 
     private IEnumerator StartDeathCoroutine()

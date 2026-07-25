@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-03
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: ACTION POINTS
-  stepDescription: "IN BATTLES, EACH HERO HAS TWO ACTION POINTS PER TURN. \n\nTHEY
-    CAN BE SPENT ON ANY ACTION : MOVE, USE A SKILL OR USE AN OBJECT."
-  highlightType: 1
-  endCondition: 0
-  leftSidePanel: 0
-  playNextStepOnFinished: 1
+  stepName: LOOT
+  stepDescription: 'YOU FOUND SOME <#7A2E00>LOOT</color> !
+
+    WHEN INTERACTED WITH,
+    YOU''LL HAVE TO PLACE IT IN ONE OF YOUR <#7A2E00>HEROES'' INVENTORY</color>
+
+
+    <#7A2E00>INTERACT
+    WITH THE GEM AND PLACE IT IN YOUR INVENTORY</color>'
+  highlightType: 0
+  endCondition: 9
+  tutoType: 0
+  leftSidePanel: 1
+  playNextStepOnFinished: 0
   playNextStepDelay: 0.2
+  waitDuration: 0

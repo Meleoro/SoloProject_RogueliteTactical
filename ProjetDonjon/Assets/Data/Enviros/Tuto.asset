@@ -61,7 +61,7 @@ MonoBehaviour:
   possibleChallengeRooms:
   - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
   possibleStartRooms:
-  - {fileID: 2917294264406634095, guid: 581c2856ecf5e4f4987601aa19cdea79, type: 3}
+  - {fileID: 2917294264406634095, guid: 97ffd9ce2354b3149aebbe0058ec8ebd, type: 3}
   possibleStairsRooms:
   - {fileID: 2917294264406634095, guid: 7f1c262d991c12f48bffac1db4436036, type: 3}
   possibleFirstBossRooms:
@@ -69,6 +69,9 @@ MonoBehaviour:
   possibleSecondBossRooms: []
   possibleCorridorTrapRoomsHard: []
   possibleTrapRoomsHard: []
+  possibleCorridorPlateformRoomsHard: []
+  possiblePlateformRoomsHard: []
+  possiblePuzzleRoomsHard: []
   possibleCommonLoot:
   - probability: 100
     loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}

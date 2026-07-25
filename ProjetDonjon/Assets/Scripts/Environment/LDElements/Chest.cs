@@ -116,7 +116,7 @@ public class Chest : MonoBehaviour, IInteractible
 
             yield return new WaitForSeconds(openDuration * 0.25f);
 
-            SpawnCoins(coinsCount, lootToGenerate.Length, lootToGenerate.Length);
+            //SpawnCoins(coinsCount, lootToGenerate.Length, lootToGenerate.Length);
 
             Relic newRelic = Instantiate(relicPrefab, transform.position + Vector3.right * 1.25f, Quaternion.Euler(0, 0, 0));
             newRelic.Initialise(relicData);
@@ -195,9 +195,10 @@ public class Chest : MonoBehaviour, IInteractible
 
         if (maxIndex == 0)
             countToSpawn = maxCoins;
-
         else 
             countToSpawn = maxCoins / maxIndex;
+
+        countToSpawn += BattleManager.Instance.PassivesManager.GetBonusMoney(HeroesManager.Instance.Heroes, countToSpawn);
 
         for (int i = 0; i < countToSpawn; i++)
         {
@@ -214,12 +215,10 @@ public class Chest : MonoBehaviour, IInteractible
                 return LootManager.Instance.GetSpawnedLootChest();
 
             case ChestType.Challenge:
-                LootManager.Instance.GetSpawnedLootChallenge();
-                break;
+                return LootManager.Instance.GetSpawnedLootChallenge();
 
             case ChestType.Trial:
-                LootManager.Instance.GetSpawnedLootTrial();
-                break;
+                return LootManager.Instance.GetSpawnedLootTrial();
         }
 
         return null;

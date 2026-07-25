@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-02
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: LOOT
-  stepDescription: "LOOT IS WHAT YOU ARE LOOKING FOR IN YOUR EXPEDITIONS ! \nWHEN
-    INTERACTED WITH, YOU'LL NEED TO PLACE IT IN ONE OF YOUR HEROES' INVENTORY\n\nTAKE
-    THE GEM AND PLACE IT IN YOUR INVENTORY"
+  stepName: INTERACT
+  stepDescription: PRESS <#7A2E00>[E]</color> TO INTERACT WITH OBJECTS
   highlightType: 0
-  endCondition: 9
-  tutoType: 0
+  endCondition: 4
+  tutoType: 1
   leftSidePanel: 1
-  playNextStepOnFinished: 0
-  playNextStepDelay: 0.2
+  playNextStepOnFinished: 1
+  playNextStepDelay: 1
   waitDuration: 0

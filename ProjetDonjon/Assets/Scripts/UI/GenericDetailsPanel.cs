@@ -243,6 +243,19 @@ public class GenericDetailsPanel : MonoBehaviour
         appearCoroutine = StartCoroutine(AppearEffectCoroutine());
     }
 
+    public void LoadDetails(GenericDetailsData data, Vector3 position, bool mirrorHorizontal)
+    {
+        _mainRectTr.gameObject.SetActive(true);
+        SetPosition(position, mirrorHorizontal ? -offset : offset);
+
+        _numberText.text = "";
+
+        _nameText.text = data.name;
+        _descriptionText.text = data.description;
+
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+    }
+
     #endregion
 
 

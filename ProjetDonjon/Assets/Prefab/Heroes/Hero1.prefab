@@ -81,13 +81,12 @@ MonoBehaviour:
   skillTreeData: {fileID: 11400000, guid: a8b4c8c4e0bf3ed4f8a1f0d2f2486129, type: 2}
   heroIndex: 0
   startLoot:
-  - {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
-  - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
-  - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
-  - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+  - {fileID: 11400000, guid: e7e0a4442387ad14ab003b55760919bf, type: 2}
+  - {fileID: 11400000, guid: c2c504afd88e1c74fa51801fb07a5a7f, type: 2}
+  - {fileID: 11400000, guid: df8748ba0b1a37c4d9f1edf5ab74cd3d, type: 2}
+  - {fileID: 11400000, guid: 440e036a5b8ec2e4e95a9ffbbd8b2c2e, type: 2}
+  - {fileID: 11400000, guid: 82d362697078f994c8bab5320c7eaca0, type: 2}
+  - {fileID: 11400000, guid: 2fe3ffd9ea97bfe4a8814d94908178ad, type: 2}
   neededXPLevelZero: 8
   neededXPMultiplicator: 1.4
   _controller: {fileID: 7159339506722094448}
@@ -4951,7 +4950,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &3544337150392580791
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4997,6 +4996,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5028,7 +5028,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &4236781243471622882
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,6 +5122,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3627329165563515315
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5168,6 +5168,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 30a2329f078dc9f47ade4fdf4c892c34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_FlipX: 0
@@ -5177,8 +5178,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &5325608646046616393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,6 +5219,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2102602649195524311
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5263,6 +5265,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -98986900, guid: 390d219cb95f3d34db497d02a137cbc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5272,8 +5275,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!95 &8575267897746095112
 Animator:
   serializedVersion: 7
@@ -10289,7 +10292,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8426191890070879912
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10335,6 +10338,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -10366,7 +10370,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1001 &3058186013467763996
 PrefabInstance:
   m_ObjectHideFlags: 0

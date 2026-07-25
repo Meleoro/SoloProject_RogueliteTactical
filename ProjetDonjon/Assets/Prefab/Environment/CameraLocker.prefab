@@ -91,4 +91,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8175ea893cbd75b40ade9c0dac0bdd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camSize: 10
+  camSize: 8

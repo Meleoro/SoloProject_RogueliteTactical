@@ -60,6 +60,7 @@ public class LootData : ScriptableObject
     public int luckUpgrade;
     public int mpUpgrade;
     public int spUpgrade;
+    public int exclusiveHeroIndex = -1;    // If the equipment can only be equipped to a specific hero
 
     [Header("Equipment Upgrade")]
     public LootData upgradedVersion;

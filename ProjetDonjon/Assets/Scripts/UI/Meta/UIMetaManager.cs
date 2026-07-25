@@ -139,10 +139,16 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _collectionMenu.OnShow += () => currentMetaMenu = CurrentMetaMenu.Collection;
         _collectionMenu.OnHide += () => currentMetaMenu = CurrentMetaMenu.Main;
 
-        _mainMetaMenu.ActualiseCampProgress();
         _mainMetaMenu.Show(true);
-
         _expeditionsMenu.Hide(true);
+
+        if (!TutoManager.Instance.DidTutorialStep[12])
+        {
+            StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(12, 0.5f, false));
+            return;
+        }
+
+        _mainMetaMenu.ActualiseCampProgress();
     }
 
     public void QuitMetaMenu()

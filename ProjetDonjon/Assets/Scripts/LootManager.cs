@@ -75,6 +75,7 @@ public class LootManager : GenericSingletonClass<LootManager>
         
         // Coins
         int pickedCoinsAmount = Random.Range(currentFloorLootData.minBattleCoins, currentFloorLootData.maxBattleCoins);
+        pickedCoinsAmount += BattleManager.Instance.PassivesManager.GetBonusMoney(HeroesManager.Instance.Heroes, pickedCoinsAmount);
 
         for (int i = 0; i < pickedCoinsAmount; i++)
         {
@@ -97,6 +98,7 @@ public class LootManager : GenericSingletonClass<LootManager>
 
         // Coins
         int pickedCoinsAmount = Random.Range(currentFloorLootData.minChallengeCoins, currentFloorLootData.maxChallengeCoins);
+        pickedCoinsAmount += BattleManager.Instance.PassivesManager.GetBonusMoney(HeroesManager.Instance.Heroes, pickedCoinsAmount);
 
         for (int i = 0; i < pickedCoinsAmount; i++)
         {

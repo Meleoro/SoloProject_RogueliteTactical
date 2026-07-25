@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PassivesManager 
@@ -33,6 +34,8 @@ public class PassivesManager
 
     public void ApplyPassives(PassiveData[] passivesToApply, Unit mainUnit, Unit secondaryUnit) 
     {
+        Debug.Log(mainUnit);
+
         for(int i = 0; i < passivesToApply.Length; i++)
         {
             ApplyPassive(passivesToApply[i].passiveEffects, mainUnit, secondaryUnit);
@@ -59,7 +62,7 @@ public class PassivesManager
                     break;
 
                 case PassiveEffectType.GainSkillPoint:
-                    (mainUnit as Hero).AddSkillPoints(1);
+                    (mainUnit as Hero).AddSkillPoints((int)passivesEffects[i].additivePower);
                     break;
 
                 case PassiveEffectType.MaxSkillPoints:
@@ -217,6 +220,87 @@ public class PassivesManager
         }
 
         return bonus;
+    }
+
+    // Returns the quantity of skill points for which the loss is cancelled
+    public int GetConsumedSkillPointsBonus(Unit unit, Unit attackedUnit)
+    {
+        if (!unit) return 0;
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        int bonus = 0;
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.LoseLessSkillPoint ||
+               (passivesToCheck[i].neededAlteration && !unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType))) continue;
+
+            bonus += (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return bonus;
+    }
+
+    float currentRemainsMoney = 0;
+    public int GetBonusMoney(Unit[] squad, float baseMoney)
+    {
+        if (squad.Length == 0) return 0;
+        float newMoney = baseMoney;
+
+        foreach (Unit unit in squad)
+        {
+            PassiveData[] passivesToCheck = unit.EquippedPassives;
+            // If hero, we add the equipment passives
+            if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+            for (int i = 0; i < passivesToCheck.Length; i++)
+            {
+                if (passivesToCheck[i] is null) continue;
+                if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.GainMore) continue;
+
+                newMoney *= passivesToCheck[i].passiveEffects[0].multipliedPower;
+                newMoney += (int)passivesToCheck[i].passiveEffects[0].additivePower;
+            }
+        }
+
+        newMoney += currentRemainsMoney;
+        currentRemainsMoney = newMoney % 1;
+
+        return (int)newMoney - (int)baseMoney;
+    }
+
+    Dictionary<string, float> currentRemainsXP = new Dictionary<string, float>();
+    public int GetBonusXP(Unit unit, float baseXP)
+    {
+        if (!unit) return 0;
+        float newXP = baseXP;
+
+        PassiveData[] passivesToCheck = unit.EquippedPassives;
+        // If hero, we add the equipment passives
+        if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
+
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.GainMore) continue;
+
+            newXP *= passivesToCheck[i].passiveEffects[0].multipliedPower;
+            newXP += (int)passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        if(!currentRemainsXP.ContainsKey(unit.name))
+        {
+            currentRemainsXP.Add(unit.name, 0);
+        }
+
+        newXP += currentRemainsXP[unit.name];
+        currentRemainsXP[unit.name] = newXP % 1;
+
+        return (int)newXP - (int)baseXP;
     }
 
     #endregion

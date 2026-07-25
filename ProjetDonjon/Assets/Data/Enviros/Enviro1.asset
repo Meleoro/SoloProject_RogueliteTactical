@@ -38,6 +38,8 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 05c78ccda8e89cc4bbf04d294ad56e55, type: 3}
   - {fileID: 2917294264406634095, guid: 26011d838b4ded648ba964957d534530, type: 3}
   - {fileID: 2917294264406634095, guid: 24ec467b9738ef74dadf23427b354144, type: 3}
+  - {fileID: 2917294264406634095, guid: 141889dae28667e4db33562755908e0e, type: 3}
+  - {fileID: 2917294264406634095, guid: 971ef4f497cdedf4dafef6bbbe8be585, type: 3}
   possibleCorridorRooms:
   - {fileID: 2917294264406634095, guid: 3fb2efc6eb1d84c4e9c70404e1922f11, type: 3}
   - {fileID: 1856086751064925117, guid: 7abfbe6e3f513954494e647f8b38976c, type: 3}
@@ -45,14 +47,16 @@ MonoBehaviour:
   - {fileID: 1856086751064925117, guid: 74ae62d704662a74fb639f237bbb8dd7, type: 3}
   - {fileID: 2917294264406634095, guid: e59b18cce1e22ee458f7f6481a2172e5, type: 3}
   - {fileID: 2917294264406634095, guid: 701b6b3e30f24544ba2805dd56605b1d, type: 3}
+  - {fileID: 1856086751064925117, guid: 1aa7c1b69fb3c914fb5042404d0e85c0, type: 3}
   possibleCorridorTrapRooms:
   - {fileID: 2917294264406634095, guid: d0712f18a6c113748a718bea172b2827, type: 3}
   - {fileID: 2917294264406634095, guid: fe3cf7f00058be14ab178e75e85752fe, type: 3}
   - {fileID: 2917294264406634095, guid: 45f20c2edfd7b814794b0f68b04cda39, type: 3}
-  - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
   - {fileID: 2917294264406634095, guid: 4600d616a4a13e240a97279da1eb9ee8, type: 3}
+  - {fileID: 2917294264406634095, guid: 9523f4491b9331b4a82e48d816c2f0fb, type: 3}
   - {fileID: 2917294264406634095, guid: 59c1b160dd442704981b3477fdaba786, type: 3}
   - {fileID: 2917294264406634095, guid: 1c07978d9f72a6d4f9908ee354f9b6f4, type: 3}
+  - {fileID: 2917294264406634095, guid: 690f8a4668420f64caa9a751f6d96d8d, type: 3}
   possibleCorridorPlateformRooms:
   - {fileID: 2917294264406634095, guid: 6616e4c47be786b42a4f5a3e40966387, type: 3}
   - {fileID: 2917294264406634095, guid: ada4e059088f9a24c8e4d7787d6220d5, type: 3}
@@ -60,11 +64,15 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 9cc03ae9ad4105a419c16a8e903adfae, type: 3}
   - {fileID: 2917294264406634095, guid: b749238e1025e1649a06205f509d2f1b, type: 3}
   - {fileID: 2917294264406634095, guid: fd474c9e72daafd42aa7abcc8fd66eea, type: 3}
+  - {fileID: 1856086751064925117, guid: 46850fc5319ca024d8ce91d385ee1f12, type: 3}
+  - {fileID: 1856086751064925117, guid: 0a8661fdd6ba6d7498cba94a95e8de06, type: 3}
   possiblePlateformRooms:
   - {fileID: 2917294264406634095, guid: acd82df5924bf224db9788423c8ed8dc, type: 3}
   - {fileID: 2917294264406634095, guid: f309f058cedd6e24a90942071bb7db5a, type: 3}
   - {fileID: 2917294264406634095, guid: 6dbcd3546dae674429c6634589a0c711, type: 3}
   - {fileID: 2917294264406634095, guid: 28d403d7ca77e1d4db15b4c93708afab, type: 3}
+  - {fileID: 2917294264406634095, guid: c7c13253a6414bc41b12f5fd84fb179e, type: 3}
+  - {fileID: 2917294264406634095, guid: bf095283bd2113340b208a473fd347bd, type: 3}
   possibleTrapRooms:
   - {fileID: 2917294264406634095, guid: e19b037d6cb7802489ab86828f7b52e1, type: 3}
   - {fileID: 2917294264406634095, guid: 0dc7e514750cd7548a917b3cf49001aa, type: 3}
@@ -82,6 +90,7 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: f698fdfd24d220545a30d7883a759fca, type: 3}
   possibleStartRooms:
   - {fileID: 2917294264406634095, guid: 581c2856ecf5e4f4987601aa19cdea79, type: 3}
+  - {fileID: 2917294264406634095, guid: 97ffd9ce2354b3149aebbe0058ec8ebd, type: 3}
   possibleStairsRooms:
   - {fileID: 2917294264406634095, guid: 7f1c262d991c12f48bffac1db4436036, type: 3}
   possibleFirstBossRooms:
@@ -90,7 +99,7 @@ MonoBehaviour:
   - {fileID: 2917294264406634095, guid: 718af3d54e6547044988292b3bb1bf85, type: 3}
   possibleCorridorTrapRoomsHard:
   - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
-  - {fileID: 2917294264406634095, guid: 59c1b160dd442704981b3477fdaba786, type: 3}
+  - {fileID: 2917294264406634095, guid: 46809b3318ff7954ba79d96f86de8294, type: 3}
   possibleTrapRoomsHard:
   - {fileID: 2917294264406634095, guid: 556f42e12b42abe4390e40348aa6ffd2, type: 3}
   - {fileID: 2917294264406634095, guid: b7ad3067bb488fd4298a1dc0e58861e6, type: 3}

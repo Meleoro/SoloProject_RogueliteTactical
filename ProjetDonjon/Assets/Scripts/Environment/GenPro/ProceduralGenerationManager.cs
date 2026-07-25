@@ -479,6 +479,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     {
         generatedRooms = new List<Room>();
 
+        Vector2Int[] roomPositions = { new Vector2Int(2, 2), new Vector2Int(2, 3), new Vector2Int(3, 3), new Vector2Int(4, 3), new Vector2Int(4, 4) };
+
         wantedRoomAmount = tutorialRooms.Length;
         Vector2Int currentPos = new Vector2Int(wantedRoomAmount, wantedRoomAmount);
 
@@ -486,8 +488,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
         for (int i = 0; i < wantedRoomAmount; i++)
         {
+            currentPos = roomPositions[i];
             AddRoom(currentPos, tutorialRooms[i]);
-            currentPos += new Vector2Int(0, 1);
         }
 
         spawnPos = generatedRooms[0]._heroSpawnerTr.position;

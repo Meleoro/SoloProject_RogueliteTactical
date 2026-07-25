@@ -215,7 +215,7 @@ public class HeroController : MonoBehaviour
 
         oldPos = transform.position;
 
-        OnJump?.Invoke(1);
+        OnJump?.Invoke(0);
         AudioManager.Instance.PlaySoundOneShot(1, 3);
 
         _rbSprite.bodyType = RigidbodyType2D.Dynamic;

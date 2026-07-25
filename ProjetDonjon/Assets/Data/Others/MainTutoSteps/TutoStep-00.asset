@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: TutoStep-00
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: MOVEMENT
-  stepDescription: 'WELCOME INTO THE DUNGEON !
-
-
-    YOU CAN USE THE KEYS [ZQSD]
-    TO MOVE AROUND [SPACE] TO JUMP.'
+  stepDescription: PRESS <#7A2E00>[ZQSD]</color> TO MOVE AROUND
   highlightType: 0
   endCondition: 1
   tutoType: 1

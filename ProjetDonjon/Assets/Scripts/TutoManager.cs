@@ -20,6 +20,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     public bool DidBattleTuto { get {  return didTutorialStep[4]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
     public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[10]; } }
+    public bool TutoDisabled { get {  return disableTuto; } }
 
     [Header("Private Infos")]
     private bool[] didTutorialStep;
@@ -81,8 +82,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay, bool isAdditionalStep = false)
     {
+        _tutorialPanel.LockUIInputs();
+
         yield return new WaitForSeconds(delay);
 
+        _tutorialPanel.UnlockUIInputs();
         DisplayTutorial(tutoID, isAdditionalStep);
     }
 
@@ -94,27 +98,30 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         isDisplayingTuto = true;
 
         // To avoid having the camera moving while focusing on one element
-        if (BattleManager.Instance.IsInBattle)
+        if (BattleManager.Instance.IsInBattle && !isAdditionalStep)
             CameraManager.Instance.LockCameraInputs();
 
-        if(isAdditionalStep) didAdditionalTutorialSteps[tutoID] = true;
+        if (isAdditionalStep) didAdditionalTutorialSteps[tutoID] = true;
         else didTutorialStep[tutoID] = true;
 
         currentStep = isAdditionalStep ? additionalTutoSteps[tutoID] : mainTutoSteps[tutoID];
         currentTutoID = tutoID;
 
+        if (currentStep.lockPlayerInputs)
+        {
+            HeroesManager.Instance.StopControl();
+        }
+
         // Classic Panel
-        if(currentStep.tutoType == TutoType.ClassicPanel)
+        if (currentStep.tutoType == TutoType.ClassicPanel)
         {
             if (currentStep.leftSidePanel)
             {
-                _tutorialPanel.RectTr.localPosition = _leftPosRef.localPosition;
-                _tutorialPanel.DisplayTutorial(currentStep);
+                _tutorialPanel.DisplayTutorial(currentStep, _leftPosRef.localPosition, _leftPosRef.localPosition + new Vector3(-300, 0, 0));
             }
             else
             {
-                _tutorialPanel.RectTr.localPosition = _rightPosRef.localPosition;
-                _tutorialPanel.DisplayTutorial(currentStep);
+                _tutorialPanel.DisplayTutorial(currentStep, _rightPosRef.localPosition, _rightPosRef.localPosition + new Vector3(300, 0, 0));
             }
 
             _tutorialPanel.OnHide += EndTutorialStep;
@@ -125,13 +132,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         {
             if (currentStep.leftSidePanel)
             {
-                _smallTutorialPanel.RectTr.localPosition = _upLeftPosRef.localPosition;
-                _smallTutorialPanel.DisplayTutorial(currentStep);
+                _smallTutorialPanel.DisplayTutorial(currentStep, _upLeftPosRef.localPosition, _upLeftPosRef.localPosition + new Vector3(0, 250, 0));
             }
             else
             {
-                _smallTutorialPanel.RectTr.localPosition = _upRightPosRef.localPosition;
-                _smallTutorialPanel.DisplayTutorial(currentStep);
+                _smallTutorialPanel.DisplayTutorial(currentStep, _upRightPosRef.localPosition, _upRightPosRef.localPosition + new Vector3(0, 250, 0));
             }
 
             _smallTutorialPanel.OnHide += EndTutorialStep;
@@ -146,8 +151,12 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         {
             case TutoEndCondition.MoveExplo:
                 HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.OnMove += ValidateEndCondition;
+                endConditionsValidated = new bool[1];
+                break;
+
+            case TutoEndCondition.Jump:
                 HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.OnJump += ValidateEndCondition;
-                endConditionsValidated = new bool[2];
+                endConditionsValidated = new bool[1];
                 break;
 
             case TutoEndCondition.MoveBattle:
@@ -219,18 +228,18 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     private void DoSecondBattleTutorial()
     {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(6, 0.6f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(7, 0.6f));
     }
 
     private void DoThirdBattleTutorial()
     {
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(8, 0.5f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 0.5f));
     }
 
     private void DoRelicTutorial()
     {
         BattleManager.Instance.OnBattleEnd -= DoRelicTutorial;
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 1f));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(10, 1f));
     }
 
     private void BindLevelUpTurorialToBattleEnd()
@@ -289,6 +298,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         for (int i = 0; i < endConditionsValidated.Length; i++)
         {
             if (!endConditionsValidated[i]) return;
+        }
+
+        if (currentStep.lockPlayerInputs)
+        {
+            HeroesManager.Instance.RestartControl();
         }
 
         _tutorialPanel.HideTutorial();
@@ -376,6 +390,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             case TutoEndCondition.OpenSkills:
                 UIManager.Instance.SkillsMenu.OnShow -= ValidateEndCondition;
                 break;
+        }
+
+        if(currentStep.stepName == "CAMP")
+        {
+            UIMetaManager.Instance.MainMetaMenu.ActualiseCampProgress();
         }
 
         if (!currentStep.playNextStepOnFinished) 

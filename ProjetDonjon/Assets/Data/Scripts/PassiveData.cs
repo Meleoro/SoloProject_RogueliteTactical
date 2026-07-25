@@ -28,21 +28,6 @@ public struct PassiveEffect
     public float multipliedPower;
 }
 
-public enum PassiveEffectType
-{
-    ApplyOnSelfAlteration,
-    ApplyOnOtherAlteration,
-    UpgradeAlteration,
-    ImmuneAlteration,
-    UpgradeCritDamages,
-    UpgradeCritChances,
-    MaxSkillPoints,
-    GainSkillPoint,
-    UpgradeSummonHealth,
-    UpgradeSummonDamages,
-    UpgradeDamages
-}
-
 public enum PassiveTriggerType
 {
     Always,
@@ -55,5 +40,27 @@ public enum PassiveTriggerType
     OnCrit,
     OnKill,
     OnSummon,
-    OnBattleStarted
+    OnBattleStarted,
+    OnTurnStarted,
+    OnTurnEnded,
+    OnConsumeFocusPoint,
+    OnMoneyGain,
+    OnXpGain
+}
+
+public enum PassiveEffectType
+{
+    ApplyOnSelfAlteration,
+    ApplyOnOtherAlteration,
+    UpgradeAlteration,
+    ImmuneAlteration,
+    UpgradeCritDamages,
+    UpgradeCritChances,
+    MaxSkillPoints,
+    GainSkillPoint,
+    UpgradeSummonHealth,
+    UpgradeSummonDamages,
+    UpgradeDamages,
+    LoseLessSkillPoint,
+    GainMore
 }

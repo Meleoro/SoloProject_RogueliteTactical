@@ -151,7 +151,8 @@ public class Loot : MonoBehaviour, IInteractible
         _spriteRenderer.transform.UChangeLocalPosition(appearDuration * 0.6f, new Vector3(0, Random.Range(minAppearAddedY, maxAppearAddedY)), 
             CurveType.EaseOutSin);
         _spriteRenderer.material.SetColor("_Color", Color.black);
-        _spriteRenderer.material.ULerpMaterialColor(appearDuration * 0.8f, Color.white, "_Color");
+        //_spriteRenderer.material.ULerpMaterialColor(appearDuration * 0.8f, Color.white, "_Color");
+        _spriteRenderer.material.DOColor(Color.white, "_Color", appearDuration * 0.8f);
 
         _rays1SpriteRenderer.material.SetFloat("_MaxDistance", 0f);
         _rays2SpriteRenderer.material.SetFloat("_MaxDistance", 0f);
@@ -319,6 +320,9 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void Equip(EquipmentSlot slot)
     {
+        if (!GetCanBeEquipped())
+            return;
+
         if (slot is null)
         {
             slot = UIManager.Instance.HeroInfosScreen.GetAppropriateEquipmentSlot(LootData.equipmentType);
@@ -354,6 +358,14 @@ public class Loot : MonoBehaviour, IInteractible
     public void ExitEquipmentSlot()
     {
         overlayedEquipmentSlot = null;
+    }
+
+    public bool GetCanBeEquipped()
+    {
+        if(lootData.exclusiveHeroIndex == -1) return true;
+        if(associatedHero == null) return false;    
+
+        return lootData.exclusiveHeroIndex == associatedHero.HeroIndex;
     }
 
     #endregion

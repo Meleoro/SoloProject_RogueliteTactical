@@ -19,6 +19,7 @@ public class TutorialPanel : MonoBehaviour
     private Transform originalParent;
     private Vector3[] originalPositions;
     private Vector3[] originalLocalPositions;
+    private Vector3 startPosSave;
     private bool isDisplayingTileHighlight;
     private bool isDisplayingSkillHighlight;
     private bool maintainPosition;
@@ -38,6 +39,7 @@ public class TutorialPanel : MonoBehaviour
     [Header("Outside References")]
     [SerializeField] private SkillsPanelButton _skillsPanelFirstButton;
     [SerializeField] private SkillsPanelButton _skillsPanelSecondButton;
+    [SerializeField] private Animator _animator;
 
 
 
@@ -68,7 +70,18 @@ public class TutorialPanel : MonoBehaviour
     }
 
 
-    public void DisplayTutorial(TutoStepData tutoData)
+    public void LockUIInputs()
+    {
+        _backDarkImage.raycastTarget = true;
+    }
+
+    public void UnlockUIInputs()
+    {
+        _backDarkImage.raycastTarget = false;
+    }
+
+
+    public void DisplayTutorial(TutoStepData tutoData, Vector3 aimedLocalPos, Vector3 startLocalPos)
     {
         currentTutoData = tutoData;
 
@@ -91,10 +104,19 @@ public class TutorialPanel : MonoBehaviour
         }
 
         _stepNameText.text = tutoData.stepName;
-        _stepDescriptionText.text = tutoData.stepDescription;
 
-        _rectTr.DOScale(Vector3.one * 0.8f, 0.2f).SetEase(Ease.OutBack);
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(tutoData.stepDescription, _stepDescriptionText));
+        //_stepDescriptionText.text = tutoData.stepDescription;
+
+        _rectTr.localPosition = startLocalPos;
+        startPosSave = startLocalPos;
+
+        //_rectTr.DOScale(Vector3.one * 0.8f, 0.25f).SetEase(Ease.OutBack);
+        _rectTr.DOLocalMove(aimedLocalPos, 0.35f).SetEase(Ease.OutBack);
+
         _backDarkImage.raycastTarget = true;
+
+        //_animator.SetBool("IsDisplayed", true);
 
         StartHighlight();
     }
@@ -104,9 +126,13 @@ public class TutorialPanel : MonoBehaviour
         if (!isDisplayed) return;
         isDisplayed = false;
 
-        _rectTr.DOScale(Vector3.one * 0, 0.2f).SetEase(Ease.InBack);
+        //_rectTr.DOScale(Vector3.one * 0f, 0.25f).SetEase(Ease.OutBack);
+        _rectTr.DOLocalMove(startPosSave, 0.3f).SetEase(Ease.InBack);
+
         _backDarkImage.DOFade(0f, 0.2f).SetEase(Ease.OutBack);
         _backDarkImage.raycastTarget = false;
+
+        //_animator.SetBool("IsDisplayed", false);
 
         OnHide?.Invoke();
 

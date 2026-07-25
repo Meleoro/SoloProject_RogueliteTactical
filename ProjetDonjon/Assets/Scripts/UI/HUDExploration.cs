@@ -22,6 +22,7 @@ public class HUDExploration : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Image[] _buttonsImages;
+    [SerializeField] private RectTransform[] _buttonsParent;
     [SerializeField] private Animator _animator;
     [SerializeField] private InventoriesManager _inventoryManager;
     [SerializeField] private HeroInfosScreen _heroInfosScreen;
@@ -71,6 +72,8 @@ public class HUDExploration : MonoBehaviour
 
         isDisplayed = true;
         _animator.SetBool("IsDisplayed", true);
+
+        ActualiseDisplayedButtons();
 
         UIManager.Instance.ShowHeroInfosPanels();
     }
@@ -181,6 +184,17 @@ public class HUDExploration : MonoBehaviour
 
 
     #region Others
+
+    private void ActualiseDisplayedButtons()
+    {
+        if(TutoManager.Instance.TutoDisabled)
+            return;
+
+        _buttonsParent[0].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[3]);
+        _buttonsParent[1].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[2]);
+        _buttonsParent[2].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[3]);
+        _buttonsParent[3].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[4]);
+    }
 
     private void DoBounceSkillTree()
     {
