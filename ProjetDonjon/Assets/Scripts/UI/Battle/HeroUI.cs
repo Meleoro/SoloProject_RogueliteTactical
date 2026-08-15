@@ -1,10 +1,7 @@
 using DG.Tweening;
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +19,7 @@ public class UnitUI : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private float appearEffectSpeed;
+    [SerializeField] private IntentTooltip[] enemyIntentTooltips;
 
     [Header("Actions")]
     public Action HoverAction;
@@ -32,6 +30,7 @@ public class UnitUI : MonoBehaviour
     private float currentAimedRatio;
     private int currentHealth;
     private Alteration[] currentAlterations;
+    private SkillData currentSkill;
     private Vector3 saveDamageTextPos;
     private Vector3 saveLevelUpTextPos;
     private Unit attachedUnit;
@@ -43,10 +42,12 @@ public class UnitUI : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private TextMeshProUGUI _shieldText;
     [SerializeField] private TextMeshProUGUI _changePaternText;
     [SerializeField] private Image _healthFillableImage;
     [SerializeField] private Image _healthFillableImage2;
     [SerializeField] private Image _hearthImage;
+    [SerializeField] private Image _enemyIntentImage;
     [SerializeField] private RectTransform _parentTr;
     [SerializeField] private TextMeshProUGUI _turnCounterText;
     [SerializeField] private Animator _animator;
@@ -194,13 +195,46 @@ public class UnitUI : MonoBehaviour
         ClickAction?.Invoke();
     }
 
+    public void HoverEnemyIntent()
+    {
+        for(int i = 0; i < enemyIntentTooltips.Length; i++)
+        {
+            if (enemyIntentTooltips[i].skillType != currentSkill.skillType) continue;
+
+            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(enemyIntentTooltips[i].data, _enemyIntentImage.rectTransform.position);
+
+            break;
+        }
+    }
+
+    public void UnhoverEnemyIntent()
+    {
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
+    }
+
     #endregion
 
 
     #region Others
 
-    public void ActualiseUI(float currentHealthRatio, int currentHealth, List<AlterationStruct> currentAlterations)
+    public void ActualiseUI(float currentHealthRatio, int currentHealth, List<AlterationStruct> currentAlterations, SkillData currentSkill = null)
     {
+        if(currentSkill != null)
+        {
+            this.currentSkill = currentSkill;
+
+            for (int i = 0; i < enemyIntentTooltips.Length; i++)
+            {
+                if (enemyIntentTooltips[i].skillType != currentSkill.skillType) continue;
+
+                _enemyIntentImage.enabled = true;
+                _enemyIntentImage.sprite = enemyIntentTooltips[i].icon;
+                _enemyIntentImage.SetNativeSize();
+
+                break;
+            }
+        }
+
         if(currentAimedRatio != currentHealthRatio && currentAimedRatio != 0)
         {
             StartCoroutine(DoDamageTextEffectCoroutine(this.currentHealth - currentHealth, 1f));
@@ -230,12 +264,14 @@ public class UnitUI : MonoBehaviour
             // Sield / Skull heart sprites changes
             if (currentAlterations[i].alteration.alterationType == AlterationType.Shield)
             {
+                _shieldText.text = currentAlterations[i].currentStrength.ToString();
+
                 foundShield = true;
 
                 if(currentHeartState == HeartState.Normal)
                 {
                     currentHeartState = HeartState.Shield;
-
+                    _animator.SetTrigger("HeartShield");
                 }
             }
             else if (currentAlterations[i].alteration.alterationType == AlterationType.Skulled)
@@ -253,6 +289,7 @@ public class UnitUI : MonoBehaviour
         if(currentHeartState == HeartState.Shield && !foundShield)
         {
             currentHeartState = HeartState.Normal;
+            _animator.SetTrigger("ShieldHeart");
 
         }
         else if(currentHeartState == HeartState.Skull && !foundSkull)
@@ -314,4 +351,12 @@ public class UnitUI : MonoBehaviour
     }
 
     #endregion
+}
+
+[Serializable]
+public struct IntentTooltip
+{
+    public SkillType skillType;
+    public GenericDetailsData data;
+    public Sprite icon;
 }

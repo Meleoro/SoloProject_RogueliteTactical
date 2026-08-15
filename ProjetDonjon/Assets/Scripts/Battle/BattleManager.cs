@@ -405,12 +405,34 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     public IEnumerator UseSkillCoroutine(SkillData usedSkill)
     {
-        noMouseControls = true;
-
         if (usedSkill == null) usedSkill = _tilesManager.CurrentSkill;
-        OnSkillUsed.Invoke();
-
         BattleTile[] skillBattleTiles = _tilesManager.GetAllSkillTiles().ToArray();
+
+        if(skillBattleTiles.Length == 0)
+        {
+            _tilesManager.ResetTiles();
+
+            if (currentUnit.GetType() != typeof(Hero))
+            {
+                yield return new WaitForSeconds(0.5f);
+
+                currentUnit.EndTurn(0.5f);
+            }
+        }
+
+        if (currentUnit.GetType() == typeof(Hero) && usedSkill.skillEffects[0].skillEffectType == SkillEffectType.Damage)
+        {
+            Unit[] attackUnits = _tilesManager.GetConcernedUnits(skillBattleTiles, usedSkill, CurrentUnit);
+
+            // Probably a missclick from the player, so we cancel it
+            if (attackUnits.Length == 0)
+            {
+                yield break;
+            }
+        }
+
+        noMouseControls = true;
+        OnSkillUsed.Invoke();
 
         // Camera Part
         Transform[] cameraTiles = new Transform[skillBattleTiles.Length + 1];

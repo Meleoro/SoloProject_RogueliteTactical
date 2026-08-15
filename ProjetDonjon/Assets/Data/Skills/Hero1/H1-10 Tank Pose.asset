@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: H1-10 Tank Pose
   m_EditorClassIdentifier: 
   skillName: TANK POSE
-  skillDescription: GIVES YOU STURDINESS FOR 3 TURNS AND 3 SHIELDS
+  skillDescription: GIVES THIS UNIT <#7C210C>STURDY</color> FOR 3 TURNS AND <#2C2E5E>3
+    SHIELDS</color>
   animName: Skill2
   skillPointCost: 3
   mustTargetAlly: 1
   skillIcon: {fileID: -28761685, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 1171102006, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 897d1c9dc66f4f8498b0d6dff76ac1dd, type: 2}
   - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}
-  skillType: 2
+  skillType: 3
+  skillPaternType: 0
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 0

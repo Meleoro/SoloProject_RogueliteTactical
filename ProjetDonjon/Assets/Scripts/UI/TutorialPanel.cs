@@ -35,6 +35,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private Image _backDarkImage;
     [SerializeField] private Image _progressImage;
     [SerializeField] private Image _progressImageBack;
+    [SerializeField] private Image _buttonOutline;
 
     [Header("Outside References")]
     [SerializeField] private SkillsPanelButton _skillsPanelFirstButton;
@@ -304,11 +305,13 @@ public class TutorialPanel : MonoBehaviour
     public void HoverContinue()
     {
         _continueButton.DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutBack);
+        _buttonOutline.DOFade(1, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void UnhoverContinue()
     {
         _continueButton.DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack);
+        _buttonOutline.DOFade(0, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void ClickContinue()

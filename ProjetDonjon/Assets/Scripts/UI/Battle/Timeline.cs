@@ -195,7 +195,7 @@ public class Timeline : MonoBehaviour
         TimelineUnit timelineUnit = DetermineWhichUnitOnSlot(timelineUnits);
          
         TimelineSlot newSlot = Instantiate(slotPrefab, _slotsPositions[0].parent);
-        newSlot._rectTr.localPosition = _leftLimitPosition.localPosition + new Vector3(spaceBetweenSlots * (slots.Count + 1), 0, 0);
+        newSlot._rectTr.localPosition = _leftLimitPosition.localPosition + new Vector3(spaceBetweenSlots * (slots.Count + 2), 0, 0);
         newSlot.SetupSlot(timelineUnit.unit.UnitData.unitImage, timelineUnit.unit, slots.Count + 1);
         newSlot.Advance(0.5f, _slotsPositions);
         slots.Add(newSlot);

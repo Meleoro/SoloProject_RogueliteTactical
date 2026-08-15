@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: H1-1 Basic Strike
   m_EditorClassIdentifier: 
   skillName: BASIC STRIKE
-  skillDescription: DEALS DAMAGES ON ONE TILE
+  skillDescription: DEALS DAMAGES ON ONE ADJACENT TILE
   animName: Skill1
   skillPointCost: 0
   mustTargetAlly: 0
   skillIcon: {fileID: 553366629, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 311212683, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
-  skillType: 1
+  skillType: 0
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2

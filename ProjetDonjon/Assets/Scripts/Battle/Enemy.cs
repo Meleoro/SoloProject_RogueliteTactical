@@ -67,6 +67,8 @@ public class AIUnit : Unit
         currentSkillData = currentData.skills[0];
         currentSkillIndex = 0;
 
+        _ui.ActualiseUI((float)currentHealth / currentMaxHealth, currentHealth, currentAlterations, currentSkillData);
+
         currentPreviewType = PreviewType.Move;
 
         InitialiseUnitInfos(currentData.baseHealth, currentData.baseStrength, currentData.baseSpeed, currentData.baseLuck, 0);
@@ -240,6 +242,8 @@ public class AIUnit : Unit
                 currentSkillIndex = (currentSkillIndex + 1) % currentData.skills.Length;
                 currentSkillData = currentData.skills[currentSkillIndex];
 
+                _ui.ActualiseUI((float)currentHealth / currentMaxHealth, currentHealth, currentAlterations, currentSkillData);
+
                 yield return new WaitForSeconds(1.5f);
             }
 
@@ -258,7 +262,7 @@ public class AIUnit : Unit
                 (int)Mathf.Sqrt(AIData.movePatern.Length), true, Enums.ObstacleType.All, null, true);
         possibleMoves.Add(currentTile);
 
-        int bestGrade = -1000;
+        int bestGrade = -100;
         BattleTile pickedMoveTile = currentTile;
         BattleTile pickedSkillTile = null;
 
@@ -286,12 +290,12 @@ public class AIUnit : Unit
 
                 // If we didn't find any usable skill tile we skip
                 if (currentSkillTile is null) continue;
-                if (currentSkillTile.UnitOnTile is null && currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Empty) continue;
-                if (currentSkillTile.UnitOnTile == this && currentSkillData.skillType != SkillType.SkillArea) continue;
-                if (!aimedTiles.Contains(currentSkillTile) && currentSkillData.skillType != SkillType.SkillArea) continue;
+                //if (currentSkillTile.UnitOnTile is null && currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Empty) continue;
+                //if (currentSkillTile.UnitOnTile == this && currentSkillData.skillPaternType != SkillPaternType.SkillArea) continue;
+                //if (!aimedTiles.Contains(currentSkillTile) && currentSkillData.skillPaternType != SkillPaternType.SkillArea) continue;
 
                 // If we can hit a target, we verify if the move has a good enough grade to be selected
-                BattleTile[] dangerTiles = GetDangerTiles(currentMoveTile.TileCoordinates, currentSkillTile.TileCoordinates);
+                BattleTile[] dangerTiles = GetDangerTiles(currentMoveTile.TileCoordinates, currentSkillTile);
                 int moveGrade = GetMoveGrade(currentMoveTile.TileCoordinates, dangerTiles, depth);
                 if (moveGrade < bestGrade) continue;
 
@@ -305,17 +309,17 @@ public class AIUnit : Unit
             {
                 BattleTile[] possibleSkillTiles;
 
-                if (currentSkillData.skillType == SkillType.SkillArea) possibleSkillTiles = new BattleTile[1] { possibleMoves[i] };
+                if (currentSkillData.skillPaternType == SkillPaternType.SkillArea) possibleSkillTiles = new BattleTile[1] { possibleMoves[i] };
                 else possibleSkillTiles = BattleManager.Instance.TilesManager.GetPaternTiles(possibleMoves[i].TileCoordinates, currentSkillData.skillPatern,
                         (int)Mathf.Sqrt(currentSkillData.skillPatern.Length), true, Enums.ObstacleType.UnitsIncluded, currentTile).ToArray();
 
                 for (int j = 0; j < possibleSkillTiles.Length; j++)
                 {
-                    BattleTile[] dangerTiles = GetDangerTiles(possibleMoves[i].TileCoordinates, possibleSkillTiles[j].TileCoordinates);
+                    BattleTile[] dangerTiles = GetDangerTiles(possibleMoves[i].TileCoordinates, possibleSkillTiles[j]);
                     int moveGrade = GetMoveGrade(possibleMoves[i].TileCoordinates, dangerTiles, depth);
 
                     if (moveGrade <= bestGrade) continue;
-                    
+
                     bestGrade = moveGrade;
                     pickedMoveTile = possibleMoves[i];
 
@@ -337,39 +341,18 @@ public class AIUnit : Unit
         return (pickedMoveTile, pickedSkillTile);
     }
 
-    private BattleTile[] GetDangerTiles(Vector2Int movePos, Vector2Int skillPos)
+    private BattleTile[] GetDangerTiles(Vector2Int movePos, BattleTile skillTile)
     {
         // Skill Grade
         BattleTile[] skillDangerTiles;
-        if (currentSkillData.skillType == SkillType.SkillArea)
+        if (currentSkillData.skillPaternType == SkillPaternType.SkillArea)
         {
             skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(movePos,
                 currentSkillData.skillPatern, (int)Mathf.Sqrt(currentSkillData.skillPatern.Length), true, Enums.ObstacleType.Nothing).ToArray();
         }
-        else if (currentSkillData.useOrientatedAOE)
-        {
-            Vector2Int coordinateDif = skillPos - CurrentTile.TileCoordinates;
-
-            if (coordinateDif.y > 0)
-                skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternUp,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternUp.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
-
-            else if(coordinateDif.y < 0)
-                skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternDown,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternDown.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
-
-            else if (coordinateDif.x > 0)
-                skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternRight,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternRight.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
-
-            else
-                skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPaternLeft,
-                    (int)Mathf.Sqrt(currentSkillData.skillAOEPaternLeft.Length), false, Enums.ObstacleType.Nothing, null, true).ToArray();
-        }
         else
         {
-            skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(skillPos, currentSkillData.skillAOEPatern, 
-                (int)Mathf.Sqrt(currentSkillData.skillAOEPatern.Length), true, Enums.ObstacleType.UnitsIncluded).ToArray();
+            skillDangerTiles = BattleManager.Instance.TilesManager.GetPatternAOETiles(skillTile, skillTile, currentSkillData).ToArray();
         }
 
         return skillDangerTiles;
@@ -377,12 +360,13 @@ public class AIUnit : Unit
 
     private int GetMoveGrade(Vector2Int testedMovePos, BattleTile[] testedDangerTiles, int depth)
     {
-        int finalGrade = -5 * depth;
+        int finalGrade = -10 * depth;
 
         // Move grade
         for (int i = 0; i < avoidedTiles.Length; i++)
         {
             int currentDist = (int)Vector2Int.Distance(testedMovePos, avoidedTiles[i].TileCoordinates);
+            currentDist = Mathf.Clamp(currentDist, 0, 5);
 
             switch (AIData.AI)
             {
@@ -397,11 +381,18 @@ public class AIUnit : Unit
         }
 
         // Skill Grade
+        bool reachesAimedTiles = false;
         for (int i = 0; i < testedDangerTiles.Length; i++)
         {
             if (!aimedTiles.Contains(testedDangerTiles[i])) continue;
 
-            finalGrade += 15;
+            finalGrade += 20;
+            reachesAimedTiles = true;
+        }
+
+        if(!reachesAimedTiles)
+        {
+            finalGrade -= 100;
         }
 
         return finalGrade;

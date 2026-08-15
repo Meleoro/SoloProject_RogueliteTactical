@@ -59,6 +59,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     [Header("References Positions")]
     [SerializeField] private RectTransform[] _hiddenInventoryPositions;
     [SerializeField] private RectTransform[] _shownInventoryPositions;
+    [SerializeField] private Inventory[] _possibleInventories;
     [SerializeField] private RectTransform _mainLootParent;
     [SerializeField] private RectTransform _hiddenPosition;
     [SerializeField] private RectTransform _shownPosition;
@@ -85,17 +86,17 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         SaveManager.Instance.AddSaveableObject(this);
     }
 
-    public Inventory InitialiseInventory(Inventory inventoryPrefab, int index, Hero hero)
+    public Inventory InitialiseInventory(Hero hero)
     {
-        allHeroesInventories[index] = Instantiate(inventoryPrefab, _inventoriesParent);
-        allHeroesInventories[index].InitialiseInventory(hero);
+        allHeroesInventories[hero.HeroIndex] = Instantiate(_possibleInventories[hero.HeroIndex], _inventoriesParent);
+        allHeroesInventories[hero.HeroIndex].InitialiseInventory(hero);
 
-        allSlots.AddRange(allHeroesInventories[index].GetSlots());
+        allSlots.AddRange(allHeroesInventories[hero.HeroIndex].GetSlots());
 
         StartCoroutine(ResetPosDelayCoroutine());
-        StartCoroutine(SetupStartItemsCoroutine(allHeroesInventories[index], hero));
+        StartCoroutine(SetupStartItemsCoroutine(allHeroesInventories[hero.HeroIndex], hero));
 
-        return allHeroesInventories[index];
+        return allHeroesInventories[hero.HeroIndex];
     }
 
     public void EnableInventory(int index)

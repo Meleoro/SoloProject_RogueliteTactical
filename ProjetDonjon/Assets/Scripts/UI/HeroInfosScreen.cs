@@ -319,8 +319,6 @@ public class HeroInfosScreen : MonoBehaviour
 
     private void VerifyValueChangeEffects(int newMaxHealth, int newStrength, int newSpeed, int newLuck, int newMovePoints, int maxSP)
     {
-        Debug.Log(int.Parse(_statsTexts[0].text));
-
         if (newMaxHealth != int.Parse(_statsTexts[0].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[0]));
         if(newStrength != int.Parse(_statsTexts[1].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[1]));
         if(newSpeed != int.Parse(_statsTexts[2].text)) StartCoroutine(ValueChangeEffectCoroutine(_statsTexts[2]));

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Utilities;
 
 public class SkillTreeManager : MonoBehaviour
@@ -26,17 +27,13 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private RectTransform _nodesUpRightTrRef;
     [SerializeField] private RectTransform _nodesParent;
     [SerializeField] private RectTransform _mainRectTr; 
-    [SerializeField] private RectTransform _leftArrowRectTr;
-    [SerializeField] private RectTransform _leftArrowPosRef;
-    [SerializeField] private RectTransform _rightArrowRectTr;
-    [SerializeField] private RectTransform _rightArrowPosRef;
-    [SerializeField] private TextMeshProUGUI _heroNameText;
-    [SerializeField] private TextMeshProUGUI _heroAvailablePointsText;
+    [SerializeField] private Image[] _heroIcons;
+    [SerializeField] private SkillTreeProfile[] _skillTreeProfiles;
 
 
     private void Start()
     {
-        currentNodes = new SkillTreeNode[15];
+        currentNodes = new SkillTreeNode[20];
         for(int i = 0; i < currentNodes.Length; i++)
         {
             currentNodes[i] = Instantiate(nodePrefab, transform.position, Quaternion.Euler(0, 0, 0), _nodesParent);
@@ -44,10 +41,23 @@ public class SkillTreeManager : MonoBehaviour
             currentNodes[i].OnUnhover += UnhoverNode;
             currentNodes[i].OnClickValid += ClickNode;
         }
+
+        for(int i = 0; i < _skillTreeProfiles.Length; i++)
+        {
+            _skillTreeProfiles[i].OnClick += SelectHero;
+        }
     }
 
 
     #region Generate Skill Tree
+
+    private void SelectHero(int index)
+    {
+        currentIndex = index;
+        Hero hero = HeroesManager.Instance.Heroes[currentIndex];
+
+        LoadHero(hero);
+    }
 
     private void LoadHero(Hero hero)
     {
@@ -56,8 +66,10 @@ public class SkillTreeManager : MonoBehaviour
         GenerateSkillTree(hero);
         SetupNodes(hero);
 
-        _heroNameText.text = hero.HeroData.unitName;
-        _heroAvailablePointsText.text = "AVAILABLE POINTS : " + hero.CurrentSkillTreePoints;
+        for(int i = 0; i < _heroIcons.Length; i++)
+        {
+            _heroIcons[i].enabled = hero.HeroIndex == i; 
+        }
     }
 
 
@@ -132,6 +144,7 @@ public class SkillTreeManager : MonoBehaviour
         Hero hero = HeroesManager.Instance.Heroes[currentIndex];
 
         LoadHero(hero);
+        _skillTreeProfiles[currentIndex].SelectProfile();
 
         HeroesManager.Instance.StopControl();
         OnShow.Invoke();
@@ -143,14 +156,10 @@ public class SkillTreeManager : MonoBehaviour
     private IEnumerator ShowCoroutine()
     {
         _mainRectTr.UChangeLocalPosition(0.3f, new Vector3(0, -30, 0), CurveType.EaseOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.3f, _leftArrowPosRef.localPosition + new Vector3(10, 0, 0), CurveType.EaseOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.3f, _rightArrowPosRef.localPosition + new Vector3(-10, 0, 0), CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(0.3f);
 
         _mainRectTr.UChangeLocalPosition(0.1f, new Vector3(0, 0, 0), CurveType.EaseInOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.1f, _leftArrowPosRef.localPosition, CurveType.EaseInOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.1f, _rightArrowPosRef.localPosition, CurveType.EaseInOutCubic);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -171,14 +180,10 @@ public class SkillTreeManager : MonoBehaviour
     private IEnumerator HideCoroutine()
     {
         _mainRectTr.UChangeLocalPosition(0.1f, new Vector3(0, -30, 0), CurveType.EaseOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.1f, _leftArrowPosRef.localPosition + new Vector3(10, 0, 0), CurveType.EaseOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.1f, _rightArrowPosRef.localPosition + new Vector3(-10, 0, 0), CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(0.1f);
 
         _mainRectTr.UChangeLocalPosition(0.3f, new Vector3(0, 600, 0), CurveType.EaseInOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.3f, _leftArrowPosRef.localPosition + new Vector3(-100, 0, 0), CurveType.EaseInOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.3f, _rightArrowPosRef.localPosition + new Vector3(100, 0, 0), CurveType.EaseInOutCubic);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -222,7 +227,7 @@ public class SkillTreeManager : MonoBehaviour
 
     private void HoverNode(SkillTreeNode node)
     {
-        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(node.Data, node.transform.position, node.RectTr.localPosition.x < 0);
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(node.Data, node.transform.position, node.RectTr.localPosition.x < 0, node.RectTr.localPosition.y < -100);
     }
 
     private void UnhoverNode(SkillTreeNode node)
@@ -241,7 +246,9 @@ public class SkillTreeManager : MonoBehaviour
         }
 
         currentHero.ActualiseSkillTreeUnlockedNodes(possessedNodes);
-        _heroAvailablePointsText.text = "AVAILABLE POINTS : " + currentHero.CurrentSkillTreePoints;
+        //_heroAvailablePointsText.text = "AVAILABLE POINTS : " + currentHero.CurrentSkillTreePoints;
+
+        _skillTreeProfiles[currentIndex].ActualiseInfos();
 
         ActualiseNodes();
     }
@@ -251,38 +258,6 @@ public class SkillTreeManager : MonoBehaviour
 
 
     #region Others
-
-    public void HoverArrow(bool isLeft)
-    {
-        if (isLeft)
-        {
-            _leftArrowRectTr.UChangeScale(0.2f, Vector3.one * 1.2f, CurveType.EaseOutSin);
-        }
-        else
-        {
-            _rightArrowRectTr.UChangeScale(0.2f, Vector3.one * 1.2f, CurveType.EaseOutSin);
-        }
-    }
-
-    public void UnhoverArrow(bool isLeft)
-    {
-        if (isLeft)
-        {
-            _leftArrowRectTr.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
-        }
-        else
-        {
-            _rightArrowRectTr.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
-        }
-    }
-
-    public void ClickArrow(bool isLeft)
-    {
-        if (isOpeningOrClosing) return;
-
-        StartCoroutine(ChangeHeroCoroutine(isLeft));
-    }
-
 
     // Called at the end of the generation of a skill tree to setup all nodes
     private void SetupNodes(Hero hero)

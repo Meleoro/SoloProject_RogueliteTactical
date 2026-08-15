@@ -16,10 +16,12 @@ MonoBehaviour:
   skillDescription: SUMMONS A POWERFUL FOREST MINION TO HELP YOU (MAX 1 AT ONCE)
   animName: Skill2
   skillPointCost: 4
+  mustTargetAlly: 0
   skillIcon: {fileID: 1812084220, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 465495736, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
-  skillType: 1
+  skillType: 7
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 5
     skillEffectTargetType: 3
@@ -35,6 +37,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

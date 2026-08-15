@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkullToHeart
-  serializedVersion: 7
+  serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -151,9 +151,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1102479426, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+      value: {fileID: -6299240279524820590, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
     - time: 0.25
-      value: {fileID: -4121382484041984274, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+      value: {fileID: -7878076222933570752, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
     attribute: m_Sprite
     path: HealthBar/Hearth
     classID: 114
@@ -175,6 +175,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 3765734810
       attribute: 304273561
@@ -184,6 +185,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 119279618
       attribute: 4185109675
@@ -193,6 +195,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 3765734810
       attribute: 2015549526
@@ -202,9 +205,10 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     pptrCurveMapping:
-    - {fileID: -1102479426, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
-    - {fileID: -4121382484041984274, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+    - {fileID: -6299240279524820590, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
+    - {fileID: -7878076222933570752, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

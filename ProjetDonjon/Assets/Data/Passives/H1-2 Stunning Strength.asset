@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: H1-2 Stunning Strength
   m_EditorClassIdentifier: 
   passiveName: STUNNING ATTACKS
-  passiveDescription: HAS 10% CHANCE TO INFLICT STUNNED WHEN THIS UNIT DEALS DAMAGES
+  passiveDescription: HAS 10% CHANCE TO INFLICT <#FFC12E>STUNNED</color> WHEN THIS
+    UNIT DEALS DAMAGES
   passiveIcon: {fileID: 1685792960, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: -1451717230, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:

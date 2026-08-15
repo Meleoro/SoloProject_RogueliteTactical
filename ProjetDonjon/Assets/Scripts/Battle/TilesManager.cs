@@ -104,7 +104,7 @@ public class TilesManager
             foreach (BattleTile tile in currentTile.TileNeighbors)
             {
                 if (result.Contains(tile)) continue;
-                if (tile.CurrentTileState != BattleTileState.Attack && tile.CurrentTileState != BattleTileState.Danger) continue;
+                if (tile.CurrentTileState != BattleTileState.SkillPreview && tile.CurrentTileState != BattleTileState.Skill) continue;
 
                 result.Add(tile);
                 openList.Add(tile);
@@ -143,7 +143,7 @@ public class TilesManager
 
         for (int i = 0; i < battleRoom.BattleTiles.Count; i++)
         {
-            if (battleRoom.BattleTiles[i].CurrentTileState == BattleTileState.Danger && !battleRoom.BattleTiles[i].IsHole)
+            if (battleRoom.BattleTiles[i].CurrentTileState == BattleTileState.Skill && !battleRoom.BattleTiles[i].IsHole)
             {
                 returnedTiles.Add(battleRoom.BattleTiles[i]);
             }
@@ -172,7 +172,7 @@ public class TilesManager
         if (skill is not null) currentSkill = skill;
         if (baseTile is not null) currentSkillBaseTile = baseTile;
 
-        bool isBlockedByUnits = currentSkill.skillType != SkillType.SkillArea && currentSkill.skillType != SkillType.AdjacentTiles;
+        bool isBlockedByUnits = currentSkill.skillPaternType != SkillPaternType.SkillArea && currentSkill.skillPaternType != SkillPaternType.AdjacentTiles;
 
         List<BattleTile> skillTiles = GetPaternTiles(currentSkillBaseTile.TileCoordinates, currentSkill.skillPatern,
             (int)Mathf.Sqrt(currentSkill.skillPatern.Length), true,
@@ -180,7 +180,7 @@ public class TilesManager
 
         for (int i = 0; i < skillTiles.Count; i++)
         {
-            skillTiles[i].DisplayPossibleAttackTile(doBounce);
+            skillTiles[i].DisplayPossibleSkillTile(doBounce, currentSkill.skillType);
         }
 
         return skillTiles;
@@ -202,25 +202,25 @@ public class TilesManager
 
         List<BattleTile> skillTiles = new List<BattleTile>();
 
-        switch (skill.skillType)
+        switch (skill.skillPaternType)
         {
-            case SkillType.AOEPaternTiles:
+            case SkillPaternType.AOEPaternTiles:
                 skillTiles = GetPatternAOETiles(overlayedTile, currentUnit.CurrentTile, skill);
                 break;
 
-            case SkillType.SkillArea:
+            case SkillPaternType.SkillArea:
                 skillTiles = GetPaternTiles(currentUnit.CurrentTile.TileCoordinates, skill.skillPatern, (int)Mathf.Sqrt(skill.skillPatern.Length),
                     false, ObstacleType.Nothing);
                 break;
 
-            case SkillType.AdjacentTiles:
+            case SkillPaternType.AdjacentTiles:
                 skillTiles = GetAdjacentTiles(overlayedTile);
                 break;
         }
 
         for (int i = 0; i < skillTiles.Count; i++)
         {
-            skillTiles[i].DisplayDangerTile();
+            skillTiles[i].DisplayDangerTile(skill.skillType);
         }
     }
 
@@ -233,6 +233,11 @@ public class TilesManager
 
         for (int i = 0; i < enemies.Length; i++)
         {
+            if (enemies[i].CurrentSkillData.skillType != SkillType.Attack &&
+                enemies[i].CurrentSkillData.skillType != SkillType.HeavyAttack &&
+                enemies[i].CurrentSkillData.skillType != SkillType.AttackBuff &&
+                enemies[i].CurrentSkillData.skillType != SkillType.AttackDebuff) continue;    // We only show the tiles concerned by enemy attacks
+
             moveTiles = GetPaternTiles(enemies[i].CurrentTile.TileCoordinates, enemies[i].AIData.movePatern,
                 (int)Mathf.Sqrt(enemies[i].AIData.movePatern.Length), true, ObstacleType.All, null, true);
 
@@ -244,7 +249,7 @@ public class TilesManager
                 skillTiles = GetPaternTiles(moveTiles[j].TileCoordinates, enemies[i].CurrentSkillData.skillPatern,
                     (int)Mathf.Sqrt(enemies[i].CurrentSkillData.skillPatern.Length), true, ObstacleType.UnitsIncluded);
 
-                if (enemies[i].CurrentSkillData.skillType == SkillType.AOEPaternTiles)
+                if (enemies[i].CurrentSkillData.skillPaternType == SkillPaternType.AOEPaternTiles)
                 {
                     List<BattleTile> addedTiles = new List<BattleTile>();
                     for (int k = 0; k < skillTiles.Count; k++)
@@ -257,7 +262,7 @@ public class TilesManager
                 for (int k = 0; k < skillTiles.Count; k++)
                 {
                     //if (skillTiles[k].CurrentTileState == BattleTileState.Move) continue;
-                    skillTiles[k].DisplayPossibleAttackTile(true);
+                    skillTiles[k].DisplayPossibleSkillTile(true, enemies[i].CurrentSkillData.skillType);
                 }
             }
         }
@@ -292,21 +297,36 @@ public class TilesManager
                 tiles = GetPaternTiles(enemy.CurrentTile.TileCoordinates, enemy.CurrentSkillData.skillPatern,
                     (int)Mathf.Sqrt(enemy.CurrentSkillData.skillPatern.Length), true);
 
-                if(enemy.CurrentSkillData.skillType == SkillType.AOEPaternTiles)
-                {
-                    List<BattleTile> addedTiles = new List<BattleTile>();
+                List<BattleTile> AOETiles = new List<BattleTile>();
 
+                bool doFlash = false;
+
+                if (enemy.CurrentSkillData.skillPaternType == SkillPaternType.AOEPaternTiles)
+                {
                     for (int i = 0; i < tiles.Count; i++)
                     {
-                        addedTiles.AddRange(GetPatternAOETiles(tiles[i], enemy.CurrentTile, enemy.CurrentSkillData));
-                    }
+                        AOETiles.AddRange(GetPatternAOETiles(tiles[i], enemy.CurrentTile, enemy.CurrentSkillData));
 
-                    tiles.AddRange(addedTiles);
+                        if(AOETiles.Count > 1)
+                        {
+                            doFlash = true;
+                        }
+                    }
                 }
 
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    tiles[i].DisplayPossibleAttackTile(true);
+                    tiles[i].DisplayPossibleSkillTile(true, enemy.CurrentSkillData.skillType);
+                }
+
+                if (!doFlash) break;
+                
+                for (int i = 0; i < AOETiles.Count; i++)
+                {
+                    if (doFlash)
+                    {
+                        AOETiles[i].StartFlashColorEffect();
+                    }
                 }
                 break;
 
@@ -320,7 +340,7 @@ public class TilesManager
                     secondaryTiles = GetPaternTiles(tiles[i].TileCoordinates, enemy.CurrentSkillData.skillPatern,
                         (int)Mathf.Sqrt(enemy.CurrentSkillData.skillPatern.Length), true, ObstacleType.UnitsIncluded);
 
-                    if (enemy.CurrentSkillData.skillType == SkillType.AOEPaternTiles)
+                    if (enemy.CurrentSkillData.skillPaternType == SkillPaternType.AOEPaternTiles)
                     {
                         List<BattleTile> addedTiles = new List<BattleTile>();
                         for (int j = 0; j < secondaryTiles.Count; j++)
@@ -333,7 +353,7 @@ public class TilesManager
                     for (int j = 0; j < secondaryTiles.Count; j++)
                     {
                         if (secondaryTiles[j].CurrentTileState == BattleTileState.Move) continue;
-                        secondaryTiles[j].DisplayPossibleAttackTile(true);
+                        secondaryTiles[j].DisplayPossibleSkillTile(true, enemy.CurrentSkillData.skillType);
                     }
 
                     tiles[i].DisplayMoveTile();

@@ -34,6 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3753592923595365184
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,6 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -4684333735789482159, guid: f57b17b0593c5a94e93b145a0e86b855, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.25490198}
   m_FlipX: 0
@@ -88,8 +90,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &1306653478329261983
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,13 +322,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTileColorOutline: {r: 1, g: 1, b: 1, a: 0.15686275}
-  moveTileColorOutline: {r: 0.6745098, g: 1, b: 0.69411767, a: 0.49019608}
+  moveTileColorOutline: {r: 0.40903422, g: 0.8679245, b: 0.3520825, a: 0.49019608}
   attackTileColorOutline: {r: 1, g: 0.4669811, b: 0.4669811, a: 0.39215687}
-  dangerTileColorOutline: {r: 0.972549, g: 0.86389047, b: 0.47058824, a: 0.6039216}
+  dangerTileColorOutline: {r: 1, g: 0.8355936, b: 0.24842751, a: 0.8}
+  buffTileColorOutline: {r: 0.37425336, g: 0.4868681, b: 0.7987421, a: 0.6}
+  debuffTileColorOutline: {r: 0.663251, g: 0.370524, b: 0.802, a: 0.6}
   baseTileColorBack: {r: 1, g: 1, b: 1, a: 0.02745098}
-  moveTileColorBack: {r: 0.6745098, g: 1, b: 0.6940734, a: 0.09411765}
+  moveTileColorBack: {r: 0.4117647, g: 0.87058824, b: 0.3529412, a: 0.09411765}
   attackTileColorBack: {r: 1, g: 0.495283, b: 0.495283, a: 0.09411765}
-  dangerTileColorBack: {r: 0.9725491, g: 0.86274517, b: 0.47058827, a: 0.09803922}
+  dangerTileColorBack: {r: 1, g: 0.8392157, b: 0.2509804, a: 0.2}
+  buffTileColorBack: {r: 0.37254903, g: 0.4862745, b: 0.8, a: 0.101960786}
+  debuffTileColorBack: {r: 0.6666667, g: 0.37254903, b: 0.8039216, a: 0.101960786}
   overlayEffectDuration: 0.1
   addedColorOverlayOutline: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.19607843}
   addedColorOverlayBack: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.19607843}
@@ -392,6 +398,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -484,6 +491,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6090027786256672664
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -529,6 +537,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7223950226953391895, guid: f57b17b0593c5a94e93b145a0e86b855, type: 3}
   m_Color: {r: 0.7877358, g: 0.96056473, b: 1, a: 0.11372549}
   m_FlipX: 0
@@ -538,5 +547,5 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []

@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: H1-5 Shield Hit
   m_EditorClassIdentifier: 
   skillName: SHIELD HIT
-  skillDescription: DEALS SMALL DAMAGES AND PUSHES THE TARGET
+  skillDescription: DEALS SMALL DAMAGES ON ONE ADJACENT TILE AND PUSHES THE TARGET
   animName: Skill3
   skillPointCost: 1
+  mustTargetAlly: 0
   skillIcon: {fileID: 1812084220, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 465495736, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
-  skillType: 1
+  skillType: 0
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2
@@ -42,6 +44,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

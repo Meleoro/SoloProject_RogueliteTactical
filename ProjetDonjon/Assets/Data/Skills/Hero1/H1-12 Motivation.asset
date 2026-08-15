@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: H1-12 Motivation
   m_EditorClassIdentifier: 
   skillName: MOTIVATION
-  skillDescription: GIVES STRENGTH AND STURDINESS TO ONE UNIT FOR 3 TURNS
+  skillDescription: GIVES <#7C210C>REINFORCED</color> AND <#7C210C>STURDINESS</color>
+    TO ONE UNIT FOR 3 TURNS
   animName: Skill2
   skillPointCost: 2
   mustTargetAlly: 1
   skillIcon: {fileID: -1196157072, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -1824687369, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 3e34f2f0be98dba4695ded6ff676ab24, type: 2}
   - {fileID: 11400000, guid: 897d1c9dc66f4f8498b0d6dff76ac1dd, type: 2}
-  skillType: 1
+  skillType: 3
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 1

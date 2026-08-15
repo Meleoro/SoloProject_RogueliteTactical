@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HeroInfoPanel : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Image _heroImage;
+    [SerializeField] private Image[] _heroImages;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private SkillPoint[] _skillPoints;
@@ -17,15 +17,20 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void InitialisePanel(Hero hero)
     {
-        _heroImage.sprite = hero.HeroData.unitImage;
-        _nameText.text = hero.HeroData.unitName;
+        
+        for(int i = 0; i < _heroImages.Length; i++)
+        {
+            _heroImages[i].enabled = i == hero.HeroIndex;
+        }
+
+        //_nameText.text = hero.HeroData.unitName;
 
         ActualisePanel(hero);
     }
 
     public void ActualisePanel(Hero hero)
     {
-        _levelText.text = "LVL." + hero.CurrentLevel;
+        _levelText.text = "LEVEL " + hero.CurrentLevel;
 
         for(int i = 0; i < hero.CurrentSkillPoints; i++)
         {

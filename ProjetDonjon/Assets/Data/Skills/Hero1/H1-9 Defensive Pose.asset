@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: H1-9 Defensive Pose
   m_EditorClassIdentifier: 
   skillName: DEFENSIVE POSE
-  skillDescription: GIVES YOU STURDINESS FOR 3 TURNS
+  skillDescription: GIVES THIS UNIT <#7C210C>STURDY</color> FOR 3 TURNS
   animName: Skill2
   skillPointCost: 1
   mustTargetAlly: 0
   skillIcon: {fileID: 1044571779, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -1217327357, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 897d1c9dc66f4f8498b0d6dff76ac1dd, type: 2}
-  skillType: 2
+  skillType: 3
+  skillPaternType: 0
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 0

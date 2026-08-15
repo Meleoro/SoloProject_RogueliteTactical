@@ -14,8 +14,9 @@ public class Hero : Unit
     [SerializeField] private SkillTreeData skillTreeData;
     [SerializeField] private int heroIndex;        // ID To access heroes save
     public LootData[] startLoot;
-    [SerializeField] public int neededXPLevelZero;
-    [SerializeField] public float neededXPMultiplicator;
+    [SerializeField] private int maxHeroLevel;
+    [SerializeField] private int neededXPLevelZero;
+    [SerializeField] private float neededXPMultiplicator;
 
     [Header("Actions")]
     public Action OnClickUnit;
@@ -74,11 +75,11 @@ public class Hero : Unit
         CurrentLevel = HeroesManager.Instance.HeroesLevel[heroIndex];
         CurrentXPToReach = (int)(neededXPLevelZero * ((currentLevel + 1) * neededXPMultiplicator));
 
-        skillTreeUnlockedNodes = new bool[15];
-        for(int i = 0; i < 15; i++)
+        skillTreeUnlockedNodes = new bool[maxHeroLevel];
+        for(int i = 0; i < maxHeroLevel; i++)
         {
             if(HeroesManager.Instance.unlockAllSkills) skillTreeUnlockedNodes[i] = true;
-            else skillTreeUnlockedNodes[i] = HeroesManager.Instance.HeroesUnlockedNodes[heroIndex * 15 + i];
+            else skillTreeUnlockedNodes[i] = HeroesManager.Instance.HeroesUnlockedNodes[heroIndex * maxHeroLevel + i];
         }
         currentSkillTreePoints = HeroesManager.Instance.HeroesCurrentSkillTreePoint[heroIndex];
 
@@ -359,6 +360,7 @@ public class Hero : Unit
         int currentMovePoints = heroData.baseMovePoints + addedMovePoints;
         int currentMaxSP = heroData.maxSkillPoints + addedSP;
 
+        // EQUIPMENT
         for (int i = 0; i < EquippedLoot.Length; i++)
         {
             if (EquippedLoot[i] == null) continue;
@@ -371,6 +373,39 @@ public class Hero : Unit
             currentMaxSP += EquippedLoot[i].LootData.spUpgrade;
         }
 
+        // SKILL TREE UPGRADES
+        foreach(SkillTreeNodeData treeNode in GetAllPossessedNodes(skillTreeData, skillTreeUnlockedNodes)) 
+        {
+            if (treeNode.skillData is not null || treeNode.passiveData is not null) continue;
+
+            switch (treeNode.statUpgradeType)
+            {
+                case StatType.Health:
+                    currentHealth += treeNode.upgradeStrength;
+                    break;
+
+                case StatType.Strength:
+                    currentStrength += treeNode.upgradeStrength;
+                    break;
+
+                case StatType.Speed:
+                    currentSpeed += treeNode.upgradeStrength;
+                    break;
+
+                case StatType.Luck:
+                    currentLuck += treeNode.upgradeStrength;
+                    break;
+
+                case StatType.MovePoints:
+                    currentMovePoints += treeNode.upgradeStrength;
+                    break;
+
+                case StatType.SkillPoints:
+                    currentMaxSP += treeNode.upgradeStrength;
+                    break;
+            }
+        }
+
         this.currentMovePoints = currentMovePoints;
         this.currentMaxSkillPoints = currentMaxSP;
 
@@ -380,11 +415,29 @@ public class Hero : Unit
         OnHeroInfosChange.Invoke();
     }
 
+    private SkillTreeNodeData[] GetAllPossessedNodes(SkillTreeData skillTreeData, bool[] unlockedNodes)
+    {
+        SkillTreeNodeData[] validNodes = new SkillTreeNodeData[unlockedNodes.Length];   // "2 +" because a hero starts with 2 skills at level 0 
+        int i = 0;
+
+        for (int x = 0; x < skillTreeData.skillTreeRows.Length; x++)
+        {
+            for (int y = 0; y < skillTreeData.skillTreeRows[x].rowNodes.Length; y++)
+            {
+                if (unlockedNodes[i])
+                    validNodes[i] = skillTreeData.skillTreeRows[x].rowNodes[y];
+
+                i++;
+            }
+        }
+
+        return validNodes;
+    }
+
     public override void AddStatsModificators(int addedMaxHealth, int addedStrength, int addedSpeed, int addedLuck, int addedMovePoints, int addedSP)
     {
         currentMovePoints += addedMovePoints;
         currentMaxSkillPoints += addedSP;
-
 
         base.AddStatsModificators(addedMaxHealth, addedStrength, addedSpeed, addedLuck, addedMovePoints, addedSP);
     }
@@ -431,6 +484,8 @@ public class Hero : Unit
         skillTreeUnlockedNodes = unlockedNodes;
 
         currentSkillTreePoints--;
+
+        ActualiseUnitInfos(0, 0, 0, 0, 0, 0);
     }
 
     // Called when we modify the equipped skills

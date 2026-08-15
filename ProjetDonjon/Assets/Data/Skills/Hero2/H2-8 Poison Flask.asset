@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: H2-8 Poison Flask
   m_EditorClassIdentifier: 
   skillName: POISON FLASK
-  skillDescription: POISONS ALL ENEMIES IN A SMALL AREA
+  skillDescription: 'APPLIES <#860060>POISONED</color> TO ALL ENEMIES IN A SMALL
+    AREA FOR 3 TURNS  '
   animName: Skill3
   skillPointCost: 2
+  mustTargetAlly: 0
   skillIcon: {fileID: -112064891, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -382150790, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: bdd1cd386b28d51469bd606f8f387012, type: 2}
-  skillType: 1
+  skillType: 4
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 2

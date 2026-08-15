@@ -54,6 +54,7 @@ public class PlayerActionsMenu : MonoBehaviour
     [SerializeField] private Image[] _skillPointImages;
     [SerializeField] private Image[] _actionPointImages;
     [SerializeField] private TextMeshProUGUI[] _buttonTexts;
+    [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private VerticalLayoutGroup _verticalLayoutGroup;
 
 
@@ -84,6 +85,8 @@ public class PlayerActionsMenu : MonoBehaviour
     public void SetupHeroActionsUI(Hero currentHero)
     {
         this.currentHero = currentHero;
+
+        _nameText.text = currentHero.HeroData.unitName;
 
         OpenActionsMenu();
     }

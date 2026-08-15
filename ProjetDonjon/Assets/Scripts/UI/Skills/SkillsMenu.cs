@@ -70,7 +70,7 @@ public class SkillsMenu : MonoBehaviour
     private void HoverEquippableSkill(EquippableSkill equippableSkill)
     {
         if(equippableSkill.PassiveData is null) 
-            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(equippableSkill.SkillData, equippableSkill.transform.position);
+            UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(equippableSkill.SkillData, equippableSkill.transform.position, false);
 
         else
             UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(equippableSkill.PassiveData, equippableSkill.transform.position);

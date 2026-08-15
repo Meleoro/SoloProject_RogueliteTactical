@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
   m_Name: Poisoned
   m_EditorClassIdentifier: 
-  tooltipName: POISONED
-  tooltipDescription: POISONED UNITS TAKE ONE DAMAGE AT THE START OF THEIR TURN
+  tooltipName: <#860060>POISONED</color>
+  tooltipDescription: THE UNIT TAKES ONE DAMAGE AT THE START OF ITS TURN

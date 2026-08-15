@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: H1-2 Powerful Strike
   m_EditorClassIdentifier: 
   skillName: POWERFUL STRIKE
-  skillDescription: DEALS HEAVY DAMAGES ON ONE TILE, STUNS WHEN CRIT
+  skillDescription: DEALS HEAVY DAMAGES ON ONE ADJACENT TILES, APPLIES <#FFC12E>STUNNED</color>
+    WHEN CRIT
   animName: Skill1
   skillPointCost: 3
   mustTargetAlly: 0
   skillIcon: {fileID: 1719542924, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 309539153, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
-  additionalTooltipDatas: []
+  skillIntentIcon: {fileID: 0}
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}
   skillType: 1
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2

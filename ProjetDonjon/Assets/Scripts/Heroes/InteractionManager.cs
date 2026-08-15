@@ -46,6 +46,7 @@ public class InteractionManager : MonoBehaviour
         if (!isSetup) return;
 
         transform.position = currentHeroTransform.position + new Vector3(0, yOffset, 0);
+        ActualiseClosestInteractible();
 
         if (closestInteractible is null) return;
         if (UIManager.Instance.CurrentUIState != UIState.Nothing) return;

@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteLayerer
   offset: 0
-  autoInitialise: 1
+  autoInitialise: 0
   PublicOffset: 0
   _spriteRenderer: {fileID: 8929217451348358929}
   _heroParentTr: {fileID: 0}

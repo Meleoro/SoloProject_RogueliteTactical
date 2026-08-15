@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: H2-4 DistantShot
   m_EditorClassIdentifier: 
   skillName: DISTANT SHOT
-  skillDescription: DEALS SMALL DAMAGE BUT CAN AIM VERY DISTANT TILES AND DIAGONAL
-    TILES
+  skillDescription: DEALS SMALL DAMAGES ON VERY DISTANT TILES AND DIAGONAL TILES
   animName: Skill1
   skillPointCost: 1
   mustTargetAlly: 0
   skillIcon: {fileID: 553366629, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: 311212683, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
-  skillType: 3
+  skillType: 0
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2

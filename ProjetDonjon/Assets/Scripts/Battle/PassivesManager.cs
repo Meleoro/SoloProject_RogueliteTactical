@@ -34,8 +34,6 @@ public class PassivesManager
 
     public void ApplyPassives(PassiveData[] passivesToApply, Unit mainUnit, Unit secondaryUnit) 
     {
-        Debug.Log(mainUnit);
-
         for(int i = 0; i < passivesToApply.Length; i++)
         {
             ApplyPassive(passivesToApply[i].passiveEffects, mainUnit, secondaryUnit);

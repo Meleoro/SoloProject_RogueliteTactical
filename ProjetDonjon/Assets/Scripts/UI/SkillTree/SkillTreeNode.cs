@@ -14,12 +14,17 @@ public class SkillTreeNode : MonoBehaviour
     [SerializeField] private Color baseColor;
     [SerializeField] private Sprite[] skillSprites;
     [SerializeField] private Sprite[] passiveSprites;
+    [SerializeField] private Sprite[] statSprites;
 
     [Header("Outline Parameters")]
     [SerializeField] private Color outlineBaseColor;
     [SerializeField] private Color outlineReachableColor;
     [SerializeField] private Color outlineReachableColor2;
     [SerializeField] private Color outlinePossessedColor;
+
+    [Header("Line Renderer Parameters")]
+    [SerializeField] private Color lineRendererBaseColor;
+    [SerializeField] private Color lineRendererReachableColor;
 
     [Header("Actions")]
     public Action<SkillTreeNode> OnHover;
@@ -37,23 +42,31 @@ public class SkillTreeNode : MonoBehaviour
     private Vector3 currentScale;
     private Coroutine hoverCoroutine;
     private Coroutine availableCoroutine;
+    private RectTransform currentLeftTr;
+    private RectTransform currentRightTr;
 
     [Header("Public Infos")]
-    public RectTransform LeftRectTr { get { return _leftRectTr; } }
-    public RectTransform RightRectTr { get { return _rightRectTr; } }
+    public RectTransform LeftRectTr { get { return currentLeftTr; } }
+    public RectTransform RightRectTr { get { return currentRightTr; } }
     public RectTransform RectTr { get { return _rectTr; } }
     public SkillTreeNodeData Data { get { return data; } }
     public bool IsPossessed { get { return isPossessed; } }
 
     [Header("References")]
     [SerializeField] private RectTransform _rectTr;
-    [SerializeField] private RectTransform _leftRectTr;
-    [SerializeField] private RectTransform _rightRectTr;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private Image _iconImage;
     [SerializeField] private Image _outlineImage;
     [SerializeField] private Image _mainImage;
     [SerializeField] private Image _shadowImage;
+
+    [Header("References Left Right")]
+    [SerializeField] private RectTransform _leftRectSkillTr;
+    [SerializeField] private RectTransform _rightRectSkillTr;
+    [SerializeField] private RectTransform _leftRectPassiveTr;
+    [SerializeField] private RectTransform _rightRectPassiveTr;
+    [SerializeField] private RectTransform _leftRectStatTr;
+    [SerializeField] private RectTransform _rightRectStatTr;
 
 
     private void Start()
@@ -70,10 +83,30 @@ public class SkillTreeNode : MonoBehaviour
         this.data = data;
         this.associatedHero = associatedHero;
 
-        _mainImage.sprite = data.skillData is not null ? skillSprites[0] : passiveSprites[0];
-        _shadowImage.sprite = data.skillData is not null ? skillSprites[1] : passiveSprites[1];
-        _outlineImage.sprite = data.skillData is not null ? skillSprites[2] : passiveSprites[2];
+        if(data.skillData is not null)
+        {
+            _mainImage.sprite = skillSprites[0];
+            _outlineImage.sprite = skillSprites[1];
+            currentLeftTr = _leftRectSkillTr;
+            currentRightTr = _rightRectSkillTr;
+        }
+        else if(data.passiveData is not null)
+        {
+            _mainImage.sprite = passiveSprites[0];
+            _outlineImage.sprite = passiveSprites[1];
+            currentLeftTr = _leftRectPassiveTr;
+            currentRightTr = _rightRectPassiveTr;
+        }
+        else
+        {
+            _mainImage.sprite = statSprites[0];
+            _outlineImage.sprite = statSprites[1];
+            currentLeftTr = _leftRectStatTr;
+            currentRightTr = _rightRectStatTr;
+        }
+
         _iconImage.sprite = data.icon;
+
         _mainImage.SetNativeSize();
         _iconImage.SetNativeSize();
         _shadowImage.SetNativeSize();
@@ -164,22 +197,22 @@ public class SkillTreeNode : MonoBehaviour
         {
             currentColor = possessedColor;
             currentOutlineColor = outlinePossessedColor;
-            currentScale = Vector3.one * 0.9f;
+            currentScale = Vector3.one * 0.85f;
 
             _outlineImage.DOColor(currentOutlineColor, 0.2f);
-            _lineRenderer.startColor = currentOutlineColor;
-            _lineRenderer.endColor = currentOutlineColor;
+            _lineRenderer.startColor = lineRendererReachableColor;
+            _lineRenderer.endColor = lineRendererReachableColor;
 
             _iconImage.DOColor(currentOutlineColor, 0.2f);
         }
         else if (isReachable)
         {
             currentColor = reachableColor;
-            currentScale = Vector3.one * 0.9f;
+            currentScale = Vector3.one * 0.85f;
             currentOutlineColor = outlineReachableColor;
 
-            _lineRenderer.startColor = currentOutlineColor;
-            _lineRenderer.endColor = currentOutlineColor;
+            _lineRenderer.startColor = lineRendererBaseColor;
+            _lineRenderer.endColor = lineRendererBaseColor;
             _outlineImage.DOColor(currentOutlineColor, 0.2f);
             availableCoroutine = StartCoroutine(AvailableEffectCoroutine());
 
@@ -188,12 +221,12 @@ public class SkillTreeNode : MonoBehaviour
         else
         {
             currentColor = baseColor;
-            currentScale = Vector3.one * 0.85f;
+            currentScale = Vector3.one * 0.8f;
             currentOutlineColor = outlineBaseColor;
 
             _outlineImage.DOColor(currentOutlineColor, 0.2f);
-            _lineRenderer.startColor = currentOutlineColor;
-            _lineRenderer.endColor = currentOutlineColor;
+            _lineRenderer.startColor = lineRendererBaseColor;
+            _lineRenderer.endColor = lineRendererBaseColor;
 
             _iconImage.DOColor(currentOutlineColor, 0.2f);
         }
@@ -217,17 +250,17 @@ public class SkillTreeNode : MonoBehaviour
         _iconImage.DOColor(outlinePossessedColor, 0.2f).SetEase(Ease.OutCubic);
         _outlineImage.DOColor(outlinePossessedColor, 0.2f).SetEase(Ease.OutCubic);
 
-        _rectTr.UChangeScale(0.1f, currentScale + Vector3.one * 0.3f, CurveType.EaseOutSin);
+        _rectTr.UChangeScale(0.1f, currentScale + Vector3.one * 0.25f, CurveType.EaseOutSin);
 
         yield return new WaitForSeconds(0.1f);
 
-        _rectTr.UChangeScale(0.2f, currentScale + Vector3.one * 0.2f, CurveType.EaseInOutSin);
+        _rectTr.UChangeScale(0.2f, currentScale + Vector3.one * 0.15f, CurveType.EaseInOutSin);
     }
 
 
     private IEnumerator ClickNodeEffectCoroutine()
     {
-        _rectTr.UChangeScale(0.1f, currentScale - Vector3.one * 0.2f, CurveType.EaseOutSin);
+        _rectTr.UChangeScale(0.1f, currentScale - Vector3.one * 0.15f, CurveType.EaseOutSin);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -241,7 +274,7 @@ public class SkillTreeNode : MonoBehaviour
 
         while(true)
         {
-            _rectTr.UChangeScale(0.75f, currentScale * 0.9f, CurveType.EaseInOutSin);
+            _rectTr.UChangeScale(0.75f, currentScale * 0.93f, CurveType.EaseInOutSin);
             _outlineImage.DOColor(outlineReachableColor2, 0.75f).SetEase(Ease.InOutSine);
             _mainImage.DOColor(reachableColor + Color.white * 0.05f, 0.75f).SetEase(Ease.InOutSine);
             _iconImage.DOColor(outlineReachableColor2, 0.75f).SetEase(Ease.InOutSine);

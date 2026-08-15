@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -24,6 +25,7 @@ public class TimelineSlot : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image _unitImage;
     [SerializeField] private Image _mainImage;
+    [SerializeField] private Image _highlightImage;
     public RectTransform _rectTr;
 
 
@@ -87,21 +89,25 @@ public class TimelineSlot : MonoBehaviour
     {
         unit.DisplayOverlayOutline();
 
-        _unitImage.sprite = unit.UnitData.unitImageHighlight;
+        //_unitImage.sprite = unit.UnitData.unitImageHighlight;
 
-        _mainImage.ULerpImageColor(0.2f, new Color(saveColorMain.r + 0.1f, saveColorMain.g + 0.1f, saveColorMain.b + 0.1f));
-        _unitImage.ULerpImageColor(0.2f, new Color(saveColorUnit.r + 0.1f, saveColorUnit.g + 0.1f, saveColorUnit.b + 0.1f));
+        _mainImage.DOColor(new Color(saveColorMain.r + 0.1f, saveColorMain.g + 0.1f, saveColorMain.b + 0.1f), 0.25f);
+        _unitImage.DOColor(new Color(saveColorUnit.r + 0.1f, saveColorUnit.g + 0.1f, saveColorUnit.b + 0.1f), 0.25f);
+
+        _highlightImage.DOFade(1, 0.25f).SetEase(Ease.OutFlash);
     }
 
     public void QuitOverlaySlot()
     {
         unit.HideOutline();
 
-        if(currentIndex != 0) 
-            _unitImage.sprite = unit.UnitData.unitImage;
+        //if(currentIndex != 0) 
+        //    _unitImage.sprite = unit.UnitData.unitImage;
 
-        _mainImage.ULerpImageColor(0.2f, new Color(saveColorMain.r, saveColorMain.g, saveColorMain.b));
-        _unitImage.ULerpImageColor(0.2f, new Color(saveColorUnit.r, saveColorUnit.g, saveColorUnit.b));
+        _mainImage.DOColor(new Color(saveColorMain.r, saveColorMain.g, saveColorMain.b), 0.25f);
+        _unitImage.DOColor(new Color(saveColorUnit.r, saveColorUnit.g, saveColorUnit.b), 0.25f);
+
+        _highlightImage.DOFade(0, 0.25f).SetEase(Ease.OutFlash);
     }
 
     public void ClickSlot()

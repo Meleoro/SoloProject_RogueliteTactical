@@ -393,7 +393,7 @@ public class Room : MonoBehaviour
                 if (heroes[j].CurrentHealth <= 0) continue;
 
                 int dist = (int)Vector2Int.Distance(heroes[j].CurrentTile.TileCoordinates, roomEnemySpawners[i].AssociatedTile.TileCoordinates);
-                if (dist <= 2 && TutoManager.Instance.DidBattleTuto) 
+                if (dist <= 2 && (TutoManager.Instance.DidBattleTuto || !TutoManager.Instance.IsInTuto)) 
                 {
                     roomEnemySpawners.RemoveAt(i);
                     break;
@@ -475,7 +475,14 @@ public class Room : MonoBehaviour
                 if (spawnCountPerEnemy.ContainsKey(wantedUnit.enemyPrefab) && spawnCountPerEnemy[wantedUnit.enemyPrefab] >= wantedUnit.maxCountPerBattle) continue;
             }
 
-            if(wantedUnit.enemyPrefab.GetType() == typeof(AIUnit))
+            if (GameManager.Instance.DebugForcedEnemyEncounter)
+            {
+                wantedUnit = new EnemySpawn();
+                wantedUnit.enemyPrefab = GameManager.Instance.DebugForcedEnemyEncounter;
+                wantedUnit.proba = 100;
+            }
+
+            if (wantedUnit.enemyPrefab.GetType() == typeof(AIUnit))
             {
                 currentSpawnedCount++;
                 if (spawnCountPerEnemy.ContainsKey(wantedUnit.enemyPrefab)) spawnCountPerEnemy[wantedUnit.enemyPrefab]++;

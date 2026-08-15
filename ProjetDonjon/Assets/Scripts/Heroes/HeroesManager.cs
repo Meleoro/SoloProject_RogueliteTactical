@@ -146,7 +146,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         for (int i = 0; i < allHeroes.Length; i++)
         {
             allHeroes[i] = Instantiate(allHeroesPrefabs[i], new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), transform);
-            allHeroes[i].SetupInventory(_inventoryManager.InitialiseInventory(allHeroes[i].HeroData.heroInventoryPrefab, i, allHeroes[i]));
+            allHeroes[i].SetupInventory(_inventoryManager.InitialiseInventory(allHeroes[i]));
             allHeroes[i].LoadEquippedInfos(HeroesEquippedSkillNames, HeroesEquippedPassiveNames);
 
             allHeroes[i].OnDead += HeroDies;
@@ -321,9 +321,6 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         for(int i = 0; i < heroes.Length; i++)
         {
             int heroQuantity = quantity + BattleManager.Instance.PassivesManager.GetBonusXP(heroes[i], quantity);
-
-            Debug.Log(quantity);
-            Debug.Log(heroQuantity);
 
             for(int j = 0; j < heroQuantity; j++)
             {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
   m_Name: Stunned
   m_EditorClassIdentifier: 
-  tooltipName: STUNNED
-  tooltipDescription: STUNNED UNITS SKIP THEIR NEXT TURN
+  tooltipName: <#FFC12E>STUNNED</color>
+  tooltipDescription: THE UNIT WILL SKIP IT'S NEXT TURN

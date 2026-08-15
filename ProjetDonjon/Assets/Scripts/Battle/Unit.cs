@@ -68,13 +68,13 @@ public class Unit : MonoBehaviour
     protected bool isHovered;
     protected bool isDead;
 
-    [Header("Private Stats Modificators")]
-    private float strengthModificator = 1;
-    private float speedModificator = 1;
-    private float luckModificator = 1;
-    private int movePointsModificatorAdditive;
-    private float critModificatorAdditive;
-    private List<AlterationStruct> currentAlterations = new List<AlterationStruct>(); 
+    [Header("Protected Stats Modificators")]
+    protected float strengthModificator = 1;
+    protected float speedModificator = 1;
+    protected float luckModificator = 1;
+    protected int movePointsModificatorAdditive;
+    protected float critModificatorAdditive;
+    protected List<AlterationStruct> currentAlterations = new List<AlterationStruct>(); 
 
     [Header("Protected Infos")]
     protected BattleTile currentTile;
@@ -797,6 +797,7 @@ public class Unit : MonoBehaviour
     protected IEnumerator DisappearCoroutine(float duration, bool destroy = true)
     {
         _spriteRenderer.material.ULerpMaterialFloat(duration, -0.5f, "_DitherProgress");
+        _spriteRenderer.material.SetColor("_OutlineColor", new Color(0, 0, 0, 0));
 
         yield return new WaitForSeconds(duration);
 

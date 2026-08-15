@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: E8Debuff
   m_EditorClassIdentifier: 
   skillName: Debuff
-  skillDescription: GIVES SKULLED TO EVERY ENEMIES IN THE AREA
+  skillDescription: GIVES SKULLED VULNERABLE TO ONE ENEMY
   animName: Skill1
   skillPointCost: 0
   mustTargetAlly: 0
   skillIcon: {fileID: 0}
   skillHighlightIcon: {fileID: 0}
+  skillIntentIcon: {fileID: -1281018070245706714, guid: 2c514522191fcd24eaa84ace94748e08, type: 3}
   additionalTooltipDatas: []
-  skillType: 1
+  skillType: 4
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 2

@@ -83,7 +83,7 @@ public class Loot : MonoBehaviour, IInteractible
         _imageBackground.material = new Material(_imageBackground.material);
         _image.material = new Material(_image.material);
 
-        saveSize = Vector3.one * 0.75f;
+        saveSize = Vector3.one * 0.65f;
         _spriteRenderer.material.SetVector("_TextureSize", new Vector2(_spriteRenderer.sprite.texture.width, _spriteRenderer.sprite.texture.height));
     }
 
@@ -276,7 +276,7 @@ public class Loot : MonoBehaviour, IInteractible
 
     protected IEnumerator SquishCoroutine(float duration)
     {
-        float aimedSize = 0.75f;
+        float aimedSize = 0.65f;
         isSquishing = true;
         _imageBackground.rectTransform.UChangeScale(duration * 0.24f, new Vector3(1.25f * aimedSize, 0.85f * aimedSize, 1f * aimedSize), CurveType.EaseInOutCubic);
 

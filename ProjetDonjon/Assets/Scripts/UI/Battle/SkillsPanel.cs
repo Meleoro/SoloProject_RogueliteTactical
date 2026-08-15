@@ -21,10 +21,11 @@ public class SkillsPanel : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private SkillsPanelButton[] _skillButtons;
-    [SerializeField] private AdditionalTooltip[] _additionalTooltips;
-    [SerializeField] private TextMeshProUGUI _skillNameText;
-    [SerializeField] private TextMeshProUGUI _skillDescriptionText;
+    //[SerializeField] private AdditionalTooltip[] _additionalTooltips;
+    //[SerializeField] private TextMeshProUGUI _skillNameText;
+    //[SerializeField] private TextMeshProUGUI _skillDescriptionText;
     private Animator _animator;
+    [SerializeField] private RectTransform _detailsPosRectTr;
 
 
     private void Start()
@@ -76,6 +77,8 @@ public class SkillsPanel : MonoBehaviour
     {
         if (!isOpenned) return;
 
+        UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
+
         isOpenned = false;
         _animator.SetBool("IsOpenned", false);
     }
@@ -111,17 +114,19 @@ public class SkillsPanel : MonoBehaviour
 
     private void LoadSkillDetails(SkillData skillData)
     {
-        _skillNameText.text = skillData.skillName;
-        _skillDescriptionText.text = skillData.skillDescription;
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(skillData, _detailsPosRectTr.position, true);
 
-        for (int i = 0; i < _additionalTooltips.Length; i++)
-        {
-            if(i < skillData.additionalTooltipDatas.Length)
-                _additionalTooltips[i].Show(skillData.additionalTooltipDatas[i], 0);
+        //_skillNameText.text = skillData.skillName;
+        //_skillDescriptionText.text = skillData.skillDescription;
 
-            else
-                _additionalTooltips[i].Hide();
-        }
+        //for (int i = 0; i < _additionalTooltips.Length; i++)
+        //{
+        //    if(i < skillData.additionalTooltipDatas.Length)
+        //        _additionalTooltips[i].Show(skillData.additionalTooltipDatas[i], 0);
+
+        //    else
+        //        _additionalTooltips[i].Hide();
+        //}
     }
 
     private void UnloadSkillDetails()
@@ -130,15 +135,15 @@ public class SkillsPanel : MonoBehaviour
         {
             BattleManager.Instance.TilesManager.DisplayPossibleSkillTiles(currentButtonSkill.SkillData, BattleManager.Instance.CurrentUnit.CurrentTile);
 
-            _skillNameText.text = currentButtonSkill.SkillData.name;
-            _skillDescriptionText.text = currentButtonSkill.SkillData.skillDescription;
+            //_skillNameText.text = currentButtonSkill.SkillData.name;
+            //_skillDescriptionText.text = currentButtonSkill.SkillData.skillDescription;
         }
         else
         {
             BattleManager.Instance.TilesManager.ResetTiles();
 
-            _skillNameText.text = "";
-            _skillDescriptionText.text = "";
+            //_skillNameText.text = "";
+            //_skillDescriptionText.text = "";
         }
     }
 }

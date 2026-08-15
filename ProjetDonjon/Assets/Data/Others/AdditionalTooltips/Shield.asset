@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  tooltipName: SHIELD
-  tooltipDescription: SHIELDS WILL TAKE DAMAGES BEFORE THE HEALTH BAR
+  tooltipName: <#2C2E5E>SHIELD</color>
+  tooltipDescription: SHIELDS WILL TAKE DAMAGES INSTEAD OF THE HEALTH BAR

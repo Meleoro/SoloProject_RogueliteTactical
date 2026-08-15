@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
   m_Name: Slowed
   m_EditorClassIdentifier: 
-  tooltipName: SLOWED
-  tooltipDescription: SLOWED UNITS HAVE -50% SPEED
+  tooltipName: <#7C210C>SLOWED</color>
+  tooltipDescription: THE UNIT HAS -50% SPEED

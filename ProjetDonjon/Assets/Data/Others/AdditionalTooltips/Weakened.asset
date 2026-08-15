@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b31fe12b73a4048a1c970fcbbb687a, type: 3}
   m_Name: Weakened
   m_EditorClassIdentifier: 
-  tooltipName: WEAKENED
-  tooltipDescription: WEAKENED UNITS DEALS 50% LESS DAMAGES
+  tooltipName: <#7C210C>WEAKENED</color>
+  tooltipDescription: THE UNIT HAS -50% STRENGTH

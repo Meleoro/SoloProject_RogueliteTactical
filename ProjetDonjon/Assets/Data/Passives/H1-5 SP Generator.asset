@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: H1-5 SP Generator
   m_EditorClassIdentifier: 
   passiveName: SP GENERATOR
-  passiveDescription: EACH TIME THIS UNIT TAKES DAMAGES, 50% CHANCE TO GAIN 1 SKILL
-    POINT
+  passiveDescription: EACH TIME THIS UNIT TAKES DAMAGES, IT HAS 50% CHANCE TO GAIN
+    1 SKILL POINT
   passiveIcon: {fileID: 847775307, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 1196405056, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []

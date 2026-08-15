@@ -106,10 +106,10 @@ TextureImporter:
       name: Tuto_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 114
-        width: 98
-        height: 127
+        x: 13
+        y: 112
+        width: 102
+        height: 131
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +128,10 @@ TextureImporter:
       name: Tuto_1
       rect:
         serializedVersion: 2
-        x: 121
-        y: 223
-        width: 73
-        height: 18
+        x: 120
+        y: 221
+        width: 75
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: Tuto_2
       rect:
         serializedVersion: 2
-        x: 127
-        y: 111
-        width: 98
-        height: 66
+        x: 125
+        y: 109
+        width: 102
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,7 +199,7 @@ TextureImporter:
         width: 86
         height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -208,6 +208,28 @@ TextureImporter:
       bones: []
       spriteID: 7964232dad67b0b4fa601d78fc490ab6
       internalID: 896495653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tuto_5
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 202
+        width: 71
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dfd20e064dbcb24d881d2dab80c3723
+      internalID: -1837196955
       vertices: []
       indices: 
       edges: []
@@ -231,6 +253,7 @@ TextureImporter:
       Tuto_2: -458058429
       Tuto_3: 1480122217
       Tuto_4: 896495653
+      Tuto_5: -1837196955
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

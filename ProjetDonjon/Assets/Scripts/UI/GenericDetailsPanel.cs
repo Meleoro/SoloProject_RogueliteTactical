@@ -13,9 +13,12 @@ public class GenericDetailsPanel : MonoBehaviour
     [SerializeField] private Vector3 offsetInventory;
     [SerializeField] private Vector3 offsetAlteration;
     [SerializeField] private Vector3 offsetRelic;
+    [SerializeField] private Vector3 offsetIntent;
+    [SerializeField] private GenericDetailsData[] statDatas;
 
     [Header("Private Infos")]
     private Coroutine appearCoroutine;
+    private Vector3 statsOffsetSave;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -30,9 +33,17 @@ public class GenericDetailsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _statsTexts;
     [SerializeField] private RectTransform _statGlobalParent;
 
+    [Header("Appear Effect References")]
+    [SerializeField] private Image[] _imagesToFade;
+    [SerializeField] private TextMeshProUGUI[] _textsToFade;
+    [SerializeField] private RectTransform _statRectTr;
+    [SerializeField] private Image[] _imagesToFadeStats;
+    [SerializeField] private TextMeshProUGUI[] _textsToFadeStats;
+
 
     private void Start()
     {
+        statsOffsetSave = _statRectTr.localPosition;
         HideDetails();
     }
 
@@ -66,6 +77,7 @@ public class GenericDetailsPanel : MonoBehaviour
         else    // Equipment side stats panel
         {
             _statGlobalParent.gameObject.SetActive(true);
+            bool hasStatChange = false;
 
             if (mirrorHorizontal) _mainRectTr.position = _mainRectTr.position + Vector3.left * 0.75f;
             else _mainRectTr.position = _mainRectTr.position;
@@ -79,25 +91,38 @@ public class GenericDetailsPanel : MonoBehaviour
             {
                 _statsParents[0].gameObject.SetActive(true);
                 _statsTexts[0].text = lootData.healthUpgrade.ToString();
+
+                hasStatChange = true;
             }
             if (lootData.strengthUpgrade != 0)
             {
                 _statsParents[1].gameObject.SetActive(true);
                 _statsTexts[1].text = lootData.strengthUpgrade.ToString();
+
+                hasStatChange = true;
             }
             if (lootData.speedUpgrade != 0)
             {
                 _statsParents[2].gameObject.SetActive(true);
                 _statsTexts[2].text = lootData.speedUpgrade.ToString();
+
+                hasStatChange = true;
             }
             if (lootData.luckUpgrade != 0)
             {
                 _statsParents[3].gameObject.SetActive(true);
                 _statsTexts[3].text = lootData.luckUpgrade.ToString();
+
+                hasStatChange = true;
+            }
+
+            if(!hasStatChange)
+            {
+                _statGlobalParent.gameObject.SetActive(false);
             }
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, lootData.lootDescription));
 
         if (noAdditionalDetails) return;
 
@@ -111,7 +136,7 @@ public class GenericDetailsPanel : MonoBehaviour
         }
     }
 
-    public void LoadDetails(SkillTreeNodeData nodeData, Vector3 position, bool mirrorHorizontal)
+    public void LoadDetails(SkillTreeNodeData nodeData, Vector3 position, bool mirrorHorizontal, bool mirrorVertical)
     {
         _mainRectTr.gameObject.SetActive(true);
 
@@ -136,13 +161,13 @@ public class GenericDetailsPanel : MonoBehaviour
             for (int i = 0; i < _additionalTooltips.Length; i++)
             {
                 if (i < nodeData.skillData.additionalTooltipDatas.Length)
-                    _additionalTooltips[i].Show(nodeData.skillData.additionalTooltipDatas[i], 0.15f + i * 0.15f);
+                    _additionalTooltips[i].Show(nodeData.skillData.additionalTooltipDatas[i], 0.15f + i * 0.15f, mirrorVertical);
 
                 else
                     _additionalTooltips[i].Hide();
             }
         }
-        else
+        else if(nodeData.passiveData is not null)
         {
             _nameText.text = nodeData.passiveData.passiveName;
             _descriptionText.text = nodeData.passiveData.passiveDescription;
@@ -152,20 +177,41 @@ public class GenericDetailsPanel : MonoBehaviour
             for (int i = 0; i < _additionalTooltips.Length; i++)
             {
                 if (i < nodeData.passiveData.additionalTooltipDatas.Length)
-                    _additionalTooltips[i].Show(nodeData.passiveData.additionalTooltipDatas[i], 0.15f + i * 0.15f);
+                    _additionalTooltips[i].Show(nodeData.passiveData.additionalTooltipDatas[i], 0.15f + i * 0.15f, mirrorVertical);
 
                 else
                     _additionalTooltips[i].Hide();
             }
         }
+        else
+        {
+            GenericDetailsData data = statDatas[((int)nodeData.statUpgradeType) - 1];
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+            _descriptionText.text = "";
+            for (int i = 0; i < data.description.Length; i++)
+            {
+                if (data.description[i] == '?')
+                {
+                    _descriptionText.text += nodeData.upgradeStrength;
+                }
+                else
+                {
+                    _descriptionText.text += data.description[i];
+                }
+            }
+
+            _nameText.text = data.name;
+            _numberText.text = "";
+            _treeNodeTypeText.text = "STAT";
+        }
+
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
     }
 
-    public void LoadDetails(SkillData skillData, Vector3 position)
+    public void LoadDetails(SkillData skillData, Vector3 position, bool noOffset)
     {
         _mainRectTr.gameObject.SetActive(true);
-        SetPosition(position, offset);
+        SetPosition(position, noOffset ? Vector3.zero : offset);
 
         _nameText.text = skillData.skillName;
         _descriptionText.text = skillData.skillDescription;
@@ -174,13 +220,13 @@ public class GenericDetailsPanel : MonoBehaviour
         for (int i = 0; i < _additionalTooltips.Length; i++)
         {
             if (i < skillData.additionalTooltipDatas.Length)
-                _additionalTooltips[i].Show(skillData.additionalTooltipDatas[i], 0.15f + i * 0.15f);
+                _additionalTooltips[i].Show(skillData.additionalTooltipDatas[i], 0.15f + i * 0.15f, true);
 
             else
                 _additionalTooltips[i].Hide();
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
     }
 
     public void LoadDetails(PassiveData passiveData, Vector3 position)
@@ -201,7 +247,7 @@ public class GenericDetailsPanel : MonoBehaviour
                 _additionalTooltips[i].Hide();
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(AlterationStruct alterationData, Vector3 position, Unit attachedUnit)
@@ -227,7 +273,7 @@ public class GenericDetailsPanel : MonoBehaviour
             }
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(RelicData relicData, Vector3 position)
@@ -240,7 +286,7 @@ public class GenericDetailsPanel : MonoBehaviour
         _nameText.text = "?????";
         _descriptionText.text = relicData.relicHint;
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(GenericDetailsData data, Vector3 position, bool mirrorHorizontal)
@@ -253,7 +299,20 @@ public class GenericDetailsPanel : MonoBehaviour
         _nameText.text = data.name;
         _descriptionText.text = data.description;
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine());
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+    }
+
+    public void LoadDetails(GenericDetailsData data, Vector3 position)
+    {
+        _mainRectTr.gameObject.SetActive(true);
+        SetPosition(position, offsetIntent);
+
+        _numberText.text = "";
+
+        _nameText.text = data.name;
+        _descriptionText.text = data.description;
+
+        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     #endregion
@@ -271,22 +330,67 @@ public class GenericDetailsPanel : MonoBehaviour
         _statGlobalParent.gameObject.SetActive(false);
         _treeNodeTypeText.enabled = false;
         _skillCostText.enabled = false;
+
         for(int i = 0; i < _skillCostImages.Length; i++)
         {
             _skillCostImages[i].enabled = false;    
         }
+
+        for (int i = 0; i < _additionalTooltips.Length; i++)
+        {
+            _additionalTooltips[i].Hide();
+        }
     }
 
-    private IEnumerator AppearEffectCoroutine()
+    private IEnumerator AppearEffectCoroutine(string title, string description)
     {
-        _mainRectTr.localScale = Vector3.zero;
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(title, _nameText, 0.25f));
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(description, _descriptionText, 0.35f));
 
         float aimedSize = 0.75f;
-        _mainRectTr.DOScale(Vector3.one * aimedSize * 1.1f, 0.12f).SetEase(Ease.OutCubic);
+        _mainRectTr.localScale = Vector3.one * aimedSize;
+        //_mainRectTr.DOScale(Vector3.one * aimedSize * 1.1f, 0.12f).SetEase(Ease.OutCubic);
 
-        yield return new WaitForSeconds(0.12f);
+        _mainRectTr.localPosition = new Vector3(0, -80f, 0);
+        _mainRectTr.DOLocalMove(new Vector3(0, 0f, 0), 0.25f).SetEase(Ease.OutBack);
 
-        _mainRectTr.DOScale(new Vector3(aimedSize, aimedSize, aimedSize), 0.15f).SetEase(Ease.OutCubic);
+        for (int i = 0; i < _imagesToFade.Length; i++)
+        {
+            _imagesToFade[i].DOKill();
+            _imagesToFade[i].color = _imagesToFade[i].color * new Color(1, 1, 1, 0);
+            _imagesToFade[i].DOFade(1, 0.35f).SetEase(Ease.OutSine);
+        }
+        for (int i = 0; i < _textsToFade.Length; i++)
+        {
+            _textsToFade[i].DOKill();
+            _textsToFade[i].color = _textsToFade[i].color * new Color(1, 1, 1, 0);
+            _textsToFade[i].DOFade(1, 0.35f).SetEase(Ease.OutSine);
+        }
+
+        for (int i = 0; i < _imagesToFadeStats.Length; i++)
+        {
+            _imagesToFadeStats[i].DOKill();
+            _imagesToFadeStats[i].color = _imagesToFadeStats[i].color * new Color(1, 1, 1, 0);
+        }
+        for (int i = 0; i < _textsToFadeStats.Length; i++)
+        {
+            _textsToFadeStats[i].DOKill();
+            _textsToFadeStats[i].color = _textsToFadeStats[i].color * new Color(1, 1, 1, 0);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        _statRectTr.localPosition = statsOffsetSave + new Vector3(30, 0, 0);
+        _statRectTr.DOLocalMove(statsOffsetSave, 0.25f).SetEase(Ease.OutBack);
+
+        for (int i = 0; i < _imagesToFadeStats.Length; i++)
+        {
+            _imagesToFadeStats[i].DOFade(1, 0.35f).SetEase(Ease.OutSine);
+        }
+        for (int i = 0; i < _textsToFadeStats.Length; i++)
+        {
+            _textsToFadeStats[i].DOFade(1, 0.35f).SetEase(Ease.OutSine);
+        }
     }
 
     private IEnumerator DisappearEffectCoroutine()

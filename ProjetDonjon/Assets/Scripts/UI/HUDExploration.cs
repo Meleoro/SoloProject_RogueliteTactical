@@ -28,6 +28,7 @@ public class HUDExploration : MonoBehaviour
     [SerializeField] private HeroInfosScreen _heroInfosScreen;
     [SerializeField] private SkillTreeManager _skillTreeScreen;
     [SerializeField] private SkillsMenu _skillsMenu;
+    [SerializeField] private CollectionMenu _collectionMenu;
 
 
     private void Start()
@@ -46,6 +47,9 @@ public class HUDExploration : MonoBehaviour
 
         _skillsMenu.OnShow += Hide;
         _skillsMenu.OnHide += Show;
+
+        _collectionMenu.OnShow += Hide;
+        _collectionMenu.OnHide += Show;
 
         UIManager.Instance.OnExplorationStart += ShowWithDelay;
         UIManager.Instance.Transition.OnTransitionStart += Hide;
@@ -180,6 +184,13 @@ public class HUDExploration : MonoBehaviour
         _skillsMenu.Show();
     }
 
+    public void ClickCollection()
+    {
+        if (!isDisplayed) return;
+
+        _collectionMenu.Show();
+    }
+
     #endregion
 
 
@@ -194,6 +205,7 @@ public class HUDExploration : MonoBehaviour
         _buttonsParent[1].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[2]);
         _buttonsParent[2].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[3]);
         _buttonsParent[3].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[4]);
+        _buttonsParent[4].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[9]);
     }
 
     private void DoBounceSkillTree()

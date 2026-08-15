@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f51d3c135e2eb44b0a2bc3502c2e38, type: 3}
+  m_Name: H2-3 Poison Specialist
+  m_EditorClassIdentifier: 
+  passiveName: POISON SPECIALIST
+  passiveDescription: <#860060>POISONED</color> ENEMIES TAKE +1 DAMAGE PER TURN,
+    THIS UNIT CAN'T BE <#860060>POISONED</color>
+  passiveIcon: {fileID: -112064891, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  passiveHighlightIcon: {fileID: -382150790, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: bdd1cd386b28d51469bd606f8f387012, type: 2}
+  passiveTriggerType: 0
+  neededAlteration: {fileID: 0}
+  passiveTriggerProba: 0
+  passiveEffects:
+  - passiveEffectType: 3
+    appliedAlteration: {fileID: 11400000, guid: 159132732668f964199bd5498810af03, type: 2}
+    additivePower: 0
+    multipliedPower: 0

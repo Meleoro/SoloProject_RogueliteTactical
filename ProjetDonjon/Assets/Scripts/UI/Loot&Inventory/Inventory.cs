@@ -27,8 +27,6 @@ public class Inventory : MonoBehaviour
     private InventorySlot[,] inventorySlotsTab = new InventorySlot[0, 0];
     private InventorySlot[] inventorySlots;
     private InventorySlot[] baseSlots;
-    private InventorySlot[] upgradeSlots1;
-    private InventorySlot[] upgradeSlots2;
     private RectTransform originalParent;
     private RectTransform originalLootParentParent;  
     private Hero associatedHero;
@@ -38,9 +36,10 @@ public class Inventory : MonoBehaviour
     [Header("References")]
     [SerializeField] private RectTransform _slotsParent;
     [SerializeField] private RectTransform _overlayedSlotsParent;
-    [SerializeField] private RectTransform _upgrade1SlotsParent;
-    [SerializeField] private RectTransform _upgrade2SlotsParent;
     [SerializeField] private RectTransform[] _quickChangeButtonsPositions;
+    [SerializeField] private RectTransform[] _disabledSlots;
+    [SerializeField] private InventorySlot[] _upgrade1Slots;
+    [SerializeField] private InventorySlot[] _upgrade2Slots;
     private RectTransform _rectTransform;
     private RectTransform _hiddenRectTr;
     private RectTransform _showedRectTr;
@@ -67,10 +66,8 @@ public class Inventory : MonoBehaviour
         if(inventorySlots is null)
         {
             baseSlots = _slotsParent.GetComponentsInChildren<InventorySlot>();
-            upgradeSlots1 = _upgrade1SlotsParent.GetComponentsInChildren<InventorySlot>();
-            upgradeSlots2 = _upgrade2SlotsParent.GetComponentsInChildren<InventorySlot>();
 
-            inventorySlots = baseSlots.Concat(upgradeSlots1).Concat(upgradeSlots2).ToArray();
+            inventorySlots = baseSlots.Concat(_upgrade1Slots).Concat(_upgrade2Slots).ToArray();
         }
 
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -81,12 +78,26 @@ public class Inventory : MonoBehaviour
 
     public void InitialiseInventory(Hero hero)
     {
-        associatedHero = hero;
-        baseSlots = _slotsParent.GetComponentsInChildren<InventorySlot>();
-        upgradeSlots1 = _upgrade1SlotsParent.GetComponentsInChildren<InventorySlot>();
-        upgradeSlots2 = _upgrade2SlotsParent.GetComponentsInChildren<InventorySlot>();
+        for(int i = 0; i < _disabledSlots.Length; i++)
+        {
+            _disabledSlots[i].gameObject.SetActive(false);
+        }
 
-        inventorySlots = baseSlots.Concat(upgradeSlots1).Concat(upgradeSlots2).ToArray();
+        for (int i = 0; i < _upgrade1Slots.Length; i++)
+        {
+            _upgrade1Slots[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < _upgrade2Slots.Length; i++)
+        {
+            _upgrade2Slots[i].gameObject.SetActive(false);
+        }
+
+
+        associatedHero = hero;
+        baseSlots = _slotsParent.GetComponentsInChildren<InventorySlot>(false);
+
+        inventorySlots = baseSlots.Concat(_upgrade1Slots).Concat(_upgrade2Slots).ToArray();
         
         SetupSlots();
 
@@ -106,17 +117,15 @@ public class Inventory : MonoBehaviour
         }
 
         // We disable the upgrades
-        for (int i = 0; i < upgradeSlots1.Length; i++)
+        for (int i = 0; i < _upgrade1Slots.Length; i++)
         {
-            upgradeSlots1[i].SetIsAvailable(false);
+            _upgrade1Slots[i].SetIsAvailable(false);
         }
-        _upgrade1SlotsParent.gameObject.SetActive(false);
 
-        for (int i = 0; i < upgradeSlots2.Length; i++)
+        for (int i = 0; i < _upgrade2Slots.Length; i++)
         {
-            upgradeSlots2[i].SetIsAvailable(false);
+            _upgrade2Slots[i].SetIsAvailable(false);
         }
-        _upgrade2SlotsParent.gameObject.SetActive(false);
     }
 
 
@@ -328,35 +337,31 @@ public class Inventory : MonoBehaviour
 
         if(currentLevel >= 1)
         {
-            _upgrade1SlotsParent.gameObject.SetActive(true);
-            for(int i = 0; i < upgradeSlots1.Length; i++)
+            for(int i = 0; i < _upgrade1Slots.Length; i++)
             {
-                upgradeSlots1[i].SetIsAvailable(true);
+                _upgrade1Slots[i].SetIsAvailable(true);
             }
         }
         else
         {
-            _upgrade1SlotsParent.gameObject.SetActive(false);
-            for (int i = 0; i < upgradeSlots1.Length; i++)
+            for (int i = 0; i < _upgrade1Slots.Length; i++)
             {
-                upgradeSlots1[i].SetIsAvailable(false);
+                _upgrade1Slots[i].SetIsAvailable(false);
             }
         }
 
         if (currentLevel >= 2)
         {
-            _upgrade2SlotsParent.gameObject.SetActive(true);
-            for (int i = 0; i < upgradeSlots2.Length; i++)
+            for (int i = 0; i < _upgrade2Slots.Length; i++)
             {
-                upgradeSlots2[i].SetIsAvailable(true);
+                _upgrade2Slots[i].SetIsAvailable(true);
             }
         }
         else
         {
-            _upgrade2SlotsParent.gameObject.SetActive(false);
-            for (int i = 0; i < upgradeSlots2.Length; i++)
+            for (int i = 0; i < _upgrade2Slots.Length; i++)
             {
-                upgradeSlots2[i].SetIsAvailable(false);
+                _upgrade2Slots[i].SetIsAvailable(false);
             }
         }
     }

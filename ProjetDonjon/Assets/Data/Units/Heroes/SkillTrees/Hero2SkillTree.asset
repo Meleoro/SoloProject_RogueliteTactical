@@ -17,64 +17,125 @@ MonoBehaviour:
     - skillData: {fileID: 11400000, guid: 1ad3d76110d9630478f6ac318c73d159, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: 1485900190, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 00000000010000000200000003000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 0000000001000000
+    - skillData: {fileID: 0}
+      passiveData: {fileID: 0}
+      icon: {fileID: 2075632640, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 3
+      upgradeStrength: 2
+      connectedNextNodeIndexes: 0200000003000000
   - rowNodes:
     - skillData: {fileID: 11400000, guid: 6751e20b554257c4992d441afd4c1c57, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -908109116, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 00000000
     - skillData: {fileID: 11400000, guid: 26c8896787f68394492e596ad66258ca, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -1379138658, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 00000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 0000000001000000
     - skillData: {fileID: 11400000, guid: 3b58756d0586d7047b935a61a7e16d05, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: 1485900190, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 01000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 0100000002000000
     - skillData: {fileID: 11400000, guid: 5da4028e8305f324fab8252fcfa564b4, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -1912497988, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 01000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 02000000
   - rowNodes:
     - skillData: {fileID: 0}
       passiveData: {fileID: 11400000, guid: cfc1eadab94a4bd49b14970aac1bf56e, type: 2}
       icon: {fileID: -699150491, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 0000000001000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 00000000
+    - skillData: {fileID: 0}
+      passiveData: {fileID: 0}
+      icon: {fileID: -1843139344, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 1
+      upgradeStrength: 3
+      connectedNextNodeIndexes: 0100000002000000
     - skillData: {fileID: 0}
       passiveData: {fileID: 11400000, guid: 312d0956952e5874486ed9d518107045, type: 2}
       icon: {fileID: -699150491, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 0200000003000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 03000000
   - rowNodes:
     - skillData: {fileID: 11400000, guid: ed4c0e619cc7dc540a4cb7f07bdb72cf, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -1000054034, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 00000000
     - skillData: {fileID: 11400000, guid: 6446af2578459de4083a12a37efc94ed, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -908109116, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 01000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 0000000001000000
     - skillData: {fileID: 11400000, guid: 482bef61e241a5e44ae9564744b6361c, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -79529260, guid: c9f013acfd912164c907920db08e81f5, type: 3}
-      connectedNextNodeIndexes: 02000000
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 0100000002000000
     - skillData: {fileID: 0}
       passiveData: {fileID: 11400000, guid: 855497575fd323e4cb5476dfad7c58f4, type: 2}
       icon: {fileID: -1912497988, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
+      connectedNextNodeIndexes: 02000000
+  - rowNodes:
+    - skillData: {fileID: 0}
+      passiveData: {fileID: 0}
+      icon: {fileID: -1786459371, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 2
+      upgradeStrength: 1
+      connectedNextNodeIndexes: 00000000
+    - skillData: {fileID: 0}
+      passiveData: {fileID: 0}
+      icon: {fileID: -350457593, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 4
+      upgradeStrength: 3
+      connectedNextNodeIndexes: 0100000002000000
+    - skillData: {fileID: 0}
+      passiveData: {fileID: 0}
+      icon: {fileID: 2075632640, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 3
+      upgradeStrength: 2
       connectedNextNodeIndexes: 03000000
   - rowNodes:
     - skillData: {fileID: 11400000, guid: 0c0476276e966a14e8be6bf6fc6ba390, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: 819781575, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 
     - skillData: {fileID: 0}
       passiveData: {fileID: 11400000, guid: 5ab74b68d3363e645b7eb4e377b3ed50, type: 2}
       icon: {fileID: 1485900190, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 
     - skillData: {fileID: 0}
       passiveData: {fileID: 11400000, guid: 697e2234c37b3e4469e401e78a6446bd, type: 2}
-      icon: {fileID: -1791474333, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      icon: {fileID: -908109116, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 
     - skillData: {fileID: 11400000, guid: 6b488f1af944b00428fb99a2bd8a9f4b, type: 2}
       passiveData: {fileID: 0}
       icon: {fileID: -1912497988, guid: c9f013acfd912164c907920db08e81f5, type: 3}
+      statUpgradeType: 0
+      upgradeStrength: 0
       connectedNextNodeIndexes: 

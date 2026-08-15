@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 440e036a5b8ec2e4e95a9ffbbd8b2c2e, type: 2}
   - {fileID: 11400000, guid: 82d362697078f994c8bab5320c7eaca0, type: 2}
   - {fileID: 11400000, guid: 2fe3ffd9ea97bfe4a8814d94908178ad, type: 2}
+  maxHeroLevel: 20
   neededXPLevelZero: 8
   neededXPMultiplicator: 1.4
   _controller: {fileID: 7159339506722094448}

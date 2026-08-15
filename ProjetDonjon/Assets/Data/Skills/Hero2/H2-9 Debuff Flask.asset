@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e6cef5a84204b45954bf504b67252a, type: 3}
   m_Name: H2-9 Debuff Flask
   m_EditorClassIdentifier: 
-  skillName: DEBUFF FLASK
-  skillDescription: WEAKENS AND SLOWS ALL ENEMIES IN AN AREA
+  skillName: WEAKENING FLASK
+  skillDescription: APPLIES <#7C210C>WEAKENED</color> AND <#7C210C>SLOWED</color>
+    ALL ENEMIES IN AN AREA FOR 3 TURNS
   animName: Skill3
   skillPointCost: 2
   mustTargetAlly: 0
   skillIcon: {fileID: -1854112359, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -2001667901, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: e4847cad51e27d8409d9a0f0378bc37d, type: 2}
   - {fileID: 11400000, guid: 58af8928e2e48dc448e24222d1cc1914, type: 2}
-  skillType: 1
+  skillType: 4
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 0
     skillEffectTargetType: 2

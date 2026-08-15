@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: H1-4 Shield Generator
   m_EditorClassIdentifier: 
   passiveName: INVINCIBLE
-  passiveDescription: STURDY GIVES THIS UNIT +25% PROTECTION AGAINST ATTACKS
+  passiveDescription: <#7C210C>STURDY</color> GIVES THIS UNIT +25% PROTECTION AGAINST
+    DAMAGES
   passiveIcon: {fileID: 1044571779, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: -1217327357, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:
-  - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}
+  - {fileID: 11400000, guid: 897d1c9dc66f4f8498b0d6dff76ac1dd, type: 2}
   passiveTriggerType: 2
   neededAlteration: {fileID: 11400000, guid: a4dccd989fc1ef24e9430b7dd0d6968f, type: 2}
   passiveTriggerProba: 100

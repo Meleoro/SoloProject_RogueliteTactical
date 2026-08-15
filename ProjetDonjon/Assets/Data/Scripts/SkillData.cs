@@ -5,6 +5,19 @@ using UnityEngine;
 
 public enum SkillType
 {
+    Attack,
+    HeavyAttack,
+    Heal,
+    Buff,
+    Debuff,
+    AttackBuff,
+    AttackDebuff,
+    Summon
+}
+
+
+public enum SkillPaternType
+{
     Self,
     AOEPaternTiles,
     SkillArea,
@@ -57,10 +70,12 @@ public class SkillData : ScriptableObject
     public bool mustTargetAlly;
     public Sprite skillIcon;
     public Sprite skillHighlightIcon;
+    public Sprite skillIntentIcon;     // For enemies intent icon in battles
     public AdditionalTooltipData[] additionalTooltipDatas;
 
     [Header("Effects")]
     public SkillType skillType;
+    public SkillPaternType skillPaternType;
     public SkillEffect[] skillEffects;
     [Min(1)] public int attackCount;
 

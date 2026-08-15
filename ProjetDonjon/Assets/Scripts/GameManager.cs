@@ -5,11 +5,12 @@ using Utilities;
 
 public class GameManager : GenericSingletonClass<GameManager>
 {
-    [Header("Parameters")]
+    [Header("Parameters Debug")]
     [SerializeField] private bool startGameInMainMenu = true;
     [SerializeField] private bool enableDebugCommands;
     [SerializeField] private bool startGameInExplo;
     [SerializeField] private EnviroData startEnviroData;
+    [SerializeField] private AIUnit debugForcedEnemyEncounter;
 
     [Header("Actions")]
     public Action<int> OnReturnToCamp;  // For tutorial
@@ -17,6 +18,7 @@ public class GameManager : GenericSingletonClass<GameManager>
     [Header("Public Infos")]
     public bool IsInExplo { get; private set; }
     public bool EnableDebugCommands { get { return enableDebugCommands; } }
+    public AIUnit DebugForcedEnemyEncounter { get { return debugForcedEnemyEncounter; } }
     public bool StartGameInMainMenu { get { return startGameInMainMenu; } }
     public int ExpeditionCoinsCount { get; private set; }
     public int ExpeditionKillCount { get; private set; }

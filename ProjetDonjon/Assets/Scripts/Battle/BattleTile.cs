@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ public enum BattleTileState
 {
     None,
     Move,
-    Attack,
-    Danger
+    SkillPreview,    // Possible skill use tile
+    Skill            // Skill use tile (tile selected)
 }
 
 public class BattleTile : MonoBehaviour
@@ -25,10 +26,14 @@ public class BattleTile : MonoBehaviour
     [SerializeField] private Color moveTileColorOutline;
     [SerializeField] private Color attackTileColorOutline;
     [SerializeField] private Color dangerTileColorOutline;
+    [SerializeField] private Color buffTileColorOutline;
+    [SerializeField] private Color debuffTileColorOutline;
     [SerializeField] private Color baseTileColorBack;
     [SerializeField] private Color moveTileColorBack;
     [SerializeField] private Color attackTileColorBack;
     [SerializeField] private Color dangerTileColorBack;
+    [SerializeField] private Color buffTileColorBack;
+    [SerializeField] private Color debuffTileColorBack;
 
     [Header("Overlay Parameters")]
     [SerializeField] private float overlayEffectDuration;
@@ -46,8 +51,10 @@ public class BattleTile : MonoBehaviour
     private List<BattleTile> tileNeighbors = new List<BattleTile>();
     private BattleTileState currentTileState;
     private BattleTileState saveTileState;
+    private SkillType currentSkillType;
     private Vector3 savePos;
     private Coroutine highlightCoroutine;
+    private Coroutine flashCoroutine;
     private Coroutine changeStateEffectCoroutine;
     private BattleTile[] highlightedTiles;
     private bool isHole;
@@ -138,33 +145,135 @@ public class BattleTile : MonoBehaviour
         changeStateEffectCoroutine = StartCoroutine(ChangeStateEffect(moveTileColorOutline, moveTileColorBack, true, saveTileState == BattleTileState.Move));
     }
 
-    public void DisplayPossibleAttackTile(bool doBounce)
+    public void DisplayPossibleSkillTile(bool doBounce, SkillType skillType)
     {
-        if (currentTileState == BattleTileState.Attack) return;
-        currentTileState = BattleTileState.Attack;
+        if (currentTileState == BattleTileState.SkillPreview) return;
+        currentTileState = BattleTileState.SkillPreview;
+
+        currentSkillType = skillType;
 
         if (changeStateEffectCoroutine is not null) StopCoroutine(changeStateEffectCoroutine);
-        changeStateEffectCoroutine = StartCoroutine(ChangeStateEffect(attackTileColorOutline, attackTileColorBack, doBounce, saveTileState == BattleTileState.Attack));
+
+        switch (currentSkillType)
+        {
+            case SkillType.Attack:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(attackTileColorOutline, attackTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.HeavyAttack:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(attackTileColorOutline, attackTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.AttackBuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(attackTileColorOutline, attackTileColorBack, false, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.AttackDebuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(attackTileColorOutline, attackTileColorBack, false, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+
+            case SkillType.Heal:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline, buffTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.Buff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline, buffTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.Summon:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline, buffTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+
+            case SkillType.Debuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(debuffTileColorOutline, debuffTileColorBack, doBounce, saveTileState == BattleTileState.SkillPreview));
+                break;
+        }
     }
 
-    public void DisplayDangerTile()
+    public void DisplayDangerTile(SkillType skillType)
     {
-        if (currentTileState == BattleTileState.Danger) return;
+        if (currentTileState == BattleTileState.Skill) return;
         if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
-        currentTileState = BattleTileState.Danger;
+        currentTileState = BattleTileState.Skill;
 
         if (changeStateEffectCoroutine is not null) StopCoroutine(changeStateEffectCoroutine);
-        changeStateEffectCoroutine = StartCoroutine(ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Danger));
+
+        switch (currentSkillType)
+        {
+            case SkillType.Attack:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.HeavyAttack:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.AttackBuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.AttackDebuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.Heal:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
+                    false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.Buff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
+                    false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.Summon:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
+                    false, saveTileState == BattleTileState.Skill));
+                break;
+
+            case SkillType.Debuff:
+                changeStateEffectCoroutine = StartCoroutine(
+                    ChangeStateEffect(debuffTileColorOutline + addedColorOverlayOutline, debuffTileColorBack + addedColorOverlayBack, 
+                    false, saveTileState == BattleTileState.Skill));
+                break;
+        }
     }
 
     public void DisplayNormalTile()
     {
+        if (flashCoroutine is not null)
+        {
+            StopCoroutine(flashCoroutine);
+
+            _mainSpriteRenderer.DOComplete();
+            _backSpriteRenderer.DOComplete();
+            _mainSpriteRenderer.color = currentColorOutline;
+            _backSpriteRenderer.color = currentColorBack;
+        }
+
         if (currentTileState == BattleTileState.None) return;
-        if (currentTileState == BattleTileState.Danger && unitOnTile is not null) unitOnTile.HideOutline();
+        if (currentTileState == BattleTileState.Skill && unitOnTile is not null) unitOnTile.HideOutline();
         saveTileState = currentTileState;
         currentTileState = BattleTileState.None;
 
         if(changeStateEffectCoroutine is not null) StopCoroutine(changeStateEffectCoroutine);
+
         changeStateEffectCoroutine = StartCoroutine(ChangeStateEffect(baseTileColorOutline, baseTileColorBack, false, true));
     }
 
@@ -231,6 +340,41 @@ public class BattleTile : MonoBehaviour
         }
     }
 
+
+    public void StartFlashColorEffect()
+    {
+        if (changeStateEffectCoroutine is not null) StopCoroutine(changeStateEffectCoroutine);
+
+        _mainSpriteRenderer.DOComplete();
+        _backSpriteRenderer.DOComplete();
+        transform.DOComplete();
+
+        flashCoroutine = StartCoroutine(DoFlashEffect(dangerTileColorOutline, dangerTileColorBack));
+    }
+
+    private IEnumerator DoFlashEffect(Color flashOutlineColor, Color flashBackColor)
+    {
+        yield return new WaitForEndOfFrame();
+
+        transform.position = savePos;
+        transform.localScale = Vector3.one;
+
+        StopHighlight();
+
+        while (true)
+        {
+            _mainSpriteRenderer.DOColor(flashOutlineColor, 0.8f).SetEase(Ease.InOutSine);
+            _backSpriteRenderer.DOColor(flashBackColor, 0.8f).SetEase(Ease.InOutSine);
+
+            yield return new WaitForSeconds(1.0f);
+
+            _mainSpriteRenderer.DOColor(currentColorOutline, 0.8f).SetEase(Ease.InOutSine);
+            _backSpriteRenderer.DOColor(currentColorBack, 0.8f).SetEase(Ease.InOutSine);
+
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
     #endregion
 
 
@@ -278,7 +422,7 @@ public class BattleTile : MonoBehaviour
 
     public void OverlayTile()
     {
-        if (currentTileState == BattleTileState.Attack && BattleManager.Instance.CurrentActionType == MenuType.LaunchSkill)
+        if (currentTileState == BattleTileState.SkillPreview && BattleManager.Instance.CurrentActionType == MenuType.LaunchSkill)
         {
             BattleManager.Instance.TilesManager.DisplayDangerTiles(this, null);
         }
@@ -340,7 +484,7 @@ public class BattleTile : MonoBehaviour
 
     public void QuitOverlayTile()
     {
-        if (currentTileState == BattleTileState.Danger)
+        if (currentTileState == BattleTileState.Skill)
         {
             BattleManager.Instance.TilesManager.DisplayPossibleSkillTiles(null, null, false);
         }
@@ -391,7 +535,7 @@ public class BattleTile : MonoBehaviour
                 StartCoroutine(BattleManager.Instance.MoveUnitCoroutine(this, false));
                 break;
 
-            case BattleTileState.Danger:
+            case BattleTileState.Skill:
                 if (BattleManager.Instance.CurrentActionType != MenuType.LaunchSkill) break;
                 StartCoroutine(BattleManager.Instance.UseSkillCoroutine(null));
                 break;

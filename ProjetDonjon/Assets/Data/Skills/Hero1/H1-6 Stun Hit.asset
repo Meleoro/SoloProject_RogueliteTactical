@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: H1-6 Stun Hit
   m_EditorClassIdentifier: 
   skillName: STUN HIT
-  skillDescription: DEALS SMALL DAMAGES AND STUNS THE TARGET
+  skillDescription: DEALS SMALL DAMAGES ON ONE ADJACENT TILE AND APPLIES <#FFC12E>STUNNED</color>
+    THE TARGET
   animName: Skill3
   skillPointCost: 2
+  mustTargetAlly: 0
   skillIcon: {fileID: 1685792960, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -1451717230, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}
-  skillType: 1
+  skillType: 0
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2
@@ -36,6 +40,7 @@ MonoBehaviour:
   mirrorHorizontalVFX: 0
   mirrorVerticalVFX: 0
   VFXs: []
+  throwedObject: {fileID: 0}
   leftVFX: {fileID: 0}
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}

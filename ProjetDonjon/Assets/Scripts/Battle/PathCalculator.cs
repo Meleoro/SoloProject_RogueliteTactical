@@ -15,14 +15,23 @@ public class PathCalculator
         {
             this.battleTile = battleTile;
             this.tilePos = tilePos;
-            isBlocked = false;
+
+            if(this.battleTile == null || this.battleTile.UnitOnTile != null)
+            {
+                isBlocked = true;
+            }
+            else
+            {
+                isBlocked = false;
+            }
+
             previousPosition = Vector2Int.zero;
         }
 
         public BattleTile battleTile;
         public Vector2Int tilePos;
-        public bool isBlocked;
         public Vector2Int previousPosition;
+        public bool isBlocked;
     }
 
     private PathCalculatorTile[,] pathCalculatorTiles;
@@ -46,13 +55,14 @@ public class PathCalculator
         {
             for (int y = 0; y < pathCalculatorTiles.GetLength(1); y++)
             {
-                if (tiles[x, y] is null)
+                if (tiles[x, y] == null)
                 {
+                    pathCalculatorTiles[x, y].battleTile = null;
                     pathCalculatorTiles[x, y].isBlocked = true;
                     continue;
                 }
 
-                if (tiles[x, y].UnitOnTile is not null)
+                if (tiles[x, y].UnitOnTile != null)
                     pathCalculatorTiles[x, y].isBlocked = true;
                 else
                     pathCalculatorTiles[x, y].isBlocked = false;
@@ -221,7 +231,6 @@ public class PathCalculator
     #endregion
 
 
-
     public bool VerifyIsReachable(Vector2Int start, Vector2Int end, bool useDiagonals, ObstacleType obstacleType, BattleTile ignoredTile, bool includeEnd)
     {
         Vector2Int dir = end - start;
@@ -248,9 +257,10 @@ public class PathCalculator
         Vector2Int currentCoord;
         while(currentTile.tilePos != end)
         {
+            if (currentTile.battleTile == null) return false;
+
             if (currentTile.battleTile != ignoredTile)
             {
-                if (currentTile.battleTile is null) return false;
                 if (currentTile.isBlocked && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Units 
                     || obstacleType == ObstacleType.UnitsIncluded)) return false;
                 if (currentTile.battleTile.IsHole && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Holes)) return false;

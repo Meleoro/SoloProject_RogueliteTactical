@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: H2-5 WeakeningShot
   m_EditorClassIdentifier: 
   skillName: WEAKENING SHOT
-  skillDescription: DEALS SMALL DAMAGES ON ONE TILE AND WEAKENS THE TARGET
+  skillDescription: DEALS SMALL DAMAGES ON ONE DISTANT TILE AND APPLIES <#7C210C>WEAKENED</color>
+    TO THE TARGET FOR 3 TURNS
   animName: Skill1
   skillPointCost: 1
   mustTargetAlly: 0
   skillIcon: {fileID: -1854112359, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   skillHighlightIcon: {fileID: -2001667901, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  skillIntentIcon: {fileID: 0}
   additionalTooltipDatas:
   - {fileID: 11400000, guid: e4847cad51e27d8409d9a0f0378bc37d, type: 2}
-  skillType: 1
+  skillType: 6
+  skillPaternType: 1
   skillEffects:
   - skillEffectType: 1
     skillEffectTargetType: 2
