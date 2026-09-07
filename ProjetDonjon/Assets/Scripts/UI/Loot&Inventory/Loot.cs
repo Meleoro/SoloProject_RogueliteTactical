@@ -26,6 +26,8 @@ public class Loot : MonoBehaviour, IInteractible
     [SerializeField] private Color[] lootColorAccordingToRarity;
     [SerializeField] private Sprite[] levelSprites;
     [SerializeField] private float dragLerpSpeed;
+    [SerializeField] private float baseSizeMain = 0.65f;
+    [SerializeField] private float baseSizeItemImage = 0.65f;
     [SerializeField] private bool debug;
 
     [Header("Appear Effect Parameters")]
@@ -51,7 +53,7 @@ public class Loot : MonoBehaviour, IInteractible
     private bool isPlacedInInventory;
     private bool isSquishing;
     private bool isEquipped;
-    private Vector3 addedSize;
+    private Quaternion savePreviousRot;
     private InventorySlot[] slotsOccupied;
     private InventorySlot bottomLeftSlot;      // For Save
     private EquipmentSlot overlayedEquipmentSlot;
@@ -123,6 +125,24 @@ public class Loot : MonoBehaviour, IInteractible
         _levelImage.sprite = levelSprites[lootData.level];
         _levelImage.SetNativeSize();
     }
+
+
+    public IEnumerator AppearInInventoryCoroutine(float delay)
+    {
+        _image.rectTransform.localScale = Vector3.zero;
+        _imageBackground.rectTransform.localScale = Vector3.zero;
+        _levelImage.rectTransform.localScale = Vector3.zero; 
+
+        yield return new WaitForSeconds(delay);
+
+        _imageBackground.rectTransform.DOScale(Vector3.one * baseSizeMain, 0.25f).SetEase(Ease.OutBack);
+        _levelImage.rectTransform.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(0.1f);
+
+        _image.rectTransform.DOScale(Vector3.one * baseSizeItemImage, 0.25f).SetEase(Ease.OutBack);
+    }
+
 
 
     #region World Private Functions
@@ -212,7 +232,7 @@ public class Loot : MonoBehaviour, IInteractible
         _image.SetNativeSize();
 
         _imageBackground.sprite = GetBackgroundSprite(lootData.spaceTaken);
-        _imageBackground.rectTransform.localScale = Vector3.one * 0.4f;
+        _imageBackground.rectTransform.localScale = Vector3.one * baseSizeMain;
         _imageBackground.SetNativeSize();
 
         dragWantedPos = InventoriesManager.Instance.MainLootParent.position;
@@ -276,7 +296,7 @@ public class Loot : MonoBehaviour, IInteractible
 
     protected IEnumerator SquishCoroutine(float duration)
     {
-        float aimedSize = 0.65f;
+        float aimedSize = baseSizeMain;
         isSquishing = true;
         _imageBackground.rectTransform.UChangeScale(duration * 0.24f, new Vector3(1.25f * aimedSize, 0.85f * aimedSize, 1f * aimedSize), CurveType.EaseInOutCubic);
 
@@ -383,6 +403,7 @@ public class Loot : MonoBehaviour, IInteractible
             _imageBackground.rectTransform.SetParent(InventoriesManager.Instance.FrontLootParent);
 
             _imageBackground.raycastTarget = false;
+            savePreviousRot = _imageBackground.rectTransform.rotation;
 
             if (isPlacedInInventory)
             {
@@ -398,7 +419,6 @@ public class Loot : MonoBehaviour, IInteractible
             if(inventoryBounceCoroutine != null)
             {
                 StopCoroutine(inventoryBounceCoroutine);
-                addedSize = Vector3.zero;
             }
         }
 
@@ -431,7 +451,7 @@ public class Loot : MonoBehaviour, IInteractible
     {
         isDragged = false;
         UIManager.Instance.DraggedLoot = null;
-        _imageBackground.raycastTarget = true;
+        //_imageBackground.raycastTarget = true;
 
         if (isRotating) return;
 
@@ -478,7 +498,9 @@ public class Loot : MonoBehaviour, IInteractible
 
     private void FailDrop()
     {
-        if(slotsOccupied.Length > 0)
+        _imageBackground.rectTransform.rotation = savePreviousRot;
+
+        if (slotsOccupied.Length > 0)
         {
             PlaceInInventory(slotsOccupied.ToList());
         }
@@ -527,7 +549,8 @@ public class Loot : MonoBehaviour, IInteractible
 
         _imageBackground.material.SetColor("_ShineColor", Color.black);
         _image.material.SetColor("_ShineColor", Color.black);
-        _imageBackground.rectTransform.UBounceScale(0.05f, Vector3.one * 0.6f, 0.15f, Vector3.one * 0.74f, CurveType.EaseInOutSin);
+
+        StartCoroutine(PlaceEffectsCoroutine());
     }
 
     #endregion
@@ -535,39 +558,43 @@ public class Loot : MonoBehaviour, IInteractible
 
     #region Other Mouse Functions
 
-    private Coroutine overlayCoroutine;
-
     public void OverlayLoot()
     {
         if (UIManager.Instance.DraggedLoot != null) return;
 
+        _imageBackground.rectTransform.SetParent(InventoriesManager.Instance.FrontLootParent);
+
         UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(lootData, _imageBackground.transform.position, 
-            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.6f);
+            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).x > 0.5f, 
+            CameraManager.Instance.Camera.WorldToViewportPoint(_image.rectTransform.position).y < 0.4f);
 
         AudioManager.Instance.PlaySoundOneShot(0, 0);
 
-        if (overlayCoroutine is not null) StopCoroutine(overlayCoroutine);
-        overlayCoroutine = StartCoroutine(OverlayLootCoroutine(0.1f));
-    }
-
-    private IEnumerator OverlayLootCoroutine(float duration)
-    {
-        _imageBackground.rectTransform.UChangeScale(duration, saveSize * 1.35f, CurveType.EaseInOutSin);
-
-        yield return new WaitForSeconds(duration);
-
-        _imageBackground.rectTransform.UChangeScale(duration * 0.3f, saveSize * 1.2f, CurveType.EaseInOutSin);
+        _imageBackground.rectTransform.DOComplete();
+        _imageBackground.rectTransform.DOScale(saveSize * 1.15f, 0.2f).SetEase(Ease.OutBack);
+        _image.rectTransform.DOScale(Vector3.one * 0.95f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void QuitOverlayLoot()
     {
         UIMetaManager.Instance.GenericDetailsPanel.HideDetails();
 
-        if (overlayCoroutine is not null) StopCoroutine(overlayCoroutine);
+        if(isPlacedInInventory)
+        {
+            _imageBackground.rectTransform.SetParent(slotsOccupied[0].LootParent);
+        }
+        else
+        {
+            _imageBackground.rectTransform.SetParent(InventoriesManager.Instance.MainLootParent);
+        }
 
-        _imageBackground.rectTransform.UChangeScale(0.1f, saveSize, CurveType.EaseInOutSin);
+        _imageBackground.rectTransform.DOComplete();
+        _imageBackground.rectTransform.DOScale(saveSize, 0.15f).SetEase(Ease.OutBack);
+
         _imageBackground.material.ULerpMaterialColor(0.1f, new Color(0f, 0f, 0f, 0f), "_AddedColor");
         _image.material.ULerpMaterialColor(0.1f, new Color(0f, 0f, 0f, 0f), "_AddedColor");
+
+        _image.rectTransform.DOScale(Vector3.one * baseSizeItemImage, 0.15f).SetEase(Ease.OutBack);
     }
 
     public void OverlayOtherLoot()
@@ -603,6 +630,17 @@ public class Loot : MonoBehaviour, IInteractible
 
             InventoriesManager.Instance.InventoryActionPanel.OpenPanel(this);
         }
+    }
+
+    public void DisableRaycastTarget(bool forceQuitOverlay)
+    {
+        _imageBackground.raycastTarget = false;
+        if(forceQuitOverlay) QuitOverlayLoot();
+    }
+
+    public void EnableRaycastTarget()
+    {
+        _imageBackground.raycastTarget = true;
     }
 
     #endregion
@@ -648,6 +686,21 @@ public class Loot : MonoBehaviour, IInteractible
         }
     }
 
+    private IEnumerator PlaceEffectsCoroutine()
+    {
+        //_imageBackground.rectTransform.UBounceScale(0.05f, Vector3.one * 0.6f, 0.15f, Vector3.one * 0.74f, CurveType.EaseInOutSin);
+
+        _imageBackground.rectTransform.DOScale(Vector3.one * baseSizeMain * 0.5f, 0.05f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        _imageBackground.rectTransform.DOScale(Vector3.one * baseSizeMain, 0.15f);
+
+        yield return new WaitForSeconds(0.1f);
+
+        _imageBackground.raycastTarget = true;
+    }
+
     private IEnumerator InventoryBounceCoroutine(float duration, float maxSize)
     {
         float addedSizeFloat = 0;
@@ -657,14 +710,12 @@ public class Loot : MonoBehaviour, IInteractible
         while (true)
         {
             timer = 0;
-            addedSize = Vector3.zero;
 
             while (timer < duration)
             {
                 timer += Time.deltaTime;
                 temporary = Mathf.Lerp(0, maxSize, timer / duration);
                 addedSizeFloat = Mathf.Lerp(addedSizeFloat, temporary, Time.deltaTime * 3f);
-                addedSize = Vector3.one * addedSizeFloat;
 
                 yield return new WaitForEndOfFrame();
             }
@@ -676,7 +727,6 @@ public class Loot : MonoBehaviour, IInteractible
                 timer += Time.deltaTime;
                 temporary = Mathf.Lerp(maxSize, 0, timer / duration);
                 addedSizeFloat = Mathf.Lerp(addedSizeFloat, temporary, Time.deltaTime * 3f);
-                addedSize = Vector3.one * addedSizeFloat;
 
                 yield return new WaitForEndOfFrame();
             }

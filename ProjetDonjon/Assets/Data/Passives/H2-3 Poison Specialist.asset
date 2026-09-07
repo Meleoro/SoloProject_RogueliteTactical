@@ -20,10 +20,14 @@ MonoBehaviour:
   additionalTooltipDatas:
   - {fileID: 11400000, guid: bdd1cd386b28d51469bd606f8f387012, type: 2}
   passiveTriggerType: 0
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 0
   passiveEffects:
   - passiveEffectType: 3
     appliedAlteration: {fileID: 11400000, guid: 159132732668f964199bd5498810af03, type: 2}
     additivePower: 0
+    multipliedPower: 0
+  - passiveEffectType: 2
+    appliedAlteration: {fileID: 11400000, guid: 159132732668f964199bd5498810af03, type: 2}
+    additivePower: 1
     multipliedPower: 0

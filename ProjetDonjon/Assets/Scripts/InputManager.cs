@@ -5,6 +5,8 @@ public class InputManager : MonoBehaviour
 {
     public PlayerInput _playerInput;
 
+    public static bool DisableInputs;
+
     public static Vector2 moveDir;
     public static Vector2 mouseDelta;
     public static Vector2 mousePosition;
@@ -27,6 +29,30 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        if(DisableInputs)
+        {
+            moveDir = Vector2.zero;
+            mouseDelta = Vector2.zero;
+            mouseScroll = 0;
+            wantsToJump = false;
+            isHoldingJump = false;
+            wantsToInteract = false;
+            wantsToInventory = false;
+            wantsToHeroInfo = false;
+            wantsToSkillTree = false;
+            wantsToSkills = false;
+            wantsToCollection = false;
+            wantsToRotateLeft = false;
+            wantsToRotateRight = false;
+            wantsToReturn = false;
+            wantsToRightClick = false;
+            wantsToDrag = false;
+            wantsToDisplayAllDangerTiles = false;
+            wantsToStopDisplayAllDangerTiles = false;
+
+            return;
+        }
+
         moveDir = _playerInput.actions["Move"].ReadValue<Vector2>();
         mouseDelta = _playerInput.actions["MouseDelta"].ReadValue<Vector2>();
         mousePosition = _playerInput.actions["MousePosition"].ReadValue<Vector2>();

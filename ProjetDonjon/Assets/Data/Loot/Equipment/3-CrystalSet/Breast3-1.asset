@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Breast3-1
   m_EditorClassIdentifier: 
   lootName: CRYSTAL ARMOR I
-  lootDescription: THIS UNIT STARTS EACH FIGHT WITH THORNS II
+  lootDescription: EACH TIME THIS UNIT DOES A <#7C210C>CRITICAL</color>, GIVES THIS
+    UNIT <#E9A800>1 SKILL POINT</color>
   lootType: 1
   rarityType: 2
   sprite: {fileID: 1213750802, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -30,13 +31,16 @@ MonoBehaviour:
   luckUpgrade: 3
   mpUpgrade: 0
   spUpgrade: 0
-  upgradedVersion: {fileID: 0}
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 11400000, guid: 3ae0c359b6f821f4f96db2d7b01e7d79, type: 2}
   upgradeCost:
-    neededMaterials: []
-    neededMatQuantities: 
+    neededMaterials:
+    - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+    neededMatQuantities: 02000000
   appliedPassive: {fileID: 11400000, guid: 5a437db92a5ae704eaf2ddfdbae84be0, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0
   additionalTooltipDatas:
-  - {fileID: 11400000, guid: aaff5ee0ee52021438f482bfdbde0f50, type: 2}
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
+  - {fileID: 11400000, guid: 7ed72bdfb3a63e843bad98604bd4b062, type: 2}

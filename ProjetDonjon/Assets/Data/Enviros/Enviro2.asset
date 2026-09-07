@@ -1,0 +1,190 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4df46b03aadc9249bda5741a5972ca0, type: 3}
+  m_Name: Enviro2
+  m_EditorClassIdentifier: 
+  enviroName: COMING SOON
+  enviroDescription: THIS CRYPT FULL OF TREASURE IS ALSO HOME FOR A CIVILISATION
+    OF GOBLINS, IT IS ALSO SAID THAT A DARK MAGE LURKS IN THE DEPTH OF THIS CRYPT
+  enviroDangerText: 'RECOMMANDED LEVEL : ???'
+  enviroResourcesTexts: 'RESOURCES : ???'
+  enviroIllustration: {fileID: 1205301917, guid: c09bee4696533c248b349d7ad5262ed3, type: 3}
+  enviroIndex: 1
+  recommandedLevels: 010000000200000004000000050000000600000008000000
+  minDistGoldenPath: 5
+  maxDistGoldenPath: 7
+  minRoomAmount: 7
+  maxRoomAmount: 10
+  floorsAmount: 6
+  possibleBattleRooms:
+  - {fileID: 2917294264406634095, guid: 6d5789751cd4f5840bd377f0d57b4ae2, type: 3}
+  - {fileID: 2917294264406634095, guid: 0ce6309a5c1defe4cacf6938dc39b307, type: 3}
+  - {fileID: 2917294264406634095, guid: 4667598ee5cbfca4d9b29ca669afdd36, type: 3}
+  - {fileID: 2917294264406634095, guid: ddb26f0363c8f6e4da95b3031e6e07bf, type: 3}
+  - {fileID: 6937991569428506517, guid: 469b1836312c23945b3c56712c887aa5, type: 3}
+  - {fileID: 6937991569428506517, guid: 59ea394616e758e4fbbf775561097cbe, type: 3}
+  - {fileID: 2917294264406634095, guid: 8a9c6d9302b53524588329c27380022e, type: 3}
+  - {fileID: 2917294264406634095, guid: 43999d5fd2398684893d30c85f0f1a3f, type: 3}
+  - {fileID: 2917294264406634095, guid: 7a80536822c8da443b249570fd073869, type: 3}
+  - {fileID: 2917294264406634095, guid: 05c78ccda8e89cc4bbf04d294ad56e55, type: 3}
+  - {fileID: 2917294264406634095, guid: 26011d838b4ded648ba964957d534530, type: 3}
+  - {fileID: 2917294264406634095, guid: 24ec467b9738ef74dadf23427b354144, type: 3}
+  - {fileID: 2917294264406634095, guid: 141889dae28667e4db33562755908e0e, type: 3}
+  - {fileID: 2917294264406634095, guid: 971ef4f497cdedf4dafef6bbbe8be585, type: 3}
+  - {fileID: 2917294264406634095, guid: c05b48d6441099b47ab09473d2dfc125, type: 3}
+  - {fileID: 2917294264406634095, guid: a42cfabbf8496a745b20e68cf4a0b6fa, type: 3}
+  possibleCorridorRooms:
+  - {fileID: 2917294264406634095, guid: 3fb2efc6eb1d84c4e9c70404e1922f11, type: 3}
+  - {fileID: 1856086751064925117, guid: 7abfbe6e3f513954494e647f8b38976c, type: 3}
+  - {fileID: 1856086751064925117, guid: b92b98f296c70324cae3224e36091707, type: 3}
+  - {fileID: 1856086751064925117, guid: 74ae62d704662a74fb639f237bbb8dd7, type: 3}
+  - {fileID: 2917294264406634095, guid: e59b18cce1e22ee458f7f6481a2172e5, type: 3}
+  - {fileID: 2917294264406634095, guid: 701b6b3e30f24544ba2805dd56605b1d, type: 3}
+  - {fileID: 1856086751064925117, guid: 1aa7c1b69fb3c914fb5042404d0e85c0, type: 3}
+  possibleCorridorTrapRooms:
+  - {fileID: 2917294264406634095, guid: d0712f18a6c113748a718bea172b2827, type: 3}
+  - {fileID: 2917294264406634095, guid: fe3cf7f00058be14ab178e75e85752fe, type: 3}
+  - {fileID: 2917294264406634095, guid: 45f20c2edfd7b814794b0f68b04cda39, type: 3}
+  - {fileID: 2917294264406634095, guid: 4600d616a4a13e240a97279da1eb9ee8, type: 3}
+  - {fileID: 2917294264406634095, guid: 9523f4491b9331b4a82e48d816c2f0fb, type: 3}
+  - {fileID: 2917294264406634095, guid: 59c1b160dd442704981b3477fdaba786, type: 3}
+  - {fileID: 2917294264406634095, guid: 1c07978d9f72a6d4f9908ee354f9b6f4, type: 3}
+  - {fileID: 2917294264406634095, guid: 690f8a4668420f64caa9a751f6d96d8d, type: 3}
+  possibleCorridorPlateformRooms:
+  - {fileID: 2917294264406634095, guid: 6616e4c47be786b42a4f5a3e40966387, type: 3}
+  - {fileID: 2917294264406634095, guid: ada4e059088f9a24c8e4d7787d6220d5, type: 3}
+  - {fileID: 2917294264406634095, guid: bc47482e243ce94468c87bc393626d78, type: 3}
+  - {fileID: 2917294264406634095, guid: 9cc03ae9ad4105a419c16a8e903adfae, type: 3}
+  - {fileID: 2917294264406634095, guid: b749238e1025e1649a06205f509d2f1b, type: 3}
+  - {fileID: 2917294264406634095, guid: fd474c9e72daafd42aa7abcc8fd66eea, type: 3}
+  - {fileID: 1856086751064925117, guid: 46850fc5319ca024d8ce91d385ee1f12, type: 3}
+  - {fileID: 1856086751064925117, guid: 0a8661fdd6ba6d7498cba94a95e8de06, type: 3}
+  possiblePlateformRooms:
+  - {fileID: 2917294264406634095, guid: acd82df5924bf224db9788423c8ed8dc, type: 3}
+  - {fileID: 2917294264406634095, guid: f309f058cedd6e24a90942071bb7db5a, type: 3}
+  - {fileID: 2917294264406634095, guid: 6dbcd3546dae674429c6634589a0c711, type: 3}
+  - {fileID: 2917294264406634095, guid: 28d403d7ca77e1d4db15b4c93708afab, type: 3}
+  - {fileID: 2917294264406634095, guid: c7c13253a6414bc41b12f5fd84fb179e, type: 3}
+  - {fileID: 2917294264406634095, guid: bf095283bd2113340b208a473fd347bd, type: 3}
+  possibleTrapRooms:
+  - {fileID: 2917294264406634095, guid: e19b037d6cb7802489ab86828f7b52e1, type: 3}
+  - {fileID: 2917294264406634095, guid: 0dc7e514750cd7548a917b3cf49001aa, type: 3}
+  - {fileID: 2917294264406634095, guid: fa4bc56fd84534348ac1f27b2a25c902, type: 3}
+  - {fileID: 2917294264406634095, guid: e5b996a8a2f8abc4b90543f37d6206b2, type: 3}
+  - {fileID: 2917294264406634095, guid: 9b0773dfa9997374aa423a2fac10c827, type: 3}
+  possiblePuzzleRooms:
+  - {fileID: 2917294264406634095, guid: 4e1c9c053424a984d814e594755a3ded, type: 3}
+  - {fileID: 2917294264406634095, guid: 156a46d7ea7d6124b802ffed2bfe3346, type: 3}
+  - {fileID: 2917294264406634095, guid: 1075ff869e0b00943aac5ffef3c7b6a9, type: 3}
+  - {fileID: 2917294264406634095, guid: 8b67ade2c216ba14694f5280f41ebbd0, type: 3}
+  possibleChallengeRooms:
+  - {fileID: 2917294264406634095, guid: afdc936cb1b93bc4e9a5506e0c4428a1, type: 3}
+  - {fileID: 2917294264406634095, guid: 4701f986ea23a454c9225a52851a083f, type: 3}
+  - {fileID: 2917294264406634095, guid: f698fdfd24d220545a30d7883a759fca, type: 3}
+  possibleStartRooms:
+  - {fileID: 2917294264406634095, guid: 581c2856ecf5e4f4987601aa19cdea79, type: 3}
+  - {fileID: 2917294264406634095, guid: 97ffd9ce2354b3149aebbe0058ec8ebd, type: 3}
+  possibleStairsRooms:
+  - {fileID: 2917294264406634095, guid: 7f1c262d991c12f48bffac1db4436036, type: 3}
+  possibleFirstBossRooms:
+  - {fileID: 2917294264406634095, guid: 5cbe374aae63ec84195d013e30bd5ad4, type: 3}
+  possibleSecondBossRooms:
+  - {fileID: 2917294264406634095, guid: 718af3d54e6547044988292b3bb1bf85, type: 3}
+  possibleCorridorTrapRoomsHard:
+  - {fileID: 2917294264406634095, guid: 9dd82eb021ee29d4f865bbc6db7760f6, type: 3}
+  - {fileID: 2917294264406634095, guid: 46809b3318ff7954ba79d96f86de8294, type: 3}
+  possibleTrapRoomsHard:
+  - {fileID: 2917294264406634095, guid: 556f42e12b42abe4390e40348aa6ffd2, type: 3}
+  - {fileID: 2917294264406634095, guid: b7ad3067bb488fd4298a1dc0e58861e6, type: 3}
+  - {fileID: 2917294264406634095, guid: 6c5353f7fbddb1e4089c50b1b4dff520, type: 3}
+  - {fileID: 2917294264406634095, guid: e18541a798be0a1499007cd0b668cbcc, type: 3}
+  possibleCorridorPlateformRoomsHard:
+  - {fileID: 2917294264406634095, guid: 361e3014fa138844ca03e683e249f769, type: 3}
+  - {fileID: 2917294264406634095, guid: 99f9fd5f0f244a64486ab67d48517fef, type: 3}
+  possiblePlateformRoomsHard: []
+  possiblePuzzleRoomsHard:
+  - {fileID: 2917294264406634095, guid: 1f4958465627865419952408f56cf37e, type: 3}
+  - {fileID: 2917294264406634095, guid: 71b5b5c1b0a64f14ebe0b69e442bd9b6, type: 3}
+  - {fileID: 2917294264406634095, guid: c826b453fc43a35478cd1fd3ac4eb250, type: 3}
+  - {fileID: 2917294264406634095, guid: df77dd622b9431f4294e6b2221fa6a9b, type: 3}
+  possibleCommonLoot:
+  - probability: 25
+    loot: {fileID: 11400000, guid: 9181194398e4656458e8a86cf750ad8e, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 8c619ec65573b5b4b89ce41ad5d53ee7, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 489ce2b2d4640574e8be925a9007ddd8, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 7256e143e98fdac43bba6a109d0b0f9c, type: 2}
+  - probability: 15
+    loot: {fileID: 11400000, guid: e7257f000b5a63d40b3ec08d33568288, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 6a19da2e9de63b94d98a3dfd2959074d, type: 2}
+  possibleRareLoot:
+  - probability: 20
+    loot: {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 861915a6d01ecc247b8ba04832474eb5, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: ae63ec5eccf09584dac1a34cf0bd7b4c, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: c6365ca817b6eca4f9ee09436cae8af2, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: aa4d0709758515249b72ea99be866219, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: f911b33cd98bec44498b9613ec0b396e, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: e5beb7085b7e3404d829c9ff66aceb3a, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: d232afad462b29e4a89ee38c348180c0, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 45011751c251c3d4facdd68092b5380c, type: 2}
+  possibleEpicLoot:
+  - probability: 20
+    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
+  possibleMysticLoot:
+  - probability: 20
+    loot: {fileID: 11400000, guid: c2c504afd88e1c74fa51801fb07a5a7f, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: e7e0a4442387ad14ab003b55760919bf, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: df8748ba0b1a37c4d9f1edf5ab74cd3d, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 96f0184470bc7e740967f996d653f93b, type: 2}
+  - probability: 20
+    loot: {fileID: 11400000, guid: 440e036a5b8ec2e4e95a9ffbbd8b2c2e, type: 2}
+  lootPerFloors:
+  - {fileID: 11400000, guid: 552fdf40ba613ba4798b39159b339ca9, type: 2}
+  - {fileID: 11400000, guid: c2e6cfa2e8d18214ea3f908b7db5ebd6, type: 2}
+  - {fileID: 11400000, guid: 7456501236f695146b33097042b37c4b, type: 2}
+  - {fileID: 11400000, guid: 9c07328acd89c8040b6d866114eaaf12, type: 2}
+  - {fileID: 11400000, guid: dec5c41635ad061418926eccd860a28f, type: 2}
+  - {fileID: 11400000, guid: 7077cbaea47420645918febcb3ee1463, type: 2}
+  enemySpawnsPerFloor:
+  - {fileID: 11400000, guid: 67936368a301ebf4aa43f0d3184247d5, type: 2}
+  - {fileID: 11400000, guid: a751178e5de40aa4a8d8fbe6f743b8ff, type: 2}
+  - {fileID: 11400000, guid: a86e230126572f245a9f589e9f504163, type: 2}
+  - {fileID: 11400000, guid: e66d0b04f75115443869519f98a37726, type: 2}
+  - {fileID: 11400000, guid: efb18c40d988cfe4781d6cf5b2e39cec, type: 2}
+  - {fileID: 11400000, guid: 222ba2f9b981e884c86a8d1e695ad698, type: 2}

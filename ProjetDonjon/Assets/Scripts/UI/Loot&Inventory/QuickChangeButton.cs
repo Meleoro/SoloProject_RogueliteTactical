@@ -27,7 +27,11 @@ public class QuickChangeButton : MonoBehaviour
 
     public void ActualiseInfos(RectTransform parent, bool isDisplayed) 
     {
-        _rectTr.SetParent(parent);
+        if(parent != null)
+        {
+            _rectTr.SetParent(parent);
+        }
+
         _rectTr.localPosition = Vector3.zero;
         _rectTr.localScale = Vector3.one;   
 
@@ -58,6 +62,8 @@ public class QuickChangeButton : MonoBehaviour
     {
         _mainImage.enabled = false;
         _heroIconImage.enabled = false;
+
+        UnselectHero();
     }
 
     public void SelectHero()

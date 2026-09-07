@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utilities;
@@ -20,6 +21,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     [SerializeField] private Loot lootPrefab;
     [SerializeField] private Relic relicPrefab;
     [SerializeField] private Coin coinPrefab;
+    [SerializeField] private ParticleSystem hitVFXPrefab;
 
     [Header("Actions")]
     public Action OnMoveUnit;
@@ -90,6 +92,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         else if (InputManager.wantsToStopDisplayAllDangerTiles)
         {
             TilesManager.StopDisplayPossibleMoveTiles();
+        }
+
+        if(GameManager.Instance.EnableDebugCommands && Input.GetKeyDown(KeyCode.Z))
+        {
+            EndBattle();
         }
     }
 
@@ -187,7 +194,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             battleRoom.RoomEnemies[i].EnterBattle(battleRoom.RoomEnemies[i].CurrentTile);
         }
 
-        if (battleRoom.RoomEnemies.Count > 2) OnBattleWithManyEnemiesStart?.Invoke();
+        if (battleRoom.RoomEnemies.Count > 1) OnBattleWithManyEnemiesStart?.Invoke();
 
         CameraManager.Instance.EnterBattle(battleCenterPos, cameraSize);
         HeroesManager.Instance.EnterBattle(possibleTiles);
@@ -201,6 +208,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     {
         yield return new WaitForSeconds(2.5f + delay);
 
+        UIManager.Instance.ShowHeroInfosPanels();
         _timeline.InitialiseTimeline(currentUnits);
 
         StartCoroutine(NextTurnCoroutine(0, false));
@@ -224,6 +232,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         CameraManager.Instance.ExitBattle();
         HeroesManager.Instance.ExitBattle();
 
+        UIManager.Instance.HideHeroInfosPanels();
         _timeline.Disappear();
         _playerActionsMenu.CloseActionsMenu();
     }
@@ -301,7 +310,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         CameraManager.Instance.FocusOnTransforms(transforms);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.75f);
 
         PlayNextBattleEvent();
     }
@@ -313,7 +322,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         yield return new WaitForSeconds(delay);
 
-        noMouseControls = false;
         if (!isInBattle) yield break;
 
         if(endTurn) _timeline.NextTurn();
@@ -328,6 +336,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             isEnemyTurn = false;
             OnHeroTurnStart?.Invoke();
             _playerActionsMenu.SetupHeroActionsUI(CurrentUnit as Hero);
+            CameraManager.Instance.UnlockCameraInputs();
             noMouseControls = false;
         }
         else
@@ -335,6 +344,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             TilesManager.UnhoverAll();
 
             isEnemyTurn = true;
+            noMouseControls = true;
+            CameraManager.Instance.LockCameraInputs();
             CameraManager.Instance.FocusOnTransform(CurrentUnit.transform, 5f);
             AIUnit enemy = CurrentUnit as AIUnit;
             StartCoroutine(enemy.PlayEnemyTurnCoroutine());
@@ -498,7 +509,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             // We verify if the turn ends
             if ((currentUnit as Hero).CurrentActionPoints > 0)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
 
                 AddBattleEventToQueue(BattleEventType.NextPlayerAction);
                 PlayNextBattleEvent();
@@ -553,9 +564,12 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             switch (usedSkill.skillEffects[i].skillEffectType)
             {
                 case SkillEffectType.Damage:
-                    if (isCrit) battleTile.UnitOnTile.TakeDamage((int)(usedSkill.skillEffects[i].multipliedPower * unit.CurrentStrength * 
-                        (unit.CurrentCritMultiplier + _passivesManager.GetPassiveCritDamagesUpgrade(unit, battleTile.UnitOnTile))), unit);
-                    else battleTile.UnitOnTile.TakeDamage((int)(usedSkill.skillEffects[i].multipliedPower * unit.CurrentStrength), unit);
+                    int damages = (int)(usedSkill.skillEffects[i].multipliedPower * unit.CurrentStrength);
+
+                    if (isCrit) battleTile.UnitOnTile.TakeDamage((int)(damages * (unit.CurrentCritMultiplier + 
+                        _passivesManager.GetPassiveCritDmgMultiplierUpgrade(unit, battleTile.UnitOnTile))), unit, true);
+
+                    else battleTile.UnitOnTile.TakeDamage(damages, unit, false);
 
                     PassiveData[] prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnAttack, unit).ToArray();
                     _passivesManager.ApplyPassives(prokedPassives, unit, battleTile.UnitOnTile);
@@ -610,10 +624,16 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     private void PlaySkillVFX(BattleTile[] battleTile, SkillData usedSkill)
     {
-        if (usedSkill.VFXs.Length == 0 && usedSkill.downVFX == null && usedSkill.throwedObject == null) return;
+        if(currentVFXIndex >= usedSkill.vfxDatas.Length)
+        {
+            Debug.LogWarning("Trying to launch VFXs but not enough VFXs are referenced in the skill : " + usedSkill.name);
+            return;
+        }
+
+        VFXData vfxData = usedSkill.vfxDatas[currentVFXIndex];
 
         // Throwable VFX
-        if (usedSkill.throwedObject != null)
+        if (vfxData.throwedObject != null)
         {
             Vector3 middlePos = Vector2.zero;
             foreach (BattleTile tile in battleTile)
@@ -622,7 +642,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             }
             middlePos /= battleTile.Length;
 
-            if (usedSkill.throwedObject.TryGetComponent<Flask>(out Flask flask))
+            if (vfxData.throwedObject.TryGetComponent<Flask>(out Flask flask))
             {
                 FlaskType type = FlaskType.Poison;
                 if (usedSkill.skillEffects[0].appliedAlteration is null) type = FlaskType.Cure;
@@ -632,42 +652,47 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             return;
         }
 
-
-        Vector2Int coordDif = _tilesManager.CurrentSkillBaseTile.TileCoordinates - currentUnit.CurrentTile.TileCoordinates;
+        Vector2Int coordDif = battleTile[0].TileCoordinates - currentUnit.CurrentTile.TileCoordinates;
 
         // We Choose the VFX to play
         GameObject usedVFX = null;
-        if (usedSkill.VFXs.Length == 0)
+        if (vfxData.VFX == null)
         {
-            if (coordDif.x > 0) usedVFX = usedSkill.rightVFX;
-            else if (coordDif.x < 0) usedVFX = usedSkill.leftVFX;
-            else if (coordDif.y > 0) usedVFX = usedSkill.upVFX;
-            else usedVFX = usedSkill.downVFX;
+            if (coordDif.x > 0) usedVFX = vfxData.rightVFX;
+            else if (coordDif.x < 0) usedVFX = vfxData.leftVFX;
+            else if (coordDif.y > 0) usedVFX = vfxData.upVFX;
+            else usedVFX = vfxData.downVFX;
         }
         else
         {
-            usedVFX = usedSkill.VFXs[currentVFXIndex];
+            usedVFX = vfxData.VFX;
         }
 
         // We play the VFX
-        if (usedSkill.VFXs.Length > currentVFXIndex && !usedSkill.onTargetVFX && usedSkill.oneVFXPerTile)
+        if (vfxData.vfxType == VFXData.VFXAttackType.OnTilesVFX)
         {
             foreach (BattleTile tile in battleTile)
             {
-                GameObject newVFX = Instantiate(usedVFX, tile.UnitOnTile.transform.position, Quaternion.Euler(0, 0, 0));
-                AdaptVFXVisuals(newVFX, coordDif, usedSkill);
+                GameObject newVFX = Instantiate(usedVFX, tile.UnitOnTile.transform.position, usedVFX.transform.rotation);
+                AdaptVFXVisuals(newVFX, coordDif, vfxData);
             }
         }
-        else if (usedSkill.VFXs.Length > currentVFXIndex && usedSkill.onTargetVFX)
+        else if (vfxData.vfxType == VFXData.VFXAttackType.OnTargetsVFX)
         {
             foreach (BattleTile tile in battleTile)
             {
                 if (tile.UnitOnTile is null) continue;
-                GameObject newVFX = Instantiate(usedVFX, tile.UnitOnTile.transform.position, Quaternion.Euler(0, 0, 0));
-                AdaptVFXVisuals(newVFX, coordDif, usedSkill);
+
+                GameObject newVFX = Instantiate(usedVFX, tile.UnitOnTile.transform.position, usedVFX.transform.rotation);
+                ParticleSystem hitVFX = Instantiate(hitVFXPrefab, tile.UnitOnTile.transform.position, usedVFX.transform.rotation, newVFX.transform);
+
+                hitVFX.transform.localPosition = new Vector3(0, 0, 0);
+                hitVFX.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+                AdaptVFXVisuals(newVFX, coordDif, vfxData);
             }
         }
-        else
+        else if (vfxData.vfxType == VFXData.VFXAttackType.OnAverageTilesPosVFX)
         {
             Vector3 middlePos = Vector2.zero;
             foreach (BattleTile tile in battleTile)
@@ -676,30 +701,39 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             }
             middlePos /= battleTile.Length;
 
-            GameObject newVFX = Instantiate(usedVFX, middlePos, Quaternion.Euler(0, 0, 0));
-            AdaptVFXVisuals(newVFX, coordDif, usedSkill);
+            GameObject newVFX = Instantiate(usedVFX, middlePos, usedVFX.transform.rotation);
+            AdaptVFXVisuals(newVFX, coordDif, vfxData);
         }
 
-        currentVFXIndex++;
+        currentVFXIndex++;   
     }
 
-    private void AdaptVFXVisuals(GameObject vfx, Vector2Int coordDif, SkillData skillData)
+    private void AdaptVFXVisuals(GameObject vfx, Vector2Int coordDif, VFXData vfxData)
     {
-        if (skillData.mirrorHorizontalVFX)
+        if (vfxData.mirrorHorizontalVFX)
         {
             if (coordDif.x < 0)
                 vfx.transform.localScale = new Vector3(-1 * vfx.transform.localScale.x, vfx.transform.localScale.y, vfx.transform.localScale.z);
         }
 
-        if (skillData.mirrorVerticalVFX)
+        if (vfxData.mirrorVerticalVFX)
         {
             if (coordDif.y > 0)
                 vfx.transform.localScale = new Vector3(vfx.transform.localScale.x, -1 * vfx.transform.localScale.y, vfx.transform.localScale.z);
         }
 
-        if (skillData.rotateVFX)
+        if (vfxData.rotateVFX)
         {
             vfx.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(coordDif.y, coordDif.x) * Mathf.Rad2Deg);
+        }
+
+        if(vfxData.offset != Vector2.zero)
+        {
+            if (coordDif.x < 0 && vfxData.mirrorHorizontalVFX) vfx.transform.position -= new Vector3(vfxData.offset.x, 0, 0);
+            else vfx.transform.position += new Vector3(vfxData.offset.x, 0, 0);
+
+            if (coordDif.y > 0 && vfxData.mirrorVerticalVFX) vfx.transform.position -= new Vector3(0, vfxData.offset.y, 0);
+            else vfx.transform.position += new Vector3(0, vfxData.offset.y, 0);
         }
     }
 

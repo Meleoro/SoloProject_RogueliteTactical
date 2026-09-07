@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HiddenUI
-  serializedVersion: 7
+  serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -31,7 +31,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
   m_FloatCurves:
   - serializedVersion: 2
     curve:
@@ -134,7 +134,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -155,7 +155,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -168,7 +168,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -176,6 +176,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 459991926
       attribute: 1967290853
@@ -185,6 +186,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 1373050512
       attribute: 1460864421
@@ -194,6 +196,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 2768517320
       attribute: 1460864421
@@ -203,6 +206,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 2668285714
       attribute: 1460864421
@@ -212,8 +216,9 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -221,8 +226,9 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -230,6 +236,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -353,7 +360,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -374,7 +381,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -395,7 +402,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -416,7 +423,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -437,7 +444,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0

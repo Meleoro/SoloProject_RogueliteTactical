@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -14,6 +15,7 @@ public class HUDExploration : MonoBehaviour
     public Image SkillsMenu { get { return _buttonsImages[2]; } }
     public Image SkillTreeMenu { get { return _buttonsImages[3]; } }
     public Animator Animator { get { return _animator; } }
+    public bool IsDisplayed { get { return isDisplayed; } }
 
     [Header("Private Infos")]
     private bool isDisplayed;
@@ -29,6 +31,7 @@ public class HUDExploration : MonoBehaviour
     [SerializeField] private SkillTreeManager _skillTreeScreen;
     [SerializeField] private SkillsMenu _skillsMenu;
     [SerializeField] private CollectionMenu _collectionMenu;
+    [SerializeField] private Minimap _minimap;
 
 
     private void Start()
@@ -57,6 +60,9 @@ public class HUDExploration : MonoBehaviour
 
         HeroesManager.Instance.OnHeroLevelUp += DoBounceSkillTree;
 
+        UIMetaManager.Instance.MainMetaMenu.OnShow += Show;
+        UIMetaManager.Instance.MainMetaMenu.OnHide += Hide;
+
         foreach (var button in _buttonsImages)
         {
             Material material = button.material;
@@ -69,7 +75,7 @@ public class HUDExploration : MonoBehaviour
 
     #region Show
 
-    private void Show()
+    public void Show()
     {
         if (BattleManager.Instance.IsInBattle) return;
         if (isDisplayed) return;
@@ -77,9 +83,13 @@ public class HUDExploration : MonoBehaviour
         isDisplayed = true;
         _animator.SetBool("IsDisplayed", true);
 
-        ActualiseDisplayedButtons();
+        if(UIManager.Instance.Transition.IsActive || !GameManager.Instance.IsInExplo)
+            _minimap.gameObject.SetActive(false);
 
-        UIManager.Instance.ShowHeroInfosPanels();
+        else 
+            _minimap.gameObject.SetActive(true);
+
+        ActualiseDisplayedButtons();
     }
 
     private void ShowWithDelay()
@@ -99,7 +109,7 @@ public class HUDExploration : MonoBehaviour
 
     #region Hide
 
-    private void Hide()
+    public void Hide()
     {
         if (!isDisplayed) return;
 
@@ -155,7 +165,7 @@ public class HUDExploration : MonoBehaviour
     {
         if (!isDisplayed) return;
 
-        _inventoryManager.OpenInventories();
+        _inventoryManager.ShowInventories();
     }
 
     public void ClickEquipment()
@@ -196,10 +206,10 @@ public class HUDExploration : MonoBehaviour
 
     #region Others
 
-    private void ActualiseDisplayedButtons()
+    public void ActualiseDisplayedButtons()
     {
-        if(TutoManager.Instance.TutoDisabled)
-            return;
+        //if(TutoManager.Instance.TutoDisabled)
+        //    return;
 
         _buttonsParent[0].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[3]);
         _buttonsParent[1].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[2]);

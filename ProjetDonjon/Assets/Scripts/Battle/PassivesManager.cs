@@ -10,6 +10,9 @@ public class PassivesManager
 
     public List<PassiveData> GetTriggeredPassives(PassiveTriggerType triggerType, Unit unit)
     {
+        if (!BattleManager.Instance.IsInBattle && triggerType == PassiveTriggerType.OnDamageReceived) 
+            return new List<PassiveData>();
+
         List<PassiveData> returnedList = new List<PassiveData>();
 
         if (!unit) return returnedList;
@@ -137,8 +140,17 @@ public class PassivesManager
         {
             if (passivesToCheck[i] is null) continue;
             if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttack &&
-                (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttackUnitWithAlt ||
-                !attackedUnit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType))) continue;
+                (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttackUnitWithAlt)) continue;
+
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (attackedUnit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
 
             if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeCritChances) continue;
 
@@ -158,9 +170,17 @@ public class PassivesManager
         {
             if (passivesToCheck[i] is null) continue;
             if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAlterationApplied) continue;
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration) continue;
 
-            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration ||
-                appliedAlteration.alterationType != passivesToCheck[i].neededAlteration.alterationType) continue;
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (appliedAlteration.alterationType != passivesToCheck[i].neededAlteration[j].alterationType) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
 
             return (int)passivesToCheck[i].passiveEffects[0].additivePower;
         }
@@ -178,9 +198,17 @@ public class PassivesManager
         {
             if (passivesToCheck[i] is null) continue;
             if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAlterationGained) continue;
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration) continue;
 
-            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeAlteration ||
-                appliedAlteration.alterationType != passivesToCheck[i].neededAlteration.alterationType) continue;
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (appliedAlteration.alterationType != passivesToCheck[i].neededAlteration[j].alterationType) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
 
             return (int)passivesToCheck[i].passiveEffects[0].additivePower;
         }
@@ -188,13 +216,34 @@ public class PassivesManager
         return 0;
     }
 
-    public int GetPassiveCritDamagesUpgrade(Unit unit, Unit attackedUnit)
+    public float GetPassiveCritDmgMultiplierUpgrade(Unit unit, Unit attackedUnit)
     {
         PassiveData[] passivesToCheck = unit.EquippedPassives;
         // If hero, we add the equipment passives
         if (unit.GetType() == typeof(Hero)) passivesToCheck = unit.EquippedPassives.Concat(((Hero)unit).EquippedLootPassives).ToArray();
 
-        return 0;
+        float bonus = 0;
+        for (int i = 0; i < passivesToCheck.Length; i++)
+        {
+            if (passivesToCheck[i] is null) continue;
+            //if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttack) continue;
+
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeCritDamages) continue;
+
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (attackedUnit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
+
+            bonus += passivesToCheck[i].passiveEffects[0].additivePower;
+        }
+
+        return bonus;
     }
 
     public int GetBonusDamages(Unit unit, Unit attackedUnit)
@@ -211,8 +260,17 @@ public class PassivesManager
             if (passivesToCheck[i] is null) continue;
             if (passivesToCheck[i].passiveTriggerType != PassiveTriggerType.OnAttack) continue;
 
-            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeDamages ||
-                !unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType)) continue;
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.UpgradeDamages) continue;
+
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
 
             bonus += (int)passivesToCheck[i].passiveEffects[0].additivePower;
         }
@@ -234,8 +292,17 @@ public class PassivesManager
         {
             if (passivesToCheck[i] is null) continue;
 
-            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.LoseLessSkillPoint ||
-               (passivesToCheck[i].neededAlteration && !unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration.alterationType))) continue;
+            if (passivesToCheck[i].passiveEffects[0].passiveEffectType != PassiveEffectType.LoseLessSkillPoint) continue;
+
+            bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
+            for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
+            {
+                if (!unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
+
+                alterationValid = true;
+                break;
+            }
+            if (!alterationValid) continue;
 
             bonus += (int)passivesToCheck[i].passiveEffects[0].additivePower;
         }

@@ -67,7 +67,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
   m_FloatCurves:
   - serializedVersion: 2
     curve:
@@ -104,7 +104,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 114
     script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
     flags: 0
@@ -143,7 +143,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_fontColor.a
-    path: HealthBar/Hearth/HearthText
+    path: HealthBar/Heart/HearthText
     classID: 114
     script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 0
@@ -155,7 +155,7 @@ AnimationClip:
     - time: 0.25
       value: {fileID: -7878076222933570752, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
     attribute: m_Sprite
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 114
     script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
     flags: 2
@@ -167,7 +167,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -177,7 +177,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 304273561
       script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
       typeID: 114
@@ -187,7 +187,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     - serializedVersion: 2
-      path: 119279618
+      path: 166978681
       attribute: 4185109675
       script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
       typeID: 114
@@ -197,7 +197,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     - serializedVersion: 2
-      path: 3765734810
+      path: 2920215620
       attribute: 2015549526
       script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
       typeID: 114
@@ -283,7 +283,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -340,7 +340,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -397,7 +397,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -436,7 +436,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: HealthBar/Hearth
+    path: HealthBar/Heart
     classID: 114
     script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
     flags: 0
@@ -475,7 +475,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_fontColor.a
-    path: HealthBar/Hearth/HearthText
+    path: HealthBar/Heart/HearthText
     classID: 114
     script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 0

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: EP_31
   m_EditorClassIdentifier: Assembly-CSharp::PassiveData
   passiveName: Crystal Breast
-  passiveDescription: 'Gives you constant Thorns II '
+  passiveDescription: 'CRIT GIVES 1 SP '
   passiveIcon: {fileID: 0}
   passiveHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
-  passiveTriggerType: 10
-  neededAlteration: {fileID: 0}
+  passiveTriggerType: 7
+  neededAlteration: []
   passiveTriggerProba: 100
   passiveEffects:
-  - passiveEffectType: 0
-    appliedAlteration: {fileID: 11400000, guid: 413d1159baf8d47469e3d3c47bb1a95b, type: 2}
-    additivePower: 0
+  - passiveEffectType: 7
+    appliedAlteration: {fileID: 0}
+    additivePower: 1
     multipliedPower: 0

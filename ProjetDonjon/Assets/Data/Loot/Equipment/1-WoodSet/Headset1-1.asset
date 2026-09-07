@@ -17,7 +17,7 @@ MonoBehaviour:
   lootType: 1
   rarityType: 0
   sprite: {fileID: -1288772121, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 15
+  value: 25
   level: 0
   spaceTaken:
   - row: 01
@@ -29,6 +29,7 @@ MonoBehaviour:
   luckUpgrade: 0
   mpUpgrade: 0
   spUpgrade: 0
+  exclusiveHeroIndex: -1
   upgradedVersion: {fileID: 11400000, guid: 771ed91095d829848a11259c392367d6, type: 2}
   upgradeCost:
     neededMaterials:

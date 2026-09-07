@@ -124,12 +124,12 @@ TextureImporter:
       name: Expedition_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 315
-        width: 83
-        height: 127
+        x: 32
+        y: 337
+        width: 91
+        height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: Expedition_1
       rect:
         serializedVersion: 2
-        x: 158
-        y: 303
-        width: 302
-        height: 171
+        x: 145
+        y: 313
+        width: 313
+        height: 187
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: Expedition_2
       rect:
         serializedVersion: 2
-        x: 46
-        y: 267
+        x: 32
+        y: 286
         width: 64
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: Expedition_3
       rect:
         serializedVersion: 2
-        x: 120
-        y: 263
+        x: 106
+        y: 282
         width: 70
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -212,12 +212,12 @@ TextureImporter:
       name: Expedition_4
       rect:
         serializedVersion: 2
-        x: 207
-        y: 258
+        x: 193
+        y: 277
         width: 79
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -234,12 +234,12 @@ TextureImporter:
       name: Expedition_5
       rect:
         serializedVersion: 2
-        x: 379
-        y: 191
+        x: 290
+        y: 204
         width: 71
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -256,12 +256,12 @@ TextureImporter:
       name: Expedition_6
       rect:
         serializedVersion: 2
-        x: 46
-        y: 108
-        width: 197
-        height: 127
+        x: 11
+        y: 101
+        width: 205
+        height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -278,12 +278,12 @@ TextureImporter:
       name: Expedition_7
       rect:
         serializedVersion: 2
-        x: 437
-        y: 228
-        width: 14
-        height: 12
+        x: 33
+        y: 254
+        width: 62
+        height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,11 +296,77 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Expedition_8
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 137
+        width: 42
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43b9f23e0213d844b23d04d55e81f15
+      internalID: 1205301917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Expedition_9
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 250
+        width: 68
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67e460a21553aa641bafb7156854803e
+      internalID: 35872300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Expedition_10
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 245
+        width: 77
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7da98cff737d48542a7edf726de61787
+      internalID: -1356735392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fa38180e1dcc103459ed398ad104ab3c
     internalID: 0
     vertices: []
     indices: 
@@ -312,12 +378,15 @@ TextureImporter:
     nameFileIdTable:
       Expedition_0: -2935680279109091232
       Expedition_1: 9125458003669966427
+      Expedition_10: -1356735392
       Expedition_2: -9041884584524936412
       Expedition_3: -3540423492238861282
       Expedition_4: -6935698765590941097
       Expedition_5: 6030883662778213400
       Expedition_6: -1198329427001337647
       Expedition_7: -6971849999168495995
+      Expedition_8: 1205301917
+      Expedition_9: 35872300
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,17 +18,16 @@ public class Transition : MonoBehaviour
     public Action OnTransitionEnd;
 
     [Header("Public Infos")]
-    public TextMeshProUGUI StopButtonText { get { return _stopButtonText; } }
-    public Image StopButton { get { return _stopButton; } }
+    public TextMeshProUGUI StopButtonText { get { return _buttonsTexts[1]; } }
+    public Image StopButton { get { return _buttonsImages[1] ; } }
+    public bool IsActive { get { return isActive; } }
 
     [Header("Private Infos")]
     private EnviroData currentEnviroData;
-    private RectTransform[] buttonsRectTr;
-    private Image[] buttonsImages;
-    private TextMeshProUGUI[] buttonsTexts;
-    private Coroutine arrowsCoroutine;
     private int currentFloor;
     private bool isOnLastFloor;
+    private bool isActive = false;
+    private Vector3 saveButtonScale;
 
     [Header("References")]
     [SerializeField] private Image _fadeImage;
@@ -36,33 +35,26 @@ public class Transition : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _statsTexts;
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private RectTransform _floorsRectTr;
-    [SerializeField] private TextMeshProUGUI _continueButtonText;
-    [SerializeField] private TextMeshProUGUI _stopButtonText;
-    [SerializeField] private Image _continueButton;
-    [SerializeField] private Image _stopButton;
-    [SerializeField] private Image[] _arrows;
+    [SerializeField] private RectTransform[] _buttonsRectTr;
+    [SerializeField] private Image[] _buttonsImages;
+    [SerializeField] private Image[] _buttonsOutline;
+    [SerializeField] private TextMeshProUGUI[] _buttonsTexts;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private TextMeshProUGUI _introAreaNameText;
+    [SerializeField] private TextMeshProUGUI _introFloorNameText;
 
 
     private void Start()
     {
         _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 1);
 
-        buttonsRectTr = new RectTransform[2];
-        buttonsRectTr[0] = _continueButtonText.GetComponent<RectTransform>();
-        buttonsRectTr[1] = _stopButtonText.GetComponent<RectTransform>();
+        for(int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].gameObject.SetActive(false);
+        }
 
-        buttonsImages = new Image[2];
-        buttonsImages[0] = _continueButton;
-        buttonsImages[1] = _stopButton;
-
-        buttonsTexts = new TextMeshProUGUI[2];
-        buttonsTexts[0] = _continueButtonText;
-        buttonsTexts[1] = _stopButtonText;
-
-        _continueButton.gameObject.SetActive(false);
-        _stopButton.gameObject.SetActive(false);
-
-        _mainRectTr.localScale = Vector3.zero;
+        _introAreaNameText.DOFade(0, 0);
+        _introFloorNameText.DOFade(0, 0);
     }
 
     public void StartTransition(EnviroData enviroData, int floorIndex, bool instantFade)
@@ -70,9 +62,12 @@ public class Transition : MonoBehaviour
         currentEnviroData = enviroData;
         _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, instantFade ? 1 : 0);
 
-        _mainRectTr.localScale = Vector3.zero;
+        for (int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].raycastTarget = true;
+        }
 
-        if (floorIndex == (enviroData.floorsAmount - 1)) isOnLastFloor = true;
+        if (floorIndex == enviroData.floorsAmount) isOnLastFloor = true;
         else isOnLastFloor = false;
 
         if (floorIndex == 0)
@@ -81,19 +76,21 @@ public class Transition : MonoBehaviour
         }
         else
         {
+            InputManager.DisableInputs = true;
+
             ActualiseFloorsTexts(enviroData);
 
             _statsTexts[0].text = " " + GameManager.Instance.ExpeditionCoinsCount;
             _statsTexts[1].text = " " + GameManager.Instance.ExpeditionKillCount;
-            _statsTexts[2].text = " " + GameManager.Instance.ExpeditionRelicCount;
-            _statsTexts[3].text = " " + GameManager.Instance.ExpeditionChestCount;
+            _statsTexts[2].text = " " + GameManager.Instance.ExpeditionChestCount;
+            _statsTexts[3].text = " " + GameManager.Instance.ExpeditionRelicCount;
 
-            if(!isOnLastFloor) _continueButton.gameObject.SetActive(true);
-            else _continueButton.gameObject.SetActive(false);
+            if(!isOnLastFloor) _buttonsImages[0].gameObject.SetActive(true);   // Continue button
+            else _buttonsImages[0].gameObject.SetActive(false);   // Continue button
 
-            _stopButton.gameObject.SetActive(true);
+            _buttonsImages[1].gameObject.SetActive(true);    // Stop button
 
-            StartCoroutine(ChangeFloorCoroutine(floorIndex, 1.75f));
+            StartCoroutine(DisplayFloorTransitionCoroutine(floorIndex, 1.75f));
         }
     }
 
@@ -103,8 +100,13 @@ public class Transition : MonoBehaviour
 
         _mainRectTr.localScale = Vector3.zero;
 
-        _continueButton.gameObject.SetActive(false);
-        _stopButton.gameObject.SetActive(true);
+        for (int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].gameObject.SetActive(false);
+        }
+
+        _buttonsImages[0].gameObject.SetActive(false);   // Continue button
+        _buttonsImages[1].gameObject.SetActive(true);    // Stop button
 
         ActualiseFloorsTexts(currentEnviroData);
 
@@ -123,8 +125,10 @@ public class Transition : MonoBehaviour
 
         if(endValue == 0)
         {
-            _continueButton.gameObject.SetActive(false);
-            _stopButton.gameObject.SetActive(false);
+            for (int i = 0; i < _buttonsImages.Length; i++)
+            {
+                _buttonsImages[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -137,30 +141,39 @@ public class Transition : MonoBehaviour
 
         yield return new WaitForSeconds(duration * 0.6f);
 
+        StartCoroutine(CameraManager.Instance.DoIntroMovementCoroutine(duration * 0.4f));
         FadeScreen(duration * 0.3f, 0);
 
-        yield return new WaitForSeconds(duration * 0.2f);
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(currentEnviroData.enviroName.ToUpper(), _introAreaNameText, 0.2f));
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine("FLOOR 1", _introFloorNameText, 0.2f));
+
+        _anim.SetTrigger("DoIntro");
+
+        yield return new WaitForSeconds(duration * 0.4f);
     }
 
-    private IEnumerator ChangeFloorCoroutine(int floorIndex, float duration)
+    private IEnumerator DisplayFloorTransitionCoroutine(int floorIndex, float duration)
     {
         OnTransitionStart?.Invoke();
 
         HighlightFloor(floorIndex - 1);
         FadeScreen(1, duration * 0.6f);
 
-        yield return new WaitForSeconds(duration * 0.6f);
+        yield return new WaitForSeconds(duration * 0.65f);
 
-        _mainRectTr.DOScale(Vector3.one, duration * 0.4f);
+        _anim.SetBool("IsDisplayed", true);
+        isActive = true;
 
-        yield return new WaitForSeconds(duration * 0.4f);
+        StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(11, 1.75f));
+
+        yield return new WaitForSeconds(duration * 0.35f);
 
         StartCoroutine(_floorTransitions[floorIndex - 1].DoClearedEffectCoroutine());
         if(!isOnLastFloor) _floorTransitions[floorIndex].StartNextEffect();
 
-        if(!isOnLastFloor) DisplayArrows();
+        InputManager.DisableInputs = false;
 
-        TutoManager.Instance.DisplayTutorial(11);
+        UIManager.Instance.HUDExploration.Show();
     }
 
     private IEnumerator StartDeathCoroutine()
@@ -171,20 +184,38 @@ public class Transition : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        _mainRectTr.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
+        _anim.SetBool("IsDisplayed", true);
     }
 
     private IEnumerator ContinueCoroutine(float duration)
     {
-        ChangeFloor(currentFloor + 1, duration * 0.5f);
+        ChangeFloor(currentFloor + 1, duration * 0.3f);
         _floorTransitions[currentFloor + 1].EndNextEffect();
 
         HighlightFloor(currentFloor + 1);
 
-        yield return new WaitForSeconds(duration * 0.5f);
+        yield return new WaitForSeconds(duration * 0.4f);
 
-        FadeScreen(duration * 0.5f, 0);
-        _mainRectTr.DOScale(Vector3.zero, duration * 0.3f);
+        _anim.SetBool("IsDisplayed", false);
+        isActive = false;
+        UIManager.Instance.HUDExploration.Hide();
+
+        yield return new WaitForSeconds(duration * 0.35f);
+
+        ProceduralGenerationManager.Instance.GenerateNextFloor();
+
+        yield return new WaitForSeconds(duration * 0.05f);
+
+        FadeScreen(duration * 0.4f, 0);
+
+        yield return new WaitForSeconds(duration * 0.05f);
+
+        StartCoroutine(CameraManager.Instance.DoIntroMovementCoroutine(duration * 0.4f));
+
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(currentEnviroData.enviroName.ToUpper(), _introAreaNameText, 0.2f));
+        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine("FLOOR " + (currentFloor+1), _introFloorNameText, 0.2f));
+
+        _anim.SetTrigger("DoIntro");
 
         yield return new WaitForSeconds(duration * 0.5f);
 
@@ -193,13 +224,17 @@ public class Transition : MonoBehaviour
 
     private IEnumerator StopCoroutine(float duration)
     {
-        _mainRectTr.DOScale(Vector3.zero, duration).SetEase(Ease.InOutSine);
         _floorTransitions[currentFloor + 1].EndNextEffect();
+        _anim.SetBool("IsDisplayed", false);
+        isActive = false;
+        UIManager.Instance.HUDExploration.Hide();
 
         yield return new WaitForSeconds(duration);
 
-        _continueButton.gameObject.SetActive(false);
-        _stopButton.gameObject.SetActive(false);
+        for (int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].gameObject.SetActive(false);
+        }
 
         StartCoroutine(GameManager.Instance.EndExplorationCoroutine());
     }
@@ -233,51 +268,13 @@ public class Transition : MonoBehaviour
 
     private void ChangeFloor(int newFloor, float duration)
     {
-        Vector3 dif = _floorTransitions[newFloor].transform.position - _floorTransitions[currentFloor].transform.position;
-        _floorsRectTr.DOMove(_floorsRectTr.position - dif, duration).SetEase(Ease.OutBack);
-    }
+        Vector3 dif = _floorTransitions[newFloor].transform.localPosition - _floorTransitions[currentFloor].transform.localPosition;
+        _floorsRectTr.DOLocalMove(_floorsRectTr.localPosition - dif, duration).SetEase(Ease.OutBack);
 
-    private void DisplayArrows()
-    {
-        for (int i = 0; i < _arrows.Length; i++)
-        {
-            _arrows[i].DOComplete();
-            _arrows[i].DOFade(1, 0.5f);
-        }
+        _floorTransitions[newFloor].DoEnterFloorEffects();
 
-        arrowsCoroutine = StartCoroutine(BounceArrowsCoroutine());
-    }
-
-    private IEnumerator BounceArrowsCoroutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        while (true)
-        {
-            for(int i = 0; i < _arrows.Length; i++)
-            {
-                _arrows[i].DOFade(1.0f, 0.7f);
-            }
-
-            yield return new WaitForSeconds(1.0f);
-
-            for (int i = 0; i < _arrows.Length; i++)
-            {
-                _arrows[i].DOFade(0.6f, 0.7f);
-            }
-
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    private void HideArrows()
-    {
-        for (int i = 0; i < _arrows.Length; i++)
-        {
-            _arrows[i].DOComplete();
-            _arrows[i].DOFade(0, 0.2f);
-        }
-        StopCoroutine(arrowsCoroutine);
+        _floorTransitions[newFloor].Highlight();
+        _floorTransitions[currentFloor].Unhighlight();
     }
 
     #endregion
@@ -287,38 +284,48 @@ public class Transition : MonoBehaviour
 
     public void HoverButton(int buttonIndex)
     {
-        buttonsRectTr[buttonIndex].DOKill();
-        buttonsImages[buttonIndex].DOKill();
-        buttonsTexts[buttonIndex].DOKill();
+        _buttonsRectTr[buttonIndex].DOComplete();
+        _buttonsImages[buttonIndex].DOComplete();
+        _buttonsTexts[buttonIndex].DOComplete();
 
-        buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1.15f, 0.15f).SetEase(Ease.OutCubic);
-        buttonsImages[buttonIndex].DOColor(buttonColorHover, 0.15f).SetEase(Ease.OutCubic);
-        buttonsTexts[buttonIndex].DOColor(buttonTextColorHover, 0.15f).SetEase(Ease.OutCubic);
+        saveButtonScale = _buttonsRectTr[buttonIndex].localScale;
+
+        _buttonsRectTr[buttonIndex].DOScale(saveButtonScale * 1.1f, 0.15f).SetEase(Ease.OutCubic);
+        _buttonsImages[buttonIndex].DOColor(buttonColorHover, 0.15f).SetEase(Ease.OutCubic);
+        _buttonsTexts[buttonIndex].DOColor(buttonTextColorHover, 0.15f).SetEase(Ease.OutCubic);
+
+        _buttonsOutline[buttonIndex].DOFade(1, 0.15f).SetEase(Ease.OutBack);
     }
 
     public void UnhoverButton(int buttonIndex)
     {
-        buttonsRectTr[buttonIndex].DOKill();
-        buttonsImages[buttonIndex].DOKill();
-        buttonsTexts[buttonIndex].DOKill();
+        _buttonsRectTr[buttonIndex].DOKill();
+        _buttonsImages[buttonIndex].DOKill();
+        _buttonsTexts[buttonIndex].DOKill();
 
-        buttonsRectTr[buttonIndex].DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.InCubic);
-        buttonsImages[buttonIndex].DOColor(buttonColorUnhover, 0.15f).SetEase(Ease.OutCubic);
-        buttonsTexts[buttonIndex].DOColor(buttonTextColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+        _buttonsRectTr[buttonIndex].DOScale(saveButtonScale, 0.15f).SetEase(Ease.InCubic);
+        _buttonsImages[buttonIndex].DOColor(buttonColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+        _buttonsTexts[buttonIndex].DOColor(buttonTextColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+
+        _buttonsOutline[buttonIndex].DOFade(0, 0.15f).SetEase(Ease.OutBack);
     }
 
     public void ClickContinue()
     {
-        _continueButton.enabled = false;
-        _stopButton.enabled = false;
+        for (int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].raycastTarget = false;
+        }
 
-        StartCoroutine(ContinueCoroutine(2.5f));
+        StartCoroutine(ContinueCoroutine(3.2f));
     }
 
     public void ClickStop()
     {
-        _continueButton.enabled = false;
-        _stopButton.enabled = false;
+        for (int i = 0; i < _buttonsImages.Length; i++)
+        {
+            _buttonsImages[i].raycastTarget = false;
+        }
 
         StartCoroutine(StopCoroutine(0.3f));
     }

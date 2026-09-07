@@ -12,59 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79dd46977732774e8de2f5811e5f0c1, type: 3}
   m_Name: Z1-4
   m_EditorClassIdentifier: 
-  probaPerTierChest: 00000000280000003c00000000000000
-  chestPossibleLoots:
-  - probability: 5
-    loot: {fileID: 11400000, guid: 489ce2b2d4640574e8be925a9007ddd8, type: 2}
-  - probability: 5
-    loot: {fileID: 11400000, guid: 8c619ec65573b5b4b89ce41ad5d53ee7, type: 2}
-  - probability: 5
-    loot: {fileID: 11400000, guid: 7256e143e98fdac43bba6a109d0b0f9c, type: 2}
-  - probability: 5
-    loot: {fileID: 11400000, guid: 97278269c2f0bdf48a7abf0cf71093c6, type: 2}
-  - probability: 5
-    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
-  - probability: 15
-    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
-  - probability: 15
-    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
-  - probability: 15
-    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
-  - probability: 15
-    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
-  - probability: 15
-    loot: {fileID: 11400000, guid: 6f0aa61029427f444b8a275c8060a241, type: 2}
+  probaPerTierChest: 000000001e000000320000000a000000
   minChestCoins: 7
   maxChestCoins: 10
   minLootAmountPerChest: 1
   maxLootAmountPerChest: 2
-  probaPerTierBattle: 0a000000460000001400000000000000
-  battleEndPossibleLoots:
-  - probability: 30
-    loot: {fileID: 11400000, guid: ceb65b497fe74454b81438432fb45f27, type: 2}
-  - probability: 25
-    loot: {fileID: 11400000, guid: bb0d49ba4faa46e45bd9227fd3487e71, type: 2}
-  - probability: 25
-    loot: {fileID: 11400000, guid: e4e24e6630b1e0b499ad2a63baf6ad35, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 35e324d0004635a4aac17c385b47df21, type: 2}
+  probaPerTierBattle: 00000000410000001400000005000000
   minBattleCoins: 5
   maxBattleCoins: 8
   minLootAmountPerBattle: 1
   maxLootAmountPerBattle: 1
-  probaPerTierChallenge: 00000000280000003c00000000000000
-  challengeEndPossibleLoots:
-  - probability: 20
-    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+  probaPerTierChallenge: 000000001e000000280000001e000000
   minChallengeCoins: 9
   maxChallengeCoins: 12
   minLootAmountPerChallenge: 2
   maxLootAmountPerChallenge: 3
+  probaPerTierTrial: 000000001e000000280000001e000000
+  minTrialCoins: 9
+  maxTrialCoins: 12
+  minLootAmountPerTrial: 2
+  maxLootAmountPerTrial: 3

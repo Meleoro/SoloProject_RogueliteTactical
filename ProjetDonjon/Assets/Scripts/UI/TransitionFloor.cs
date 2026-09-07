@@ -9,11 +9,13 @@ public class TransitionFloor : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private Color highlightFadeColor;
     [SerializeField] private Color unhighlightFadeColor;
+    [SerializeField] private Sprite[] possibleHeroSprites;
 
     [Header("Private Infos")]
     private EnviroData data;
     private int floorIndex;
     private Coroutine nextCoroutine;
+    private bool isInitialised;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -23,27 +25,70 @@ public class TransitionFloor : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _nextText;
     [SerializeField] private Image _fadeImage;
     [SerializeField] private Image _bossIcon;
+    [SerializeField] private Image[] _heroImages;
+    [SerializeField] private Image[] _enemyImages;
+    [SerializeField] private Image _topImage;
+    [SerializeField] private Image _bottomImage;
+    [SerializeField] private Image _topBetweenImage;
 
 
     public void Initialise(EnviroData data, int floorIndex)
     {
+        if (isInitialised) return;
+        isInitialised = true;
+
         this.data = data;
         this.floorIndex = floorIndex;
 
         _floorText.text = "FLOOR " + (floorIndex + 1);
-        _recommandedLevelText.text = "REQ LEVEL : " + data.recommandedLevels[floorIndex];
+        _recommandedLevelText.text = "LEVEL " + data.recommandedLevels[floorIndex];
 
         if(floorIndex == 2 || floorIndex == 5) _bossIcon.enabled = true;
         else _bossIcon.enabled = false;
         _bossIcon.enabled = false;
 
         _fadeImage.color = unhighlightFadeColor;
+
+        if(floorIndex == 0)
+        {
+            _topBetweenImage.enabled = false;
+            _bottomImage.enabled = false;
+            _topImage.enabled = true;
+        }
+        else if (floorIndex == 5)
+        {
+            _topBetweenImage.enabled = true;
+            _bottomImage.enabled = true;
+            _topImage.enabled = false;
+        }
+        else
+        {
+            _topBetweenImage.enabled = true;
+            _bottomImage.enabled = false;
+            _topImage.enabled = false;
+        }
+
+        for(int i = 0; i < _heroImages.Length; i++)
+        {
+            _heroImages[i].DOFade(0, 0);
+        } 
     }
 
 
     public void Highlight()
     {
         _fadeImage.DOColor(highlightFadeColor, 0.4f);
+
+        if (floorIndex != 0) return;
+        
+        for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
+        {
+            _heroImages[i].sprite = possibleHeroSprites[HeroesManager.Instance.Heroes[i].HeroIndex];
+            _heroImages[i].SetNativeSize();
+            _heroImages[i].DOFade(1, 0f).SetEase(Ease.OutBack);
+            _heroImages[i].rectTransform.DOLocalMoveX(_heroImages[i].rectTransform.localPosition.x + 30, 0f).SetEase(Ease.OutBack);
+        }
+        
     }
 
     public void Unhighlight()
@@ -52,9 +97,72 @@ public class TransitionFloor : MonoBehaviour
     }
 
 
+    public void DoEnterFloorEffects()
+    {
+        StartCoroutine(HeroAppearCoroutine());
+        StartCoroutine(EnemiesHighlightCoroutine());
+    }
+
+    public void DoExitEffects()
+    {
+        StartCoroutine(HeroDisappearCoroutine());
+    }
+
+
+    private IEnumerator HeroAppearCoroutine()
+    {
+        for(int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
+        {
+            _heroImages[i].sprite = possibleHeroSprites[HeroesManager.Instance.Heroes[i].HeroIndex];
+            _heroImages[i].SetNativeSize();
+            _heroImages[i].DOFade(1, 0.5f).SetEase(Ease.OutBack);
+            _heroImages[i].rectTransform.DOLocalMoveX(_heroImages[i].rectTransform.localPosition.x + 30, 0.5f).SetEase(Ease.OutBack);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private IEnumerator HeroDisappearCoroutine()
+    {
+        Debug.Log("Pourquoi");
+        for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
+        {
+            _heroImages[i].DOFade(0, 0.5f).SetEase(Ease.OutBack);
+            _heroImages[i].rectTransform.DOLocalMoveX(_heroImages[i].rectTransform.localPosition.x - 30, 0.5f).SetEase(Ease.OutBack);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private IEnumerator EnemiesHighlightCoroutine()
+    {
+        for (int i = 0; i < _enemyImages.Length; i++)
+        {
+            _enemyImages[i].DOFade(1, 0.4f).SetEase(Ease.OutBack);
+            _enemyImages[i].rectTransform.DOLocalMoveX(_enemyImages[i].rectTransform.localPosition.x - 20, 0.4f).SetEase(Ease.OutBack);
+
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+
+    private IEnumerator EnemiesUnhighlightCoroutine()
+    {
+        for (int i = 0; i < _enemyImages.Length; i++)
+        {
+            _enemyImages[i].DOFade(0.7f, 0.4f).SetEase(Ease.OutBack);
+            _enemyImages[i].rectTransform.DOLocalMoveX(_enemyImages[i].rectTransform.localPosition.x + 20, 0.4f).SetEase(Ease.OutBack);
+
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+
+
+
     public IEnumerator DoClearedEffectCoroutine()
     {
         _clearedText.rectTransform.localScale = new Vector3(2, 2, 2);
+
+        StartCoroutine(EnemiesUnhighlightCoroutine());
 
         _clearedText.DOFade(1, 0.35f).SetEase(Ease.InOutCubic);
         _clearedText.rectTransform.DOScale(1f, 0.45f).SetEase(Ease.OutBack);

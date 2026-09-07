@@ -14,10 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
   neededRelicCount: 1
   unlockType: 0
-  unlockName: 'NEW HERO: THE ARCHER'
-  unlockDescription: 'You unlocked a new hero : The Archer.
+  unlockName: 'UNLOCKED HERO : THE ARCHER'
+  unlockDescription: '- STRIKES ENEMIES FROM AFAR
 
-    He can fight from
-    a distance, summon forrest creatures to help and cast powerful debuff on enemies'
+'
   unlockedHeroIndex: 1
+  unlockAdditionalDescription: '- SUMMONS FOREST CREATURES TO HELP IN FIGHTS
+
+    -
+    APPLIES POWERFUL DEBUFFS TO ENEMIES '
+  heroAnim:
+  - {fileID: 7785396639866059691, guid: f57daf789dc649d4dbdae639ebd0028f, type: 3}
+  - {fileID: 100403828269553611, guid: f57daf789dc649d4dbdae639ebd0028f, type: 3}
+  - {fileID: 5842733954100359278, guid: f57daf789dc649d4dbdae639ebd0028f, type: 3}
+  - {fileID: -5990004255220839003, guid: f57daf789dc649d4dbdae639ebd0028f, type: 3}
   unlockedExpeditionIndex: 0

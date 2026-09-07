@@ -20,8 +20,8 @@ MonoBehaviour:
   additionalTooltipDatas:
   - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}
   passiveTriggerType: 5
-  neededAlteration: {fileID: 0}
-  passiveTriggerProba: 80
+  neededAlteration: []
+  passiveTriggerProba: 10
   passiveEffects:
   - passiveEffectType: 1
     appliedAlteration: {fileID: 11400000, guid: c2542ffcfdc24874f80e68e474db9402, type: 2}

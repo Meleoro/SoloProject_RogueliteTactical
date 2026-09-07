@@ -49,6 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  isTall: 0
+  damageColor: {r: 0, g: 0, b: 0, a: 0}
+  healColor: {r: 0, g: 0, b: 0, a: 0}
+  poisonColor: {r: 0, g: 0, b: 0, a: 0}
+  skullColor: {r: 0, g: 0, b: 0, a: 0}
+  shieldColor: {r: 0, g: 0, b: 0, a: 0}
   buffVFX: {fileID: 681623016373210144, guid: 65722577af6b2cf48bc5018986b195f6, type: 3}
   debuffVFX: {fileID: 7845840632209546155, guid: fe1f168013654594da5974d28c188584, type: 3}
   shieldVFX: {fileID: 4073576334773073123, guid: d3ea12f10502ea84c86aeea07470278a, type: 3}
@@ -57,8 +63,8 @@ MonoBehaviour:
   stunVFX: {fileID: 8724637062435613789, guid: 4fd7bfdd009c82c4ba9d96a32f72f584, type: 3}
   skullVFX: {fileID: 0}
   overlayColor: {r: 1, g: 1, b: 1, a: 1}
-  positiveColor: {r: 0, g: 1, b: 0, a: 1}
-  negativeColor: {r: 1, g: 0, b: 0, a: 1}
+  positiveColor: {r: 0.21568628, g: 0.7137255, b: 1, a: 1}
+  negativeColor: {r: 0.9607843, g: 0.27058825, b: 0.1254902, a: 1}
   unitsTurnColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _ui: {fileID: 1987359570940192128}
   _spriteRenderer: {fileID: 8929217451348358929}
@@ -129,6 +135,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6176432861609125337
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,6 +154,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -168,9 +177,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 30a2329f078dc9f47ade4fdf4c892c34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_FlipX: 0
@@ -180,8 +191,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &4946960069964644675
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +228,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8929217451348358929
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,6 +247,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -256,9 +270,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 1942942847937823758, guid: eea7c818f68f0b84b8ad8848adb2d870, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -268,8 +284,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!114 &4674991809401278559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,9 +298,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbb5062570442049b2a104140c9c5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundCategoryIndex: 0
+  minSoundIndex: 0
+  maxSoundIndex: 0
   PlaySkillEffect: 0
   PlayVFX: 0
   PlayCritVFX: 0
+  PlaySound: 0
   _vfxToPlay: {fileID: 0}
   _critVFXAnim: {fileID: 0}
 --- !u!1001 &8619814207663377190

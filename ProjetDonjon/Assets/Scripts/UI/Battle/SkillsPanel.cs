@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -14,18 +15,15 @@ public class SkillsPanel : MonoBehaviour
     public Action OnLaunchSkill;
 
     [Header("Private Infos")]
-    private Hero currentHero;
     private SkillsPanelButton currentButtonSkill;
     private bool isOpenned;
     private SkillsPanelButton lockedButton;
 
     [Header("References")]
     [SerializeField] private SkillsPanelButton[] _skillButtons;
-    //[SerializeField] private AdditionalTooltip[] _additionalTooltips;
-    //[SerializeField] private TextMeshProUGUI _skillNameText;
-    //[SerializeField] private TextMeshProUGUI _skillDescriptionText;
-    private Animator _animator;
     [SerializeField] private RectTransform _detailsPosRectTr;
+    [SerializeField] private VerticalLayoutGroup _verticalLayout;
+    private Animator _animator;
 
 
     private void Start()
@@ -49,11 +47,8 @@ public class SkillsPanel : MonoBehaviour
     {
         if (isOpenned) return;
 
-        currentHero = hero;
         isOpenned = true;
-
         currentButtonSkill = null;
-
         transform.position = hero.transform.position + offset;
 
         for (int i = 0; i < _skillButtons.Length; i++)
@@ -68,10 +63,29 @@ public class SkillsPanel : MonoBehaviour
             _skillButtons[i].InitialiseButton(hero.EquippedSkills[i], hero);
             _skillButtons[i].ActualiseSkillPointsImages(hero);
             _skillButtons[i].QuitOverlayButtonInstant(true);
+
+            StartCoroutine(_skillButtons[i].ShowButtonCoroutine(0.04f + i * 0.04f));
         }
+
+        StartCoroutine(ForceVerticalGroupDirtyCoroutine(1.0f));
 
         _animator.SetBool("IsOpenned", true);
     }
+
+    private IEnumerator ForceVerticalGroupDirtyCoroutine(float duration)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            _verticalLayout.enabled = false;
+            _verticalLayout.enabled = true;
+
+            yield return new WaitForEndOfFrame();
+        }
+    } 
 
     public void CloseSkillsPanel()
     {
@@ -115,18 +129,6 @@ public class SkillsPanel : MonoBehaviour
     private void LoadSkillDetails(SkillData skillData)
     {
         UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(skillData, _detailsPosRectTr.position, true);
-
-        //_skillNameText.text = skillData.skillName;
-        //_skillDescriptionText.text = skillData.skillDescription;
-
-        //for (int i = 0; i < _additionalTooltips.Length; i++)
-        //{
-        //    if(i < skillData.additionalTooltipDatas.Length)
-        //        _additionalTooltips[i].Show(skillData.additionalTooltipDatas[i], 0);
-
-        //    else
-        //        _additionalTooltips[i].Hide();
-        //}
     }
 
     private void UnloadSkillDetails()
@@ -134,16 +136,10 @@ public class SkillsPanel : MonoBehaviour
         if(currentButtonSkill != null)
         {
             BattleManager.Instance.TilesManager.DisplayPossibleSkillTiles(currentButtonSkill.SkillData, BattleManager.Instance.CurrentUnit.CurrentTile);
-
-            //_skillNameText.text = currentButtonSkill.SkillData.name;
-            //_skillDescriptionText.text = currentButtonSkill.SkillData.skillDescription;
         }
         else
         {
             BattleManager.Instance.TilesManager.ResetTiles();
-
-            //_skillNameText.text = "";
-            //_skillDescriptionText.text = "";
         }
     }
 }

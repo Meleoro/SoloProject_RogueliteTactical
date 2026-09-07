@@ -29,5 +29,6 @@ MonoBehaviour:
   tutoType: 0
   leftSidePanel: 1
   playNextStepOnFinished: 0
+  lockPlayerInputs: 1
   playNextStepDelay: 0.2
   waitDuration: 0

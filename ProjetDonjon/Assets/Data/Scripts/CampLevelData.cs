@@ -20,6 +20,9 @@ public class CampLevelData : ScriptableObject
 
     [Header("Hero Unlock")]
     public int unlockedHeroIndex;
+    [TextArea] public string unlockAdditionalDescription;  // Because the text is in two parts
+    public Sprite[] heroAnim;
+
 
     [Header("Expedition Unlock")]
     public int unlockedExpeditionIndex;

@@ -39,11 +39,12 @@ public class PlayerActionsMenu : MonoBehaviour
     private Color[] colorSaves;
     private bool isOpened;
     private MenuType currentMenu;
+    private Vector3 saveScaleButton;
 
     [Header("Public Infos")]
     public MenuType CurrentMenu { get { return currentMenu; } }
-    public Image[] ActionPointImages { get { return _actionPointImages; } }
-    public Image[] SkillPointImages { get { return _skillPointImages; } }
+    public Image[] ActionPointImages { get { return _actionPointHighlightImages; } }
+    public Image[] SkillPointImages { get { return _skillPointHighlightImages; } }
     public Image[] ButtonImages { get { return _buttonImages; } }
     public SkillsPanel SkillsPanel { get { return _skillsPanel; } }
 
@@ -53,6 +54,8 @@ public class PlayerActionsMenu : MonoBehaviour
     [SerializeField] private SkillsPanel _skillsPanel;
     [SerializeField] private Image[] _skillPointImages;
     [SerializeField] private Image[] _actionPointImages;
+    [SerializeField] private Image[] _skillPointHighlightImages;
+    [SerializeField] private Image[] _actionPointHighlightImages;
     [SerializeField] private TextMeshProUGUI[] _buttonTexts;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private VerticalLayoutGroup _verticalLayoutGroup;
@@ -101,6 +104,10 @@ public class PlayerActionsMenu : MonoBehaviour
         currentHero.OnClickUnit -= OpenActionsMenu;
         if (currentMenu == MenuType.Move) currentHero.OnClickUnit -= ReturnPreviousBattleMenu;
 
+        currentHero.EndTurnOutline(false);
+
+        StartCoroutine(AdaptHeightCoroutine(null, 0, 0, 0.5f));
+
         currentMenu = MenuType.BaseActions;
         isOpened = true;
 
@@ -136,7 +143,13 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         CameraManager.Instance.OnCameraMouseInput -= CloseActionsMenu;
 
-        if (currentMenu != MenuType.Skills && currentMenu != MenuType.Move) currentHero.OnClickUnit += OpenActionsMenu;
+        StartCoroutine(AdaptHeightCoroutine(null, 0, 0, 0.5f));
+
+        if (currentMenu != MenuType.Skills && currentMenu != MenuType.Move && currentMenu != MenuType.UseItems)
+        { 
+            currentHero.OnClickUnit += OpenActionsMenu;
+            currentHero.StartTurnOutline();
+        }
         //else if (currentMenu == MenuType.Move) currentHero.OnClickUnit += ReturnPreviousBattleMenu;
 
         _animator.SetBool("IsOpenned", false);
@@ -200,10 +213,15 @@ public class PlayerActionsMenu : MonoBehaviour
 
     public void OverlayButton(int buttonIndex)
     {
-        if (buttonIndex == 0 && (currentHero.IsHindered)) return;
+        if (buttonIndex == 0 && currentHero.IsHindered) return;
 
-        _buttonImages[buttonIndex].ULerpImageColor(0.1f, colorSaves[buttonIndex] + overlayActionAddedColor);
-        _buttonImages[buttonIndex].rectTransform.UChangeScale(0.1f, Vector3.one * 1.05f);
+        _buttonImages[buttonIndex].DOComplete();
+        _buttonImages[buttonIndex].rectTransform.DOComplete();
+
+        saveScaleButton = _buttonImages[buttonIndex].rectTransform.localScale;
+
+        _buttonImages[buttonIndex].DOColor(colorSaves[buttonIndex] + overlayActionAddedColor, 0.15f).SetEase(Ease.OutCubic);
+        _buttonImages[buttonIndex].rectTransform.DOScale(saveScaleButton * 1.05f, 0.15f).SetEase(Ease.OutCubic);
 
         _buttonTexts[buttonIndex].DOComplete();
         _buttonTexts[buttonIndex].DOColor(textHoverColor, 0.1f);
@@ -215,10 +233,11 @@ public class PlayerActionsMenu : MonoBehaviour
     {
         if (buttonIndex == 0 && currentHero.IsHindered) return;
 
-        _buttonImages[buttonIndex].rectTransform.UStopChangeScale();
+        _buttonImages[buttonIndex].DOKill();
+        _buttonImages[buttonIndex].rectTransform.DOKill();
 
-        _buttonImages[buttonIndex].ULerpImageColor(0.15f, colorSaves[buttonIndex]);
-        _buttonImages[buttonIndex].rectTransform.UChangeScale(0.15f, Vector3.one);
+        _buttonImages[buttonIndex].DOColor(colorSaves[buttonIndex], 0.15f).SetEase(Ease.OutCubic);
+        _buttonImages[buttonIndex].rectTransform.DOScale(saveScaleButton, 0.15f).SetEase(Ease.OutCubic);
 
         _buttonTexts[buttonIndex].DOComplete();
         _buttonTexts[buttonIndex].DOColor(textUnhoverColor, 0.1f);
@@ -250,7 +269,11 @@ public class PlayerActionsMenu : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            rectTr.sizeDelta = new Vector2(rectTr.sizeDelta.x, Mathf.Lerp(startHeight, endHeight, timer / duration));
+            if(rectTr)
+            {
+                rectTr.sizeDelta = new Vector2(rectTr.sizeDelta.x, Mathf.Lerp(startHeight, endHeight, timer / duration));
+            }
+
             _verticalLayoutGroup.enabled = false;
             _verticalLayoutGroup.enabled = true;
 

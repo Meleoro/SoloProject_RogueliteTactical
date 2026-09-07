@@ -1843,7 +1843,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b6d3c454fb403d4484c64b28e1d020c, type: 2}
   - {fileID: 11400000, guid: b5eed90c2958d9d4093160bb8678d27d, type: 2}
   - {fileID: 11400000, guid: 4dd7640e617ae25409a01e18d12b07b8, type: 2}
-  holePrefab: {fileID: 0}
+  holePrefab: {fileID: 6778788659100814078, guid: b0b1c71c206fe0044b1e5344701ebe76, type: 3}
   isDebugRoom: 0
   isBossRoom: 0
   isChallengeRoom: 0

@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: H2-2 Skilled Archer
   m_EditorClassIdentifier: 
   passiveName: SKILLED ARCHER
-  passiveDescription: CRIT HIT GIVE YOU 1 SKILL POINT
+  passiveDescription: EACH TIME THIS UNIT DOES A <#7C210C>CRITICAL</color>, GIVES
+    THIS UNIT <#E9A800>1 SKILL POINT</color>
   passiveIcon: {fileID: 847775307, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 1196405056, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
-  additionalTooltipDatas: []
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
+  - {fileID: 11400000, guid: 7ed72bdfb3a63e843bad98604bd4b062, type: 2}
   passiveTriggerType: 7
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 7

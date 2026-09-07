@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
+  m_Name: Headset3-2
+  m_EditorClassIdentifier: 
+  lootName: CRISTAL HEADSET II
+  lootDescription: <#7C210C>+25% CRITICAL CHANCES</color> WHEN ATTACKING <#176F00>HINDERED</color>
+    OR <#FFC12E>STUNNED</color> UNITS
+  lootType: 1
+  rarityType: 2
+  sprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
+  value: 200
+  level: 1
+  spaceTaken:
+  - row: 01
+  equipmentType: 1
+  equipmentSprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
+  healthUpgrade: 2
+  strengthUpgrade: 0
+  speedUpgrade: 0
+  luckUpgrade: 2
+  mpUpgrade: 0
+  spUpgrade: 0
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 0}
+  upgradeCost:
+    neededMaterials: []
+    neededMatQuantities: 
+  appliedPassive: {fileID: 11400000, guid: df7fdf7b8b7dac64c8950f317204c7b1, type: 2}
+  consumableType: 0
+  consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
+  - {fileID: 11400000, guid: a3a2ae7d22be7624f8654ebb623e18a1, type: 2}
+  - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}

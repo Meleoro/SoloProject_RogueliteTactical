@@ -40,6 +40,7 @@ public class AIUnit : Unit
     public SkillData CurrentSkillData { get { return currentSkillData; } }
     public PreviewType CurrentPreviewType { get { return currentPreviewType; } }
     public bool IsBoss { get { return isBoss; } }
+    public SpriteRenderer SpriteRenderer { get { return _spriteRenderer; } }
 
     [Header("Enemy References")]
     [SerializeField] private ParticleSystem _eliteVFX;
@@ -91,7 +92,8 @@ public class AIUnit : Unit
             if (currentSkillData.skillEffects[0].skillEffectTargetType == SkillEffectTargetType.Allies)
             {
                 aimedTiles = new BattleTile[BattleManager.Instance.CurrentEnemies.Count];
-                for (int i = 0; i < BattleManager.Instance.CurrentEnemies.Count; i++) {
+                for (int i = 0; i < BattleManager.Instance.CurrentEnemies.Count; i++) 
+                {
                     if (BattleManager.Instance.CurrentEnemies[i].CurrentTile == currentTile) continue;
                     aimedTiles[i] = BattleManager.Instance.CurrentEnemies[i].CurrentTile;
                 }
@@ -115,13 +117,15 @@ public class AIUnit : Unit
             else
             {
                 aimedTiles = new BattleTile[BattleManager.Instance.CurrentHeroes.Count];
-                for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) {
+                for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) 
+                {
                     aimedTiles[i] = BattleManager.Instance.CurrentHeroes[i].CurrentTile;
                 }
             }
 
             avoidedTiles = new BattleTile[BattleManager.Instance.CurrentHeroes.Count];
-            for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) {
+            for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) 
+            {
                 avoidedTiles[i] = BattleManager.Instance.CurrentHeroes[i].CurrentTile;
             }
         }
@@ -131,7 +135,8 @@ public class AIUnit : Unit
             if (currentSkillData.skillEffects[0].skillEffectTargetType == SkillEffectTargetType.Allies)
             {
                 aimedTiles = new BattleTile[BattleManager.Instance.CurrentHeroes.Count];
-                for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) {
+                for (int i = 0; i < BattleManager.Instance.CurrentHeroes.Count; i++) 
+                {
                     aimedTiles[i] = BattleManager.Instance.CurrentHeroes[i].CurrentTile;
                 }
             }
@@ -144,7 +149,8 @@ public class AIUnit : Unit
             else
             {
                 aimedTiles = new BattleTile[BattleManager.Instance.CurrentEnemies.Count];
-                for (int i = 0; i < BattleManager.Instance.CurrentEnemies.Count; i++) {
+                for (int i = 0; i < BattleManager.Instance.CurrentEnemies.Count; i++) 
+                {
                     if (BattleManager.Instance.CurrentEnemies[i].CurrentTile == currentTile) continue;
                     aimedTiles[i] = BattleManager.Instance.CurrentEnemies[i].CurrentTile;
                 }
@@ -214,7 +220,8 @@ public class AIUnit : Unit
         {
             (moveTile, skillTile) = GetBestMove(currentTile, 0, 1);
 
-            if (skillTile is null) {
+            if (skillTile is null) 
+            {
                 (moveTile, skillTile) = GetBestMove(currentTile, 0, 2);
             }
 
@@ -262,6 +269,12 @@ public class AIUnit : Unit
                 (int)Mathf.Sqrt(AIData.movePatern.Length), true, Enums.ObstacleType.All, null, true);
         possibleMoves.Add(currentTile);
 
+        if(TutoManager.Instance.IsInTuto)   // Doesn't move in the tuto
+        {
+            possibleMoves.Clear();
+            possibleMoves.Add(currentTile);
+        }
+
         int bestGrade = -100;
         BattleTile pickedMoveTile = currentTile;
         BattleTile pickedSkillTile = null;
@@ -295,7 +308,7 @@ public class AIUnit : Unit
                 //if (!aimedTiles.Contains(currentSkillTile) && currentSkillData.skillPaternType != SkillPaternType.SkillArea) continue;
 
                 // If we can hit a target, we verify if the move has a good enough grade to be selected
-                BattleTile[] dangerTiles = GetDangerTiles(currentMoveTile.TileCoordinates, currentSkillTile);
+                BattleTile[] dangerTiles = GetDangerTiles(currentMoveTile, currentSkillTile);
                 int moveGrade = GetMoveGrade(currentMoveTile.TileCoordinates, dangerTiles, depth);
                 if (moveGrade < bestGrade) continue;
 
@@ -315,7 +328,7 @@ public class AIUnit : Unit
 
                 for (int j = 0; j < possibleSkillTiles.Length; j++)
                 {
-                    BattleTile[] dangerTiles = GetDangerTiles(possibleMoves[i].TileCoordinates, possibleSkillTiles[j]);
+                    BattleTile[] dangerTiles = GetDangerTiles(possibleMoves[i], possibleSkillTiles[j]);
                     int moveGrade = GetMoveGrade(possibleMoves[i].TileCoordinates, dangerTiles, depth);
 
                     if (moveGrade <= bestGrade) continue;
@@ -327,6 +340,7 @@ public class AIUnit : Unit
                     {
                         if (dangerTile.UnitOnTile is null && pickedMoveTile != dangerTile 
                             && currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Empty) continue;
+
                         if (!aimedTiles.Contains(dangerTile) && (pickedMoveTile != dangerTile 
                             || currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Allies)) continue;
 
@@ -341,18 +355,18 @@ public class AIUnit : Unit
         return (pickedMoveTile, pickedSkillTile);
     }
 
-    private BattleTile[] GetDangerTiles(Vector2Int movePos, BattleTile skillTile)
+    private BattleTile[] GetDangerTiles(BattleTile moveTile, BattleTile skillTile)
     {
         // Skill Grade
         BattleTile[] skillDangerTiles;
         if (currentSkillData.skillPaternType == SkillPaternType.SkillArea)
         {
-            skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(movePos,
+            skillDangerTiles = BattleManager.Instance.TilesManager.GetPaternTiles(moveTile.TileCoordinates,
                 currentSkillData.skillPatern, (int)Mathf.Sqrt(currentSkillData.skillPatern.Length), true, Enums.ObstacleType.Nothing).ToArray();
         }
         else
         {
-            skillDangerTiles = BattleManager.Instance.TilesManager.GetPatternAOETiles(skillTile, skillTile, currentSkillData).ToArray();
+            skillDangerTiles = BattleManager.Instance.TilesManager.GetPatternAOETiles(skillTile, moveTile, currentSkillData).ToArray();
         }
 
         return skillDangerTiles;
@@ -413,7 +427,7 @@ public class AIUnit : Unit
         currentPreviewType = (PreviewType)newPreviewIndex;
 
         CurrentTile.ClickTile();
-        CurrentTile.OverlayTile();
+        CurrentTile.QuitOverlayTile();    
 
         StartCoroutine(SquishCoroutine(0.15f));
 
@@ -440,13 +454,13 @@ public class AIUnit : Unit
         }
     }
 
-    public override void TakeDamage(int damageAmount, Unit originUnit)
+    public override void TakeDamage(int damageAmount, Unit originUnit, bool isCrit = false)
     {
         AudioManager.Instance.PlaySoundOneShot(2, 1);
 
         OnDamageTaken?.Invoke(1);
 
-        base.TakeDamage(damageAmount, originUnit);
+        base.TakeDamage(damageAmount, originUnit, isCrit);
     }
 
 

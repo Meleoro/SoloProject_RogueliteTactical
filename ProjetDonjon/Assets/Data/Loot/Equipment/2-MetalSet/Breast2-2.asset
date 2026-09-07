@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
+  m_Name: Breast2-2
+  m_EditorClassIdentifier: 
+  lootName: METAL ARMOR II
+  lootDescription: THIS UNIT STARTS EACH FIGHT WITH <#2C2E5E>3 SHIELDS</color>
+  lootType: 1
+  rarityType: 1
+  sprite: {fileID: 1408896084216172181, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
+  value: 100
+  level: 1
+  spaceTaken:
+  - row: 0101
+  - row: 0101
+  equipmentType: 2
+  equipmentSprite: {fileID: -7282768604804434793, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
+  healthUpgrade: 6
+  strengthUpgrade: 0
+  speedUpgrade: 0
+  luckUpgrade: 1
+  mpUpgrade: -1
+  spUpgrade: 0
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 0}
+  upgradeCost:
+    neededMaterials: []
+    neededMatQuantities: 
+  appliedPassive: {fileID: 11400000, guid: ba301f2792baf4c4cb44381cbd07fc4a, type: 2}
+  consumableType: 0
+  consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}

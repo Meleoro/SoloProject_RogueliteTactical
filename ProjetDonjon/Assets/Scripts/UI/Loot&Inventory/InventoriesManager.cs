@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     private int currentCoins;
     private bool alreadyLoadedSave;
     private bool lockedInInventory;
+    private bool isOpeningOrClosing;
 
     [Header("Public Infos")]
     public RectTransform MainLootParent { get { return _mainLootParent; } }
@@ -158,7 +160,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         if (loot.LootData.lootType == LootType.Equipment) OnEquipmentAdded?.Invoke();
 
-        OpenInventories();
+        ShowInventories();
     }
 
     // Called when a loot gets added to an inventory
@@ -191,11 +193,25 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
     }
 
-    private IEnumerator CallObserverWithDelayCoroutine()
+    public List<Loot> GetInventoryLoot(int inventoryHeroIndex, bool isChest)
     {
-        yield return new WaitForSeconds(0.05f);
+        List<Loot> result = new List<Loot>();
 
-        OnInventoryChange?.Invoke();
+        for (int i = allLoots.Count - 1; i >= 0; i--)
+        {
+            if (!allLoots[i].AssociatedHero && isChest)
+            {
+                result.Add(allLoots[i]);
+                continue;
+            }
+
+            if (!allLoots[i].AssociatedHero) continue;
+            if (allLoots[i].AssociatedHero.HeroIndex != inventoryHeroIndex) continue;
+
+            result.Add(allLoots[i]);
+        }
+
+        return result;
     }
 
     // Called on death
@@ -218,6 +234,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public bool VerifyCanOpenCloseInventory(bool enterInventory = true)
     {
         if (lockedInInventory && !enterInventory) return false;
+        if (isOpeningOrClosing) return false;
 
         for(int i = 0; i < inventoryInstantiatedAmount; i++)
         {
@@ -238,49 +255,79 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         lockedInInventory = false;
     }
 
-    public async void OpenInventories()
+    public void ShowInventories()
     {
         OnInventoryOpen?.Invoke();
 
-        _backInventoriesImage.rectTransform.UChangeLocalPosition(openEffectDuration * 0.75f, 
-            _backInventoriesImage.rectTransform.parent.InverseTransformPoint(_shownPosition.position + Vector3.up), CurveType.EaseOutSin);
-        _backFadeImage.UFadeImage(openEffectDuration, 0.5f, CurveType.EaseOutCubic);
+        _backInventoriesImage.rectTransform.DOLocalMove(_backInventoriesImage.rectTransform.parent.InverseTransformPoint(_shownPosition.position),
+            openEffectDuration).SetEase(Ease.OutBack);
+
+        _backFadeImage.enabled = true;
+        _backFadeImage.DOFade(0.7f, openEffectDuration).SetEase(Ease.OutSine);
 
         UIManager.Instance.CoinUI.Show();
-
-        await Task.Delay(20);
+        HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.StopControl();
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
         {
             StartCoroutine(currentHeroesInventories[i].OpenInventoryCoroutine(openEffectDuration));
         }
 
-        await Task.Delay((int)(openEffectDuration * 0.75f * 1000));
-
-        _backInventoriesImage.rectTransform.UChangeLocalPosition(openEffectDuration * 0.25f, 
-            _backInventoriesImage.rectTransform.parent.InverseTransformPoint(_shownPosition.position), CurveType.EaseInSin);
+        StartCoroutine(ShowInventoriesCoroutine());
     }
 
-    public async void CloseInventories()
+    private IEnumerator ShowInventoriesCoroutine()
     {
-        if (lockedInInventory) return;
+        isOpeningOrClosing = true;
+
+        yield return new WaitForSeconds(openEffectDuration);
+
+        isOpeningOrClosing = false;
+    }
+
+    public void CloseInventories()
+    {
+        if (lockedInInventory || isOpeningOrClosing) return;
+
+        if (UIManager.Instance.DraggedLoot != null)
+        {
+            UIManager.Instance.DraggedLoot.Drop();
+        }
 
         OnInventoryClose?.Invoke();
-
         _inventoryActionsPanel.ClosePanel();
 
         UIManager.Instance.CoinUI.Hide();
+        HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
 
-        _backInventoriesImage.rectTransform.UChangeLocalPosition(closeEffectDuration, 
-            _backInventoriesImage.rectTransform.parent.InverseTransformPoint(_hiddenPosition.position), CurveType.EaseOutCubic);
-        _backFadeImage.UFadeImage(closeEffectDuration, 0f, CurveType.EaseOutCubic);
+        _backInventoriesImage.rectTransform.DOLocalMove(_backInventoriesImage.rectTransform.parent.InverseTransformPoint(_hiddenPosition.position),
+            openEffectDuration).SetEase(Ease.OutBack);
 
-        await Task.Delay(20);
+        _backFadeImage.DOFade(0f, openEffectDuration).SetEase(Ease.OutSine);
 
         for (int i = 0; i < inventoryInstantiatedAmount; i++)
         {
             StartCoroutine(currentHeroesInventories[i].CloseInventoryCoroutine(closeEffectDuration));
         }
+
+        StartCoroutine(HideInventoriesCoroutine());
+    }
+
+    private IEnumerator HideInventoriesCoroutine()
+    {
+        isOpeningOrClosing = true;
+
+        yield return new WaitForSeconds(closeEffectDuration);
+
+        _backFadeImage.enabled = false;
+        isOpeningOrClosing = false;
+    }
+
+    private IEnumerator CallObserverWithDelayCoroutine()
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        OnInventoryChange?.Invoke();
     }
 
     public IEnumerator OpenInventory(Inventory inventoryToOpen)
@@ -348,11 +395,14 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     #region Quick Change Buttons
 
+    private bool quickChangeOnInventory;
+
     public void DisplayQuickChangeButtons(int inventoryIndex)
     {
         Inventory inventory = currentHeroesInventories[inventoryIndex];
+        quickChangeOnInventory = true;
 
-        for(int i = 0; i < _quickChangeButtons.Length; i++)
+        for (int i = 0; i < _quickChangeButtons.Length; i++)
         {
             if (i >= currentHeroesInventories.Length || !currentHeroesInventories[i])     // If the hero isn't unlocked yet
             {
@@ -368,6 +418,25 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
     }
 
+    public void DisplayQuickChangeButtons(RectTransform[] positions)
+    {
+        quickChangeOnInventory = false;
+
+        for (int i = 0; i < _quickChangeButtons.Length; i++)
+        {
+            if (i >= currentHeroesInventories.Length || !currentHeroesInventories[i])     // If the hero isn't unlocked yet
+            {
+                _quickChangeButtons[i].ActualiseInfos(positions[i], false);
+                continue;
+            }
+
+            _quickChangeButtons[i].Show();
+            _quickChangeButtons[i].ActualiseInfos(positions[i], true);
+
+            if (i == 0) _quickChangeButtons[i].SelectHero();
+        }
+    }
+
     public void HideQuickChangeButtons()
     {
         for (int i = 0; i < currentHeroesInventories.Length; i++)
@@ -380,25 +449,25 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
     }
 
-    public void ClickQuickChange(int inventoryIndex)
+    public void ClickQuickChange(int index)
     {
-        Inventory inventory = currentHeroesInventories[inventoryIndex];
+        Inventory inventory = currentHeroesInventories[index];
 
         for (int i = 0; i < _quickChangeButtons.Length; i++)
         {
             if (i >= currentHeroesInventories.Length || !currentHeroesInventories[i])     // If the hero isn't unlocked yet
             {
-                _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], false);
+                _quickChangeButtons[i].ActualiseInfos(quickChangeOnInventory ? currentHeroesInventories[index].QuickChangeButtonsPositions[i] : null, false);
                 continue;
             }
 
-            _quickChangeButtons[i].ActualiseInfos(currentHeroesInventories[inventoryIndex].QuickChangeButtonsPositions[i], true);
+            _quickChangeButtons[i].ActualiseInfos(quickChangeOnInventory ? currentHeroesInventories[index].QuickChangeButtonsPositions[i] : null, true);
 
-            if (i == inventoryIndex) _quickChangeButtons[i].SelectHero();
+            if (i == index) _quickChangeButtons[i].SelectHero();
             else _quickChangeButtons[i].UnselectHero();
         }
 
-        OnQuickChange?.Invoke(inventoryIndex);
+        OnQuickChange?.Invoke(index);
     }
 
     #endregion
@@ -528,6 +597,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         for(int i = 0; i < currentHeroesInventories.Count(); i++)
         {
+            if (!currentHeroesInventories[i]) continue;
+
             currentHeroesInventories[i].EnterBlacksmith();
         }
     }
@@ -536,6 +607,8 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     {
         for (int i = 0; i < currentHeroesInventories.Count(); i++)
         {
+            if (!currentHeroesInventories[i]) continue;
+
             currentHeroesInventories[i].ExitBlacksmith();
         }
     }

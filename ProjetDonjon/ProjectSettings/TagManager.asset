@@ -7,6 +7,7 @@ TagManager:
   - Hero
   - Enemy
   - Walls
+  - Hole
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - HeroTrigger
   - TrapColliders
   - GroundColliders
-  - 
+  - TransparentProps
   - 
   - 
   - 
@@ -46,3 +47,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  m_MigratedRenderPipelines: []

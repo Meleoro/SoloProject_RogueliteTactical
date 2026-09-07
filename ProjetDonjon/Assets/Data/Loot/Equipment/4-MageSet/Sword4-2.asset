@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Sword4-2
   m_EditorClassIdentifier: 
-  lootName: MAGE SWORD I
+  lootName: MAGE SWORD II
   lootDescription: EACH TIME THIS UNIT SHOULD LOSE <#E9A800>FOCUS POINTS</color>,
     LOSE <#E9A800>-1 FOCUS POINT</color>
   lootType: 1
   rarityType: 3
   sprite: {fileID: -1155239217, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
-  value: 250
-  level: 0
+  value: 500
+  level: 1
   spaceTaken:
   - row: 01
   - row: 01

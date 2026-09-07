@@ -17,8 +17,9 @@ public class GenericDetailsPanel : MonoBehaviour
     [SerializeField] private GenericDetailsData[] statDatas;
 
     [Header("Private Infos")]
-    private Coroutine appearCoroutine;
+    private Coroutine currentAppearCoroutine;
     private Vector3 statsOffsetSave;
+    private Coroutine currentDescriptionAppearCoroutine;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -59,12 +60,12 @@ public class GenericDetailsPanel : MonoBehaviour
 
     #region All Load Functions
 
-    public void LoadDetails(LootData lootData, Vector3 position, bool mirrorHorizontal, bool noAdditionalDetails = false)
+    public void LoadDetails(LootData lootData, Vector3 position, bool mirrorHorizontal, bool mirrorVertical, bool noAdditionalDetails = false)
     {
         _mainRectTr.gameObject.SetActive(true);
 
         if(position != Vector3.zero) 
-            SetPosition(position, mirrorHorizontal ? offsetInventory : -offsetInventory);
+            SetPosition(position, mirrorHorizontal ? offsetInventory - new Vector3(0.04f, 0, 0) : -offsetInventory - new Vector3(0.04f, 0, 0));
 
         _nameText.text = lootData.lootName;
         _descriptionText.text = lootData.lootDescription;
@@ -122,14 +123,14 @@ public class GenericDetailsPanel : MonoBehaviour
             }
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, lootData.lootDescription));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, lootData.lootDescription));
 
         if (noAdditionalDetails) return;
 
         for (int i = 0; i < _additionalTooltips.Length; i++)
         {
             if (i < lootData.additionalTooltipDatas.Length)
-                _additionalTooltips[i].Show(lootData.additionalTooltipDatas[i], 0.15f + i * 0.15f);
+                _additionalTooltips[i].Show(lootData.additionalTooltipDatas[i], 0.15f + i * 0.15f, mirrorVertical);
 
             else
                 _additionalTooltips[i].Hide();
@@ -205,7 +206,7 @@ public class GenericDetailsPanel : MonoBehaviour
             _treeNodeTypeText.text = "STAT";
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
     }
 
     public void LoadDetails(SkillData skillData, Vector3 position, bool noOffset)
@@ -226,7 +227,7 @@ public class GenericDetailsPanel : MonoBehaviour
                 _additionalTooltips[i].Hide();
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text,_descriptionText.text));
     }
 
     public void LoadDetails(PassiveData passiveData, Vector3 position)
@@ -247,7 +248,7 @@ public class GenericDetailsPanel : MonoBehaviour
                 _additionalTooltips[i].Hide();
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(AlterationStruct alterationData, Vector3 position, Unit attachedUnit)
@@ -273,7 +274,7 @@ public class GenericDetailsPanel : MonoBehaviour
             }
         }
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(RelicData relicData, Vector3 position)
@@ -286,7 +287,7 @@ public class GenericDetailsPanel : MonoBehaviour
         _nameText.text = "?????";
         _descriptionText.text = relicData.relicHint;
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(GenericDetailsData data, Vector3 position, bool mirrorHorizontal)
@@ -299,7 +300,7 @@ public class GenericDetailsPanel : MonoBehaviour
         _nameText.text = data.name;
         _descriptionText.text = data.description;
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     public void LoadDetails(GenericDetailsData data, Vector3 position)
@@ -312,7 +313,7 @@ public class GenericDetailsPanel : MonoBehaviour
         _nameText.text = data.name;
         _descriptionText.text = data.description;
 
-        appearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
+        currentAppearCoroutine = StartCoroutine(AppearEffectCoroutine(_nameText.text, _descriptionText.text));
     }
 
     #endregion
@@ -322,7 +323,7 @@ public class GenericDetailsPanel : MonoBehaviour
 
     public void HideDetails()
     {
-        if (appearCoroutine != null) StopCoroutine(appearCoroutine);
+        if (currentAppearCoroutine != null) StopCoroutine(currentAppearCoroutine);
 
         _mainRectTr.DOComplete();
         _mainRectTr.gameObject.SetActive(false);
@@ -344,8 +345,13 @@ public class GenericDetailsPanel : MonoBehaviour
 
     private IEnumerator AppearEffectCoroutine(string title, string description)
     {
+        if(currentDescriptionAppearCoroutine != null)
+        {
+            StopCoroutine(currentDescriptionAppearCoroutine);
+        }
+
         StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(title, _nameText, 0.25f));
-        StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(description, _descriptionText, 0.35f));
+        currentDescriptionAppearCoroutine = StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(description, _descriptionText, 0.35f));
 
         float aimedSize = 0.75f;
         _mainRectTr.localScale = Vector3.one * aimedSize;

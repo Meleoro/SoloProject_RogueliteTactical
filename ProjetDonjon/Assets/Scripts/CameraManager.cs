@@ -71,7 +71,29 @@ public class CameraManager : GenericSingletonClass<CameraManager>
         transform.position = Vector3.Lerp(transform.position, currentWantedPos, followSpeed * Time.deltaTime);
         _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, currentWantedSize, sizeFollowSpeed * Time.deltaTime);
 
-        if(!isLocked) ManageMouseInputs();
+        if(!isLocked && !TutoManager.Instance.IsInTuto) ManageMouseInputs();
+    }
+
+
+    public IEnumerator DoIntroMovementCoroutine(float movementDuration)
+    {
+        isInitialised = false;
+        float timer = 0;
+
+        transform.position = followedTransform.position + followOffset + Vector3.down * 1f;
+        _camera.orthographicSize = baseSize + GetEnviroSizeModificator() + 2;
+
+        while (timer < movementDuration)
+        {
+            timer += Time.deltaTime;
+
+            currentWantedPos = Vector3.Lerp(followedTransform.position + followOffset + Vector3.down * 1f, followedTransform.position + followOffset, timer / movementDuration);
+            currentWantedSize = Mathf.Lerp(baseSize + GetEnviroSizeModificator() + 2, baseSize + GetEnviroSizeModificator(), (timer * 1.2f) / movementDuration);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        isInitialised = true;
     }
 
 
@@ -94,11 +116,6 @@ public class CameraManager : GenericSingletonClass<CameraManager>
         }
         
         return Mathf.Lerp(-maxSizeModifierExplo, 0, ((averageDist / raycastAmount) / maxRaycastDistExplo));
-    }
-
-    public void LockCamera()
-    {
-        isLocked = true;
     }
 
     public void LockCamera(Vector2 position, float size)
@@ -192,6 +209,8 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
     public void FocusOnTransforms(Transform[] focusedTr)
     {
+        float minZoom = 3.5f;
+
         Vector3 middlePos = Vector2.zero;
         float maxDist = 0;
         foreach (Transform transform in focusedTr)
@@ -201,7 +220,9 @@ public class CameraManager : GenericSingletonClass<CameraManager>
         }
         middlePos /= focusedTr.Length;
 
-        FocusOnPosition(middlePos, maxDist * 2f);
+        middlePos += Vector3.up * maxDist * 0.22f;   // Offset because of the timeline hidding a part of the screen
+
+        FocusOnPosition(middlePos, Mathf.Clamp(maxDist, minZoom, float.MaxValue));
     }
 
     public IEnumerator FocusOnTrCoroutine(Transform focusedTr, float cameraSize, float duration)

@@ -130,11 +130,17 @@ public class SlabBoardTrial : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        DisplayCorrectPath();
+        if(collision.CompareTag("Hero"))
+        {
+            DisplayCorrectPath();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        HideCorrectPath();
+        if (collision.CompareTag("Hero"))
+        {
+            HideCorrectPath();
+        }
     }
 }

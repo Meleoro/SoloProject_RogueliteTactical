@@ -58,7 +58,7 @@ public class EquippedSkill : MonoBehaviour
         {
             _mainText.enabled = true;
             _mainText.text = passiveData.passiveName;
-            _skillIcon.sprite = passiveData.passiveIcon;
+            _skillIcon.sprite = passiveData.passiveHighlightIcon;
         }
         else if(!isLocked)
         {

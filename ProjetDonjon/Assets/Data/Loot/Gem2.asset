@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Gem2
   m_EditorClassIdentifier: 
   lootName: CRISTAL
-  lootDescription: Can be sell at good prices
+  lootDescription: CAN BE SOLD FOR COINS
   lootType: 0
+  rarityType: 0
   sprite: {fileID: -730577239, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 15
+  value: 50
+  level: 0
   spaceTaken:
   - row: 01
   equipmentType: 0
@@ -25,5 +27,15 @@ MonoBehaviour:
   strengthUpgrade: 0
   speedUpgrade: 0
   luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 0}
+  upgradeCost:
+    neededMaterials: []
+    neededMatQuantities: 
+  appliedPassive: {fileID: 0}
   consumableType: 0
   consumablePower: 0
+  usableOutsideBattle: 0
+  additionalTooltipDatas: []

@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class TutorialPanel : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private Color highlightActionPointColor;
+    [SerializeField] private Color noHighlightActionPointColor;
+    [SerializeField] private Color highlightSkillPointColor;
+    [SerializeField] private Color noHighlightSkillPointColor;
+
     [Header("Actions")]
     public Action OnHide;
 
@@ -25,6 +31,7 @@ public class TutorialPanel : MonoBehaviour
     private bool maintainPosition;
     private bool isDisplayed;
     private float currentProgress;
+    private Coroutine currentHighlightCoroutine;
 
     [Header("References")]
     [SerializeField] private TextMeshProUGUI _stepNameText;
@@ -84,6 +91,8 @@ public class TutorialPanel : MonoBehaviour
 
     public void DisplayTutorial(TutoStepData tutoData, Vector3 aimedLocalPos, Vector3 startLocalPos)
     {
+        Debug.Log(tutoData.name);
+
         currentTutoData = tutoData;
 
         _progressImageBack.gameObject.SetActive(false);
@@ -107,17 +116,13 @@ public class TutorialPanel : MonoBehaviour
         _stepNameText.text = tutoData.stepName;
 
         StartCoroutine(UIManager.Instance.DisplayTextProgressivelyCoroutine(tutoData.stepDescription, _stepDescriptionText));
-        //_stepDescriptionText.text = tutoData.stepDescription;
 
         _rectTr.localPosition = startLocalPos;
         startPosSave = startLocalPos;
 
-        //_rectTr.DOScale(Vector3.one * 0.8f, 0.25f).SetEase(Ease.OutBack);
         _rectTr.DOLocalMove(aimedLocalPos, 0.35f).SetEase(Ease.OutBack);
 
         _backDarkImage.raycastTarget = true;
-
-        //_animator.SetBool("IsDisplayed", true);
 
         StartHighlight();
     }
@@ -145,9 +150,9 @@ public class TutorialPanel : MonoBehaviour
 
     private void StartHighlight()
     {
-        if (currentTutoData.highlightType == TutoHighlightType.None)
+        if (currentTutoData.highlightType == TutoHighlightType.None && !currentTutoData.lockPlayerInputs)
         {
-            _backDarkImage.DOFade(0.3f, 0.2f).SetEase(Ease.OutBack);
+            _backDarkImage.DOFade(0.4f, 0.2f).SetEase(Ease.OutBack);
 
             _backDarkImage.raycastTarget = false;
 
@@ -160,11 +165,24 @@ public class TutorialPanel : MonoBehaviour
             case TutoHighlightType.HighlightActionPoints:
                 maintainPosition = true;
                 highlightedImages = UIManager.Instance.PlayerActionsMenu.ActionPointImages;
+                for(int i = 0; i < highlightedImages.Length; i++)
+                {
+                    highlightedImages[i].enabled = true;
+                }
+
+                currentHighlightCoroutine = StartCoroutine(HighlightActionPointsCoroutine());
                 break;
 
             case TutoHighlightType.HighlightSkillPoints:
                 maintainPosition = true;
                 highlightedImages = UIManager.Instance.PlayerActionsMenu.SkillPointImages;
+
+                for (int i = 0; i < highlightedImages.Length; i++)
+                {
+                    highlightedImages[i].enabled = true;
+                }
+
+                currentHighlightCoroutine = StartCoroutine(HighlightSkillPointsCoroutine());
                 break;
                 
             case TutoHighlightType.HighlightMoveButton:
@@ -180,11 +198,12 @@ public class TutorialPanel : MonoBehaviour
                 break;
 
             case TutoHighlightType.HighlightEnemy:
-                BattleManager.Instance.CurrentEnemies[0].UI.Canvas.sortingOrder = 330;
+                BattleManager.Instance.CurrentEnemies[0].UI.Canvas.sortingOrder = 331;
+                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.GetComponent<SpriteLayerer>().enabled = false;
+                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.sortingOrder = 331;
                 highlightedImages = new Image[] { };
 
-                _backDarkImage.DOComplete();
-                _backDarkImage.DOFade(0.3f, 0.2f).SetEase(Ease.OutBack);
+                _backDarkImage.raycastTarget = true;
                 break;
 
             case TutoHighlightType.HighlightReturnToCamp:
@@ -192,16 +211,19 @@ public class TutorialPanel : MonoBehaviour
                 break;
 
             case TutoHighlightType.HighlightEquipmentMenu:
+                UIManager.Instance.HUDExploration.ActualiseDisplayedButtons();
                 UIManager.Instance.HUDExploration.Animator.enabled = false;
                 highlightedImages = new Image[] { UIManager.Instance.HUDExploration.EquipmentMenuImage };
                 break;
 
             case TutoHighlightType.HighlightSkillTreeMenu:
+                UIManager.Instance.HUDExploration.ActualiseDisplayedButtons();
                 UIManager.Instance.HUDExploration.Animator.enabled = false;
                 highlightedImages = new Image[] { UIManager.Instance.HUDExploration.SkillTreeMenu };
                 break;
 
             case TutoHighlightType.HighlightSkillsMenu:
+                UIManager.Instance.HUDExploration.ActualiseDisplayedButtons();
                 UIManager.Instance.HUDExploration.Animator.enabled = false;
                 highlightedImages = new Image[] { UIManager.Instance.HUDExploration.SkillsMenu };
                 break;
@@ -218,10 +240,13 @@ public class TutorialPanel : MonoBehaviour
         {
             originalPositions[i] = highlightedImages[i].rectTransform.position;
             originalLocalPositions[i] = highlightedImages[i].rectTransform.localPosition;
+            //Vector3 saveScale = highlightedImages[i].rectTransform.localScale;
 
             highlightedImages[i].rectTransform.SetParent(_highlightParent, true);
-
             highlightedImages[i].rectTransform.position = new Vector3(originalPositions[i].x, originalPositions[i].y, 0);
+
+            //_highlightParent.localScale = highlightedImages[i].rectTransform.localScale;
+            //highlightedImages[i].rectTransform.localScale = saveScale;
         }
     }
 
@@ -233,7 +258,7 @@ public class TutorialPanel : MonoBehaviour
 
         Vector2Int enemyCoordinates = BattleManager.Instance.CurrentEnemies[0].CurrentTile.TileCoordinates;
         BattleManager.Instance.TilesManager.battleRoom.
-            PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].SetToFirstLayer(330);
+            PlacedBattleTiles[enemyCoordinates.x - 1, enemyCoordinates.y].SetToFirstLayer(330);
 
         TutoManager.Instance.OnFirstStepValidated -= HighlightMoveTile;
     }
@@ -268,6 +293,29 @@ public class TutorialPanel : MonoBehaviour
     {
         if (currentTutoData.highlightType == TutoHighlightType.None) return;
 
+        switch(currentTutoData.highlightType)
+        {
+            case TutoHighlightType.HighlightActionPoints:
+                StopCoroutine(currentHighlightCoroutine);
+                for(int i = 0; i < highlightedImages.Length; i++)
+                {
+                    highlightedImages[i].enabled = false;
+                }
+                break;
+
+            case TutoHighlightType.HighlightSkillPoints:
+                StopCoroutine(currentHighlightCoroutine);
+                for (int i = 0; i < highlightedImages.Length; i++)
+                {
+                    highlightedImages[i].enabled = false;
+                }
+                break;
+
+            case TutoHighlightType.HighlightEnemy:
+                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.GetComponent<SpriteLayerer>().enabled = true;
+                break;
+        }
+
         maintainPosition = false;
         UIManager.Instance.HUDExploration.Animator.enabled = true;
 
@@ -284,7 +332,7 @@ public class TutorialPanel : MonoBehaviour
 
             Vector2Int enemyCoordinates = BattleManager.Instance.CurrentEnemies[0].CurrentTile.TileCoordinates;
             BattleManager.Instance.TilesManager.battleRoom.
-                PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].SetToNormalLayer();
+                PlacedBattleTiles[enemyCoordinates.x - 1, enemyCoordinates.y].SetToNormalLayer();
         }
         else if (isDisplayingSkillHighlight)
         {
@@ -294,6 +342,45 @@ public class TutorialPanel : MonoBehaviour
             {
                 _skillsPanelFirstButton.GetComponent<RectTransform>().parent = originalParent;
             }
+        }
+    }
+
+    public IEnumerator HighlightActionPointsCoroutine()
+    {
+        while (true)
+        {
+            for (int i = 0; i < highlightedImages.Length; i++)
+            {
+                highlightedImages[i].DOColor(highlightActionPointColor, 0.75f).SetEase(Ease.InOutSine);
+            }
+
+            yield return new WaitForSeconds(0.75f);
+
+            for (int i = 0; i < highlightedImages.Length; i++)
+            {
+                highlightedImages[i].DOColor(noHighlightActionPointColor, 0.75f).SetEase(Ease.InOutSine);
+            }
+
+            yield return new WaitForSeconds(0.75f);
+        }
+    }
+    public IEnumerator HighlightSkillPointsCoroutine()
+    {
+        while (true)
+        {
+            for (int i = 0; i < highlightedImages.Length; i++)
+            {
+                highlightedImages[i].DOColor(highlightSkillPointColor, 0.75f).SetEase(Ease.InOutSine);
+            }
+
+            yield return new WaitForSeconds(0.75f);
+
+            for (int i = 0; i < highlightedImages.Length; i++)
+            {
+                highlightedImages[i].DOColor(noHighlightSkillPointColor, 0.75f).SetEase(Ease.InOutSine);
+            }
+
+            yield return new WaitForSeconds(0.75f);
         }
     }
 

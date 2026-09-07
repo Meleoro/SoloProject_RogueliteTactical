@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: TutoStep-12
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: CAMP
-  stepDescription: 'YOUR CAMP IS WHERE YOU CAN STORE YOUR LOOT, BUY NEW STUFF, UPGRADE
-    YOUR GEARS...
+  stepDescription: 'WELCOME TO <#7A2E00>YOUR CAMP</color> ! IT''S HERE THAT YOU WILL
+    BE ABLE TO <#7A2E00>BUY NEW ITEMS</color>, <#7A2E00>UPGRADE EQUPMENTS</color>
+    OR <#7A2E00>STORE YOUR STUFF</color>.
 
 
-    YOU WILL <#7A2E00>UNLOCK NEW HEROES AND NEW FEATURES</color>
-    WHEN YOUR CAMP <#7A2E00>LEVELS UP</color>, WHICH CAN BE DONE BY FILLING YOUR
-    RELIC COLLECTION'
+    YOUR CAMP WILL <#7A2E00>GAIN LEVEL</color>
+    AS YOUR COLLECTION GETS BIGGER, SO KEEP SEARCHING FOR <#7A2E00>MORE RELICS</color>
+    TO UNLOCK NEW FEATURES, NEW PLACES TO EXPLORE OR NEW HEROES ! '
   highlightType: 0
   endCondition: 0
-  tutoType: 0
-  leftSidePanel: 1
+  tutoType: 2
+  leftSidePanel: 0
   playNextStepOnFinished: 0
+  lockPlayerInputs: 1
   playNextStepDelay: 0.2
   waitDuration: 0

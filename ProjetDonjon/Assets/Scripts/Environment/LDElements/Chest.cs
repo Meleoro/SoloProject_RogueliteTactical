@@ -22,11 +22,11 @@ public class Chest : MonoBehaviour, IInteractible
     [SerializeField] private float displayedDitherValue;
     [SerializeField] private float hiddenDitherValue;
     [SerializeField] private bool activatesChallenge;
+    [SerializeField] private Sprite noLockSprite;
 
     [Header("Private Infos")]
     private bool isOpened;
     private bool isActivated;
-    private PossibleLootData[] possibleLoots;
 
     [Header("References")]
     [SerializeField] private Animator _animator;
@@ -44,7 +44,6 @@ public class Chest : MonoBehaviour, IInteractible
     private void Start()
     {
         _spriteRenderer.material.SetVector("_TextureSize", new Vector2(_spriteRenderer.sprite.texture.width, _spriteRenderer.sprite.texture.height));
-        possibleLoots = ProceduralGenerationManager.Instance.EnviroData.lootPerFloors[ProceduralGenerationManager.Instance.CurrentFloor].chestPossibleLoots;
     }
 
 
@@ -71,6 +70,9 @@ public class Chest : MonoBehaviour, IInteractible
     {
         yield return new WaitForSeconds(startDelay);
 
+        _lockSprite.enabled = true;
+        _spriteRenderer.sprite = noLockSprite;
+
         _lockRigidbody.simulated = true;
         _lockRigidbody.AddForce(new Vector2(-0.4f, 1) * 6, ForceMode2D.Impulse);
         _lockRigidbody.AddTorque(-15, ForceMode2D.Impulse);
@@ -78,7 +80,9 @@ public class Chest : MonoBehaviour, IInteractible
         CameraManager.Instance.LockCamera(transform.position, 6f);
         GameManager.Instance.OpenChest();
 
-        transform.UShakePosition(openDuration * 0.3f, 0.2f, 0.04f);
+        _animator.SetTrigger("RemoveLock");
+
+        transform.DOShakePosition(openDuration * 0.3f, 0.2f, 15);
 
         yield return new WaitForSeconds(openDuration * 0.3f);
 
@@ -96,11 +100,11 @@ public class Chest : MonoBehaviour, IInteractible
             SpawnLoot(lootToGenerate[i], i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
             SpawnCoins(coinsCount, i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
 
-            _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+            if(_chestLight) _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
 
             yield return new WaitForSeconds(openDuration * 0.05f);
 
-            _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
+            if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
 
             if (i >= lootToGenerate.Length - 1) continue;
 
@@ -121,11 +125,11 @@ public class Chest : MonoBehaviour, IInteractible
             Relic newRelic = Instantiate(relicPrefab, transform.position + Vector3.right * 1.25f, Quaternion.Euler(0, 0, 0));
             newRelic.Initialise(relicData);
 
-            _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+            if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
 
             yield return new WaitForSeconds(openDuration * 0.05f);
 
-            _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
+            if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
         }
 
         yield return new WaitForSeconds(openDuration * 0.5f);
@@ -136,6 +140,7 @@ public class Chest : MonoBehaviour, IInteractible
         yield return new WaitForSeconds(openDuration * 0.05f);
 
         _spriteRenderer.material.DOColor(new Color(1, 1, 1, 0), "_Color", 0.3f);
+        _spriteRenderer.DOColor(new Color(1, 1, 1, 0), 0.3f);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -235,8 +240,7 @@ public class Chest : MonoBehaviour, IInteractible
                 return LootManager.Instance.GetSpawnCoinsChallenge();
 
             case ChestType.Trial:
-                LootManager.Instance.GetSpawnedLootTrial();
-                break;
+                return LootManager.Instance.GetSpawnCoinsTrial();
         }
 
         return 0;
@@ -287,10 +291,19 @@ public class Chest : MonoBehaviour, IInteractible
             _spriteRenderer.material.ULerpMaterialFloat(0.1f, 0f, "_OutlineSize");
             _collider.enabled = false;
 
-            _activatedTrial.StartTrial();
-            _activatedTrial.OnTrialEnd += Show;
+            if(_activatedTrial != null)
+            {
+                _activatedTrial.StartTrial();
+                _activatedTrial.OnTrialEnd += Show;
 
-            Hide();
+                Hide();
+            }
+            else
+            {
+                isOpened = true;
+
+                StartCoroutine(InteractCoroutine(1.5f));
+            }
         }
 
         else

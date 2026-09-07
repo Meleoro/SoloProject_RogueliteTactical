@@ -159,6 +159,7 @@ MonoBehaviour:
   displayedDitherValue: 0
   hiddenDitherValue: 0
   activatesChallenge: 0
+  noLockSprite: {fileID: -8696614312850287733, guid: f5d159d180c086c4daa89fd47b5b32dc, type: 3}
   _animator: {fileID: 572433227072451326}
   _spriteRenderer: {fileID: 6562171876627694715}
   _shadowSpriteRenderer: {fileID: 0}
@@ -370,7 +371,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 92efa282694f0194e8b90b17bed2c157, type: 2}
+  - {fileID: 2100000, guid: aafef804834a19b499418aefd7fe429b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

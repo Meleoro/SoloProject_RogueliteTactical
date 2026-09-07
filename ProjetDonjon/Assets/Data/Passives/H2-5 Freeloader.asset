@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: H2-5 Freeloader
   m_EditorClassIdentifier: 
   passiveName: FREELOADER
-  passiveDescription: +50% CRIT CHANCES WHEN THIS UNIT ATTACK A STUNNED UNIT
+  passiveDescription: <#E9A800>+40% CRITICAL CHANCES</color> WHEN THIS UNIT ATTACK
+    A <#FFC12E>STUNNED</color> UNIT
   passiveIcon: {fileID: 1685792960, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: -1451717230, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
   - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}
   passiveTriggerType: 4
-  neededAlteration: {fileID: 11400000, guid: c2542ffcfdc24874f80e68e474db9402, type: 2}
-  passiveTriggerProba: 50
+  neededAlteration:
+  - {fileID: 11400000, guid: c2542ffcfdc24874f80e68e474db9402, type: 2}
+  passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 5
     appliedAlteration: {fileID: 0}
-    additivePower: 50
+    additivePower: 40
     multipliedPower: 0

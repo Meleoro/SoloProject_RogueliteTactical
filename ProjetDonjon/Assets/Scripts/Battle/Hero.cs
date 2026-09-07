@@ -170,7 +170,7 @@ public class Hero : Unit
     {
         base.ExitBattle(currentHero);
         _controller.ExitBattle();
-        EndTurnOutline();
+        EndTurnOutline(false);
 
         currentShield = 0;
 
@@ -196,11 +196,11 @@ public class Hero : Unit
         currentActionPoints--;
     }
 
-    public override void TakeDamage(int damageAmount, Unit originUnit)
+    public override void TakeDamage(int damageAmount, Unit originUnit, bool isCrit)
     {
         if (isDead) return;
 
-        base.TakeDamage(damageAmount, originUnit);
+        base.TakeDamage(damageAmount, originUnit, isCrit);
         
         // For no damages when the hero explores in the tuto
         if (!BattleManager.Instance.IsInBattle && TutoManager.Instance.IsInTuto)

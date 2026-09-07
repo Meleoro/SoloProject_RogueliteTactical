@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
@@ -29,6 +30,7 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private RectTransform _mainRectTr; 
     [SerializeField] private Image[] _heroIcons;
     [SerializeField] private SkillTreeProfile[] _skillTreeProfiles;
+    [SerializeField] private Image _backFadeImage;
 
 
     private void Start()
@@ -131,6 +133,15 @@ public class SkillTreeManager : MonoBehaviour
         return result;
     }
 
+
+    private void ActualiseDisplayedProfiles()
+    {
+        for(int i = 0; i < _skillTreeProfiles.Length; i++)
+        {
+            _skillTreeProfiles[i].gameObject.SetActive(i < HeroesManager.Instance.Heroes.Length);
+        }
+    }
+
     #endregion
 
 
@@ -139,6 +150,8 @@ public class SkillTreeManager : MonoBehaviour
     public void Show()
     {
         if (isOpeningOrClosing) return;
+
+        ActualiseDisplayedProfiles();
 
         currentIndex = HeroesManager.Instance.CurrentHeroIndex;
         Hero hero = HeroesManager.Instance.Heroes[currentIndex];
@@ -155,13 +168,12 @@ public class SkillTreeManager : MonoBehaviour
 
     private IEnumerator ShowCoroutine()
     {
-        _mainRectTr.UChangeLocalPosition(0.3f, new Vector3(0, -30, 0), CurveType.EaseOutCubic);
+        _backFadeImage.enabled = true;
+
+        _backFadeImage.DOFade(0.7f, 0.3f);
+        _mainRectTr.DOLocalMove(new Vector3(0, 0, 0), 0.3f).SetEase(Ease.OutBack);
 
         yield return new WaitForSeconds(0.3f);
-
-        _mainRectTr.UChangeLocalPosition(0.1f, new Vector3(0, 0, 0), CurveType.EaseInOutCubic);
-
-        yield return new WaitForSeconds(0.1f);
 
         isOpeningOrClosing = false;
     }
@@ -179,14 +191,12 @@ public class SkillTreeManager : MonoBehaviour
 
     private IEnumerator HideCoroutine()
     {
-        _mainRectTr.UChangeLocalPosition(0.1f, new Vector3(0, -30, 0), CurveType.EaseOutCubic);
-
-        yield return new WaitForSeconds(0.1f);
-
-        _mainRectTr.UChangeLocalPosition(0.3f, new Vector3(0, 600, 0), CurveType.EaseInOutCubic);
+        _backFadeImage.DOFade(0f, 0.25f);
+        _mainRectTr.DOLocalMove(new Vector3(0, 500, 0), 0.3f).SetEase(Ease.InBack);
 
         yield return new WaitForSeconds(0.3f);
 
+        _backFadeImage.enabled = false;
         isOpeningOrClosing = false;
     }
 

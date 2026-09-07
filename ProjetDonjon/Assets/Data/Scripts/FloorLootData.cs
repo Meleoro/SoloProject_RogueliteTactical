@@ -6,7 +6,6 @@ public class FloorLootData : ScriptableObject
 {
     [Header("Normal Chests")]
     [Range(0, 100)] public int[] probaPerTierChest = new int[4];
-    public PossibleLootData[] chestPossibleLoots;
     public int minChestCoins;
     public int maxChestCoins;
     public int minLootAmountPerChest;
@@ -14,7 +13,6 @@ public class FloorLootData : ScriptableObject
 
     [Header("Battle Ends")]
     [Range(0, 100)] public int[] probaPerTierBattle = new int[4];
-    public PossibleLootData[] battleEndPossibleLoots;
     public int minBattleCoins;
     public int maxBattleCoins;
     public int minLootAmountPerBattle;
@@ -22,11 +20,17 @@ public class FloorLootData : ScriptableObject
 
     [Header("Challenge")]
     [Range(0, 100)] public int[] probaPerTierChallenge = new int[4];
-    public PossibleLootData[] challengeEndPossibleLoots;
     public int minChallengeCoins;
     public int maxChallengeCoins;
     public int minLootAmountPerChallenge;
     public int maxLootAmountPerChallenge;
+
+    [Header("Trial")]
+    [Range(0, 100)] public int[] probaPerTierTrial = new int[4];
+    public int minTrialCoins;
+    public int maxTrialCoins;
+    public int minLootAmountPerTrial;
+    public int maxLootAmountPerTrial;
 }
 
 [Serializable]

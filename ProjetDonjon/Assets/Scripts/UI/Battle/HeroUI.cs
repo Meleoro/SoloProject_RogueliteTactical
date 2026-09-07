@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using Random = UnityEngine.Random;
 
 
 public class UnitUI : MonoBehaviour
@@ -20,6 +21,7 @@ public class UnitUI : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private float appearEffectSpeed;
     [SerializeField] private IntentTooltip[] enemyIntentTooltips;
+    [SerializeField] private BattleUnitText battleDamageTextPrefab;
 
     [Header("Actions")]
     public Action HoverAction;
@@ -31,7 +33,6 @@ public class UnitUI : MonoBehaviour
     private int currentHealth;
     private Alteration[] currentAlterations;
     private SkillData currentSkill;
-    private Vector3 saveDamageTextPos;
     private Vector3 saveLevelUpTextPos;
     private Unit attachedUnit;
     private HeartState currentHeartState;
@@ -53,7 +54,6 @@ public class UnitUI : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private RectTransform _alterationsParent;
     [SerializeField] private Alteration[] _alterations;
-    [SerializeField] private TextMeshProUGUI _damageText;
     [SerializeField] private Canvas _canvas;
 
     [Header("XP References")]
@@ -75,8 +75,6 @@ public class UnitUI : MonoBehaviour
 
         saveLevelUpTextPos = _levelUpTextTr.localPosition;
         _levelUpTextTr.localScale = Vector3.zero;
-        saveDamageTextPos = _damageText.rectTransform.localPosition;
-        _damageText.rectTransform.localScale = Vector3.zero;
 
         _xpOutlineImage.color = new Color(_xpOutlineImage.color.r, _xpOutlineImage.color.g, _xpOutlineImage.color.b, 0);
         _xpFillableImage.color = new Color(_xpFillableImage.color.r, _xpFillableImage.color.g, _xpFillableImage.color.b, 0);
@@ -215,6 +213,41 @@ public class UnitUI : MonoBehaviour
     #endregion
 
 
+    #region Damage + Heal
+
+    public void TakeHealing(int newHealth)
+    {
+        BattleUnitText damageText = Instantiate(battleDamageTextPrefab, transform.position - new Vector3(0, 0.75f, 0),
+            Quaternion.Euler(0, 0, Random.Range(-5, 5)));
+
+        StartCoroutine(damageText.DoHealTextEffectCoroutine(newHealth - currentHealth));
+    }
+
+    public void TakeDamage(int newHealth, bool isCrit)
+    {
+        _hearthImage.rectTransform.UBounceScale(0.15f, Vector3.one * 1.3f, 0.3f, Vector3.one, CurveType.EaseInOutCubic);
+        _hearthImage.rectTransform.UShakeLocalPosition(0.3f, 10f, 0.03f, ShakeLockType.Z);
+        _parentTr.UShakeLocalPosition(0.3f, 20f, 0.03f, ShakeLockType.Z);
+
+        if (isCrit)
+        {
+            BattleUnitText damageText = Instantiate(battleDamageTextPrefab, transform.position - new Vector3(0, 0.0f, 0),
+                Quaternion.Euler(0, 0, Random.Range(-5, 5)), _canvas.transform);
+
+            StartCoroutine(damageText.DoDamageCritTextEffectCoroutine(currentHealth - newHealth));
+        }
+        else
+        {
+            BattleUnitText damageText = Instantiate(battleDamageTextPrefab, transform.position - new Vector3(0, 0.0f, 0),
+                Quaternion.Euler(0, 0, Random.Range(-5, 5)), _canvas.transform);
+
+            StartCoroutine(damageText.DoDamageTextEffectCoroutine(currentHealth - newHealth));
+        }
+    }
+
+    #endregion
+
+
     #region Others
 
     public void ActualiseUI(float currentHealthRatio, int currentHealth, List<AlterationStruct> currentAlterations, SkillData currentSkill = null)
@@ -235,14 +268,12 @@ public class UnitUI : MonoBehaviour
             }
         }
 
-        if(currentAimedRatio != currentHealthRatio && currentAimedRatio != 0)
-        {
-            StartCoroutine(DoDamageTextEffectCoroutine(this.currentHealth - currentHealth, 1f));
-
-            _hearthImage.rectTransform.UBounceScale(0.15f, Vector3.one * 1.3f, 0.3f, Vector3.one, CurveType.EaseInOutCubic);
-            _hearthImage.rectTransform.UShakeLocalPosition(0.3f, 10f, 0.03f, ShakeLockType.Z);
-            _parentTr.UShakeLocalPosition(0.3f, 20f, 0.03f, ShakeLockType.Z);
-        }
+        //if(currentAimedRatio != currentHealthRatio && currentAimedRatio != 0)
+        //{
+        //    _hearthImage.rectTransform.UBounceScale(0.15f, Vector3.one * 1.3f, 0.3f, Vector3.one, CurveType.EaseInOutCubic);
+        //    _hearthImage.rectTransform.UShakeLocalPosition(0.3f, 10f, 0.03f, ShakeLockType.Z);
+        //    _parentTr.UShakeLocalPosition(0.3f, 20f, 0.03f, ShakeLockType.Z);
+        //}
 
         currentAimedRatio = currentHealthRatio;
         _healthText.text = currentHealth.ToString();
@@ -299,38 +330,12 @@ public class UnitUI : MonoBehaviour
         }
     }
 
-    private IEnumerator DoDamageTextEffectCoroutine(int damages, float duration)
-    {
-        _damageText.text = "-" + damages;
-        _damageText.rectTransform.localPosition = saveDamageTextPos;
-
-        _damageText.rectTransform.UChangeScale(duration * 0.1f, new Vector3(1.3f, 0.9f, 1.0f), CurveType.EaseInOutCubic);
-        _damageText.rectTransform.UChangeLocalPosition(duration, saveDamageTextPos + Vector3.up * 35f, CurveType.EaseOutCubic);
-
-        yield return new WaitForSeconds(duration * 0.1f);
-
-        _damageText.rectTransform.DOScale(new Vector3(0.85f, 1.15f, 1.0f), duration * 0.2f).SetEase(Ease.InOutCubic);
-
-        yield return new WaitForSeconds(duration * 0.2f);
-
-        _damageText.rectTransform.DOScale(new Vector3(1f, 1f, 1f), duration * 0.1f).SetEase(Ease.InOutCubic);
-
-        yield return new WaitForSeconds(duration * 0.5f);
-
-        _damageText.rectTransform.DOScale(new Vector3(0f, 0f, 0f), duration * 0.2f).SetEase(Ease.InOutCubic);
-
-        yield return new WaitForSeconds(duration * 0.2f);
-
-        _damageText.rectTransform.localPosition = saveDamageTextPos;
-
-    }
-
     public IEnumerator DoChangePaternEffectCoroutine(float duration)
     {
-        _changePaternText.rectTransform.localPosition = saveDamageTextPos;
+        _changePaternText.rectTransform.localPosition = saveLevelUpTextPos;
 
         _changePaternText.rectTransform.UChangeScale(duration * 0.1f, new Vector3(1.3f, 0.9f, 1.0f), CurveType.EaseInOutCubic);
-        _changePaternText.rectTransform.UChangeLocalPosition(duration, saveDamageTextPos + Vector3.up * 25f, CurveType.EaseOutCubic);
+        _changePaternText.rectTransform.UChangeLocalPosition(duration, saveLevelUpTextPos + Vector3.up * 25f, CurveType.EaseOutCubic);
 
         yield return new WaitForSeconds(duration * 0.1f);
 
@@ -346,7 +351,7 @@ public class UnitUI : MonoBehaviour
 
         yield return new WaitForSeconds(duration * 0.2f);
 
-        _changePaternText.rectTransform.localPosition = saveDamageTextPos;
+        _changePaternText.rectTransform.localPosition = saveLevelUpTextPos;
 
     }
 

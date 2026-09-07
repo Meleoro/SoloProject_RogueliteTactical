@@ -18,10 +18,10 @@ MonoBehaviour:
   passiveHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
   passiveTriggerType: 7
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 4
     appliedAlteration: {fileID: 0}
-    additivePower: 0
-    multipliedPower: 1.5
+    additivePower: 0.5
+    multipliedPower: 0

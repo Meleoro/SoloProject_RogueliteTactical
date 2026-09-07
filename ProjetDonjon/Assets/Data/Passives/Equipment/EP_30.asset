@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: EP_30
   m_EditorClassIdentifier: Assembly-CSharp::PassiveData
   passiveName: Crystal Boots
-  passiveDescription: When you get hit, you have a 50% chance to gain Lucky
+  passiveDescription: Start fight with luck
   passiveIcon: {fileID: 0}
   passiveHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
-  passiveTriggerType: 1
-  neededAlteration: {fileID: 0}
-  passiveTriggerProba: 50
+  passiveTriggerType: 10
+  neededAlteration: []
+  passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 0
     appliedAlteration: {fileID: 11400000, guid: 974d5994fb28d6c45b7bb6731df5b642, type: 2}

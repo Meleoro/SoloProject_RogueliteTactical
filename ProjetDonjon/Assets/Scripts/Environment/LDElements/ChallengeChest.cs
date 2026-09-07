@@ -14,7 +14,6 @@ public class ChallengeChest : MonoBehaviour, IInteractible
 
     [Header("Private Infos")]
     private bool isActivated = false;
-    private PossibleLootData[] possibleLoots;
 
     [Header("References")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -30,7 +29,6 @@ public class ChallengeChest : MonoBehaviour, IInteractible
     private void Start()
     {
         _spriteRenderer.material.SetVector("_TextureSize", new Vector2(_spriteRenderer.sprite.texture.width, _spriteRenderer.sprite.texture.height));
-        possibleLoots = ProceduralGenerationManager.Instance.EnviroData.lootPerFloors[ProceduralGenerationManager.Instance.CurrentFloor].chestPossibleLoots;
     }
 
     private void GenerateLoot()

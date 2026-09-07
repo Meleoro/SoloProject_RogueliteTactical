@@ -72,25 +72,13 @@ public class SkillData : ScriptableObject
     public Sprite skillHighlightIcon;
     public Sprite skillIntentIcon;     // For enemies intent icon in battles
     public AdditionalTooltipData[] additionalTooltipDatas;
+    public VFXData[] vfxDatas;   // May have multiple vfx for attacks in multiple steps
 
     [Header("Effects")]
     public SkillType skillType;
     public SkillPaternType skillPaternType;
     public SkillEffect[] skillEffects;
     [Min(1)] public int attackCount;
-
-    [Header("Visuals")]
-    public bool onTargetVFX;
-    public bool oneVFXPerTile;
-    public bool rotateVFX;
-    public bool mirrorHorizontalVFX;
-    public bool mirrorVerticalVFX;
-    public GameObject[] VFXs;
-    public GameObject throwedObject;
-    public GameObject leftVFX;
-    public GameObject rightVFX;
-    public GameObject upVFX;
-    public GameObject downVFX;
 
     [Header("Paterns")]
     public bool useOrientatedAOE;

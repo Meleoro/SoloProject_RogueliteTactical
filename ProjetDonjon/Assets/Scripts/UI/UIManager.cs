@@ -73,16 +73,37 @@ public class UIManager : GenericSingletonClass<UIManager>
 
 
 
+    private void Start()
+    {
+        _collectionMenu.OnShow += () => currentState = UIState.Collection;
+        _collectionMenu.OnHide += () => currentState = UIState.Nothing;
+
+        _inventoriesManager.OnInventoryOpen += OpenInventory;
+
+        _heroInfosScreen.OnShow += () => currentState = UIState.HeroesInfos;
+        _heroInfosScreen.OnHide += () => currentState = UIState.Nothing;
+
+        _skillTreesManager.OnShow += () => currentState = UIState.SkillTrees;
+        _skillTreesManager.OnHide += () => currentState = UIState.Nothing;
+
+        _skillsMenu.OnShow += () => currentState = UIState.Skills;
+        _skillsMenu.OnHide += () => currentState = UIState.Nothing;
+
+    }
+
     private void Update()
     {
-        if (BattleManager.Instance.IsInBattle || !GameManager.Instance.IsInExplo) return;
+        if (BattleManager.Instance.IsInBattle) return;
 
         switch (currentState)
         {
             case UIState.Nothing:
+                if (!_hudExploration.IsDisplayed) return;
                 if (InputManager.wantsToHeroInfo)
                 {
+                    if (!_inventoriesManager.VerifyCanOpenCloseInventory()) return;
                     if (!_heroInfosScreen.VerifyCanOpenOrCloseHeroInfos()) return;
+
                     StartCoroutine(_heroInfosScreen.OpenInfosScreenCoroutine());
                     currentState = UIState.HeroesInfos;
                 }
@@ -90,7 +111,9 @@ public class UIManager : GenericSingletonClass<UIManager>
                 if (InputManager.wantsToInventory)
                 {
                     if (!_inventoriesManager.VerifyCanOpenCloseInventory()) return;
-                    _inventoriesManager.OpenInventories();
+                    if (!_heroInfosScreen.VerifyCanOpenOrCloseHeroInfos()) return;
+
+                    _inventoriesManager.ShowInventories();
                 }
 
                 if (InputManager.wantsToSkillTree)
@@ -157,20 +180,6 @@ public class UIManager : GenericSingletonClass<UIManager>
 
         OnExplorationStart.Invoke();
 
-        _collectionMenu.OnShow += () => currentState = UIState.Collection;
-        _collectionMenu.OnHide += () => currentState = UIState.Nothing;
-
-        _inventoriesManager.OnInventoryOpen += OpenInventory;
-
-        _heroInfosScreen.OnShow += () => currentState = UIState.HeroesInfos;
-        _heroInfosScreen.OnHide += () => currentState = UIState.Nothing;
-
-        _skillTreesManager.OnShow += () => currentState = UIState.SkillTrees;
-        _skillTreesManager.OnHide += () => currentState = UIState.Nothing;
-
-        _skillsMenu.OnShow += () => currentState = UIState.Skills;
-        _skillsMenu.OnHide += () => currentState = UIState.Nothing;
-
         _transition.StartTransition(enviroData, 0, isTuto);
     }
 
@@ -185,19 +194,19 @@ public class UIManager : GenericSingletonClass<UIManager>
     {
         OnExplorationEnd?.Invoke();
 
-        _collectionMenu.OnShow -= () => currentState = UIState.Collection;
-        _collectionMenu.OnHide -= () => currentState = UIState.Nothing;
+        //_collectionMenu.OnShow -= () => currentState = UIState.Collection;
+        //_collectionMenu.OnHide -= () => currentState = UIState.Nothing;
 
-        _inventoriesManager.OnInventoryOpen -= OpenInventory;
+        //_inventoriesManager.OnInventoryOpen -= OpenInventory;
 
-        _heroInfosScreen.OnShow -= () => currentState = UIState.HeroesInfos;
-        _heroInfosScreen.OnHide -= () => currentState = UIState.Nothing;
+        //_heroInfosScreen.OnShow -= () => currentState = UIState.HeroesInfos;
+        //_heroInfosScreen.OnHide -= () => currentState = UIState.Nothing;
 
-        _skillTreesManager.OnShow -= () => currentState = UIState.SkillTrees;
-        _skillTreesManager.OnHide -= () => currentState = UIState.Nothing;
+        //_skillTreesManager.OnShow -= () => currentState = UIState.SkillTrees;
+        //_skillTreesManager.OnHide -= () => currentState = UIState.Nothing;
 
-        _skillsMenu.OnShow -= () => currentState = UIState.Skills;
-        _skillsMenu.OnHide -= () => currentState = UIState.Nothing;
+        //_skillsMenu.OnShow -= () => currentState = UIState.Skills;
+        //_skillsMenu.OnHide -= () => currentState = UIState.Nothing;
     }
 
 

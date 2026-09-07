@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Boots3-1
   m_EditorClassIdentifier: 
   lootName: CRYSTAL BOOTS I
-  lootDescription: EACH TIME THIS UNIT GETS HIT, 50% CHANCES TO GAIN LUCKY FOR 3
-    TURNS
+  lootDescription: START EACH FIGHT WITH <#7C210C>LUCKY</color> FOR 3 TURNS
   lootType: 1
   rarityType: 2
   sprite: {fileID: 2072245860, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -28,13 +27,15 @@ MonoBehaviour:
   healthUpgrade: 1
   strengthUpgrade: 0
   speedUpgrade: 1
-  luckUpgrade: 1
+  luckUpgrade: 2
   mpUpgrade: 0
   spUpgrade: 0
-  upgradedVersion: {fileID: 0}
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 11400000, guid: ef947d662111b994e87eea5a6db8d7f7, type: 2}
   upgradeCost:
-    neededMaterials: []
-    neededMatQuantities: 
+    neededMaterials:
+    - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+    neededMatQuantities: 02000000
   appliedPassive: {fileID: 11400000, guid: 29dc97527d51a554eacb0ff53692cf67, type: 2}
   consumableType: 0
   consumablePower: 0

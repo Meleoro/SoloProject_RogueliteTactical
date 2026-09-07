@@ -128,6 +128,7 @@ Transform:
   - {fileID: 5857418378861915377}
   - {fileID: 8237228669059500180}
   - {fileID: 2846316689273621496}
+  - {fileID: 5531531743447066230}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4146985680107802204
@@ -157,8 +158,8 @@ MonoBehaviour:
   stunVFX: {fileID: 8724637062435613789, guid: 4fd7bfdd009c82c4ba9d96a32f72f584, type: 3}
   skullVFX: {fileID: 4941105439641107623, guid: bff0aa511c6bac648b41875a0697866a, type: 3}
   overlayColor: {r: 1, g: 1, b: 1, a: 1}
-  positiveColor: {r: 0, g: 1, b: 0, a: 1}
-  negativeColor: {r: 1, g: 0, b: 0, a: 1}
+  positiveColor: {r: 0.21568628, g: 0.7137255, b: 1, a: 1}
+  negativeColor: {r: 0.9607843, g: 0.27058825, b: 0.1254902, a: 1}
   unitsTurnColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _ui: {fileID: 8580318324518539411}
   _spriteRenderer: {fileID: 5627380343414885049}
@@ -361,6 +362,84 @@ Transform:
   - {fileID: 5388541027367275768}
   m_Father: {fileID: 5009017293649492096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8945658412771977002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5531531743447066230}
+  - component: {fileID: 7016975775617011259}
+  m_Layer: 11
+  m_Name: TransparentPropCollider
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5531531743447066230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945658412771977002}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.654, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5009017293649492096}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7016975775617011259
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945658412771977002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &1952403160228904501
 PrefabInstance:
   m_ObjectHideFlags: 0

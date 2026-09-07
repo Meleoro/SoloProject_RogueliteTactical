@@ -30,9 +30,10 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     [Header("Private Infos")]
     private int wantedRoomAmount;
     private List<Room> generatedRooms;
+    private HashSet<Room> bannedRooms;
     private Vector3 spawnPos;
     private int currentFloor;
-    public int[] trailFloorsIndexes;
+    //public int[] trailFloorsIndexes;
 
     [Header("Public Infos")]
     public int CurrentFloor { get { return currentFloor; } }
@@ -55,10 +56,11 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         currentFloor = startFloorIndex;
 
         LootManager.Instance.ActualiseInfos(enviroData, enviroData.lootPerFloors[currentFloor]);
+        bannedRooms = new HashSet<Room>();
 
-        trailFloorsIndexes = new int[2];
-        trailFloorsIndexes[0] = Random.Range(0, 2);
-        trailFloorsIndexes[1] = Random.Range(3, 5);
+        //trailFloorsIndexes = new int[2];
+        //trailFloorsIndexes[0] = Random.Range(0, 2);
+        //trailFloorsIndexes[1] = Random.Range(3, 5);
 
         if (isTuto)
         {
@@ -132,11 +134,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         GenerateAlternativePathes(2);
         GenerateDeadEnds(3);
 
-        if(currentFloor == trailFloorsIndexes[0] || currentFloor == trailFloorsIndexes[1])
-        {
-            GenerateTrialRoom();
-        }
-
+        GenerateTrialRoom();
+        
         CloseUnusedEntrances();
 
         UIManager.Instance.Minimap.SetupMinimap(_pathCalculator.floorGenProTiles, _pathCalculator);
@@ -231,6 +230,12 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
             {
                 baseRoom = generatedRooms[Random.Range(0, generatedRooms.Count)];
                 newRoom = GetRoomFromType(i == deadEndsCount - 1 ? (RoomType)6 : (RoomType)Random.Range(4, 6));
+
+                if (bannedRooms.Contains(newRoom))
+                {
+                    continue;
+                }
+
                 roomCoordinates = baseRoom.RoomCoordinates + GetRandomDirection();
                 newRoom.SetupRoom(roomCoordinates, roomSizeUnits);
             }
@@ -252,6 +257,12 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         {
             baseRoom = generatedRooms[Random.Range(0, generatedRooms.Count)];
             newRoom = GetRoomFromType(RoomType.Trial);
+
+            if(bannedRooms.Contains(newRoom))
+            {
+                continue;
+            }
+
             roomCoordinates = baseRoom.RoomCoordinates + GetRandomDirection();
             newRoom.SetupRoom(roomCoordinates, roomSizeUnits);
         }
@@ -305,6 +316,12 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
             for(int i = 0; i < result.Length; i++)
             {
                 result[i] = (RoomType)Random.Range(0, 4);
+
+                while(i != 0 && result[i] == result[i-1])
+                {
+                    result[i] = (RoomType)Random.Range(0, 4);
+                } 
+
                 if (result[i] == RoomType.Battle) battleRoomAmount++;
             }
 
@@ -355,11 +372,22 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
 
         RoomType[] pathRoomTypes = GetPathRoomTypes(path.ToArray(), wantedBattleRoomAmount);
 
-        while(!VerifyPathIsValid(path) && ++antiCrashCounter < 1000)
+        while(!VerifyPathIsValid(path) && ++antiCrashCounter < 2000)
         {
             Room testedRoom = GetRoomFromType(pathRoomTypes[currentPathIndex]);
             Vector2Int currentCoordinates = path[0];
             bool found = false;
+
+            if(!testedRoom)
+            {
+                Debug.LogError("Trying to add a null room");
+                continue;
+            }
+
+            if(bannedRooms.Contains(testedRoom))
+            {
+                continue;
+            }
 
             for (int i = 0; i < path.Count; i++)
             {
@@ -380,11 +408,29 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
                 currentPathIndex++;
             }
         }
+
+        if(antiCrashCounter >= 2000)
+        {
+            Debug.LogError("Used anti crash counter to generate path");
+            Debug.LogError("Blocked on room type : " + pathRoomTypes[currentPathIndex]);
+            Debug.LogError("Blocked on room coordinates : " + path[currentPathIndex]);
+            Debug.LogError("Blocked at index : " + currentPathIndex + " out of " + path.Count);
+        }  
     }
 
 
     private void AddRoom(Vector2Int spawnCoordinates, Room room)
     {
+        if(room == null)
+        {
+            Debug.LogWarning("Tried to add a null room while generating the map");
+            return;
+        }
+
+        Debug.Log("Spawned room : " + room.name);
+
+        bannedRooms.Add(room);
+
         Room newRoom = Instantiate(room, (Vector2)(spawnCoordinates * roomSizeUnits * new Vector2(2, 1.5f)) + offsetRoomCenter, Quaternion.Euler(0, 0, 0),
             _roomsParent);
         newRoom.SetupRoom(spawnCoordinates, roomSizeUnits);

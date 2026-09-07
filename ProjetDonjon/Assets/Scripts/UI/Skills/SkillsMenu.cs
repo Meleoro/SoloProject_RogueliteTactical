@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,8 +25,6 @@ public class SkillsMenu : MonoBehaviour
     private bool isInTransition;
     private bool isOnSkills;
     private EquippableSkill draggedInfos;
-    private EquippedSkill hoveredEquippedButton;
-    private Coroutine hoverEquippedCoroutine;
 
     [Header("References Left")]
     [SerializeField] private RectTransform _leftPartParent;
@@ -43,11 +42,8 @@ public class SkillsMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _heroName;
 
     [Header("References Others")]
-    [SerializeField] private RectTransform _leftArrowRectTr;
-    [SerializeField] private RectTransform _leftArrowPosRef;
-    [SerializeField] private RectTransform _rightArrowRectTr;
-    [SerializeField] private RectTransform _rightArrowPosRef;
-
+    [SerializeField] private RectTransform[] _heroQuickChangePositions;
+    [SerializeField] private Image _backFadeImage;
 
     private void Start()
     {
@@ -141,6 +137,17 @@ public class SkillsMenu : MonoBehaviour
         }
     }
 
+    private void EquipPassive(PassiveData passiveData)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (_equippableSkillButtons[i].PassiveData is null) continue;
+            if (_equippableSkillButtons[i].PassiveData != passiveData) continue;
+
+            _equippableSkillButtons[i].Equip();
+        }
+    }
+
     private void ActualiseHeroInfos()
     {
         SkillData[] currentSkills = new SkillData[6];
@@ -169,37 +176,19 @@ public class SkillsMenu : MonoBehaviour
     #endregion
 
 
-    #region Change Hero / Arrows
+    #region Change Hero
 
-    public void HoverArrow(bool isLeft)
+    public void SetupQuickChangeButtons()
     {
-        if (isLeft)
-        {
-            _leftArrowRectTr.UChangeScale(0.2f, Vector3.one * 1.2f, CurveType.EaseOutSin);
-        }
-        else
-        {
-            _rightArrowRectTr.UChangeScale(0.2f, Vector3.one * 1.2f, CurveType.EaseOutSin);
-        }
+        InventoriesManager.Instance.OnQuickChange += ChangeHero;
+        InventoriesManager.Instance.DisplayQuickChangeButtons(_heroQuickChangePositions);
     }
 
-    public void UnhoverArrow(bool isLeft)
+    public void ChangeHero(int heroIndex)
     {
-        if (isLeft)
-        {
-            _leftArrowRectTr.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
-        }
-        else
-        {
-            _rightArrowRectTr.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
-        }
-    }
-
-    public void ClickArrow(bool isLeft)
-    {
-        if (isInTransition || draggedInfos is not null) return;
-
-        StartCoroutine(ChangeHeroCoroutine(isLeft));
+        currentHeroIndex = heroIndex;
+        Hero hero = HeroesManager.Instance.Heroes[currentHeroIndex];
+        SetupHero(hero);
     }
 
     public IEnumerator ChangeHeroCoroutine(bool goLeft)
@@ -310,7 +299,6 @@ public class SkillsMenu : MonoBehaviour
         _heroName.text = hero.HeroData.unitName;
 
         LoadEquippableButtons();
-        LoadEquippedButtons();
         ActualiseUpButtons();
     }
 
@@ -327,14 +315,14 @@ public class SkillsMenu : MonoBehaviour
             for(int i = 0; i < currentHero.HeroData.heroBaseSkills.Length; i++)
             {
                 availableSkills.Add(currentHero.HeroData.heroBaseSkills[i]);
-                height += 50;
+                height += 60;
             }
 
             for(int i = 0; i < validNodes.Length; i++)
             {
                 if (validNodes[i].skillData is null) continue;
                 availableSkills.Add(validNodes[i].skillData);
-                height += 50;
+                height += 60;
             }
 
             for (int i = 0; i < _equippableSkillButtons.Length; i++)
@@ -358,7 +346,7 @@ public class SkillsMenu : MonoBehaviour
             {
                 if (validNodes[i].passiveData is null) continue;
                 availablePassives.Add(validNodes[i].passiveData);
-                height += 50;
+                height += 60;
             }
 
             for(int i = 0; i < _equippableSkillButtons.Length; i++)
@@ -375,6 +363,7 @@ public class SkillsMenu : MonoBehaviour
             }
         }
 
+        LoadEquippedButtons();
         _buttonsParent.sizeDelta = new Vector2(_buttonsParent.rect.width, height); 
     }
 
@@ -428,6 +417,7 @@ public class SkillsMenu : MonoBehaviour
             else if (equippedPassives[i - 6] is not null)
             {
                 _equippedSkillButtons[i].SetEquippedElement(equippedPassives[i - 6]);
+                EquipPassive(equippedPassives[i - 6]);
             }
             else
             {
@@ -458,22 +448,13 @@ public class SkillsMenu : MonoBehaviour
 
     private IEnumerator ShowCoroutine()
     {
-        _leftPartParent.UChangeLocalPosition(0.2f, _leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position) + Vector3.right * 20f, 
-            CurveType.EaseOutCubic);
-        _rightPartParent.UChangeLocalPosition(0.2f, _rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position) + Vector3.left * 20f,
-            CurveType.EaseOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.2f, _leftArrowPosRef.localPosition + new Vector3(10, 0, 0), CurveType.EaseOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.2f, _rightArrowPosRef.localPosition + new Vector3(-10, 0, 0), CurveType.EaseOutCubic);
+        SetupQuickChangeButtons();
 
+        _leftPartParent.DOLocalMove(_leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position), 0.3f).SetEase(Ease.OutBack);
+        _rightPartParent.DOLocalMove(_rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position), 0.3f).SetEase(Ease.OutBack);
 
-        yield return new WaitForSeconds(0.2f);
-
-        _leftPartParent.UChangeLocalPosition(0.3f, _leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position),
-            CurveType.EaseInOutCubic);
-        _rightPartParent.UChangeLocalPosition(0.3f, _rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position),
-            CurveType.EaseInOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.3f, _leftArrowPosRef.localPosition, CurveType.EaseInOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.3f, _rightArrowPosRef.localPosition, CurveType.EaseInOutCubic);
+        _backFadeImage.enabled = true;
+        _backFadeImage.DOFade(0.7f, 0.3f);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -494,24 +475,14 @@ public class SkillsMenu : MonoBehaviour
 
     private IEnumerator HideCoroutine()
     {
-        _leftPartParent.UChangeLocalPosition(0.1f, _leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position) + Vector3.right * 20f,
-            CurveType.EaseOutCubic);
-        _rightPartParent.UChangeLocalPosition(0.1f, _rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position) + Vector3.left * 20f,
-            CurveType.EaseOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.1f, _leftArrowPosRef.localPosition + new Vector3(10, 0, 0), CurveType.EaseOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.1f, _rightArrowPosRef.localPosition + new Vector3(-10, 0, 0), CurveType.EaseOutCubic);
+        _backFadeImage.DOFade(0f, 0.25f);
 
-        yield return new WaitForSeconds(0.1f);
+        _leftPartParent.DOLocalMove(_leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position) + Vector3.left * 550f, 0.25f).SetEase(Ease.InBack);
+        _rightPartParent.DOLocalMove(_rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position) + Vector3.right * 550f, 0.25f).SetEase(Ease.InBack);
 
-        _leftPartParent.UChangeLocalPosition(0.2f, _leftPartParent.parent.InverseTransformPoint(_leftShownPosTr.position) + Vector3.left * 600f,
-            CurveType.EaseInOutCubic);
-        _rightPartParent.UChangeLocalPosition(0.2f, _rightPartParent.parent.InverseTransformPoint(_rightShownPosTr.position) + Vector3.right * 600f,
-            CurveType.EaseInOutCubic);
-        _leftArrowRectTr.UChangeLocalPosition(0.1f, _leftArrowPosRef.localPosition + new Vector3(-100, 0, 0), CurveType.EaseInOutCubic);
-        _rightArrowRectTr.UChangeLocalPosition(0.1f, _rightArrowPosRef.localPosition + new Vector3(100, 0, 0), CurveType.EaseInOutCubic);
+        yield return new WaitForSeconds(0.3f);
 
-        yield return new WaitForSeconds(0.2f);
-
+        _backFadeImage.enabled = false;
         isInTransition = false;
     }
 

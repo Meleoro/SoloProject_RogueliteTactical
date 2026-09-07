@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: H2-1 Invocator
   m_EditorClassIdentifier: 
   passiveName: INVOCATOR
-  passiveDescription: INVOKED UNITS DEAL +1 DAMAGE AND HAVE +2 HEALTH
+  passiveDescription: INVOKED UNITS DEAL +1 DAMAGE AND +3 HEALTH
   passiveIcon: {fileID: 1812084220, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 465495736, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas: []
   passiveTriggerType: 9
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 8

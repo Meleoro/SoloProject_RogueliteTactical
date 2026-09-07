@@ -17,7 +17,7 @@ MonoBehaviour:
   lootType: 1
   rarityType: 0
   sprite: {fileID: -2035620461, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  value: 10
+  value: 25
   level: 0
   spaceTaken:
   - row: 01

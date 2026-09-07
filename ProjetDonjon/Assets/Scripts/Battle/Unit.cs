@@ -202,8 +202,6 @@ public class Unit : MonoBehaviour
 
             yield return new WaitForSeconds(0.15f);
         }
-
-        BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
     }
 
     private IEnumerator FallCoroutine()
@@ -315,7 +313,7 @@ public class Unit : MonoBehaviour
         return pickedProba < critProba + addedProba;
     }
 
-    public virtual void TakeDamage(int damageAmount, Unit originUnit)
+    public virtual void TakeDamage(int damageAmount, Unit originUnit, bool isCrit = false)
     {
         PassiveData[] triggeredPassives = BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnDamageReceived, this).ToArray();
         BattleManager.Instance.PassivesManager.ApplyPassives(triggeredPassives, this, originUnit);
@@ -328,7 +326,7 @@ public class Unit : MonoBehaviour
         // No damages when the hero explores in the tuto
         if (!BattleManager.Instance.IsInBattle && TutoManager.Instance.IsInTuto)
         {
-            StartCoroutine(DoColorEffectCoroutine(damageColor));
+            StartCoroutine(DoColorEffectCoroutine(Color.white * 1.5f));
             return;
         }
 
@@ -360,10 +358,14 @@ public class Unit : MonoBehaviour
 
         if (shieldDamages == CurrentShield && CurrentShield > 0) RemoveAlteration(AlterationType.Shield);
 
-        CurrentShield -= shieldDamages;
-        CurrentHealth -= healthDamages;
+        currentShield -= shieldDamages;
+        currentHealth -= healthDamages;
 
-        StartCoroutine(DoColorEffectCoroutine(damageColor));
+        _ui.TakeDamage(currentHealth, isCrit);
+        _ui.ActualiseUI((float)currentHealth / currentMaxHealth, currentHealth, currentAlterations);
+        OnHeroInfosChange?.Invoke();
+
+        StartCoroutine(DoColorEffectCoroutine(Color.white * 1.5f));
 
         // Shield
         if(shieldDamages != 0)
@@ -389,6 +391,8 @@ public class Unit : MonoBehaviour
 
     public virtual void Heal(int healedAmount)
     {
+        _ui.TakeHealing(currentHealth + healedAmount);
+
         if (healedAmount != -1)
             CurrentHealth = Mathf.Clamp(CurrentHealth + healedAmount, 0, CurrentMaxHealth);
         else
@@ -666,30 +670,18 @@ public class Unit : MonoBehaviour
 
     protected void HoverUnit()
     {
-        if (!BattleManager.Instance.IsInBattle) return;
         if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
 
-        isHovered = true;
-
-        CurrentTile?.OverlayTile();
+        if (currentTile)
+            currentTile.SetUnitHovered(true);
     }
 
     protected void UnHoverUnit()
     {
         if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
-        if (!isHovered) return;
-        isHovered = false;
 
-        StartCoroutine(VerifyQuitOverlayTile());
-    }
-
-    private IEnumerator VerifyQuitOverlayTile()
-    {
-        yield return new WaitForEndOfFrame();
-
-        if (!CurrentTile || CurrentTile.IsHovered) yield break;
-
-        CurrentTile?.QuitOverlayTile();
+        if (currentTile)
+            currentTile.SetUnitHovered(false);
     }
 
     protected virtual async void ClickUnit()
@@ -720,18 +712,20 @@ public class Unit : MonoBehaviour
             StartTurnOutline();
         }
 
-        _spriteRenderer.material.ULerpMaterialColor(0.15f, new Color(0, 0, 0, 0), "_OutlineColor");
+        //_spriteRenderer.material.DOKill();
+        _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.15f);
     }
 
     protected void DisplayOutline(Color color)
     {
         if(turnOutlineCoroutine != null)
         {
-            restartTurnOutlineNext = true;
-            EndTurnOutline();
+            //restartTurnOutlineNext = true;
+            EndTurnOutline(true);
         }
 
-        _spriteRenderer.material.ULerpMaterialColor(0.15f, color, "_OutlineColor");
+        //_spriteRenderer.material.DOKill();
+        _spriteRenderer.material.DOVector(color, "_OutlineColor", 0.15f);
     }
 
     public void DisplayOverlayOutline()
@@ -753,7 +747,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    protected void StartTurnOutline()
+    public void StartTurnOutline()
     {
         if(turnOutlineCoroutine != null)
         {
@@ -765,27 +759,32 @@ public class Unit : MonoBehaviour
         turnOutlineCoroutine = StartCoroutine(TurnOutlineCoroutine());
     }
 
-    protected void EndTurnOutline()
+    public void EndTurnOutline(bool fromHover)
     {
         if (turnOutlineCoroutine != null)
         {
             StopCoroutine(turnOutlineCoroutine);
+            _spriteRenderer.material.DOKill();
+            turnOutlineCoroutine = null;
         }
 
-        _spriteRenderer.material.ULerpMaterialColor(0.7f, new Color(0, 0, 0, 0), "_OutlineColor");
+        if(!fromHover) 
+        {
+            _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.3f); 
+        }
     }
 
     private IEnumerator TurnOutlineCoroutine()
     {
         while (true)
         {
-            _spriteRenderer.material.ULerpMaterialColor(0.7f, unitsTurnColor, "_OutlineColor");
+            _spriteRenderer.material.DOVector(unitsTurnColor, "_OutlineColor", 0.7f);
 
             yield return new WaitForSeconds(0.9f);
 
-            _spriteRenderer.material.ULerpMaterialColor(0.7f, new Color(0, 0, 0, 0), "_OutlineColor");
+            _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.7f);
 
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(0.8f);
         }
     }
 
@@ -838,8 +837,6 @@ public class Unit : MonoBehaviour
         PassiveData[] prokedPassives = 
             BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnTurnStarted, this).ToArray();
         BattleManager.Instance.PassivesManager.ApplyPassives(prokedPassives, this, null);
-
-        StartTurnOutline();
     }
 
     public virtual void EndTurn(float delay)
@@ -852,7 +849,7 @@ public class Unit : MonoBehaviour
             BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnTurnEnded, this).ToArray();
         BattleManager.Instance.PassivesManager.ApplyPassives(prokedPassives, this, null);
 
-        EndTurnOutline();
+        EndTurnOutline(false);
         HideOutline();
 
         ActualiseAlterations(true);

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -198,36 +199,62 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public IEnumerator OpenInventoryCoroutine(float duration)
+    public IEnumerator OpenInventoryCoroutine(float duration, bool noMovement = false)
     {
-        RebootPosition();
+        if (!noMovement)
+        {
+            RebootPosition();
 
-        _rectTransform.position = _hiddenRectTr.position;
-        _lootParent.position = _hiddenRectTr.position;
+            _rectTransform.position = _hiddenRectTr.position;
+            _lootParent.position = _hiddenRectTr.position;
 
-        isMoving = true;
-        HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.StopControl();
+            isMoving = true;
+        }
 
-        _rectTransform.UChangeLocalPosition(duration * 0.75f, _rectTransform.parent.InverseTransformPoint(_showedRectTr.position + Vector3.up), CurveType.EaseOutSin);
-        _lootParent.UChangeLocalPosition(duration * 0.75f, _rectTransform.parent.InverseTransformPoint(_showedRectTr.position + Vector3.up), CurveType.EaseOutSin);
+        if(!noMovement)
+        {
+            _rectTransform.DOLocalMove(_rectTransform.parent.InverseTransformPoint(_showedRectTr.position), duration).SetEase(Ease.OutBack);
+            _lootParent.DOLocalMove(_rectTransform.parent.InverseTransformPoint(_showedRectTr.position), duration).SetEase(Ease.OutBack);
+        }
 
-        yield return new WaitForSeconds(duration * 0.75f + Time.deltaTime);
+        for(int i = 0; i < inventorySlots.Length; i++)
+        {
+            StartCoroutine(inventorySlots[i].AppearEffectCoroutine(Random.Range(0.0f, 0.15f) + duration * 0.5f));
+        }
 
-        _rectTransform.UChangeLocalPosition(duration * 0.25f, _rectTransform.parent.InverseTransformPoint(_showedRectTr.position), CurveType.EaseInSin);
-        _lootParent.UChangeLocalPosition(duration * 0.25f, _rectTransform.parent.InverseTransformPoint(_showedRectTr.position), CurveType.EaseInSin);
+        List<Loot> inventoryLoot = InventoriesManager.Instance.GetInventoryLoot(associatedHero != null ? associatedHero.HeroIndex : -1, IsChest);
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].DisableRaycastTarget(false);
+            StartCoroutine(inventoryLoot[i].AppearInInventoryCoroutine(Random.Range(0, 0.15f) + duration * 0.5f));
+        }
 
-        yield return new WaitForSeconds(duration * 0.25f);
+        yield return new WaitForSeconds(duration);
+
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].EnableRaycastTarget();
+        }
 
         isMoving = false;
     }
 
-    public IEnumerator CloseInventoryCoroutine(float duration)
+    public IEnumerator CloseInventoryCoroutine(float duration, bool noMovement = false)
     {
-        isMoving = true;
-        HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
+        if(!noMovement)
+        {
+            isMoving = true;
+            //HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
 
-        _rectTransform.UChangeLocalPosition(duration, _rectTransform.parent.InverseTransformPoint(_hiddenRectTr.position), CurveType.EaseOutCubic);
-        _lootParent.UChangeLocalPosition(duration, _rectTransform.parent.InverseTransformPoint(_hiddenRectTr.position), CurveType.EaseOutCubic);
+            _rectTransform.DOLocalMove(_rectTransform.parent.InverseTransformPoint(_hiddenRectTr.position), duration).SetEase(Ease.OutBack);
+            _lootParent.DOLocalMove(_rectTransform.parent.InverseTransformPoint(_hiddenRectTr.position), duration).SetEase(Ease.OutBack);
+        }
+
+        List<Loot> inventoryLoot = InventoriesManager.Instance.GetInventoryLoot(associatedHero != null ? associatedHero.HeroIndex : -1, isChest);
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].DisableRaycastTarget(true);
+        }
 
         yield return new WaitForSeconds(duration);
 
@@ -426,6 +453,17 @@ public class Inventory : MonoBehaviour
         {
             inventorySlots[i].SetIsInBlacksmith(false);
         }
+    }
+
+    public void EnableRaycastTarget()
+    {
+        List<Loot> inventoryLoot = InventoriesManager.Instance.GetInventoryLoot(associatedHero.HeroIndex, isChest);
+
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].EnableRaycastTarget();
+        }
+
     }
 
     #endregion

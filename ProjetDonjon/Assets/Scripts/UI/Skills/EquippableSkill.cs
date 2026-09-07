@@ -16,6 +16,8 @@ public class EquippableSkill : MonoBehaviour
     [SerializeField] private Color hoveredTextColor;
     [SerializeField] private Color unhoveredTextColor;
     [SerializeField] private Color highlightIconColor;
+    [SerializeField] private int normalHeight;
+    [SerializeField] private int hoveredHeight;
 
     [Header("Actions")]
     public Action<EquippableSkill> OnClick;
@@ -118,7 +120,7 @@ public class EquippableSkill : MonoBehaviour
 
         AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
 
-        StartCoroutine(AdaptHeightCoroutine(70, 75, 0.15f));
+        StartCoroutine(AdaptHeightCoroutine(normalHeight, hoveredHeight, 0.15f));
     }
 
     private IEnumerator AdaptHeightCoroutine(float startHeight, float endHeight, float duration)
@@ -145,7 +147,7 @@ public class EquippableSkill : MonoBehaviour
         _mainImage.DOColor(unhoveredColor, 0.2f).SetEase(Ease.OutCubic);
         _buttonText.DOColor(unhoveredTextColor, 0.2f).SetEase(Ease.OutCubic);
 
-        StartCoroutine(AdaptHeightCoroutine(75, 70, 0.15f));
+        StartCoroutine(AdaptHeightCoroutine(hoveredHeight, normalHeight, 0.15f));
     }
 
     public void ClickButton()

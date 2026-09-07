@@ -13,7 +13,7 @@ public class PassiveData : ScriptableObject
 
     [Header("Effect")]
     public PassiveTriggerType passiveTriggerType;
-    public AlterationData neededAlteration;
+    public AlterationData[] neededAlteration;
     [Range(0, 100)] public float passiveTriggerProba;
     public PassiveEffect[] passiveEffects;
 }

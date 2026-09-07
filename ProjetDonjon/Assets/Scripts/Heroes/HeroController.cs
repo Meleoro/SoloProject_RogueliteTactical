@@ -73,6 +73,7 @@ public class HeroController : MonoBehaviour
         }
         if (noControl) return;
 
+        ActualiseSavePositions();
         Move(InputManager.moveDir);
 
         if (InputManager.wantsToJump)
@@ -98,18 +99,6 @@ public class HeroController : MonoBehaviour
         _rb.linearVelocity = inputDir * moveSpeed;
 
         Rotate(inputDir);
-
-        if(currentControllerState == ControllerState.Walk)
-        {
-            if (Vector2.Distance(savePositions[^1], transform.position) > 0.1f)
-            {
-                savePositions.Add(transform.position);
-                if (savePositions.Count > 5)
-                {
-                    savePositions.RemoveAt(0);
-                }
-            }
-        }
 
         if (inputDir != Vector2.zero)
         {
@@ -287,8 +276,57 @@ public class HeroController : MonoBehaviour
 
     #region Others
 
+    public void ForceAddCurrentPositionForSave(Vector3 position)
+    {
+        savePositions.Add(position);
+        savePositions.Add(position);
+        savePositions.Add(position);
+        savePositions.Add(position);
+        savePositions.Add(position);
+        while (savePositions.Count > 5)
+        {
+            savePositions.RemoveAt(0);
+        }
+    }
+
+    private void ActualiseSavePositions()
+    {
+        if (currentControllerState != ControllerState.Walk) return;
+        
+        Vector3[] offsets = { Vector2.right, Vector2.down, Vector2.left, Vector2.up, Vector2.up + Vector2.left, Vector2.up + Vector2.right };
+
+        bool isValid = true;
+        for(int i = 0; i < offsets.Length; i++)
+        {
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + offsets[i] + Vector3.back, Vector3.forward, 2.0f);
+
+            foreach(RaycastHit2D hit in hits)
+            {
+                if(hit.collider.gameObject.CompareTag("Hole"))
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+
+        if (!isValid) return;
+
+        if (Vector2.Distance(savePositions[^1], transform.position) > 0.1f)
+        {
+            savePositions.Add(transform.position);
+            if (savePositions.Count > 5)
+            {
+                savePositions.RemoveAt(0);
+            }
+        }
+        
+    }
+
     public IEnumerator FallCoroutine()
     {
+        InputManager.DisableInputs = true;
+
         currentControllerState = ControllerState.Fall;
         _rb.linearVelocity = Vector2.zero;
 
@@ -301,10 +339,14 @@ public class HeroController : MonoBehaviour
         _rbSprite.transform.UStopChangeScale();
 
         currentControllerState = ControllerState.Idle;
-        transform.position = savePositions[1];
+        transform.position = savePositions[0];
         _rbSprite.transform.localScale = Vector3.one;
 
         HeroesManager.Instance.TakeDamage(1);
+
+        yield return new WaitForSeconds(0.35f);
+
+        InputManager.DisableInputs = false;
     }
 
 

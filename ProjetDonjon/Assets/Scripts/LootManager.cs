@@ -149,15 +149,20 @@ public class LootManager : GenericSingletonClass<LootManager>
 
     public PossibleLootData[] GetSpawnedLootTrial()
     {
-        int spawnedLootAmount = Random.Range(currentFloorLootData.minLootAmountPerChallenge, currentFloorLootData.maxLootAmountPerChallenge + 1);
+        int spawnedLootAmount = Random.Range(currentFloorLootData.minLootAmountPerTrial, currentFloorLootData.maxLootAmountPerBattle + 1);
         PossibleLootData[] spawnedLootData = new PossibleLootData[spawnedLootAmount];
 
         for (int i = 0; i < spawnedLootAmount; i++)
         {
-            spawnedLootData[i] = GetSpawnedLoot(currentFloorLootData.probaPerTierChallenge);
+            spawnedLootData[i] = GetSpawnedLoot(currentFloorLootData.probaPerTierTrial);
         }
 
         return spawnedLootData;
+    }
+
+    public int GetSpawnCoinsTrial()
+    {
+        return Random.Range(currentFloorLootData.minChallengeCoins, currentFloorLootData.maxChallengeCoins);
     }
 
 

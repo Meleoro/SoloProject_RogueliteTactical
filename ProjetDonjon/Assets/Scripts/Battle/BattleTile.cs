@@ -41,7 +41,8 @@ public class BattleTile : MonoBehaviour
     [SerializeField] private Color addedColorOverlayBack;
 
     [Header("Actions")]
-    public Action<int> OnUnitEnterTile; 
+    public Action<int> OnUnitEnterTile;   // for tuto
+    public Action<int> OnClickTile;      // for tuto
 
     [Header("Private Infos")]
     private Vector2Int tileCoordinates;
@@ -60,6 +61,8 @@ public class BattleTile : MonoBehaviour
     private bool isHole;
     private bool cantStopHere;
     private bool isHovered;
+    private bool unitHovered;
+    private bool isOverlayed;
 
     [Header("Public Infos")]
     public Unit UnitOnTile { get { return unitOnTile; } }
@@ -105,9 +108,30 @@ public class BattleTile : MonoBehaviour
 
     #endregion
 
+
+    private void Update()
+    {
+        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls)
+        {
+            _tileButton.enabled = false;
+            isHovered = false;
+            unitHovered = false;
+        }
+
+        if (isOverlayed && !unitHovered && !isHovered)
+        {
+            QuitOverlayTile();
+        }
+    }
+
     private void LateUpdate()
     {
         saveTileState = BattleTileState.None;
+
+        if (!isOverlayed && (unitHovered || isHovered))
+        {
+            OverlayTile();
+        }
     }
 
 
@@ -202,7 +226,6 @@ public class BattleTile : MonoBehaviour
     public void DisplayDangerTile(SkillType skillType)
     {
         if (currentTileState == BattleTileState.Skill) return;
-        if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
         currentTileState = BattleTileState.Skill;
 
         if (changeStateEffectCoroutine is not null) StopCoroutine(changeStateEffectCoroutine);
@@ -212,45 +235,61 @@ public class BattleTile : MonoBehaviour
             case SkillType.Attack:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
                 break;
 
             case SkillType.HeavyAttack:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
                 break;
 
             case SkillType.AttackBuff:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
                 break;
 
             case SkillType.AttackDebuff:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(dangerTileColorOutline, dangerTileColorBack, false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
                 break;
 
             case SkillType.Heal:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
                     false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(true);
                 break;
 
             case SkillType.Buff:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
                     false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(true);
                 break;
 
             case SkillType.Summon:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(buffTileColorOutline + addedColorOverlayOutline, buffTileColorBack + addedColorOverlayBack, 
                     false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(true);
                 break;
 
             case SkillType.Debuff:
                 changeStateEffectCoroutine = StartCoroutine(
                     ChangeStateEffect(debuffTileColorOutline + addedColorOverlayOutline, debuffTileColorBack + addedColorOverlayBack, 
                     false, saveTileState == BattleTileState.Skill));
+
+                if (unitOnTile is not null) unitOnTile.DisplaySkillOutline(false);
                 break;
         }
     }
@@ -392,7 +431,9 @@ public class BattleTile : MonoBehaviour
             if (neighbor.TileCoordinates.y <= tileCoordinates.y) continue;
 
             neighbor.cantStopHere = true;
-        }    
+        }
+
+        BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
     }
 
     public void UnitLeaveTile()
@@ -405,6 +446,8 @@ public class BattleTile : MonoBehaviour
 
             neighbor.cantStopHere = false;
         }
+
+        BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
     }
 
     #endregion
@@ -417,11 +460,17 @@ public class BattleTile : MonoBehaviour
         if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
 
         isHovered = true;
-        OverlayTile();
+    }
+
+    public void SetUnitHovered(bool hovered)
+    {
+        unitHovered = hovered;
     }
 
     public void OverlayTile()
     {
+        isOverlayed = true;
+
         if (currentTileState == BattleTileState.SkillPreview && BattleManager.Instance.CurrentActionType == MenuType.LaunchSkill)
         {
             BattleManager.Instance.TilesManager.DisplayDangerTiles(this, null);
@@ -461,29 +510,15 @@ public class BattleTile : MonoBehaviour
         }
     }
 
-    public void UnhoverTile()
+    public void UnhoverTile(bool alreadyVerified = false)
     {
-        if (BattleManager.Instance.IsEnemyTurn || BattleManager.Instance.NoMouseControls) return;
         isHovered = false;
-
-        if (unitOnTile)
-            StartCoroutine(VerifyQuitOverlayTile());
-
-        else
-            QuitOverlayTile();
-    }
-
-    private IEnumerator VerifyQuitOverlayTile()
-    {
-        yield return new WaitForEndOfFrame();
-
-        if(unitOnTile && unitOnTile.IsHovered) yield break;
-
-        QuitOverlayTile();
     }
 
     public void QuitOverlayTile()
     {
+        isOverlayed = false;
+
         if (currentTileState == BattleTileState.Skill)
         {
             BattleManager.Instance.TilesManager.DisplayPossibleSkillTiles(null, null, false);
@@ -538,6 +573,7 @@ public class BattleTile : MonoBehaviour
             case BattleTileState.Skill:
                 if (BattleManager.Instance.CurrentActionType != MenuType.LaunchSkill) break;
                 StartCoroutine(BattleManager.Instance.UseSkillCoroutine(null));
+                OnClickTile?.Invoke(1);
                 break;
         }
     }

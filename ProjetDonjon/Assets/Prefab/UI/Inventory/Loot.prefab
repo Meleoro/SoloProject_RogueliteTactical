@@ -1229,6 +1229,8 @@ MonoBehaviour:
   - {fileID: 1447593001, guid: 12ec956465209d74aa3e7b9432a25a3d, type: 3}
   - {fileID: 293502351, guid: 12ec956465209d74aa3e7b9432a25a3d, type: 3}
   dragLerpSpeed: 15
+  baseSizeMain: 0.65
+  baseSizeItemImage: 0.85
   debug: 0
   minAppearAddedY: 0.5
   maxAppearAddedY: 1.5

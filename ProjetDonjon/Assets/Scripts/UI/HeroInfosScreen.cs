@@ -21,7 +21,7 @@ public class HeroInfosScreen : MonoBehaviour
     private HeroData heroData;
     private Hero hero;
     private Inventory currentInventory;
-    private bool isOpenning;
+    private bool isOpeningOrClosing;
     private int currentHeroIndex;
     private Color baseTextColor;
 
@@ -66,54 +66,8 @@ public class HeroInfosScreen : MonoBehaviour
     {
         currentHeroIndex = index;
 
-        //StartCoroutine(ChangeHeroCoroutine(left));
-
         ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex], false);
         ActualiseInventory();
-    }
-
-    private IEnumerator ChangeHeroCoroutine(int index)
-    {
-        isOpenning = true;
-
-        Vector3 pos1 = new Vector3(-800, 0, 0);
-        Quaternion rot1 = Quaternion.Euler(0, 0, 15);
-        currentInventory.RectTransform.DOLocalMove(pos1, 0.2f).SetEase(Ease.InCubic);
-        currentInventory.RectTransform.DOLocalRotate(rot1.eulerAngles, 0.2f).SetEase(Ease.InCubic);
-        currentInventory.LootParent.DOLocalMove(pos1, 0.2f).SetEase(Ease.InCubic);
-        currentInventory.LootParent.DOLocalRotate(rot1.eulerAngles, 0.2f).SetEase(Ease.InCubic);
-        _mainRectParent.DOLocalMove(pos1, 0.2f).SetEase(Ease.InCubic);
-        _mainRectParent.DOLocalRotate(rot1.eulerAngles, 0.2f).SetEase(Ease.InCubic);
-
-        yield return new WaitForSeconds(0.2f);
-
-        currentInventory.RectTransform.localRotation = Quaternion.Euler(0, 0, 0);
-        currentInventory.LootParent.localRotation = Quaternion.Euler(0, 0, 0);
-        _mainRectParent.localRotation = Quaternion.Euler(0, 0, 0);
-
-        ActualiseInfoScreen(_heroesManager.Heroes[currentHeroIndex], false);
-        ActualiseInventory();
-
-        currentInventory.RectTransform.localRotation = rot1;
-        currentInventory.LootParent.localRotation = rot1;
-
-        currentInventory.RectTransform.localPosition = -pos1;
-        currentInventory.RectTransform.UChangeLocalPosition(0.2f, _shownInventoryPosition.localPosition, CurveType.EaseOutCubic);
-        currentInventory.RectTransform.UChangeLocalRotation(0.2f, Quaternion.Euler(0, 0, 0), CurveType.EaseOutCubic);
-
-        currentInventory.LootParent.localPosition = -pos1;
-        currentInventory.LootParent.UChangeLocalPosition(0.2f, _shownInventoryPosition.localPosition, CurveType.EaseOutCubic);
-        currentInventory.LootParent.UChangeLocalRotation(0.2f, Quaternion.Euler(0, 0, 0), CurveType.EaseOutCubic);
-
-        _mainRectParent.localRotation = rot1;
-
-        _mainRectParent.localPosition = -pos1;
-        _mainRectParent.UChangeLocalPosition(0.2f, _shownInfoScreenPosition.localPosition, CurveType.EaseOutCubic);
-        _mainRectParent.UChangeLocalRotation(0.2f, Quaternion.Euler(0, 0, 0), CurveType.EaseOutCubic);
-
-        yield return new WaitForSeconds(0.2f);
-
-        isOpenning = false;
     }
 
 
@@ -133,22 +87,24 @@ public class HeroInfosScreen : MonoBehaviour
 
         OnShow.Invoke();
 
-        isOpenning = true;
+        isOpeningOrClosing = true;
 
         _backFadeImage.enabled = true;
         _backFadeImage.DOFade(0.7f, openDuration);
 
-        _mainRectParent.UChangePosition(openDuration, _shownInfoScreenPosition.position, CurveType.EaseOutCubic);
-        _inventoryParent.UChangePosition(openDuration, _shownInventoryPosition.position, CurveType.EaseOutCubic);
+        _mainRectParent.DOMove(_shownInfoScreenPosition.position, openDuration).SetEase(Ease.OutBack);
+        _inventoryParent.DOMove(_shownInventoryPosition.position, openDuration).SetEase(Ease.OutBack);
+
+        StartCoroutine(currentInventory.OpenInventoryCoroutine(openDuration, true));
 
         yield return new WaitForSeconds(openDuration);
 
-        isOpenning = false;
+        isOpeningOrClosing = false;
     }
 
     public IEnumerator CloseInfosScreenCoroutine()
     {
-        isOpenning = true;
+        isOpeningOrClosing = true;
 
         InventoriesManager.Instance.InventoryActionPanel.ClosePanel();
         HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
@@ -160,20 +116,22 @@ public class HeroInfosScreen : MonoBehaviour
 
         _backFadeImage.DOFade(0f, closeDuration);
 
-        _mainRectParent.UChangePosition(closeDuration, _hiddenInfoScreenPosition.position, CurveType.EaseOutCubic);
-        _inventoryParent.UChangePosition(closeDuration, _hiddenInventoryPosition.position, CurveType.EaseOutCubic);
+        _mainRectParent.DOMove(_hiddenInfoScreenPosition.position, closeDuration).SetEase(Ease.InBack);
+        _inventoryParent.DOMove(_hiddenInventoryPosition.position, closeDuration).SetEase(Ease.InBack);
+
+        StartCoroutine(currentInventory.CloseInventoryCoroutine(closeDuration, true));
 
         yield return new WaitForSeconds(closeDuration);
 
         currentInventory.RebootPosition();
         _backFadeImage.enabled = false;
 
-        isOpenning = false;
+        isOpeningOrClosing = false;
     }
 
     public bool VerifyCanOpenOrCloseHeroInfos()
     {
-        return !isOpenning;
+        return !isOpeningOrClosing;
     }
 
     #endregion
@@ -350,6 +308,8 @@ public class HeroInfosScreen : MonoBehaviour
 
         currentInventory.LootParent.SetParent(_inventoryParent, true);
         currentInventory.LootParent.localPosition = Vector3.zero;
+
+        currentInventory.EnableRaycastTarget();
     }
     
     #endregion

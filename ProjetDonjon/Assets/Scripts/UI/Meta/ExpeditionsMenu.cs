@@ -30,6 +30,7 @@ public class ExpeditionsMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resourcesText;
     [SerializeField] private TextMeshProUGUI _relicText;
     [SerializeField] private TextMeshProUGUI _mainExpeditionName;
+    [SerializeField] private TextMeshProUGUI _otherExpeditionName;
     [SerializeField] private Image _mainExpeditionImage;
     [SerializeField] private RectTransform[] _arrowsRectTr;
 
@@ -38,12 +39,22 @@ public class ExpeditionsMenu : MonoBehaviour
     private void LoadEnviro(EnviroData enviroData)
     {
         _mainExpeditionName.text = enviroData.enviroName;
+        _otherExpeditionName.text = enviroData.enviroName;
         _mainExpeditionImage.sprite = enviroData.enviroIllustration;
 
         _resourcesText.text = enviroData.enviroResourcesTexts;
         _dangerText.text = enviroData.enviroDangerText;
         _relicText.text =  "RELICS FOUND : " + RelicsManager.Instance.GetAreaCurrentRelicCount(enviroData.enviroIndex) + "/" +
             RelicsManager.Instance.GetAreaAllRelicCount(enviroData.enviroIndex);
+
+        if(enviroData.enviroIndex >= 1)
+        {
+            _buttons[0].gameObject.SetActive(false);
+        }
+        else
+        {
+            _buttons[0].gameObject.SetActive(true);
+        }
     }
 
 

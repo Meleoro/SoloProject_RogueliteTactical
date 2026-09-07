@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -29,7 +30,8 @@ public class SkillsPanelButton : MonoBehaviour
     private bool canBeUsed;
     private bool isLocked;
     private bool isClicked;
-    private float skillAreaSize;
+    private Vector3 baseSkillPointsParentLocalPos;
+    private Image[] currentSkillPointsImages;
 
     [Header("Public Infos")]
     public SkillData SkillData { get { return skillData; } }
@@ -37,8 +39,11 @@ public class SkillsPanelButton : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI _buttonText;
     [SerializeField] private Image _buttonImage;
+    [SerializeField] private Image _lockDarkenImage;
     [SerializeField] private Image _skillIcon;
-    [SerializeField] private Image[] _skillPointsImages;
+    [SerializeField] private Image[] _skillPointsImagesLessThanThree; 
+    [SerializeField] private Image[] _skillPointsImagesMoreThanThree;
+    [SerializeField] private RectTransform _skillPointsParent;
     private RectTransform _rectTr;
 
 
@@ -46,6 +51,8 @@ public class SkillsPanelButton : MonoBehaviour
     {
         colorSave = _buttonImage.color;
         _rectTr = GetComponent<RectTransform>();
+
+        baseSkillPointsParentLocalPos = _skillPointsParent.localPosition;
     }
 
     public void InitialiseButton(SkillData data, Hero hero)
@@ -60,15 +67,26 @@ public class SkillsPanelButton : MonoBehaviour
 
     public void ActualiseSkillPointsImages(Hero currentHero)
     {
-        for(int i = 0; i < _skillPointsImages.Length; i++)
+        AdaptSkillPointPositions();
+
+        for (int i = 0; i < currentSkillPointsImages.Length; i++)
         {
-            _skillPointsImages[i].sprite = i < currentHero.CurrentSkillPoints ? fullSPSprite : emptySPSprite;
-            _skillPointsImages[i].gameObject.SetActive(i < skillData.skillPointCost);
+            currentSkillPointsImages[i].sprite = i < currentHero.CurrentSkillPoints ? fullSPSprite : emptySPSprite;
+            currentSkillPointsImages[i].enabled = (i < skillData.skillPointCost);
         }
 
         if(currentHero.CurrentSkillPoints < skillData.skillPointCost)
         {
             canBeUsed = false;
+        }
+
+        if(skillData.skillPointCost <= 3)
+        {
+            _skillPointsParent.localPosition = baseSkillPointsParentLocalPos - new Vector3(0, 8, 0);
+        }
+        else
+        {
+            _skillPointsParent.localPosition = baseSkillPointsParentLocalPos;
         }
     }
 
@@ -76,12 +94,56 @@ public class SkillsPanelButton : MonoBehaviour
     public void LockButton()
     {
         isLocked = true;
+        _lockDarkenImage.enabled = true;
     }
 
     public void UnlockButton()
     {
         isLocked = false;
+        _lockDarkenImage.enabled = false;
     }
+
+
+    private void AdaptSkillPointPositions()
+    {
+        if(skillData.skillPointCost <= 3)
+        {
+            currentSkillPointsImages = _skillPointsImagesLessThanThree;
+            for(int i = 0; i < _skillPointsImagesMoreThanThree.Length; i++)
+            {
+                _skillPointsImagesMoreThanThree[i].enabled = false;
+            }
+        }
+        else
+        {
+            currentSkillPointsImages = _skillPointsImagesMoreThanThree;
+            for (int i = 0; i < _skillPointsImagesLessThanThree.Length; i++)
+            {
+                _skillPointsImagesLessThanThree[i].enabled = false;
+            }
+        }
+    }
+
+
+    #region Appear / Disappear
+
+    public IEnumerator ShowButtonCoroutine(float delay)
+    {
+        _rectTr.localScale = Vector3.zero;   
+
+        yield return new WaitForSeconds(delay);
+
+        _rectTr.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(0.2f);
+    }
+
+    public void HideButtonCoroutine()
+    {
+
+    }
+
+    #endregion
 
 
     #region Overlay / Click Functions

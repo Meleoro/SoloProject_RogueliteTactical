@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: H1-3 Opportunist
   m_EditorClassIdentifier: 
   passiveName: OPPORTUNIST
-  passiveDescription: HAS +25% CRIT CHANCE ON <#7C210C>WEAKENED</color> ENEMY
+  passiveDescription: HAS <#7C210C>+30% CRITICAL CHANCES</color> ON <#7C210C>WEAKENED</color>
+    ENEMY
   passiveIcon: {fileID: 1719542924, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 309539153, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
   - {fileID: 11400000, guid: e4847cad51e27d8409d9a0f0378bc37d, type: 2}
   passiveTriggerType: 4
-  neededAlteration: {fileID: 11400000, guid: 6643c1270904f0c409485d1a08a6e552, type: 2}
+  neededAlteration:
+  - {fileID: 11400000, guid: 6643c1270904f0c409485d1a08a6e552, type: 2}
   passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 5
     appliedAlteration: {fileID: 0}
-    additivePower: 25
+    additivePower: 30
     multipliedPower: 0

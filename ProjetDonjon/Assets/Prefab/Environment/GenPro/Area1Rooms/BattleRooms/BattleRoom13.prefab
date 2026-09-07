@@ -570,7 +570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsToDestory:
-  - {fileID: 3476476148826827487}
   - {fileID: 5092915560834160117}
   - {fileID: 3269110892815976244}
   - {fileID: 734265412500780869}

@@ -41,7 +41,8 @@ public enum TutoEndCondition
 public enum TutoType
 {
     ClassicPanel,
-    SmallPanel
+    SmallPanel,
+    ScreenPanel
 }
 
 

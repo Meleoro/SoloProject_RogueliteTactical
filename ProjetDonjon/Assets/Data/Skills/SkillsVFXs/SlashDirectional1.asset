@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86258820cbae8943a90ea26e2ffacb8, type: 3}
+  m_Name: SlashDirectional1
+  m_EditorClassIdentifier: Assembly-CSharp::VFXData
+  vfxType: 2
+  rotateVFX: 0
+  mirrorHorizontalVFX: 1
+  mirrorVerticalVFX: 1
+  VFX: {fileID: 0}
+  throwedObject: {fileID: 0}
+  leftVFX: {fileID: 1752444311645277086, guid: e6ebadaa5bbbec64fb8332051ff08a27, type: 3}
+  rightVFX: {fileID: 1752444311645277086, guid: e6ebadaa5bbbec64fb8332051ff08a27, type: 3}
+  upVFX: {fileID: 1752444311645277086, guid: 0a3caa5e9d4c1264c834a36812a787a2, type: 3}
+  downVFX: {fileID: 1752444311645277086, guid: 0a3caa5e9d4c1264c834a36812a787a2, type: 3}

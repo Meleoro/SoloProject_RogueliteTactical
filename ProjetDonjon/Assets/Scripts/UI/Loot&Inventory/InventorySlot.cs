@@ -1,4 +1,6 @@
+using DG.Tweening;
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +29,7 @@ public class InventorySlot : MonoBehaviour
     public Inventory AssociatedInventory { get { return associatedInventory; } }
     public bool IsAvailable { get { return isAvailable; } }
     public bool IsInBlacksmith { get { return isInBlacksmith; } }
+    public RectTransform LootParent { get { return _lootParent; } }
 
     [Header("References")]
     [SerializeField] private RectTransform _rectTr;
@@ -64,6 +67,19 @@ public class InventorySlot : MonoBehaviour
         this.isInBlacksmith = isInBlacksmith;
     }
 
+
+    #region Appear / Disappear
+
+    public IEnumerator AppearEffectCoroutine(float delay)
+    {
+        _rectTr.localScale = Vector3.zero;
+
+        yield return new WaitForSeconds(delay);
+
+        _rectTr.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+    }
+
+    #endregion
 
     #region Manage Slot Content Functions
 

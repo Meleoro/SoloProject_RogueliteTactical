@@ -10,6 +10,10 @@ using Utilities;
 
 public class MainMetaMenu : MonoBehaviour
 {
+    [Header("Actions")]
+    public Action OnShow;
+    public Action OnHide;
+
     [Header("Private Infos")]
     private Coroutine hoverCoroutine;
     private Vector2[] saveLocalPosShadows;
@@ -41,6 +45,7 @@ public class MainMetaMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _campLevelProgressText;
     [SerializeField] private TextMeshProUGUI _campLevelMainText;
     [SerializeField] private PopUp _popUp;
+    [SerializeField] private PopUp _popUpNewHero;
     [SerializeField] private Lock _shopLock;
     [SerializeField] private Lock _smithLock;
 
@@ -62,6 +67,8 @@ public class MainMetaMenu : MonoBehaviour
 
     public void Hide(Vector3 hidePos)
     {
+        OnHide?.Invoke();
+
         StartCoroutine(HideCoroutine(hidePos));
     }
 
@@ -77,6 +84,8 @@ public class MainMetaMenu : MonoBehaviour
 
     public void Show(bool instant)
     {
+        OnShow?.Invoke();
+
         if (instant)
         {
             _mainRectTr.localPosition = Vector3.zero;
@@ -282,8 +291,16 @@ public class MainMetaMenu : MonoBehaviour
         _campLevelMainText.text = "CAMP LEVEL " + (currentCampLevel + 1);
         _campLevelProgressText.text = campLevels[currentCampLevel].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
 
-        _popUp.DisplayPopUp(campLevels[currentCampLevel]);
-        _popUp.OnHide += ContinueProgress;
+        if (campLevels[currentCampLevel].unlockType == CampLevelData.CampUnlockType.NewHero)
+        {
+            _popUpNewHero.DisplayHeroPopUp(campLevels[currentCampLevel]);
+            _popUpNewHero.OnHide += ContinueProgress;
+        }
+        else
+        {
+            _popUp.DisplayPopUp(campLevels[currentCampLevel]);
+            _popUp.OnHide += ContinueProgress;
+        }
 
         RelicsManager.Instance.CampLevelUp();
 
@@ -302,6 +319,7 @@ public class MainMetaMenu : MonoBehaviour
 
     public void ContinueProgress()
     {
+        _popUpNewHero.OnHide -= ContinueProgress;
         _popUp.OnHide -= ContinueProgress;
 
         _campLevelProgressText.text = campLevels[currentCampLevel - 1].neededRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;

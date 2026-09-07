@@ -18,7 +18,7 @@ MonoBehaviour:
   passiveHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
   passiveTriggerType: 1
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 25
   passiveEffects:
   - passiveEffectType: 0

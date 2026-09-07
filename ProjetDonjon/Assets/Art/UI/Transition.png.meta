@@ -115,9 +115,9 @@ TextureImporter:
       name: Transition_0
       rect:
         serializedVersion: 2
-        x: 18
+        x: 38
         y: 332
-        width: 269
+        width: 249
         height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -181,10 +181,10 @@ TextureImporter:
       name: Transition_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 391
-        width: 179
-        height: 52
+        x: 303
+        y: 383
+        width: 155
+        height: 60
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,7 +271,7 @@ TextureImporter:
         serializedVersion: 2
         x: 321
         y: 264
-        width: 35
+        width: 36
         height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -419,6 +419,248 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Transition_14
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 210
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd6885c4454a2d4da4f35f6996c23c2
+      internalID: -764963823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_15
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 157
+        width: 43
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50bd41aec7bff1d458f37d6a5ae1224a
+      internalID: -426819511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 158
+        width: 31
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 096d1433ea9d5e24896df33b5ef27ead
+      internalID: 646397315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_17
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 320
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31536300296f6574997d3961d28bd4e1
+      internalID: -1307172491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_18
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 319
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c3a38b5432d5f4287041424a59fbd0
+      internalID: -1807521800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_19
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 320
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e7bbfba72ca097498e66d7f7df4a143
+      internalID: 314562587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_20
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 320
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb722deabdc6b204da23ab49c9aa11f6
+      internalID: 256687677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_21
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 227
+        width: 155
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a336f6787a1ed4e42a6f5baa7738b59d
+      internalID: -910367968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_22
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 203
+        width: 155
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6daab8e6a4cebaf4e9652d94b469dcbf
+      internalID: 1202612761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_23
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 163
+        width: 155
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a653170aea7d74d93805ad9a81d58a
+      internalID: 1350952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_24
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 352
+        width: 69
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25abafd8fa23963448bb4ed7fbb054dd
+      internalID: -212177858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -439,7 +681,18 @@ TextureImporter:
       Transition_11: -648866517
       Transition_12: 1843420121
       Transition_13: -770022962
+      Transition_14: -764963823
+      Transition_15: -426819511
+      Transition_16: 646397315
+      Transition_17: -1307172491
+      Transition_18: -1807521800
+      Transition_19: 314562587
       Transition_2: -7418211097746893002
+      Transition_20: 256687677
+      Transition_21: -910367968
+      Transition_22: 1202612761
+      Transition_23: 1350952
+      Transition_24: -212177858
       Transition_3: -5120422719492145513
       Transition_4: 6212022559610932868
       Transition_5: 257642906

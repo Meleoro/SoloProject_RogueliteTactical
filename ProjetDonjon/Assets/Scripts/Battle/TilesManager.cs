@@ -161,7 +161,7 @@ public class TilesManager
     {
         for (int i = 0; i < battleRoom.BattleTiles.Count; i++)
         {
-            battleRoom.BattleTiles[i].QuitOverlayTile();
+            battleRoom.BattleTiles[i].UnhoverTile();
         }
     }
 
@@ -220,6 +220,11 @@ public class TilesManager
 
         for (int i = 0; i < skillTiles.Count; i++)
         {
+            if (skill is not null)   // For enemies
+            {
+                skillTiles[i].DisplayPossibleSkillTile(false, skill.skillType);
+            }
+
             skillTiles[i].DisplayDangerTile(skill.skillType);
         }
     }
@@ -307,7 +312,7 @@ public class TilesManager
                     {
                         AOETiles.AddRange(GetPatternAOETiles(tiles[i], enemy.CurrentTile, enemy.CurrentSkillData));
 
-                        if(AOETiles.Count > 1)
+                        if(AOETiles.Count > i+1)
                         {
                             doFlash = true;
                         }

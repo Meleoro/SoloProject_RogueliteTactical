@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: H1-1 Shield Giver
   m_EditorClassIdentifier: 
   passiveName: SHIELD GIVER
-  passiveDescription: 'EACH TIME THIS UNIT APPLIES SHIELD, APPLY <#2C2E5E>+1 SHIELD</color>
+  passiveDescription: 'EACH TIME THIS UNIT APPLIES <#2C2E5E>SHIELD</color>, APPLY
+    <#2C2E5E>+1 SHIELD</color>
 
 '
   passiveIcon: {fileID: -28761685, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
@@ -21,7 +22,8 @@ MonoBehaviour:
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}
   passiveTriggerType: 3
-  neededAlteration: {fileID: 11400000, guid: 69fc52cf0de22974ab85d665e8979052, type: 2}
+  neededAlteration:
+  - {fileID: 11400000, guid: 69fc52cf0de22974ab85d665e8979052, type: 2}
   passiveTriggerProba: 100
   passiveEffects:
   - passiveEffectType: 2

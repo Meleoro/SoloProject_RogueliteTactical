@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Headset3-1
   m_EditorClassIdentifier: 
-  lootID: 0
-  lootName: CRISTAL HEADSET
-  lootDescription: WHEN THIS UNIT GETS HIT, 50% CHANCES TO INFLICT UNLUCKY FOR 3
-    TURNS TO ATTACKER
+  lootName: CRISTAL HEADSET I
+  lootDescription: <#7C210C>+25% CRITICAL CHANCES</color> WHEN ATTACKING <#176F00>HINDERED</color>
+    OR <#FFC12E>STUNNED</color> UNITS
   lootType: 1
   rarityType: 2
   sprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
   value: 100
+  level: 0
   spaceTaken:
   - row: 01
   equipmentType: 1
@@ -30,9 +30,17 @@ MonoBehaviour:
   luckUpgrade: 1
   mpUpgrade: 0
   spUpgrade: 0
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 11400000, guid: 7c3e6f9064e67bf48904fbbd81527d92, type: 2}
+  upgradeCost:
+    neededMaterials:
+    - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+    neededMatQuantities: 02000000
   appliedPassive: {fileID: 11400000, guid: 9dfeae7447f01234b943c83c57d1e581, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0
   additionalTooltipDatas:
-  - {fileID: 11400000, guid: 59d881c1f4aa5014da46ae777fb2debb, type: 2}
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}
+  - {fileID: 11400000, guid: a3a2ae7d22be7624f8654ebb623e18a1, type: 2}
+  - {fileID: 11400000, guid: f88c8bf3130dd394b92c7bb80e2c4467, type: 2}

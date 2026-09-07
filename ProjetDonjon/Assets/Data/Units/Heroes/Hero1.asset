@@ -20,7 +20,7 @@ MonoBehaviour:
   baseSpeed: 3
   baseLuck: 20
   startAlterations: []
-  baseMovePoints: 3
+  baseMovePoints: 10
   maxSkillPoints: 3
   startSkillPoints: 0
   heroInventoryPrefab: {fileID: 4803297770596504823, guid: 631feea1674ffbb4fa06dc5b02c9d019, type: 3}

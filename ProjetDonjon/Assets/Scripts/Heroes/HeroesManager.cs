@@ -93,6 +93,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     private void SwitchHero()
     {
+        Vector3 heroPosSave = heroes[currentHeroIndex].transform.position;
         currentHeroIndex = ++currentHeroIndex % heroes.Length;
 
         int antiCrash = 0;
@@ -100,7 +101,14 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         {
             currentHeroIndex = ++currentHeroIndex % heroes.Length;
         }
-        if (antiCrash == 5) return;
+        if (antiCrash == 5)
+        {
+            Debug.LogError("Needed to use the anti crash counter in the hero switch");
+            return;
+        }
+
+        heroes[currentHeroIndex].transform.position = heroPosSave;
+        heroes[currentHeroIndex].Controller.ForceAddCurrentPositionForSave(heroPosSave);
 
         _spriteLayererManager.InitialiseAll();
         ActualiseDisplayedHero();
@@ -257,13 +265,11 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     private IEnumerator TakeStairsCoroutine()
     {
-        heroes[currentHeroIndex].Controller.AutoMove(heroes[currentHeroIndex].transform.position + Vector3.up * 2f);
+        heroes[currentHeroIndex].Controller.AutoMove(heroes[currentHeroIndex].transform.position + Vector3.up * 4f);
 
         UIManager.Instance.Transition.StartTransition(_genProScript.EnviroData, _genProScript.CurrentFloor + 1, false);
 
-        yield return new WaitForSeconds(1);
-
-        _genProScript.GenerateNextFloor();
+        yield return new WaitForSeconds(3);
 
         heroes[currentHeroIndex].Controller.StopAutoMove();
     }
@@ -339,7 +345,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         if (isInvincible) return;
 
-        heroes[currentHeroIndex].TakeDamage(damagesAmount, null);
+        heroes[currentHeroIndex].TakeDamage(damagesAmount, null, false);
 
         if(!BattleManager.Instance.IsInBattle)
             StartCoroutine(DamageInvincibilityCoroutine());
@@ -359,8 +365,9 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         aliveHeroCount--;
 
         if (aliveHeroCount > 0)
-            SwitchDeadHero();
-
+        {
+            StartCoroutine(SwitchDeadHeroCoroutine());
+        }
         else
         {
             EndExploration();
@@ -376,8 +383,10 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         }
     }
 
-    private void SwitchDeadHero()
+    private IEnumerator SwitchDeadHeroCoroutine()
     {
+        yield return new WaitForSeconds(1.0f);
+
         while (heroes[currentHeroIndex].CurrentHealth <= 0)
         {
             SwitchHero();

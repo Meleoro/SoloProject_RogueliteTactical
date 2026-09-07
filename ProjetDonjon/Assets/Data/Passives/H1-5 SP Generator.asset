@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveName: SP GENERATOR
   passiveDescription: EACH TIME THIS UNIT TAKES DAMAGES, IT HAS 50% CHANCE TO GAIN
-    1 SKILL POINT
+    <#E9A800>1 SKILL POINT</color>
   passiveIcon: {fileID: 847775307, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 1196405056, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
-  additionalTooltipDatas: []
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 7ed72bdfb3a63e843bad98604bd4b062, type: 2}
   passiveTriggerType: 6
-  neededAlteration: {fileID: 0}
+  neededAlteration: []
   passiveTriggerProba: 50
   passiveEffects:
   - passiveEffectType: 7
     appliedAlteration: {fileID: 0}
-    additivePower: 0
+    additivePower: 1
     multipliedPower: 0

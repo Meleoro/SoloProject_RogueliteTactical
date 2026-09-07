@@ -58,7 +58,7 @@ public class ShopItem : MonoBehaviour
     {
         _itemImage.DOComplete();
 
-        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(itemData, transform.position, reverseDetails);
+        UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(itemData, transform.position, reverseDetails, false);
 
         _itemImage.rectTransform.DOScale(Vector3.one * 1.2f, 0.15f).SetEase(Ease.OutCubic);
         _itemImage.rectTransform.DOLocalMove(originalPos + Vector3.up * 10f, 0.15f).SetEase(Ease.OutCubic);

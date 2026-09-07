@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Sword3-1
   m_EditorClassIdentifier: 
-  lootName: CRISTAL SWORD
-  lootDescription: WHEN THIS UNIT DEALS A CRITICAL HIT, DEALS +50% DAMAGES
+  lootName: CRISTAL SWORD I
+  lootDescription: <#7C210C>CRITICAL</color> ATTACKS DEAL +150% DAMAGES INSTEAD OF
+    +100%
   lootType: 1
   rarityType: 2
   sprite: {fileID: 7607525373114708640, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -31,12 +32,14 @@ MonoBehaviour:
   mpUpgrade: 0
   spUpgrade: 0
   exclusiveHeroIndex: 0
-  upgradedVersion: {fileID: 0}
+  upgradedVersion: {fileID: 11400000, guid: 2c40436dc4ced99449009d4c2f8020b4, type: 2}
   upgradeCost:
-    neededMaterials: []
-    neededMatQuantities: 
+    neededMaterials:
+    - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+    neededMatQuantities: 02000000
   appliedPassive: {fileID: 11400000, guid: 7912d90b574fcfd4bb0d87c3a311e919, type: 2}
   consumableType: 0
   consumablePower: 0
   usableOutsideBattle: 0
-  additionalTooltipDatas: []
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 04d98fed4e22e184e9285c10b35d7ccc, type: 2}

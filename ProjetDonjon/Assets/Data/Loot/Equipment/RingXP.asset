@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RingXP
   m_EditorClassIdentifier: 
   lootName: XP COLLAR
-  lootDescription: THIS UNITS GAINS +20% XP
+  lootDescription: THIS UNIT GAINS +20% XP
   lootType: 1
   rarityType: 2
   sprite: {fileID: 833647439, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
@@ -29,6 +29,7 @@ MonoBehaviour:
   luckUpgrade: 0
   mpUpgrade: 0
   spUpgrade: 0
+  exclusiveHeroIndex: -1
   upgradedVersion: {fileID: 0}
   upgradeCost:
     neededMaterials: []

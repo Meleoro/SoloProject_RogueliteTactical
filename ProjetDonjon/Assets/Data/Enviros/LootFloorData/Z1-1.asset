@@ -58,3 +58,13 @@ MonoBehaviour:
   maxChallengeCoins: 9
   minLootAmountPerChallenge: 2
   maxLootAmountPerChallenge: 3
+  probaPerTierTrial: 1e0000003c0000000a00000000000000
+  trialEndPossibleLoots:
+  - probability: 0
+    loot: {fileID: 0}
+  - probability: 0
+    loot: {fileID: 0}
+  minTrialCoins: 6
+  maxTrialCoins: 9
+  minLootAmountPerTrial: 2
+  maxLootAmountPerTrial: 3

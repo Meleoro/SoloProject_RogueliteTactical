@@ -39,12 +39,8 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [SerializeField] private RectTransform _upRightPosRef;
     [SerializeField] private TutorialPanel _tutorialPanel;
     [SerializeField] private TutorialPanel _smallTutorialPanel;
+    [SerializeField] private TutorialPanel _screenTutorialPanel;
 
-
-    private void Start()
-    {
-
-    }
 
     // Called at the start to bind the tutorial steps the player hasn't done
     private void BindTutorials()
@@ -83,10 +79,19 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay, bool isAdditionalStep = false)
     {
+        TutoStepData step = isAdditionalStep ? additionalTutoSteps[tutoID] : mainTutoSteps[tutoID];
+        if (step && step.lockPlayerInputs)
+        {
+            HeroesManager.Instance.StopControl();
+        }
         _tutorialPanel.LockUIInputs();
 
         yield return new WaitForSeconds(delay);
 
+        if (step && step.lockPlayerInputs)
+        {
+            HeroesManager.Instance.RestartControl();
+        }
         _tutorialPanel.UnlockUIInputs();
         DisplayTutorial(tutoID, isAdditionalStep);
     }
@@ -129,7 +134,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         }
 
         // Small Panel
-        else
+        else if(currentStep.tutoType == TutoType.SmallPanel)
         {
             if (currentStep.leftSidePanel)
             {
@@ -141,6 +146,14 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             }
 
             _smallTutorialPanel.OnHide += EndTutorialStep;
+        }
+
+        // Screen Panel
+        else
+        {
+            _screenTutorialPanel.DisplayTutorial(currentStep, Vector2.zero, new Vector3(0, -500, 0));
+
+            _screenTutorialPanel.OnHide += EndTutorialStep;
         }
 
         ObserveEndConditions();
@@ -164,7 +177,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 UIManager.Instance.PlayerActionsMenu.OnMoveAction += ValidateEndCondition;
                 Vector2Int enemyCoordinates = BattleManager.Instance.CurrentEnemies[0].CurrentTile.TileCoordinates;
                 BattleManager.Instance.TilesManager.battleRoom.
-                    PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].OnUnitEnterTile += ValidateEndCondition;
+                    PlacedBattleTiles[enemyCoordinates.x - 1, enemyCoordinates.y].OnUnitEnterTile += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
                 break;
 
@@ -179,6 +192,10 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 UIManager.Instance.PlayerActionsMenu.SkillsPanel.LockOption(0);
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction += ValidateEndCondition;
                 BattleManager.Instance.CurrentHeroes[0].OnClickUnit += ValidateEndCondition;
+
+                Vector2Int heroCoordinates = BattleManager.Instance.CurrentHeroes[0].CurrentTile.TileCoordinates;
+                BattleManager.Instance.TilesManager.battleRoom.
+                    PlacedBattleTiles[heroCoordinates.x, heroCoordinates.y].OnClickTile += ValidateEndCondition;
                 endConditionsValidated = new bool[2];
                 break;
 
@@ -284,7 +301,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     {
         InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
 
-        StartCoroutine(DisplayTutorialWithDelayCoroutine(2, 1f, true));
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(2, 0.5f, true));
     }
 
     #endregion
@@ -346,7 +363,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
                 UIManager.Instance.PlayerActionsMenu.OnMoveAction -= ValidateEndCondition;
                 Vector2Int enemyCoordinates = BattleManager.Instance.CurrentEnemies[0].CurrentTile.TileCoordinates;
                 BattleManager.Instance.TilesManager.battleRoom.
-                    PlacedBattleTiles[enemyCoordinates.x, enemyCoordinates.y - 1].OnUnitEnterTile -= ValidateEndCondition;
+                    PlacedBattleTiles[enemyCoordinates.x - 1, enemyCoordinates.y].OnUnitEnterTile -= ValidateEndCondition;
 
                 BattleManager.Instance.OnHeroTurnStart += DoSecondBattleTutorial;
                 break;
@@ -359,6 +376,11 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             case TutoEndCondition.UseSecondSkill:
                 UIManager.Instance.PlayerActionsMenu.OnSkillAction -= ValidateEndCondition;
                 BattleManager.Instance.CurrentHeroes[0].OnClickUnit -= ValidateEndCondition;
+
+                Vector2Int heroCoordinates = BattleManager.Instance.CurrentHeroes[0].CurrentTile.TileCoordinates;
+                BattleManager.Instance.TilesManager.battleRoom.
+                    PlacedBattleTiles[heroCoordinates.x, heroCoordinates.y].OnClickTile -= ValidateEndCondition;
+
                 BattleManager.Instance.OnHeroTurnStart += DoThirdBattleTutorial;
                 break;
 

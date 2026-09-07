@@ -34,15 +34,15 @@ MonoBehaviour:
     maxCountPerBattle: 3
     minEnemyCountBeforeSpawn: 0
   - enemyPrefab: {fileID: 4534582793652375552, guid: 33d5baa09d638fe459cb3820acd8ee12, type: 3}
-    proba: 20
+    proba: 15
     eliteProba: 0
     maxCountPerBattle: 1
     minEnemyCountBeforeSpawn: 0
-  - enemyPrefab: {fileID: 4534582793652375552, guid: 8c5a024bd4f75674fbbcb27a947021c7, type: 3}
-    proba: 5
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 0d086288b76181d4b85e5a836e9f04c3, type: 3}
+    proba: 10
     eliteProba: 0
     maxCountPerBattle: 1
-    minEnemyCountBeforeSpawn: 0
+    minEnemyCountBeforeSpawn: 2
   possibleChallengeEnemies:
   - enemyPrefab: {fileID: 4534582793652375552, guid: 8c5a024bd4f75674fbbcb27a947021c7, type: 3}
     proba: 50

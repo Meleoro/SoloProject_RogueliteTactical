@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: EP_32
   m_EditorClassIdentifier: Assembly-CSharp::PassiveData
   passiveName: Crystal Headset
-  passiveDescription: When you get hit, you have a 50% chance to inflict Unlucky
+  passiveDescription: <#7C210C>+30% CRITICAL CHANCES</color> WHEN ATTACKING <#176F00>HINDERED</color>
+    OR <#FFC12E>STUNNED</color> UNITS
   passiveIcon: {fileID: 0}
   passiveHighlightIcon: {fileID: 0}
   additionalTooltipDatas: []
-  passiveTriggerType: 1
-  neededAlteration: {fileID: 0}
-  passiveTriggerProba: 50
+  passiveTriggerType: 0
+  neededAlteration:
+  - {fileID: 11400000, guid: 90b47bb6b429ed34aa18b3e0a5c5b0e5, type: 2}
+  - {fileID: 11400000, guid: c2542ffcfdc24874f80e68e474db9402, type: 2}
+  passiveTriggerProba: 100
   passiveEffects:
-  - passiveEffectType: 1
-    appliedAlteration: {fileID: 11400000, guid: 69245b854151af14396500e9975c69b1, type: 2}
-    additivePower: 0
+  - passiveEffectType: 5
+    appliedAlteration: {fileID: 0}
+    additivePower: 30
     multipliedPower: 0

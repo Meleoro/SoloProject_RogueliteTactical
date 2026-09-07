@@ -53,6 +53,8 @@ public class BlacksmithMenu : MonoBehaviour
         InventoriesManager.Instance.DisplayQuickChangeButtons(0);
         InventoriesManager.Instance.EnterBlacksmith();
 
+        StartCoroutine(currentInventory.OpenInventoryCoroutine(0.5f, true));
+
         StartCoroutine(ShowCoroutine());
     }
 
@@ -78,6 +80,8 @@ public class BlacksmithMenu : MonoBehaviour
         _mainMetaMenu.Show(false);
         InventoriesManager.Instance.HideQuickChangeButtons();
         InventoriesManager.Instance.ExitBlacksmith();
+
+        StartCoroutine(currentInventory.CloseInventoryCoroutine(0.5f, true));
 
         ClickEquipment(null);
 
@@ -171,8 +175,8 @@ public class BlacksmithMenu : MonoBehaviour
             return;
         }
 
-        _detailsBase.LoadDetails(baseLoot, Vector3.zero, false, true);
-        _detailsUpgrade.LoadDetails(upgradedLoot, Vector3.zero, false, true);
+        _detailsBase.LoadDetails(baseLoot, Vector3.zero, false, false, true);
+        _detailsUpgrade.LoadDetails(upgradedLoot, Vector3.zero, false, false, true);
         _detailsArrow.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
     }
 
@@ -201,10 +205,9 @@ public class BlacksmithMenu : MonoBehaviour
         currentInventory.LootParent.SetParent(_inventoryParent, true);
         currentInventory.LootParent.localPosition = Vector3.zero;
 
-        //currentInventory.RectTransform.localScale = Vector3.one;
-        //currentInventory.LootParent.localScale = Vector3.one * 0.75f;
-
         _upgradeInventory.SetUpgradeCost(currentInventory.UpgradeCosts[currentInventory.CurrentLevel]);
+
+        currentInventory.EnableRaycastTarget();
     }
 
     private void UpgradeInventory()

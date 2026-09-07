@@ -61,6 +61,8 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
         currentInventory.LootParent.SetParent(_inventoryParent, true);
         currentInventory.LootParent.localPosition = Vector3.zero;
+
+        currentInventory.EnableRaycastTarget();
     }
 
 
@@ -86,6 +88,9 @@ public class ChestMenu : MonoBehaviour, ISaveable
         currentHero = HeroesManager.Instance.AllHeroes[currentInventoryIndex];
         LoadInventory(0);
 
+        StartCoroutine(currentInventory.OpenInventoryCoroutine(0.5f, true));
+        StartCoroutine(_chestInventory.OpenInventoryCoroutine(0.5f, true));
+
         StartCoroutine(ShowCoroutine());
     }
 
@@ -105,6 +110,9 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
         InventoriesManager.Instance.OnQuickChange -= LoadInventory;
         InventoriesManager.Instance.HideQuickChangeButtons();
+
+        StartCoroutine(currentInventory.CloseInventoryCoroutine(0.5f, true));
+        StartCoroutine(_chestInventory.CloseInventoryCoroutine(0.5f, true));
 
         _mainMetaMenu.Show(false);
         InventoriesManager.Instance.InventoryActionPanel.ClosePanel();
