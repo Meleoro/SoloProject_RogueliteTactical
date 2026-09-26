@@ -46,26 +46,6 @@ public class Chest : MonoBehaviour, IInteractible
         _spriteRenderer.material.SetVector("_TextureSize", new Vector2(_spriteRenderer.sprite.texture.width, _spriteRenderer.sprite.texture.height));
     }
 
-
-    private void GenerateLoot()
-    {
-        switch(chestType)
-        {
-            case ChestType.Normal:
-                LootManager.Instance.SpawnLootChest(transform.position);
-                break;
-
-            case ChestType.Challenge:
-                LootManager.Instance.SpawnLootChallengeEnd(transform.position);
-                break;
-
-            case ChestType.Trial:
-                LootManager.Instance.SpawnLootTrialEnd(transform.position);
-                break;
-        }
-    }
-
-
     private IEnumerator InteractCoroutine(float openDuration, float startDelay = 0)
     {
         yield return new WaitForSeconds(startDelay);
@@ -100,13 +80,23 @@ public class Chest : MonoBehaviour, IInteractible
             SpawnLoot(lootToGenerate[i], i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
             SpawnCoins(coinsCount, i, relicData != null ? lootToGenerate.Length : lootToGenerate.Length - 1);
 
-            if(_chestLight) _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
+            AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, Random.Range(14, 17));
+
+            if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
 
             yield return new WaitForSeconds(openDuration * 0.05f);
 
+            if (lootToGenerate[i].loot.rarityType == RarityType.Mystic)
+            {
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, 13);
+            }
+
             if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
 
-            if (i >= lootToGenerate.Length - 1) continue;
+            if (i >= lootToGenerate.Length - 1)   // It was the last loot
+            {
+                continue;
+            }
 
             _animator.SetTrigger("Open");
 
@@ -128,6 +118,15 @@ public class Chest : MonoBehaviour, IInteractible
             if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.03f, 3f);
 
             yield return new WaitForSeconds(openDuration * 0.05f);
+
+            if (relicData.rarityType == RarityType.Mystic || relicData.rarityType == RarityType.Epic)
+            {
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, 11);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, 10);
+            }
 
             if (_chestLight) _chestLight.ULerpIntensity(openDuration * 0.05f, 0f);
         }
@@ -247,6 +246,7 @@ public class Chest : MonoBehaviour, IInteractible
     }
 
     #endregion
+
 
     #region Interface Functions
 

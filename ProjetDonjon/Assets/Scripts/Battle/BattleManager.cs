@@ -10,7 +10,8 @@ public enum BattleEventType
 {
     NextTurn,
     NextPlayerAction,
-    GainXP
+    GainXP,
+    HeroDeath
 }
 
 
@@ -45,6 +46,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     private Unit currentUnit;
     private int currentVFXIndex;
     private Queue<BattleEventType> eventQueue;
+    private Coroutine currentHeroDeathCoroutine;
 
     [Header("Public Infos")]
     public Room BattleRoom { get {  return battleRoom; } }
@@ -121,6 +123,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             if((unit as AIUnit).IsEnemy)
             {
                 currentEnemies.Add((AIUnit)unit);
+
+                if (currentEnemies.Count > 1) OnBattleWithManyEnemiesStart?.Invoke();
             }
             else
             {
@@ -194,12 +198,8 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             battleRoom.RoomEnemies[i].EnterBattle(battleRoom.RoomEnemies[i].CurrentTile);
         }
 
-        if (battleRoom.RoomEnemies.Count > 1) OnBattleWithManyEnemiesStart?.Invoke();
-
         CameraManager.Instance.EnterBattle(battleCenterPos, cameraSize);
         HeroesManager.Instance.EnterBattle(possibleTiles);
-
-        //UIManager.Instance.ShowHeroInfosPanels();
 
         StartCoroutine(StartBattleCoroutine(delay));
     }
@@ -296,6 +296,14 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             case BattleEventType.GainXP:
                 StartCoroutine(GainXPEventCoroutine());
                 break;
+
+            case BattleEventType.HeroDeath:
+                if(currentHeroDeathCoroutine != null)
+                {
+                    StopCoroutine(currentHeroDeathCoroutine);
+                }
+                currentHeroDeathCoroutine = StartCoroutine(HeroDeathCoroutine());
+                break;
         }
     }
 
@@ -313,6 +321,29 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         yield return new WaitForSeconds(1.75f);
 
         PlayNextBattleEvent();
+    }
+
+    public IEnumerator HeroDeathCoroutine()
+    {
+        List<Transform> transforms = new List<Transform>();
+        for (int i = 0; i < currentHeroes.Count; i++)
+        {
+            if(!((Hero)currentHeroes[i]).IsDying)
+            {
+                continue;
+            }
+
+            transforms.Add(currentHeroes[i].transform);
+        }
+
+        CameraManager.Instance.FocusOnTransforms(transforms.ToArray());
+
+        yield return new WaitForSecondsRealtime(1.75f);
+
+        if (HeroesManager.Instance.AliveHeroCount != 0)
+        {
+            PlayNextBattleEvent();
+        }
     }
 
 
@@ -348,6 +379,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             CameraManager.Instance.LockCameraInputs();
             CameraManager.Instance.FocusOnTransform(CurrentUnit.transform, 5f);
             AIUnit enemy = CurrentUnit as AIUnit;
+
             StartCoroutine(enemy.PlayEnemyTurnCoroutine());
         }
     }

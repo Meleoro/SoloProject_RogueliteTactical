@@ -16,6 +16,8 @@ public class TransitionFloor : MonoBehaviour
     private int floorIndex;
     private Coroutine nextCoroutine;
     private bool isInitialised;
+    private Vector3[] saveEnemiesLocalPos = new Vector3[0];
+    private Vector3[] saveHeroesLocalPos = new Vector3[0];
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -36,6 +38,18 @@ public class TransitionFloor : MonoBehaviour
     {
         if (isInitialised) return;
         isInitialised = true;
+
+        saveEnemiesLocalPos = new Vector3[_enemyImages.Length];
+        for(int i = 0; i < _enemyImages.Length; i++)
+        {
+            saveEnemiesLocalPos[i] = _enemyImages[i].transform.localPosition;
+        }
+
+        saveHeroesLocalPos = new Vector3[_heroImages.Length];
+        for(int i = 0; i < _heroImages.Length; i++)
+        {
+            saveHeroesLocalPos[i] = _heroImages[i].transform.localPosition;
+        }
 
         this.data = data;
         this.floorIndex = floorIndex;
@@ -96,6 +110,22 @@ public class TransitionFloor : MonoBehaviour
         _fadeImage.DOColor(unhighlightFadeColor, 0.4f);
     }
 
+    public void ResetVisuals()
+    {
+        for (int i = 0; i < saveHeroesLocalPos.Length; i++)
+        {
+            _heroImages[i].rectTransform.localPosition = saveHeroesLocalPos[i];
+            _heroImages[i].DOFade(0, 0);
+        }
+
+        for (int i = 0; i < saveEnemiesLocalPos.Length; i++)
+        {
+            _enemyImages[i].rectTransform.localPosition = saveEnemiesLocalPos[i];
+            _enemyImages[i].DOFade(1, 0);
+        }
+    }
+
+    #region Enter / Exit Effects
 
     public void DoEnterFloorEffects()
     {
@@ -107,7 +137,6 @@ public class TransitionFloor : MonoBehaviour
     {
         StartCoroutine(HeroDisappearCoroutine());
     }
-
 
     private IEnumerator HeroAppearCoroutine()
     {
@@ -124,7 +153,6 @@ public class TransitionFloor : MonoBehaviour
 
     private IEnumerator HeroDisappearCoroutine()
     {
-        Debug.Log("Pourquoi");
         for (int i = 0; i < HeroesManager.Instance.Heroes.Length; i++)
         {
             _heroImages[i].DOFade(0, 0.5f).SetEase(Ease.OutBack);
@@ -156,13 +184,33 @@ public class TransitionFloor : MonoBehaviour
         }
     }
 
+    #endregion
 
+
+    #region Next / Clear / Death Effects
 
     public IEnumerator DoClearedEffectCoroutine()
     {
         _clearedText.rectTransform.localScale = new Vector3(2, 2, 2);
+        _clearedText.text = "CLEARED";
 
         StartCoroutine(EnemiesUnhighlightCoroutine());
+
+        _clearedText.DOFade(1, 0.35f).SetEase(Ease.InOutCubic);
+        _clearedText.rectTransform.DOScale(0.9f, 0.45f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(0.35f);
+
+        _clearedText.DOFade(0.35f, 0.3f).SetEase(Ease.InOutCubic);
+    }
+
+    public IEnumerator DoDeadEffectCoroutine()
+    {
+        _clearedText.rectTransform.localScale = new Vector3(2, 2, 2);
+        _clearedText.text = "DEAD";
+
+        StartCoroutine(HeroDisappearCoroutine());
+        //StartCoroutine(EnemiesUnhighlightCoroutine());
 
         _clearedText.DOFade(1, 0.35f).SetEase(Ease.InOutCubic);
         _clearedText.rectTransform.DOScale(1f, 0.45f).SetEase(Ease.OutBack);
@@ -202,4 +250,6 @@ public class TransitionFloor : MonoBehaviour
             yield return new WaitForSeconds(1.2f);
         }
     }
+
+    #endregion
 }

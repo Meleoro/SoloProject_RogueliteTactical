@@ -23,6 +23,7 @@ public class ExpeditionsMenu : MonoBehaviour
     [Header("References")]
     [SerializeField] private MainMetaMenu _mainMetaMenu;
     [SerializeField] private RectTransform[] _buttons;
+    [SerializeField] private Image[] _buttonsOutline;
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private RectTransform _shownPositionRectTr;
     [SerializeField] private RectTransform _hiddenPositionRectTr;
@@ -110,19 +111,21 @@ public class ExpeditionsMenu : MonoBehaviour
 
     public void HoverButton(int index)
     {
-        _buttons[index].UChangeScale(0.2f, Vector3.one * 1.1f, CurveType.EaseOutCubic);
+        _buttons[index].DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutBack);
+        _buttonsOutline[index].DOFade(1.0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void UnHoverButton(int index)
     {
-        _buttons[index].UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseInOutSin);
+        _buttons[index].DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack);
+        _buttonsOutline[index].DOFade(0.0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void ClickButton(int index)
     {
         if(index == 0)
         {
-            GameManager.Instance.StartExploration(enviroDatas[currentEnviroIndex], false);
+            GameManager.Instance.StartExploration(enviroDatas[currentEnviroIndex], false, false);
         }
     }
 

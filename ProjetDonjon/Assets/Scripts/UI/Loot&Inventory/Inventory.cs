@@ -1,9 +1,11 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utilities;
+using Random = UnityEngine.Random;
 
 
 public class Inventory : MonoBehaviour
@@ -13,6 +15,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float inventoryScale;
     [SerializeField] private bool isChest;
     [SerializeField] private UpgradeCost[] upgradeCosts;
+
+    [Header("Actions")]
+    public Action OnTransitionEnd;
 
     [Header("Public Infos")]
     public RectTransform RectTransform { get { return _rectTransform; } }
@@ -173,16 +178,29 @@ public class Inventory : MonoBehaviour
 
         isMoving = true;
 
-        _rectTransform.UChangePosition(duration * 0.75f, forcedShownTr.position + Vector3.up * 0.2f, CurveType.EaseOutSin);
-        _lootParent.UChangePosition(duration * 0.75f, forcedShownTr.position + Vector3.up * 0.2f, CurveType.EaseOutSin);
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            StartCoroutine(inventorySlots[i].AppearEffectCoroutine(Random.Range(0.0f, 0.15f) + duration * 0.5f));
+        }
 
-        yield return new WaitForSeconds(duration * 0.75f + Time.deltaTime * 2);
+        List<Loot> inventoryLoot = InventoriesManager.Instance.GetInventoryLoot(associatedHero != null ? associatedHero.HeroIndex : -1, IsChest);
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].DisableRaycastTarget(false);
+            StartCoroutine(inventoryLoot[i].AppearInInventoryCoroutine(Random.Range(0, 0.15f) + duration * 0.5f));
+        }
 
-        _rectTransform.UChangePosition(duration * 0.25f, forcedShownTr.position, CurveType.EaseInSin);
-        _lootParent.UChangePosition(duration * 0.25f, forcedShownTr.position, CurveType.EaseInSin);
+        _rectTransform.DOLocalMove(_rectTransform.parent.InverseTransformPoint(forcedShownTr.position), duration).SetEase(Ease.OutBack);
+        _lootParent.DOLocalMove(_rectTransform.parent.InverseTransformPoint(forcedShownTr.position), duration).SetEase(Ease.OutBack);
 
-        yield return new WaitForSeconds(duration * 0.25f);
+        yield return new WaitForSeconds(duration);
 
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].EnableRaycastTarget();
+        }
+
+        OnTransitionEnd?.Invoke();
         isMoving = false;
     }
 
@@ -190,11 +208,21 @@ public class Inventory : MonoBehaviour
     {
         isMoving = true;
 
-        _rectTransform.UChangePosition(duration, forcedHiddenTr.position, CurveType.EaseOutCubic);
-        _lootParent.UChangePosition(duration, forcedHiddenTr.position, CurveType.EaseOutCubic);
+        //_rectTransform.UChangePosition(duration, forcedHiddenTr.position, CurveType.EaseOutCubic);
+        //_lootParent.UChangePosition(duration, forcedHiddenTr.position, CurveType.EaseOutCubic);
+
+        _rectTransform.DOLocalMove(_rectTransform.parent.InverseTransformPoint(forcedHiddenTr.position), duration).SetEase(Ease.OutBack);
+        _lootParent.DOLocalMove(_rectTransform.parent.InverseTransformPoint(forcedHiddenTr.position), duration).SetEase(Ease.OutBack);
+
+        List<Loot> inventoryLoot = InventoriesManager.Instance.GetInventoryLoot(associatedHero != null ? associatedHero.HeroIndex : -1, isChest);
+        for (int i = 0; i < inventoryLoot.Count; i++)
+        {
+            inventoryLoot[i].DisableRaycastTarget(true);
+        }
 
         yield return new WaitForSeconds(duration);
 
+        OnTransitionEnd?.Invoke();
         isMoving = false;
     }
 
@@ -364,8 +392,9 @@ public class Inventory : MonoBehaviour
 
         if(currentLevel >= 1)
         {
-            for(int i = 0; i < _upgrade1Slots.Length; i++)
+            for (int i = 0; i < _upgrade1Slots.Length; i++)
             {
+                _upgrade1Slots[i].gameObject.SetActive(true);
                 _upgrade1Slots[i].SetIsAvailable(true);
             }
         }
@@ -381,6 +410,7 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < _upgrade2Slots.Length; i++)
             {
+                _upgrade2Slots[i].gameObject.SetActive(true);
                 _upgrade2Slots[i].SetIsAvailable(true);
             }
         }

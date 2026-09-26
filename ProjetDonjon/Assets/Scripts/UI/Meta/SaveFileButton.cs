@@ -1,7 +1,10 @@
 using DG.Tweening;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using Utilities;
 
 public class SaveFileButton : MonoBehaviour
 {
@@ -9,7 +12,8 @@ public class SaveFileButton : MonoBehaviour
     [SerializeField] private int buttonIndex;
 
     [Header("Actions")]
-    public Action<int> OnButtonClick;
+    public Action<int> OnButtonClickWithSave;
+    public Action<int> OnButtonClickWithoutSave;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -18,15 +22,17 @@ public class SaveFileButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _campLevelText;
     [SerializeField] private TextMeshProUGUI _goldText;
     [SerializeField] private TextMeshProUGUI _emptyText;
+    [SerializeField] private Image _outlineImage;
+    [SerializeField] private Image _notAvailableImage;
 
 
     private void Start()
     {
-        ActualiseInfos();
+        ActualiseInfos(false);
     }
 
 
-    public void ActualiseInfos()
+    public void ActualiseInfos(bool fromContinue)
     {
         if (!SaveManager.Instance.HasSaveFile[buttonIndex])
         {
@@ -35,8 +41,19 @@ public class SaveFileButton : MonoBehaviour
             _goldText.enabled = false;
             _emptyText.enabled = true;
 
+            if(fromContinue)
+            {
+                SetIsAvailable(false);
+            }
+            else
+            {
+                SetIsAvailable(true);
+            }
+
             return;
         }
+
+        SetIsAvailable(true);
 
         _relicsCountText.enabled = true;
         _campLevelText.enabled = true;
@@ -60,18 +77,37 @@ public class SaveFileButton : MonoBehaviour
     }
 
 
+    public void SetIsAvailable(bool isAvailable)
+    {
+        _notAvailableImage.enabled = !isAvailable;
+    }
+
+
     public void Hover()
     {
-        _mainRectTr.DOScale(Vector3.one * 1.2f, 0.2f).SetEase(Ease.OutBack);
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
+
+        _mainRectTr.DOScale(Vector3.one * 1.05f, 0.15f).SetEase(Ease.OutBack);
+        _outlineImage.DOFade(1.0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void Unhover()
     {
-        _mainRectTr.DOScale(Vector3.one * 1f, 0.2f).SetEase(Ease.OutBack);
+        _mainRectTr.DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.OutBack);
+        _outlineImage.DOFade(0.0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void Click()
     {
-        OnButtonClick.Invoke(buttonIndex);
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
+        if (!SaveManager.Instance.HasSaveFile[buttonIndex])
+        {
+            OnButtonClickWithoutSave.Invoke(buttonIndex);
+        }
+        else
+        {
+            OnButtonClickWithSave.Invoke(buttonIndex);
+        }
     }
 }

@@ -24,7 +24,7 @@ public class Minimap : MonoBehaviour
     {
         _pathCalculator = pathCalculator;
 
-        for(int i = roomsList.Count - 1; i > 0; i--)
+        for(int i = roomsList.Count - 1; i >= 0; i--)
         {
             Destroy(roomsList[i].gameObject);
         }

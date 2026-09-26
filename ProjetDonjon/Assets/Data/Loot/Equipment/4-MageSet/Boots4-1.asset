@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boots4-1
   m_EditorClassIdentifier: 
   lootName: MAGE BOOTS I
-  lootDescription: 'THIS UNIT STARTS BATTLES WITH <#E9A800>+1 FOCUS POINT</color> '
+  lootDescription: 'THIS UNIT STARTS BATTLES WITH <#FFA768>+1 FOCUS POINT</color> '
   lootType: 1
   rarityType: 3
   sprite: {fileID: -1223806687, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
@@ -29,6 +29,7 @@ MonoBehaviour:
   luckUpgrade: -1
   mpUpgrade: 0
   spUpgrade: 0
+  exclusiveHeroIndex: -1
   upgradedVersion: {fileID: 11400000, guid: 2fa35bb6039c3554dbbd22c4aeb730e0, type: 2}
   upgradeCost:
     neededMaterials:

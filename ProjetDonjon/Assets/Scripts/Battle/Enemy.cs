@@ -207,6 +207,11 @@ public class AIUnit : Unit
             yield break;
         }
 
+        if(isDead)
+        {
+            yield break;
+        }
+
         SetupAimedTiles();
 
         yield return new WaitForSeconds(0.5f);
@@ -439,10 +444,17 @@ public class AIUnit : Unit
         currentTile.UnitLeaveTile();
         UnHoverUnit();
 
+        isDead = true;
+
         AudioManager.Instance.PlaySoundOneShot(2, 10);
         if(isEnemy) HeroesManager.Instance.SpawnXP(AIData.minXpDrop, transform.position);
 
         BattleManager.Instance.RemoveUnit(this);
+
+        if(isUnitsTurn)
+        {
+            EndTurn(0.0f);
+        }
 
         if ((BattleManager.Instance.CurrentEnemies.Count == 0 || isBoss) && isEnemy)
         {

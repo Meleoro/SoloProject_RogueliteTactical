@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: H2-5 Freeloader
   m_EditorClassIdentifier: 
   passiveName: FREELOADER
-  passiveDescription: <#E9A800>+40% CRITICAL CHANCES</color> WHEN THIS UNIT ATTACK
+  passiveDescription: <#7C210C>+40% CRITICAL CHANCES</color> WHEN THIS UNIT ATTACK
     A <#FFC12E>STUNNED</color> UNIT
   passiveIcon: {fileID: 1685792960, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: -1451717230, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}

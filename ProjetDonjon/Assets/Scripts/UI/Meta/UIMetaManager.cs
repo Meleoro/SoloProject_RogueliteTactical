@@ -23,6 +23,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     public bool IsInTransition { get { return isInTransition; } }
     public CollectionMenu CollectionMenu { get { return _collectionMenu; } }
     public BlacksmithMenu BlacksmithMenu { get { return _smithMenu; } }
+    public ChestMenu ChestMenu { get { return _chestMenu; } }
     public MainMetaMenu MainMetaMenu { get { return _mainMetaMenu; } }
     public GenericDetailsPanel GenericDetailsPanel { get { return _genericDetailsPanel; } }
     public MainMenu MainMenu { get { return _mainMenu; } }
@@ -42,7 +43,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
     public override void Awake()
     {
         base.Awake();
-        _globalParent.gameObject.SetActive(false);
+        //_globalParent.gameObject.SetActive(false);
     }
 
     private void Start()

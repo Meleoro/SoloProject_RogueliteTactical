@@ -31,6 +31,7 @@ public class HeroController : MonoBehaviour
     private bool isInBattle;
     private bool noControl;
     private bool isAutoMoving;
+    private float saveOffsetShadowY;
     private Vector2 saveSpriteLocalPos;
     private Vector2 oldPos;
     private Vector2 shadowOffset;
@@ -46,6 +47,7 @@ public class HeroController : MonoBehaviour
     [SerializeField] private ParticleSystem _walkParticleSystem;
     [SerializeField] private ParticleSystem _landParticleSystem;
     [SerializeField] private Transform _spriteParent;
+    [SerializeField] private Transform _spriteTr;
     [SerializeField] private Transform _shadowTr;
     private Rigidbody2D _rb;
 
@@ -53,6 +55,8 @@ public class HeroController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        saveOffsetShadowY = _spriteTr.position.y - _shadowTr.position.y;
 
         saveSpriteLocalPos = _rbSprite.transform.localPosition;
         savePositions.Add(transform.position);
@@ -71,7 +75,14 @@ public class HeroController : MonoBehaviour
             Move(Vector2.zero);
             return;
         }
-        if (noControl) return;
+        if (noControl)
+        {
+            _rb.linearVelocity = Vector2.zero;
+            Move(Vector2.zero);
+            return;
+        }
+
+        ActualiseShadowScale();
 
         ActualiseSavePositions();
         Move(InputManager.moveDir);
@@ -275,6 +286,13 @@ public class HeroController : MonoBehaviour
 
 
     #region Others
+
+    private void ActualiseShadowScale()
+    {
+        float currentOffset = _spriteTr.position.y - _shadowTr.position.y;
+
+        _shadowTr.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.4f, (currentOffset - saveOffsetShadowY) * 0.4f);
+    }
 
     public void ForceAddCurrentPositionForSave(Vector3 position)
     {

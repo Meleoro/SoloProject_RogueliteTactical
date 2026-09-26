@@ -341,7 +341,10 @@ public class Loot : MonoBehaviour, IInteractible
     public void Equip(EquipmentSlot slot)
     {
         if (!GetCanBeEquipped())
+        {
+            AudioManager.Instance.PlaySoundOneShotRandomPitch(0.95f, 1.05f, 0, 10);
             return;
+        }
 
         if (slot is null)
         {
@@ -467,11 +470,13 @@ public class Loot : MonoBehaviour, IInteractible
         int emptySlotsCount = GetOverlayedSlotsEmptyCount(overlayedSlots);
         if (emptySlotsCount != overlayedSlots.Count && overlayedEquipmentSlot is null) 
         {
+            _imageBackground.raycastTarget = true;
             FailDrop();
             return; 
         }
         if (GetNeededOccupiedSpace() != emptySlotsCount && overlayedEquipmentSlot is null) 
         {
+            _imageBackground.raycastTarget = true;
             FailDrop();
             return; 
         }
@@ -483,6 +488,7 @@ public class Loot : MonoBehaviour, IInteractible
         }
         else if(overlayedSlots.Count == 0 && slotsOccupied.Length == 0)
         {
+            _imageBackground.raycastTarget = true;
             inventoryBounceCoroutine = StartCoroutine(InventoryBounceCoroutine(1.25f, 0.15f));
             return;
         }
@@ -492,6 +498,8 @@ public class Loot : MonoBehaviour, IInteractible
         {
             slotsOccupied[i].RemoveLoot();
         }
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 6);
 
         PlaceInInventory(overlayedSlots);
     }
@@ -650,6 +658,8 @@ public class Loot : MonoBehaviour, IInteractible
 
     private IEnumerator RotateLootCoroutine(float duration, Quaternion finalRotation, Quaternion furtherFinalRotation)
     {
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.95f, 1.05f, 0, 7);
+
         isRotating = true;
 
         _imageBackground.rectTransform.DORotate(furtherFinalRotation.eulerAngles, duration * 0.68f);
@@ -837,6 +847,8 @@ public class Loot : MonoBehaviour, IInteractible
 
     public void Interact()
     {
+        if (!InventoriesManager.Instance.VerifyCanOpenCloseInventory()) return;
+
         InventoriesManager.Instance.AddItemToInventories(this);
         BecomeInventoryItem();
     }

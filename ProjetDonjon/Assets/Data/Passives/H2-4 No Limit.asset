@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: H2-4 No Limit
   m_EditorClassIdentifier: 
   passiveName: NO LIMIT
-  passiveDescription: +1 MAX <#E9A800>SKILL POINT</color>
+  passiveDescription: +1 MAX <#FFA768>SKILL POINT</color>
   passiveIcon: {fileID: 847775307, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   passiveHighlightIcon: {fileID: 1196405056, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
   additionalTooltipDatas:

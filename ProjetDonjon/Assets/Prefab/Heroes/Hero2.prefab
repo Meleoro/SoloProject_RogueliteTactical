@@ -265,6 +265,7 @@ MonoBehaviour:
   _walkParticleSystem: {fileID: 8748653694057178051}
   _landParticleSystem: {fileID: 2860556578533385868}
   _spriteParent: {fileID: 5050220775268981595}
+  _spriteTr: {fileID: 5985770741846012265}
   _shadowTr: {fileID: 316598353547619335}
 --- !u!1 &3581909500672128212
 GameObject:
@@ -10558,7 +10559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586550519330485921, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.803
+      value: 1.705
       objectReference: {fileID: 0}
     - target: {fileID: 7586550519330485921, guid: 50299cee98d06b74bbc376e830645ccc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

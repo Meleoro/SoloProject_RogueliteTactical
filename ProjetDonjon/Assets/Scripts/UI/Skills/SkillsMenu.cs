@@ -33,6 +33,7 @@ public class SkillsMenu : MonoBehaviour
     [SerializeField] private RectTransform[] _upButtonsRectTr;
     [SerializeField] private TextMeshProUGUI[] _upButtonsTexts;
     [SerializeField] private Image[] _upButtonsImages;
+    [SerializeField] private Image[] _upButtonsOutlines;
     [SerializeField] private RectTransform _buttonsParent;
 
     [Header("References Right")]
@@ -234,19 +235,31 @@ public class SkillsMenu : MonoBehaviour
 
     public void HoverUpButton(int buttonIndex)
     {
+        _upButtonsImages[buttonIndex].rectTransform.DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutBack);
+        _upButtonsOutlines[buttonIndex].DOFade(1.0f, 0.2f).SetEase(Ease.OutBack);
+
+        return;
+
         // Hovered + Selected
-        if((isOnSkills && buttonIndex == 0) || (!isOnSkills && buttonIndex == 1))
+        if ((isOnSkills && buttonIndex == 0) || (!isOnSkills && buttonIndex == 1))
         {
-            _upButtonsRectTr[buttonIndex].UChangeScale(0.2f, Vector3.one * 1.1f, CurveType.EaseOutSin);
+            _upButtonsImages[buttonIndex].rectTransform.DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutBack);
+            _upButtonsOutlines[buttonIndex].DOFade(1.0f, 0.3f).SetEase(Ease.OutBack);
         }
         else     // Hovered + Unselected
         {
-            _upButtonsRectTr[buttonIndex].UChangeScale(0.2f, Vector3.one * 0.9f, CurveType.EaseOutSin);
+            _upButtonsImages[buttonIndex].rectTransform.DOScale(Vector3.one * 0.9f, 0.15f).SetEase(Ease.OutBack);
+            _upButtonsOutlines[buttonIndex].DOFade(1.0f, 0.3f).SetEase(Ease.OutBack);
         }
     }
 
     public void UnhoverUpButton(int buttonIndex)
     {
+        _upButtonsImages[buttonIndex].rectTransform.DOScale(Vector3.one * 1.0f, 0.15f).SetEase(Ease.OutBack);
+        _upButtonsOutlines[buttonIndex].DOFade(0.0f, 0.2f).SetEase(Ease.OutBack);
+
+        return;
+
         // Hovered + Selected
         if ((isOnSkills && buttonIndex == 0) || (!isOnSkills && buttonIndex == 1))
         {
@@ -272,19 +285,19 @@ public class SkillsMenu : MonoBehaviour
     {
         if (isOnSkills)
         {
-            _upButtonsImages[0].rectTransform.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
-            _upButtonsImages[1].rectTransform.UChangeScale(0.2f, Vector3.one * 0.8f, CurveType.EaseOutSin);
+            //_upButtonsImages[0].rectTransform.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
+            //_upButtonsImages[1].rectTransform.UChangeScale(0.2f, Vector3.one * 0.8f, CurveType.EaseOutSin);
 
-            _upButtonsTexts[0].ULerpTextColor(0.2f, upButtonSelectedColorText, CurveType.EaseOutSin);
-            _upButtonsTexts[1].ULerpTextColor(0.2f, upButtonNotSelectedColorText, CurveType.EaseOutSin);
+            _upButtonsTexts[0].DOColor(upButtonSelectedColorText, 0.2f).SetEase(Ease.OutBack);
+            _upButtonsTexts[1].DOColor(upButtonNotSelectedColorText, 0.2f).SetEase(Ease.OutBack);
         }
         else
         {
-            _upButtonsImages[0].rectTransform.UChangeScale(0.2f, Vector3.one * 0.8f, CurveType.EaseOutSin);
-            _upButtonsImages[1].rectTransform.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
+            //_upButtonsImages[0].rectTransform.UChangeScale(0.2f, Vector3.one * 0.8f, CurveType.EaseOutSin);
+            //_upButtonsImages[1].rectTransform.UChangeScale(0.2f, Vector3.one * 1f, CurveType.EaseOutSin);
 
-            _upButtonsTexts[0].ULerpTextColor(0.2f, upButtonNotSelectedColorText, CurveType.EaseOutSin);
-            _upButtonsTexts[1].ULerpTextColor(0.2f, upButtonSelectedColorText, CurveType.EaseOutSin);
+            _upButtonsTexts[0].DOColor(upButtonNotSelectedColorText, 0.2f).SetEase(Ease.OutBack);
+            _upButtonsTexts[1].DOColor(upButtonSelectedColorText, 0.2f).SetEase(Ease.OutBack);
         }
     }
 

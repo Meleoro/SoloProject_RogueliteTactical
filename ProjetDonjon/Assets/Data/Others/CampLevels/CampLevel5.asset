@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel5
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 12
+  neededRelicCount: 5
   unlockType: 3
   unlockName: 'UNLOCKED : THE BLACKSMITH'
-  unlockDescription: Toujours rien
+  unlockDescription: THE <#7A2E00>BLACKSMITH</color> ALLOWS YOU TO <#7A2E00>UPGRADE
+    YOUR EQUIPMENT</color> AND YOUR HEROES <#7A2E00>INVENTORIES</color> AGAINST MATERIALS
+    AND COINS
   unlockedHeroIndex: 0
+  unlockAdditionalDescription: 
+  heroAnim: []
   unlockedExpeditionIndex: 0

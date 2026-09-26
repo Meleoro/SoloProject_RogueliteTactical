@@ -295,7 +295,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
 
         OnInventoryClose?.Invoke();
-        _inventoryActionsPanel.ClosePanel();
+        _inventoryActionsPanel.ClosePanel(true);
 
         UIManager.Instance.CoinUI.Hide();
         HeroesManager.Instance.Heroes[HeroesManager.Instance.CurrentHeroIndex].Controller.RestartControl();
@@ -376,7 +376,9 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
     public void AddCoins(int quantity)
     {
-        OnCoinsObtained.Invoke(quantity);
+        OnCoinsObtained.Invoke(quantity);    // For expedition stat track
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 13);  
 
         currentCoins += quantity;
         _topRightCointUI.ActualiseCoins(currentCoins);

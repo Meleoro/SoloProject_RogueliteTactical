@@ -91,8 +91,6 @@ public class TutorialPanel : MonoBehaviour
 
     public void DisplayTutorial(TutoStepData tutoData, Vector3 aimedLocalPos, Vector3 startLocalPos)
     {
-        Debug.Log(tutoData.name);
-
         currentTutoData = tutoData;
 
         _progressImageBack.gameObject.SetActive(false);
@@ -132,6 +130,32 @@ public class TutorialPanel : MonoBehaviour
         if (!isDisplayed) return;
         isDisplayed = false;
 
+        switch (currentTutoData.lockInputType)
+        {
+            case LockInputType.LockHeroInputs:
+                HeroesManager.Instance.RestartControl();
+                break;
+
+            case LockInputType.LockAllInputs:
+                InputManager.DisableInputs = false;
+                break;
+
+            case LockInputType.LockAllExceptEquipment:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptEquipment = false;
+                break;
+
+            case LockInputType.LockAllExceptSkillTrees:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptSkillTree = false;
+                break;
+
+            case LockInputType.LockAllExceptSkills:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptSkills = false;
+                break;
+        }
+
         //_rectTr.DOScale(Vector3.one * 0f, 0.25f).SetEase(Ease.OutBack);
         _rectTr.DOLocalMove(startPosSave, 0.3f).SetEase(Ease.InBack);
 
@@ -150,7 +174,7 @@ public class TutorialPanel : MonoBehaviour
 
     private void StartHighlight()
     {
-        if (currentTutoData.highlightType == TutoHighlightType.None && !currentTutoData.lockPlayerInputs)
+        if (currentTutoData.highlightType == TutoHighlightType.None && currentTutoData.lockInputType != LockInputType.LockAllInputs)
         {
             _backDarkImage.DOFade(0.4f, 0.2f).SetEase(Ease.OutBack);
 

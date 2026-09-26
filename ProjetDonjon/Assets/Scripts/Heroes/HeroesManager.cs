@@ -21,10 +21,12 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     public Action OnHeroLevelUp;
 
     [Header("Public Infos")]
-    public Hero[] Heroes { get { return heroes; } }
-    public Hero[] AllHeroes { get { return allHeroes; } }
+    public Hero[] Heroes { get { return heroes; } }    // Heroes in the player squad
+    public Hero[] AllHeroes { get { return allHeroes; } }     // All heroes in the game
     public int CurrentHeroIndex { get { return currentHeroIndex; } }
     public InteractionManager InteractionManager { get { return _interactionManager; } }
+    public int AliveHeroCount { get { return aliveHeroCount; } }
+    public bool IsInitialised { get { return isInitialised; } }
 
     [Header("Private Infos")]
     private Hero[] heroes = new Hero[0];
@@ -53,7 +55,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
     {
         RelicsManager.Instance.OnLevelUp += ActualiseUnlockedHeroes;
 
-        //if (!isInitialised) Initialise();
+        if (!isInitialised) Initialise();
     }
 
 
@@ -71,7 +73,10 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
         if (Input.GetKeyDown(KeyCode.K) && GameManager.Instance.EnableDebugCommands)
         {
-            HeroDies();
+            for(int i = 0; i < heroes.Length; i++)
+            {
+                heroes[i].TakeDamage(1, null, false);
+            }
         }
     }
 
@@ -107,8 +112,12 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
             return;
         }
 
-        heroes[currentHeroIndex].transform.position = heroPosSave;
-        heroes[currentHeroIndex].Controller.ForceAddCurrentPositionForSave(heroPosSave);
+        if(!BattleManager.Instance.IsInBattle)
+        {
+            heroes[currentHeroIndex].transform.position = heroPosSave;
+            heroes[currentHeroIndex].Controller.ForceAddCurrentPositionForSave(heroPosSave);
+            heroes[currentHeroIndex].Controller.RestartControl();
+        }
 
         _spriteLayererManager.InitialiseAll();
         ActualiseDisplayedHero();
@@ -170,7 +179,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
             _inventoryManager.EnableInventory(i);
 
-            heroesList.Add(GetHeroObject(allHeroes[i]));
+            heroesList.Add(allHeroes[i]);
             heroesList[i].transform.position = Vector3.zero;
         }
 
@@ -370,17 +379,26 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
         }
         else
         {
-            EndExploration();
-
-            StopControl();
-            CameraManager.Instance.ExitBattle();
-
-            UIManager.Instance.Transition.StartDeathTransition();
-            InventoriesManager.Instance.EmptyCurrentHeroesInventories();
-
-            BattleManager.Instance.AllHeroDefeatEndBattle();
-            InteractionManager.DisableInteractions();
+            StartCoroutine(SquadDeathCoroutine());
         }
+    }
+
+    private IEnumerator SquadDeathCoroutine()
+    {
+        CameraManager.Instance.ChangeFocusSize(6);
+
+        yield return new WaitForSeconds(1);
+
+        EndExploration();
+
+        StopControl();
+        CameraManager.Instance.ExitBattle();
+
+        UIManager.Instance.Transition.StartDeathTransition();
+        InventoriesManager.Instance.EmptyCurrentHeroesInventories();
+
+        BattleManager.Instance.AllHeroDefeatEndBattle();
+        InteractionManager.DisableInteractions();
     }
 
     private IEnumerator SwitchDeadHeroCoroutine()
@@ -421,6 +439,8 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
                 HeroesEquippedSkillNames[i * 6 + 1] = allHeroesPrefabs[i].HeroData.heroBaseSkills[1].skillName;
             }
         }
+
+        UIManager.Instance.SetupHeroInfosPanel(heroes);
     }
 
     public void SaveGame(ref GameData data)
@@ -432,7 +452,7 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
             for (int j = 0; j < heroes[i].SkillTreeUnlockedNodes.Length; j++)
             {
-                HeroesUnlockedNodes[heroes[i].HeroIndex * 15 + j] = heroes[i].SkillTreeUnlockedNodes[j];
+                HeroesUnlockedNodes[heroes[i].HeroIndex * 20 + j] = heroes[i].SkillTreeUnlockedNodes[j];
             }
 
             for (int j = 0; j < heroes[i].EquippedSkills.Length; j++)

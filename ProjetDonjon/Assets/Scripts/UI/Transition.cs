@@ -73,6 +73,7 @@ public class Transition : MonoBehaviour
         if (floorIndex == 0)
         {
             StartCoroutine(IntroCoroutine(2f));
+            ResetFloors();
         }
         else
         {
@@ -98,11 +99,11 @@ public class Transition : MonoBehaviour
     {
         OnTransitionStart?.Invoke();
 
-        _mainRectTr.localScale = Vector3.zero;
+        InputManager.DisableInputs = true;
 
         for (int i = 0; i < _buttonsImages.Length; i++)
         {
-            _buttonsImages[i].gameObject.SetActive(false);
+            _buttonsImages[i].raycastTarget = true;
         }
 
         _buttonsImages[0].gameObject.SetActive(false);   // Continue button
@@ -129,6 +130,15 @@ public class Transition : MonoBehaviour
             {
                 _buttonsImages[i].gameObject.SetActive(false);
             }
+        }
+    }
+
+
+    private void ResetFloors()
+    {
+        for(int i = 0; i < _floorTransitions.Length; i++)
+        {
+            _floorTransitions[i].ResetVisuals();
         }
     }
 
@@ -178,13 +188,21 @@ public class Transition : MonoBehaviour
 
     private IEnumerator StartDeathCoroutine()
     {
+        OnTransitionStart?.Invoke();
+
+        HighlightFloor(currentFloor);
+        FadeScreen(1, 1.0f);
+
         yield return new WaitForSeconds(1.0f);
 
-        FadeScreen(0.2f, 1f);
-
-        yield return new WaitForSeconds(0.3f);
-
         _anim.SetBool("IsDisplayed", true);
+        isActive = true;
+
+        yield return new WaitForSeconds(0.75f);
+
+        StartCoroutine(_floorTransitions[currentFloor].DoDeadEffectCoroutine());
+
+        InputManager.DisableInputs = false;
     }
 
     private IEnumerator ContinueCoroutine(float duration)
@@ -290,11 +308,11 @@ public class Transition : MonoBehaviour
 
         saveButtonScale = _buttonsRectTr[buttonIndex].localScale;
 
-        _buttonsRectTr[buttonIndex].DOScale(saveButtonScale * 1.1f, 0.15f).SetEase(Ease.OutCubic);
-        _buttonsImages[buttonIndex].DOColor(buttonColorHover, 0.15f).SetEase(Ease.OutCubic);
-        _buttonsTexts[buttonIndex].DOColor(buttonTextColorHover, 0.15f).SetEase(Ease.OutCubic);
+        _buttonsRectTr[buttonIndex].DOScale(saveButtonScale * 1.05f, 0.15f).SetEase(Ease.OutBack);
+        //_buttonsImages[buttonIndex].DOColor(buttonColorHover, 0.15f).SetEase(Ease.OutCubic);
+        //_buttonsTexts[buttonIndex].DOColor(buttonTextColorHover, 0.15f).SetEase(Ease.OutCubic);
 
-        _buttonsOutline[buttonIndex].DOFade(1, 0.15f).SetEase(Ease.OutBack);
+        _buttonsOutline[buttonIndex].DOFade(1, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void UnhoverButton(int buttonIndex)
@@ -304,10 +322,10 @@ public class Transition : MonoBehaviour
         _buttonsTexts[buttonIndex].DOKill();
 
         _buttonsRectTr[buttonIndex].DOScale(saveButtonScale, 0.15f).SetEase(Ease.InCubic);
-        _buttonsImages[buttonIndex].DOColor(buttonColorUnhover, 0.15f).SetEase(Ease.OutCubic);
-        _buttonsTexts[buttonIndex].DOColor(buttonTextColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+        //_buttonsImages[buttonIndex].DOColor(buttonColorUnhover, 0.15f).SetEase(Ease.OutCubic);
+        //_buttonsTexts[buttonIndex].DOColor(buttonTextColorUnhover, 0.15f).SetEase(Ease.OutCubic);
 
-        _buttonsOutline[buttonIndex].DOFade(0, 0.15f).SetEase(Ease.OutBack);
+        _buttonsOutline[buttonIndex].DOFade(0, 0.2f).SetEase(Ease.OutBack);
     }
 
     public void ClickContinue()

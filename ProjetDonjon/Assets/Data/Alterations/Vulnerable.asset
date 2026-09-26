@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alterationName: VULNERABLE
   alterationDescription: TAKES +50% DAMAGES
-  alterationIcon: {fileID: -389502807, guid: c24fa17b1e0e56b44a28f933fc61d136, type: 3}
+  alterationIcon: {fileID: -8481914303913920313, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
   alterationType: 2
   isPositive: 0
   isInfinite: 0

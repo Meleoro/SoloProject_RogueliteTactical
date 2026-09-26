@@ -11,14 +11,19 @@ public class GameManager : GenericSingletonClass<GameManager>
     [SerializeField] private bool startGameInExplo;
     [SerializeField] private EnviroData startEnviroData;
     [SerializeField] private AIUnit debugForcedEnemyEncounter;
+    [SerializeField] private Room debugForcedCorridorRoom;
+    [SerializeField] private Room debugForcedTrialRoom;
 
     [Header("Actions")]
     public Action<int> OnReturnToCamp;  // For tutorial
+    public Action OnExpeditionStart;  // For tutorial
 
     [Header("Public Infos")]
     public bool IsInExplo { get; private set; }
     public bool EnableDebugCommands { get { return enableDebugCommands; } }
     public AIUnit DebugForcedEnemyEncounter { get { return debugForcedEnemyEncounter; } }
+    public Room DebugForcedCorridorRoom { get { return debugForcedCorridorRoom; } }
+    public Room DebugForcedTrialRoom { get { return debugForcedTrialRoom; } }
     public bool StartGameInMainMenu { get { return startGameInMainMenu; } }
     public int ExpeditionCoinsCount { get; private set; }
     public int ExpeditionKillCount { get; private set; }
@@ -42,7 +47,7 @@ public class GameManager : GenericSingletonClass<GameManager>
 
         if (startGameInExplo || !TutoManager.Instance.DidTutorial)
         {
-            StartExploration(startEnviroData, true);
+            StartExploration(startEnviroData, true, !TutoManager.Instance.DidTutorial);
         }
         else
         {
@@ -55,6 +60,11 @@ public class GameManager : GenericSingletonClass<GameManager>
         if (Input.GetKeyDown(KeyCode.B) && EnableDebugCommands)
         {
             StartCoroutine(EndExplorationCoroutine());
+        }
+
+        if (Input.GetKeyDown(KeyCode.M) && EnableDebugCommands)
+        {
+            InventoriesManager.Instance.AddCoins(25);
         }
     }
 
@@ -71,7 +81,7 @@ public class GameManager : GenericSingletonClass<GameManager>
 
         if (!TutoManager.Instance.DidTutorial)
         {
-            StartExploration(startEnviroData, true);
+            StartExploration(startEnviroData, true, true);
         }
         else
         {
@@ -79,7 +89,7 @@ public class GameManager : GenericSingletonClass<GameManager>
         }
     }
 
-    public void StartExploration(EnviroData enviroData, bool isStart)
+    public void StartExploration(EnviroData enviroData, bool isStart, bool isTuto)
     {
         UIMetaManager.Instance.QuitMetaMenu();
         IsInExplo = true;
@@ -93,6 +103,11 @@ public class GameManager : GenericSingletonClass<GameManager>
         ExpeditionKillCount = 0;
         ExpeditionRelicCount = 0;
         ExpeditionChestCount = 0;
+
+        if(!isTuto)
+        {
+            OnExpeditionStart?.Invoke();
+        }
     }
 
     public IEnumerator EndExplorationCoroutine()

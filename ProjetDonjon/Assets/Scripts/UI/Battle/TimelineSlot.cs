@@ -83,10 +83,13 @@ public class TimelineSlot : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     #region Mouse Events
 
     public void OverlaySlot()
     {
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
+
         unit.DisplayOverlayOutline();
 
         //_unitImage.sprite = unit.UnitData.unitImageHighlight;
@@ -112,6 +115,8 @@ public class TimelineSlot : MonoBehaviour
 
     public void ClickSlot()
     {
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         CameraManager.Instance.FocusOnPosition(unit.transform.position, 3.5f);
     }
 

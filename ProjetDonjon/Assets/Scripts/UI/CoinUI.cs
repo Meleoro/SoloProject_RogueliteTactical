@@ -2,8 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
-using static UnityEngine.Rendering.DebugUI;
 
 public class CoinUI : MonoBehaviour
 {
@@ -56,6 +54,8 @@ public class CoinUI : MonoBehaviour
 
         if(isGainMoneyFeedback)
         {
+            if (!GameManager.Instance.IsInExplo) return;
+
             Show();
 
             if(displayCoroutine != null)

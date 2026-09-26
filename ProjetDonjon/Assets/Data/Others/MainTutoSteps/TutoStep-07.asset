@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutoStep-07
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: SKILL POINTS
-  stepDescription: 'THE SECOND RESSOURCE YOU HAVE TO PAY ATTENTION TO ARE YOUR <#E9A800>SKILL
+  stepDescription: 'THE SECOND RESSOURCE YOU HAVE TO PAY ATTENTION TO ARE YOUR <#FFA768>SKILL
     POINTS</color>
 
 
@@ -22,7 +22,9 @@ MonoBehaviour:
   highlightType: 2
   endCondition: 0
   tutoType: 0
+  lockInputType: 0
   leftSidePanel: 0
   playNextStepOnFinished: 1
+  lockPlayerInputs: 0
   playNextStepDelay: 0.2
   waitDuration: 0

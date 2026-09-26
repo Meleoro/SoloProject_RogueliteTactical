@@ -22,7 +22,6 @@ public class ChestMenu : MonoBehaviour, ISaveable
     [Header("Private Infos")]
     private Hero currentHero;
     private Inventory currentInventory;
-    private int currentLevel;
     private int currentInventoryIndex;
 
     [Header("References")]
@@ -43,9 +42,21 @@ public class ChestMenu : MonoBehaviour, ISaveable
         _chestInventory.InitialiseInventory(null);
 
         _upgradePanel.OnUpgrade += UpgradeChestInventory;
-        _upgradePanel.DisplayLevel(currentLevel);
+        _upgradePanel.DisplayLevel(0);
 
         SaveManager.Instance.AddSaveableObject(this);
+    }
+
+    public void Initialise()
+    {
+        //if (isInitialised) return;
+        //isInitialised = true;
+
+        //_chestInventory.SetupPosition(null, null, _lootParent);
+        //_chestInventory.InitialiseInventory(null);
+
+        //_upgradePanel.OnUpgrade += UpgradeChestInventory;
+        //_upgradePanel.DisplayLevel(currentLevel);
     }
 
 
@@ -70,7 +81,7 @@ public class ChestMenu : MonoBehaviour, ISaveable
     {
         _chestInventory.UpgradeInventory();
 
-        _upgradePanel.DisplayLevel(currentLevel);
+        _upgradePanel.DisplayLevel(_chestInventory.CurrentLevel);
     }
 
 
@@ -78,11 +89,15 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
     public void Show()
     {
+        Initialise();
+
         OnStartTransition.Invoke();
         OnShow.Invoke();
 
         InventoriesManager.Instance.OnQuickChange += LoadInventory;
         InventoriesManager.Instance.DisplayQuickChangeButtons(0);
+
+        _upgradePanel.DisplayLevel(_chestInventory.CurrentLevel);
 
         currentInventoryIndex = 0;
         currentHero = HeroesManager.Instance.AllHeroes[currentInventoryIndex];
@@ -136,15 +151,13 @@ public class ChestMenu : MonoBehaviour, ISaveable
 
     public void LoadGame(GameData data)
     {
-        currentLevel = data.chestLevel;
-
-        _chestInventory.UpdateInventoryLevel(currentLevel);
-        _upgradePanel.DisplayLevel(currentLevel);
+        _chestInventory.UpdateInventoryLevel(data.chestLevel);
+        _upgradePanel.DisplayLevel(data.chestLevel);
     }
 
     public void SaveGame(ref GameData data)
     {
-        data.chestLevel = currentLevel;
+        data.chestLevel = _chestInventory.CurrentLevel;
     }
 
     #endregion

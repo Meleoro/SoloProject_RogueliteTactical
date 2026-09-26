@@ -40,6 +40,7 @@ public class PlayerActionsMenu : MonoBehaviour
     private bool isOpened;
     private MenuType currentMenu;
     private Vector3 saveScaleButton;
+    private bool isInTransition;
 
     [Header("Public Infos")]
     public MenuType CurrentMenu { get { return currentMenu; } }
@@ -78,7 +79,7 @@ public class PlayerActionsMenu : MonoBehaviour
         if (BattleManager.Instance.CurrentUnit is null) return;
         if (BattleManager.Instance.CurrentUnit.GetType() != typeof(Hero)) return;
 
-        if (InputManager.wantsToReturn && !TutoManager.Instance.IsDisplayingTuto)
+        if (InputManager.wantsToReturn && !TutoManager.Instance.IsDisplayingTuto && !isInTransition)
         {
             ReturnPreviousBattleMenu();
         }
@@ -156,12 +157,25 @@ public class PlayerActionsMenu : MonoBehaviour
         isOpened = false;
     }
 
+    private void EndTransition()
+    {
+        isInTransition = false;
+
+        if(currentMenu == MenuType.UseItems)
+        {
+            currentHero.Inventory.OnTransitionEnd -= EndTransition;
+        }
+    }
+
 
     #region Button Effects
 
     public void StartMoveAction()
     {
         if (currentHero.IsHindered) return;
+        if (isInTransition || currentMenu != MenuType.BaseActions) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
 
         OnMoveAction?.Invoke(0);
 
@@ -173,6 +187,10 @@ public class PlayerActionsMenu : MonoBehaviour
 
     public void StartSkillsAction()
     {
+        if (isInTransition || (currentMenu != MenuType.BaseActions && currentMenu != MenuType.LaunchSkill)) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         currentMenu = MenuType.Skills;
         _skillsPanel.OpenSkillsPanel(currentHero);
 
@@ -183,6 +201,8 @@ public class PlayerActionsMenu : MonoBehaviour
 
     public void StartLaunchSkillAction()
     {
+        if (isInTransition) return;
+
         currentMenu = MenuType.LaunchSkill;
 
         currentHero.OnClickUnit -= OpenActionsMenu;
@@ -192,14 +212,24 @@ public class PlayerActionsMenu : MonoBehaviour
 
     public void StartUseObjectAction()
     {
+        if (isInTransition || currentMenu != MenuType.BaseActions) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         currentMenu = MenuType.UseItems;
 
         StartCoroutine(InventoriesManager.Instance.OpenInventory(currentHero.Inventory));
         CloseActionsMenu();
+
+        currentHero.Inventory.OnTransitionEnd += EndTransition;
     }
 
     public void EndTurnAction()
     {
+        if (isInTransition || currentMenu != MenuType.BaseActions) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         currentHero.EndTurn(0.5f);
 
         BattleManager.Instance.TilesManager.UnhoverAll();
@@ -213,7 +243,10 @@ public class PlayerActionsMenu : MonoBehaviour
 
     public void OverlayButton(int buttonIndex)
     {
+        if (isInTransition) return;
         if (buttonIndex == 0 && currentHero.IsHindered) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
 
         _buttonImages[buttonIndex].DOComplete();
         _buttonImages[buttonIndex].rectTransform.DOComplete();

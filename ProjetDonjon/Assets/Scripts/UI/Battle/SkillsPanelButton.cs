@@ -150,6 +150,8 @@ public class SkillsPanelButton : MonoBehaviour
 
     public void OverlayButton()
     {
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
+
         if (isClicked)
         {
             _buttonImage.ULerpImageColor(0.1f, colorSave + overlayActionAddedColor + clickedActionAddedColor);
@@ -218,6 +220,8 @@ public class SkillsPanelButton : MonoBehaviour
     public void ClickButton()
     {
         if (!canBeUsed || isLocked) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
 
         StartCoroutine(ClickEffectCoroutine());
 

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -39,6 +40,7 @@ public class Hero : Unit
     public int CurrentSkillTreePoints { get { return currentSkillTreePoints; } }
     public bool[] SkillTreeUnlockedNodes { get { return skillTreeUnlockedNodes; } }
     public int HeroIndex { get { return heroIndex; } }
+    public bool IsDying { get { return isDying; } }
     public UnitUI UI { get { return _ui; } }
     public int CurrentXP { get { return currentXP; } set { currentXP = value; OnHeroInfosChange?.Invoke(); } }
     public int CurrentXPToReach { get { return XPToReach; } set { XPToReach = value; OnHeroInfosChange?.Invoke(); } }
@@ -49,6 +51,7 @@ public class Hero : Unit
     private SkillData[] equippedSkills = new SkillData[6];
     private Inventory inventory;
     private bool isHidden;
+    private bool isDying;
     private Transform currentDisplayedHeroTr;
     private int currentSkillPoints;
     private int currentMaxSkillPoints;
@@ -115,6 +118,8 @@ public class Hero : Unit
 
         _spriteRenderer.transform.localPosition = Vector3.zero;
         _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        _shadowTransform.localScale = Vector3.one;
 
         _spriteRendererParent.gameObject.SetActive(true);
         _shadowTransform.gameObject.SetActive(true);
@@ -216,39 +221,79 @@ public class Hero : Unit
 
     protected override void Die()
     {
+        isDead = true;
         _animator.SetBool("IsDead", true);
+        _controller.StopControl();
+
         UnHoverUnit();
         HideOutline();
 
+        if (BattleManager.Instance.IsInBattle)
+        {
+            _ui.HideUnitUI();
+        }
+
+        StartCoroutine(DieCoroutine());
+
+        if (BattleManager.Instance.IsInBattle)
+        {
+            BattleManager.Instance.AddBattleEventToQueue(BattleEventType.HeroDeath);
+        }
         AudioManager.Instance.PlaySoundOneShot(2, 9);
-        StartCoroutine(DisappearCoroutine(1.0f, false));
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        Time.timeScale = 0.4f;
+        transform.DOShakePosition(1.0f, 0.75f, 45);
+        isDying = true;
+
+        yield return new WaitForSecondsRealtime(1);
+
+        Time.timeScale = 1f;
 
         if (BattleManager.Instance.IsInBattle)
         {
             currentTile.UnitLeaveTile();
             BattleManager.Instance.RemoveUnit(this);
-
-            _ui.HideUnitUI();
         }
 
+        _shadowTransform.DOScale(Vector3.zero, 1.0f).SetEase(Ease.InBack);
+        StartCoroutine(DisappearCoroutine(1.0f, false));
         OnDead.Invoke();
-        isDead = true;
+
+        isDying = false; 
     }
 
     public override void Heal(int healedAmount)
     {
+        if(BattleManager.Instance.IsInBattle && isDead)
+        {
+            return;
+        }
+
         base.Heal(healedAmount);
 
         if (isDead)
         {
-            OnRevive.Invoke();
+            Revive();
+        }
+    }
 
-            Debug.Log("Revied");
+    private void Revive()
+    {
+        OnRevive.Invoke();
+        isDead = false;
 
-
-            isDead = false;
+        if (BattleManager.Instance.IsInBattle)
+        {
             BattleManager.Instance.AddUnit(this);
         }
+
+        _shadowTransform.localScale = Vector3.one;
+        _spriteRenderer.material.SetFloat("_DitherProgress", 2.5f);
+
+        HideHero();
     }
 
     protected override void ClickUnit()
@@ -302,15 +347,26 @@ public class Hero : Unit
 
     public void GainXP(int quantity)
     {
+        if(isDead)
+        {
+            CurrentXP += quantity;
+            if (currentXP >= XPToReach) StartCoroutine(GainLevelCoroutine(0.9f));
+
+            return;
+        }
+
         CurrentXP += quantity;
         _ui.GainXP((float)currentXP / XPToReach);
 
         if (currentXP >= XPToReach) StartCoroutine(GainLevelCoroutine(0.9f));
+        else AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 20);   // To avoid overlap with the level up sound
     }
     
     private IEnumerator GainLevelCoroutine(float delay)
     {
         GainLevel();
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 18);
 
         yield return new WaitForSeconds(delay);
 
@@ -412,7 +468,7 @@ public class Hero : Unit
         base.ActualiseUnitInfos(currentHealth, currentStrength, currentSpeed, currentLuck, addedMovePoints, addedSP);
 
         UIManager.Instance.HeroInfosScreen.ActualiseInfoScreen(this, true);
-        OnHeroInfosChange.Invoke();
+        OnHeroInfosChange?.Invoke();
     }
 
     private SkillTreeNodeData[] GetAllPossessedNodes(SkillTreeData skillTreeData, bool[] unlockedNodes)

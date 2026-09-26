@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Headset3-2
   m_EditorClassIdentifier: 
   lootName: CRISTAL HEADSET II
-  lootDescription: <#7C210C>+25% CRITICAL CHANCES</color> WHEN ATTACKING <#176F00>HINDERED</color>
+  lootDescription: <#7C210C>+30% CRITICAL CHANCES</color> WHEN ATTACKING <#176F00>HINDERED</color>
     OR <#FFC12E>STUNNED</color> UNITS
   lootType: 1
   rarityType: 2
@@ -24,10 +24,10 @@ MonoBehaviour:
   - row: 01
   equipmentType: 1
   equipmentSprite: {fileID: -128178815, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 2
+  healthUpgrade: 1
   strengthUpgrade: 0
   speedUpgrade: 0
-  luckUpgrade: 2
+  luckUpgrade: 3
   mpUpgrade: 0
   spUpgrade: 0
   exclusiveHeroIndex: -1

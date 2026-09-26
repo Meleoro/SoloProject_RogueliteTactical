@@ -6,6 +6,9 @@ public class InputManager : MonoBehaviour
     public PlayerInput _playerInput;
 
     public static bool DisableInputs;
+    public static bool ExceptEquipment;
+    public static bool ExceptSkills;
+    public static bool ExceptSkillTree;
 
     public static Vector2 moveDir;
     public static Vector2 mouseDelta;
@@ -49,6 +52,19 @@ public class InputManager : MonoBehaviour
             wantsToDrag = false;
             wantsToDisplayAllDangerTiles = false;
             wantsToStopDisplayAllDangerTiles = false;
+
+            if(ExceptEquipment)
+            {
+                wantsToHeroInfo = _playerInput.actions["HeroInfo"].WasPressedThisFrame();
+            }
+            else if(ExceptSkills)
+            {
+                wantsToSkills = _playerInput.actions["Skills"].WasPressedThisFrame();
+            }
+            else if(ExceptSkillTree)
+            {
+                wantsToSkillTree = _playerInput.actions["SkillTrees"].WasPressedThisFrame();
+            }
 
             return;
         }

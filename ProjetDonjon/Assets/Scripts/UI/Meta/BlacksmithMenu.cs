@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 public class BlacksmithMenu : MonoBehaviour
 {
@@ -143,6 +144,8 @@ public class BlacksmithMenu : MonoBehaviour
     {
         isDoingUpgradeEffect = true;
 
+        AudioManager.Instance.PlaySoundOneShot(0, 12);
+
         _upgradedEquipmentImage.rectTransform.DOScale(Vector3.one * 1.2f, 0.3f).SetEase(Ease.OutCirc);
 
         _upgradedEquipmentImageFaded.enabled = true;
@@ -154,6 +157,8 @@ public class BlacksmithMenu : MonoBehaviour
         _upgradedEquipmentImageFaded.DOFade(0.4f, 0.3f);
 
         yield return new WaitForSeconds(0.3f);
+
+        AudioManager.Instance.PlaySoundOneShot(0, 12);
 
         _upgradedEquipmentImage.rectTransform.DOScale(Vector3.one * 0.5f, 0.1f);
         _upgradedEquipmentImageFaded.enabled = false;
@@ -214,6 +219,8 @@ public class BlacksmithMenu : MonoBehaviour
     {
         currentInventory.UpgradeInventory();
         _upgradeInventory.SetUpgradeCost(currentInventory.UpgradeCosts[currentInventory.CurrentLevel]);
+
+        AudioManager.Instance.PlaySoundOneShot(0, 11);
     }
 
     #endregion

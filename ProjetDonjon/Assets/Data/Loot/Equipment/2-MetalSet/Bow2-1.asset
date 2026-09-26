@@ -24,7 +24,7 @@ MonoBehaviour:
   - row: 01
   equipmentType: 0
   equipmentSprite: {fileID: -8163505571951053974, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
-  healthUpgrade: 1
+  healthUpgrade: 0
   strengthUpgrade: 1
   speedUpgrade: 0
   luckUpgrade: 0

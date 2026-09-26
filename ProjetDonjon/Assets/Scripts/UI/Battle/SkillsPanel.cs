@@ -128,6 +128,8 @@ public class SkillsPanel : MonoBehaviour
 
     private void LoadSkillDetails(SkillData skillData)
     {
+        if (!isOpenned) return;
+
         UIMetaManager.Instance.GenericDetailsPanel.LoadDetails(skillData, _detailsPosRectTr.position, true);
     }
 

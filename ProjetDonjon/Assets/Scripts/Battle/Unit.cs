@@ -370,8 +370,16 @@ public class Unit : MonoBehaviour
         // Shield
         if(shieldDamages != 0)
         {
-            if (CurrentShield > 0) _shieldVFX.PlayBlockAnim();
-            else _shieldVFX.PlayBreakAnim();
+            if (CurrentShield > 0)
+            {
+                _shieldVFX.PlayBlockAnim();
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 14);
+            }
+            else
+            {
+                _shieldVFX.PlayBreakAnim();
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 15);
+            }
         }
 
         if (CurrentHealth <= 0)
@@ -525,15 +533,18 @@ public class Unit : MonoBehaviour
         switch (type)
         {
             case AlterationType.Shield:
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 13);
                 _shieldVFX.PlayEquipAnim();
                 return;
 
             case AlterationType.Stunned:
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 19);
                 Destroy(Instantiate(stunVFX, transform.position, Quaternion.Euler(0, 0, 0)), 1f);
                 _stunnedVFX.Appear();
                 return;
 
             case AlterationType.Poisoned:
+                AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 12);
                 _poisonedVFX.PlayStartPoisonEffect();
                 return;
 
@@ -829,6 +840,8 @@ public class Unit : MonoBehaviour
         // Poison
         if (VerifyHasAlteration(AlterationType.Poisoned))
         {
+            AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 2, 12);
+
             TakeDamage(1, null);
             _poisonedVFX.PlayApplyPoisonEffect();
         }

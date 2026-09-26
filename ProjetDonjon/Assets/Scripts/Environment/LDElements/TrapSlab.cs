@@ -51,18 +51,25 @@ public class TrapSlab : MonoBehaviour
         {
             if (isDeactivated) break;
 
-            Arrow newArrow = Instantiate(arrowPrefab, _triggeredArrowDispensers[i].position, _triggeredArrowDispensers[i].rotation);
-            newArrow.InitialiseArrow(arrowSpeed, arrowDamages);
-
-            AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, 7, 0);
-
-            _dustParticleSystems[i].Play();
+            StartCoroutine(LaunchArrowCoroutine(Random.Range(0.0f, 0.1f), _triggeredArrowDispensers[i], _dustParticleSystems[i]));
         }
 
         yield return new WaitForSeconds(cooldownDuration);
 
         isOnCooldown = false;
         transform.UChangePosition(0.2f, originalPos, CurveType.EaseOutCubic);
+    }
+
+    private IEnumerator LaunchArrowCoroutine(float delay, Transform dispenserTr, ParticleSystem dustVFX)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Arrow newArrow = Instantiate(arrowPrefab, dispenserTr.position, dispenserTr.rotation);
+        newArrow.InitialiseArrow(arrowSpeed, arrowDamages);
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 1, 7, 0);
+
+        dustVFX.Play();
     }
 
 

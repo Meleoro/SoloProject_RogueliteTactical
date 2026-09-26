@@ -25,10 +25,10 @@ MonoBehaviour:
   - row: 0101
   equipmentType: 2
   equipmentSprite: {fileID: 1176501172, guid: 16de10eb8fea91941a2ac66a7f57eefc, type: 3}
-  healthUpgrade: 3
+  healthUpgrade: 2
   strengthUpgrade: 0
   speedUpgrade: 1
-  luckUpgrade: 5
+  luckUpgrade: 4
   mpUpgrade: 0
   spUpgrade: 0
   exclusiveHeroIndex: -1

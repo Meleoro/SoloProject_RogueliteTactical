@@ -18,10 +18,28 @@ public class InventoryActionPanel : MonoBehaviour
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private Image _mainActionsBackImage;
     [SerializeField] private RectTransform[] _buttonsRectTr;
+    [SerializeField] private TargetChoiceButton[] _targetChoiceButtons;
     [SerializeField] private TextMeshProUGUI[] _buttonsTexts;
     [SerializeField] private VerticalLayoutGroup _verticalLayoutGroup;
     [SerializeField] private Animator _animator;
 
+
+    private void Start()
+    {
+        for (int i = 0; i < _targetChoiceButtons.Length; i++)
+        {
+            _targetChoiceButtons[i].OnSizeChange += ActualiseVerticalGroupScale;
+
+            if(i < _targetChoiceButtons.Length - 1)
+            {
+                _targetChoiceButtons[i].OnClickTarget += ValidateTarget;
+            }
+            else
+            {
+                _targetChoiceButtons[i].OnClickReturn += CloseChoseTarget;
+            }
+        }
+    }
 
 
     #region Main Panel
@@ -68,12 +86,12 @@ public class InventoryActionPanel : MonoBehaviour
         // Sell Button
         if (GameManager.Instance.IsInExplo)
         {
-            _buttonsRectTr[6].gameObject.SetActive(false);
+            _buttonsRectTr[2].gameObject.SetActive(false);
         }
         else 
         {
-            _buttonsRectTr[6].gameObject.SetActive(true);
-            _buttonsTexts[6].text = "SELL (" + (int)(associatedLoot.LootData.value * 0.5f) + ")";
+            _buttonsRectTr[2].gameObject.SetActive(true);
+            _buttonsTexts[2].text = "SELL (" + (int)(associatedLoot.LootData.value * 0.5f) + ")";
 
             buttonCount++;
         }
@@ -82,10 +100,15 @@ public class InventoryActionPanel : MonoBehaviour
         _mainActionsBackImage.SetNativeSize();
     }
 
-    public void ClosePanel()
+    public void ClosePanel(bool closeAlsoTarget = false)
     {
         _animator.SetBool("IsOpened", false);
         isOpened = false;
+
+        if(closeAlsoTarget)
+        {
+            CloseChoseTarget(false);
+        }
     }
 
 
@@ -144,6 +167,11 @@ public class InventoryActionPanel : MonoBehaviour
 
     #region Choose Target Panel
 
+    private void ActualiseVerticalGroupScale()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_verticalLayoutGroup.transform as RectTransform);
+    }
+
     private void OpenChooseTarget()
     {
         ClosePanel();
@@ -153,14 +181,14 @@ public class InventoryActionPanel : MonoBehaviour
 
         for(int i = 0; i < 3; i++)
         {
-            if(heroes.Length > i)
+            if(i < heroes.Length && (heroes[i].CurrentHealth >= 0 || !BattleManager.Instance.IsInBattle))
             {
-                _buttonsRectTr[i + 2].gameObject.SetActive(true);
-                _buttonsTexts[i + 2].text = heroes[i].HeroData.unitName;
+                _targetChoiceButtons[i].gameObject.SetActive(true);
+                _targetChoiceButtons[i].ActualiseInfos(currentLoot.LootData, heroes[i]);
             }
             else
             {
-                _buttonsRectTr[i + 2].gameObject.SetActive(false);
+                _targetChoiceButtons[i].gameObject.SetActive(false);
             }
         }
     }

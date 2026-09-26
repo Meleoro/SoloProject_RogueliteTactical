@@ -2819,7 +2819,7 @@ TextureImporter:
         width: 28
         height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2828,6 +2828,512 @@ TextureImporter:
       bones: []
       spriteID: 95b24571d4916254e8dbd47bf959f811
       internalID: 1894895985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_123
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 115
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 764bea301a0647744a0868bd8eaf51bc
+      internalID: -144876906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_124
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d93bc204c3432274d9af284543965e6c
+      internalID: 2010843608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_125
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 110
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ad3dae56d60b814bb73f386b785bcd7
+      internalID: -336994692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_126
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 121
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94753085c9786ac4d8a7582e562b8cce
+      internalID: -604566307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_127
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 114
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec91b555497457429e8ce69db53c6bb
+      internalID: -267410328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_128
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 99
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa58e57e190b3a24ebbe187d0ba56b7c
+      internalID: 873192660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_129
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 102
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0417e99638b0525448c3abdacab43932
+      internalID: 845448875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_130
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 128
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a1c38c4d863b4943ac23d9dca4aab62
+      internalID: 664397560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_131
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 128
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0405c7cb0ab4a8a49b2168cecd36d6ad
+      internalID: 313859673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_132
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 73
+        width: 19
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5f1326edb7f23c4486d7e503ab85c21
+      internalID: 231690697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_133
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 70
+        width: 15
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f63d1d15f2940164a9e6800e5a145c72
+      internalID: 245127915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_134
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 79
+        width: 15
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 411bf2f9aaf898f4da5773caf81c884a
+      internalID: -735593936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_135
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 70
+        width: 16
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48320902c8953d449996e7f65a1ff78c
+      internalID: 102453352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_136
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 97
+        width: 8
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e6b1ef0b0d29874fb40bda4af4ad1ff
+      internalID: -1807852413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_137
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 96
+        width: 8
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 259e5323198f4434fa674f0578480ae7
+      internalID: 93761431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_138
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 95
+        width: 11
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6025060174cc8884b93c1adbafde71ac
+      internalID: -482050964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_139
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 69
+        width: 12
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce115928778212c4091fcfd300dc8a3a
+      internalID: -1200317165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_140
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 67
+        width: 12
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d75d8cd71af764daf27c802b140cc4
+      internalID: -1844062566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_141
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 46
+        width: 50
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a19ba6d1896ddf4fb567370abe63390
+      internalID: -154620808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_142
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 46
+        width: 50
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9ae128a11b019f40aaf6d29b5dbb5c3
+      internalID: 1839773353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_143
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 46
+        width: 50
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed19af2a0388b8349b6a1b6b80076aca
+      internalID: 1304310547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_144
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 46
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 200d7af08faeedb489c85874bda8c944
+      internalID: 540060577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro1Props_145
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 46
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f0bd843eb8b62a4e822f9c81882fcda
+      internalID: 868034098
       vertices: []
       indices: 
       edges: []
@@ -2874,8 +3380,31 @@ TextureImporter:
       Enviro1Props_120: -871091402
       Enviro1Props_121: 973576604
       Enviro1Props_122: 1894895985
+      Enviro1Props_123: -144876906
+      Enviro1Props_124: 2010843608
+      Enviro1Props_125: -336994692
+      Enviro1Props_126: -604566307
+      Enviro1Props_127: -267410328
+      Enviro1Props_128: 873192660
+      Enviro1Props_129: 845448875
       Enviro1Props_13: 1927938167
+      Enviro1Props_130: 664397560
+      Enviro1Props_131: 313859673
+      Enviro1Props_132: 231690697
+      Enviro1Props_133: 245127915
+      Enviro1Props_134: -735593936
+      Enviro1Props_135: 102453352
+      Enviro1Props_136: -1807852413
+      Enviro1Props_137: 93761431
+      Enviro1Props_138: -482050964
+      Enviro1Props_139: -1200317165
       Enviro1Props_14: 2029704918
+      Enviro1Props_140: -1844062566
+      Enviro1Props_141: -154620808
+      Enviro1Props_142: 1839773353
+      Enviro1Props_143: 1304310547
+      Enviro1Props_144: 540060577
+      Enviro1Props_145: 868034098
       Enviro1Props_15: -109298568
       Enviro1Props_16: -1745500568
       Enviro1Props_17: -1911727214

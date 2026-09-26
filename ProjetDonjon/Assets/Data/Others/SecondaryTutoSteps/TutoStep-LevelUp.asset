@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TutoStep-LevelUp
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
   stepName: LEVEL UP
-  stepDescription: ONE OF YOUR HEROES <#7A2E00>GAINED A LEVEL</color>, YOUR CAN OBTAIN
+  stepDescription: ONE OF YOUR HEROES <#7A2E00>LEVELED UP</color>, YOUR CAN OBTAIN
     A NEW SKILL OR PASSIVE IN IT'S <#7A2E00>SKILL TREE</color>
   highlightType: 13
   endCondition: 10
   tutoType: 1
+  lockInputType: 5
   leftSidePanel: 1
   playNextStepOnFinished: 0
   lockPlayerInputs: 1

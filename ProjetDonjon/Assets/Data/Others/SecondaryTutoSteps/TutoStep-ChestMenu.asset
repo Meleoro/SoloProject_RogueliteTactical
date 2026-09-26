@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
+  m_Name: TutoStep-ChestMenu
+  m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
+  stepName: CHEST MENU
+  stepDescription: 'THE <#7A2E00>CHEST</color> IS WHERE YOU CAN <#7A2E00>STORE SAFELY</color>
+    ALL OF YOUR PRECIOUS ITEMS, SINCE ALL THE ITEMS IN YOUR HEROES'' INVENTORIES
+    ARE <#7A2E00>LOST</color> WHEN YOUR WHOLE SQUAD IS <#7A2E00>DEAD</color>
+
+
+    YOU
+    CAN ALSO <#7A2E00>SELL ITEMS</color> IN THIS MENU'
+  highlightType: 0
+  endCondition: 0
+  tutoType: 0
+  lockInputType: 2
+  leftSidePanel: 1
+  playNextStepOnFinished: 0
+  lockPlayerInputs: 1
+  playNextStepDelay: 0.2
+  waitDuration: 12

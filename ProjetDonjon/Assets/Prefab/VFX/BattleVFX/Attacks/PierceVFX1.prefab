@@ -128,4 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3e1ff70f131049bcb68c85e82ed7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundIDToPlay: 4
   timeBeforeDestroy: 1

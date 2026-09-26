@@ -48,8 +48,6 @@ public class ShopMenu : MonoBehaviour, ISaveable
                 _shopRows[i].RowItems[j].OnValidClick += TryToBuyItem;
             }
         }
-
-        _upgradePanel.DisplayLevel(currentLevel);
     }
 
 
@@ -103,6 +101,7 @@ public class ShopMenu : MonoBehaviour, ISaveable
         OnShow.Invoke();
 
         UIManager.Instance.CoinUI.Show();
+        _upgradePanel.DisplayLevel(currentLevel);
 
         StartCoroutine(ShowCoroutine());
     }

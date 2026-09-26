@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bow4-1
   m_EditorClassIdentifier: 
   lootName: MAGE BOW I
-  lootDescription: 'EACH TIME THIS UNIT SHOULD CONSUME <#E9A800>FOCUS POINTS</color>,
-    CONSUME <#E9A800>-1 FOCUS POINT</color> '
+  lootDescription: 'EACH TIME THIS UNIT SHOULD CONSUME <#FFA768>FOCUS POINTS</color>,
+    CONSUME <#FFA768>-1 FOCUS POINT</color> '
   lootType: 1
   rarityType: 3
   sprite: {fileID: -72108222, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}

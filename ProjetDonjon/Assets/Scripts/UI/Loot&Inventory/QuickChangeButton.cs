@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 public class QuickChangeButton : MonoBehaviour
 {
@@ -79,6 +80,8 @@ public class QuickChangeButton : MonoBehaviour
 
         _rectTr.DOLocalMoveY(5, 0.2f).SetEase(Ease.OutBack);
         _heroIconImage.rectTransform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 8);
     }
 
     public void UnselectHero()
@@ -104,11 +107,15 @@ public class QuickChangeButton : MonoBehaviour
     public void Hover()
     {
         _rectTr.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
     }
 
     public void Unhover()
     {
         _rectTr.DOScale(Vector3.one * 1f, 0.2f).SetEase(Ease.OutBack);
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
     }
 
     public void Click()

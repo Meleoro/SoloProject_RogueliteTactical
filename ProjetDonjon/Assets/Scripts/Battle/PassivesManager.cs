@@ -265,7 +265,7 @@ public class PassivesManager
             bool alterationValid = passivesToCheck[i].neededAlteration.Length == 0;
             for (int j = 0; j < passivesToCheck[i].neededAlteration.Length; j++)
             {
-                if (unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
+                if (!unit.VerifyHasAlteration(passivesToCheck[i].neededAlteration[j].alterationType)) continue;
 
                 alterationValid = true;
                 break;

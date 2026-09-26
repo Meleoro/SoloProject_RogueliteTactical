@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel3
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 5
+  neededRelicCount: 8
   unlockType: 1
   unlockName: 'NEW AREA: THE TEMPLE'
   unlockDescription: "En gros l\xE0 vous devriez obtenir l'acc\xE8s vers la seconde
     zone, mais elle est pas encore dans le jeu, donc en fait vous avez rien gagn\xE9
     voil\xE0"
   unlockedHeroIndex: 0
+  unlockAdditionalDescription: 
+  heroAnim: []
   unlockedExpeditionIndex: 1

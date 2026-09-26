@@ -18,6 +18,7 @@ MonoBehaviour:
   highlightType: 12
   endCondition: 8
   tutoType: 1
+  lockInputType: 3
   leftSidePanel: 1
   playNextStepOnFinished: 0
   lockPlayerInputs: 1

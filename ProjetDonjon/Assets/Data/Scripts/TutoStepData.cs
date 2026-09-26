@@ -45,6 +45,16 @@ public enum TutoType
     ScreenPanel
 }
 
+public enum LockInputType
+{
+    DontLock,
+    LockHeroInputs,
+    LockAllInputs,
+    LockAllExceptEquipment,
+    LockAllExceptSkills,
+    LockAllExceptSkillTrees
+}
+
 
 [CreateAssetMenu(fileName = "TutoStepData", menuName = "Scriptable Objects/TutoStepData")]
 public class TutoStepData : ScriptableObject
@@ -54,6 +64,7 @@ public class TutoStepData : ScriptableObject
     public TutoHighlightType highlightType;
     public TutoEndCondition endCondition;
     public TutoType tutoType;
+    public LockInputType lockInputType;
     public bool leftSidePanel;
     public bool playNextStepOnFinished;
     public bool lockPlayerInputs;

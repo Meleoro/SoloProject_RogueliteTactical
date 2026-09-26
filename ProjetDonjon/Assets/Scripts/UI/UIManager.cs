@@ -99,7 +99,7 @@ public class UIManager : GenericSingletonClass<UIManager>
         {
             case UIState.Nothing:
                 if (!_hudExploration.IsDisplayed) return;
-                if (InputManager.wantsToHeroInfo)
+                if (InputManager.wantsToHeroInfo && TutoManager.Instance.DidAdditionalTutorialStep[2])
                 {
                     if (!_inventoriesManager.VerifyCanOpenCloseInventory()) return;
                     if (!_heroInfosScreen.VerifyCanOpenOrCloseHeroInfos()) return;
@@ -108,7 +108,7 @@ public class UIManager : GenericSingletonClass<UIManager>
                     currentState = UIState.HeroesInfos;
                 }
 
-                if (InputManager.wantsToInventory)
+                if (InputManager.wantsToInventory && TutoManager.Instance.DidTutorialStep[3])
                 {
                     if (!_inventoriesManager.VerifyCanOpenCloseInventory()) return;
                     if (!_heroInfosScreen.VerifyCanOpenOrCloseHeroInfos()) return;
@@ -116,17 +116,17 @@ public class UIManager : GenericSingletonClass<UIManager>
                     _inventoriesManager.ShowInventories();
                 }
 
-                if (InputManager.wantsToSkillTree)
+                if (InputManager.wantsToSkillTree && TutoManager.Instance.DidAdditionalTutorialStep[3])
                 {
                     _skillTreesManager.Show();
                 }
 
-                if (InputManager.wantsToSkills)
+                if (InputManager.wantsToSkills && TutoManager.Instance.DidAdditionalTutorialStep[4])
                 {
                     _skillsMenu.Show(); 
                 }
 
-                if(InputManager.wantsToCollection)
+                if(InputManager.wantsToCollection && TutoManager.Instance.DidTutorialStep[10])
                 {
                     _collectionMenu.Show();
                 }
@@ -247,15 +247,20 @@ public class UIManager : GenericSingletonClass<UIManager>
 
     public void ShowHeroInfosPanels()
     {
+        if (currentHeroInfoPanels == null) return;
+
         currentHeroInfoPanelsAnimator.SetBool("IsOpened", true);
     }
 
     public void HideHeroInfosPanels()
     {
+        if (currentHeroInfoPanels == null) return;
+
         currentHeroInfoPanelsAnimator.SetBool("IsOpened", false);
     }
 
     #endregion
+
 
     #region UI Effects
 

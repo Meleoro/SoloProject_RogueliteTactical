@@ -540,7 +540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4177909776565205440
 Transform:
   m_ObjectHideFlags: 0
@@ -577,6 +577,7 @@ MonoBehaviour:
   - {fileID: 2763060078429162606}
   - {fileID: 4849703901417304197}
   - {fileID: 1470759643023211882}
+  - {fileID: 2127638526877814649}
 --- !u!1 &863443954237238820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4607,16 +4608,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 3, y: 3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 4
-      m_TileSpriteIndex: 7
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 4
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - serializedVersion: 2
@@ -4632,7 +4623,7 @@ Tilemap:
     m_RefCount: 0
     m_Data: {fileID: 0}
   - serializedVersion: 2
-    m_RefCount: 33
+    m_RefCount: 32
     m_Data: {fileID: 11400000, guid: f71a6133cdcad6741bcf069cacbb64ec, type: 2}
   - serializedVersion: 2
     m_RefCount: 0
@@ -4696,7 +4687,7 @@ Tilemap:
     m_RefCount: 0
     m_Data: {fileID: 0}
   - serializedVersion: 2
-    m_RefCount: 33
+    m_RefCount: 32
     m_Data: {fileID: -5451006143467580008, guid: c8003d1f41e0af04099b99c87e3e5af1, type: 3}
   - serializedVersion: 2
     m_RefCount: 0
@@ -4730,7 +4721,7 @@ Tilemap:
     m_Data: {fileID: 3325078473130934320, guid: c8003d1f41e0af04099b99c87e3e5af1, type: 3}
   m_TileMatrixArray:
   - serializedVersion: 2
-    m_RefCount: 53
+    m_RefCount: 52
     m_Data:
       e00: 1
       e01: 0
@@ -4762,7 +4753,7 @@ Tilemap:
     m_RefCount: 0
     m_Data: {r: 6.2946e-41, g: 6.2946e-41, b: 6.2946e-41, a: 6.2946e-41}
   - serializedVersion: 2
-    m_RefCount: 53
+    m_RefCount: 52
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -11637,6 +11628,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adc2d6839cb5eed429fc9ecacfe9e2c0, type: 3}
+--- !u!1 &2127638526877814649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7244223263106262064, guid: adc2d6839cb5eed429fc9ecacfe9e2c0, type: 3}
+  m_PrefabInstance: {fileID: 8722985784131267401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6615009052143791865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2504985411985278384, guid: adc2d6839cb5eed429fc9ecacfe9e2c0, type: 3}

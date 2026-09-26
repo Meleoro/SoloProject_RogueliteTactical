@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eb52480f4ee644b8b52d78c02128a5, type: 3}
   m_Name: TutoStep-ShowAllPatterns
   m_EditorClassIdentifier: Assembly-CSharp::TutoStepData
-  stepName: SHOW ALL PATTERNS
+  stepName: SHOW DANGER
   stepDescription: THERE ARE A LOT OF ENEMIES IN THIS BATTLE, YOU CAN PRESS <#7A2E00>[TAB]</color>
     TO SEE <#7A2E00>ALL THE DANGEROUS TILES</color> AT ONCE
   highlightType: 0
   endCondition: 12
   tutoType: 1
+  lockInputType: 0
   leftSidePanel: 1
   playNextStepOnFinished: 0
   lockPlayerInputs: 0
   playNextStepDelay: 0.2
-  waitDuration: 12
+  waitDuration: 11

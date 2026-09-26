@@ -53,12 +53,12 @@ public class GameData
     public GameData()
     {
         heroesLevel = new int[4];
-        heroesUnlockedNodes = new bool[4 * 15];
+        heroesUnlockedNodes = new bool[4 * 20];
         heroesCurrentSkillPoint = new int[4];
         heroesEquippedSkillIndexes = new string[4 * 6];
         heroesEquippedPassiveIndexes = new string[4 * 3];
 
-        possessedRelicsIndexes = new bool[12 * 4];
+        possessedRelicsIndexes = new bool[12];
 
         needEquippedInitialisation = true;
         campLevel = 0;

@@ -10,6 +10,9 @@ using Utilities;
 
 public class MainMetaMenu : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private Vector3 middlePos;
+
     [Header("Actions")]
     public Action OnShow;
     public Action OnHide;
@@ -88,7 +91,7 @@ public class MainMetaMenu : MonoBehaviour
 
         if (instant)
         {
-            _mainRectTr.localPosition = Vector3.zero;
+            _mainRectTr.localPosition = middlePos;
             return;
         }
 
@@ -99,7 +102,7 @@ public class MainMetaMenu : MonoBehaviour
     {
         Vector3 dir = _mainRectTr.position - _shownPosRef.position;
 
-        _mainRectTr.DOLocalMove(Vector3.zero, 0.3f, false).SetEase(Ease.OutCubic);
+        _mainRectTr.DOLocalMove(middlePos, 0.3f, false).SetEase(Ease.OutCubic);
 
         yield return new WaitForSeconds(0.15f);
     }
@@ -226,7 +229,17 @@ public class MainMetaMenu : MonoBehaviour
 
         if (currentCampLevel == campLevels.Length) return;
 
-        _campLevelProgressBar.fillAmount = currentRelicCount / campLevels[currentCampLevel].neededRelicCount;
+        if (currentCampLevel == 0)
+        {
+            _campLevelProgressBar.fillAmount = (float)currentRelicCount / campLevels[currentCampLevel].neededRelicCount;
+        }
+        else
+        {
+            _campLevelProgressBar.fillAmount = (float)(campLevels[currentCampLevel - 1].neededRelicCount - (float)currentRelicCount) /
+                (campLevels[currentCampLevel - 1].neededRelicCount - campLevels[currentCampLevel].neededRelicCount);
+        }
+
+        //_campLevelProgressBar.fillAmount = (float)currentRelicCount / (float)campLevels[currentCampLevel].neededRelicCount;
         _campLevelProgressText.text = currentRelicCount + "/" + campLevels[currentCampLevel].neededRelicCount;
         _campLevelMainText.text = "CAMP LEVEL " + currentCampLevel;
     }
@@ -267,15 +280,27 @@ public class MainMetaMenu : MonoBehaviour
                 StartCoroutine(PlayProgressCoroutine((float)currentRelicCount - campLevels[previousCampLevel - 1].neededRelicCount / 
                     campLevels[previousCampLevel - 1].neededRelicCount));
         }
+        else
+        {
+            if (currentCampLevel == 0)
+            {
+                _campLevelProgressBar.fillAmount = (float)currentRelicCount / campLevels[currentCampLevel].neededRelicCount;
+            }
+            else
+            {
+                _campLevelProgressBar.fillAmount = (float)(campLevels[currentCampLevel - 1].neededRelicCount - (float)currentRelicCount) /
+                    (campLevels[currentCampLevel - 1].neededRelicCount - campLevels[currentCampLevel].neededRelicCount);
+            }
+        }
     }
 
     private IEnumerator PlayProgressCoroutine(float endProgress)
     {
-        _campLevelProgressBar.DOFillAmount(endProgress, 0.5f);
+        _campLevelProgressBar.DOFillAmount(endProgress, 1.5f).SetEase(Ease.OutSine);
         _campLevelProgressText.text = Mathf.Clamp(currentRelicCount, 0, campLevels[currentCampLevel].neededRelicCount) 
             + "/" + campLevels[currentCampLevel].neededRelicCount;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         // If we gain no new level
         if(endProgress < 1)

@@ -86,6 +86,7 @@ public class SaveManager : GenericSingletonClass<SaveManager>
     public void LoadGame(int index)
     {
         GameDatas[index] = handler.Load(index);
+        CurrentFileIndex = index;
 
         if (GameDatas[index] == null)
         {

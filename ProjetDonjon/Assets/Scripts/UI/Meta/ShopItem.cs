@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 public class ShopItem : MonoBehaviour
 {
@@ -85,6 +86,8 @@ public class ShopItem : MonoBehaviour
             _itemImage.rectTransform.DOComplete();
             StopAllCoroutines();
 
+            AudioManager.Instance.PlaySoundOneShotRandomPitch(0.95f, 1.05f, 0, 10);
+
             _itemImage.rectTransform.DOShakePosition(0.3f, 10.0f, 40, 90, false, true);
             StartCoroutine(BouncePriceColorCoroutine(invalidColor));
 
@@ -95,6 +98,8 @@ public class ShopItem : MonoBehaviour
 
         _itemImage.DOComplete();
         StopAllCoroutines();
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.95f, 1.05f, 0, 9);
 
         StartCoroutine(BouncePriceColorCoroutine(validColor));
         StartCoroutine(BounceBuyCoroutine());

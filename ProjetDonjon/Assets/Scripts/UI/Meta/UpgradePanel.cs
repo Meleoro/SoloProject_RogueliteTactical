@@ -132,12 +132,12 @@ public class UpgradePanel : MonoBehaviour
 
     public void HoverUpgrade()
     {
-        _upgradeButton.rectTransform.DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutCubic);
+        _upgradeButton.rectTransform.DOScale(Vector3.one * 1.1f, 0.15f).SetEase(Ease.OutBack);
     }
 
     public void UnhoverUpgrade()
     {
-        _upgradeButton.rectTransform.DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.OutCubic);
+        _upgradeButton.rectTransform.DOScale(Vector3.one * 1f, 0.15f).SetEase(Ease.OutBack);
     }
 
     public void ClickUpgrade()

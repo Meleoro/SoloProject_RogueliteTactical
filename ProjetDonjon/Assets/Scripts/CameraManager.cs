@@ -62,6 +62,8 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
     private void LateUpdate()
     {
+        if (!isInitialised) return;
+
         if (!isInBattle && isInitialised && !isLocked)
         {
             currentWantedPos = followedTransform.position + followOffset;
@@ -89,6 +91,9 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
             currentWantedPos = Vector3.Lerp(followedTransform.position + followOffset + Vector3.down * 1f, followedTransform.position + followOffset, timer / movementDuration);
             currentWantedSize = Mathf.Lerp(baseSize + GetEnviroSizeModificator() + 2, baseSize + GetEnviroSizeModificator(), (timer * 1.2f) / movementDuration);
+
+            transform.position = Vector3.Lerp(transform.position, currentWantedPos, followSpeed * Time.deltaTime);
+            _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, currentWantedSize, sizeFollowSpeed * Time.deltaTime);
 
             yield return new WaitForEndOfFrame();
         }
@@ -197,30 +202,35 @@ public class CameraManager : GenericSingletonClass<CameraManager>
         currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
     }
 
+    public void ChangeFocusSize(float cameraSize)
+    {
+        currentWantedSize = Mathf.Clamp(cameraSize, battleMinSize, battleMaxSize);
+    }
+
     public void FocusOnTransform(Transform focusedTr, float cameraSize)
     {
         if (isLocked) return;
 
         currentWantedPos = focusedTr.position + followOffset;
-        currentWantedSize = cameraSize;
-
-        currentWantedSize = Mathf.Clamp(currentWantedSize, battleMinSize, battleMaxSize);
+        currentWantedSize = Mathf.Clamp(cameraSize, battleMinSize, battleMaxSize);
     }
 
     public void FocusOnTransforms(Transform[] focusedTr)
     {
-        float minZoom = 3.5f;
+        float minZoom = 2.5f;
 
         Vector3 middlePos = Vector2.zero;
-        float maxDist = 0;
+        float maxDist = 2.5f;
         foreach (Transform transform in focusedTr)
         {
             middlePos += transform.position;
             maxDist = Mathf.Max(maxDist, Vector2.Distance(focusedTr[0].transform.position, transform.position));
         }
-        middlePos /= focusedTr.Length;
 
+        middlePos /= focusedTr.Length;
         middlePos += Vector3.up * maxDist * 0.22f;   // Offset because of the timeline hidding a part of the screen
+
+        maxDist += 1.5f;
 
         FocusOnPosition(middlePos, Mathf.Clamp(maxDist, minZoom, float.MaxValue));
     }

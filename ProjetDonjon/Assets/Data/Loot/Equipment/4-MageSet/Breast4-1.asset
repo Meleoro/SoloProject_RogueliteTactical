@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Breast4-1
   m_EditorClassIdentifier: 
   lootName: MAGE ARMOR I
-  lootDescription: THIS UNIT GAINS <#E9A800>+1 FOCUS POINT</color> WHEN IT'S TURN
+  lootDescription: THIS UNIT GAINS <#FFA768>+1 FOCUS POINT</color> WHEN IT'S TURN
     STARTS
   lootType: 1
   rarityType: 3
@@ -31,6 +31,7 @@ MonoBehaviour:
   luckUpgrade: -1
   mpUpgrade: 0
   spUpgrade: 0
+  exclusiveHeroIndex: -1
   upgradedVersion: {fileID: 11400000, guid: cb8ed96d3cc11ef4898573d564671a4a, type: 2}
   upgradeCost:
     neededMaterials:

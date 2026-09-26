@@ -71,7 +71,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
             TutoManager.Instance.StartTutorial();
             GenerateTutorialFloor();
 
-            StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.15f));
+            StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.25f));
             StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(0, 1.5f));
             return;
         }
@@ -83,7 +83,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
             else GenerateFloor(enviroData);
         }
 
-        StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.15f));
+        StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.25f));
     }
 
 
@@ -120,6 +120,8 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         if (currentFloor == 2) GenerateBossFloor(true);
         else if (currentFloor == 5) GenerateBossFloor(false);
         else GenerateFloor(enviroData);
+
+        StartCoroutine(_spriteLayererManager.InitialiseAllCoroutine(0.25f));
     }
 
     public void GenerateFloor(EnviroData enviroData)
@@ -248,6 +250,10 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     {
         Room baseRoom = generatedRooms[Random.Range(0, generatedRooms.Count)];
         Room newRoom = GetRoomFromType(RoomType.Trial);
+        if (GameManager.Instance.DebugForcedTrialRoom)
+        {
+            newRoom = GameManager.Instance.DebugForcedTrialRoom;
+        }
         Vector2Int roomCoordinates = baseRoom.RoomCoordinates + GetRandomDirection();
         newRoom.SetupRoom(roomCoordinates, roomSizeUnits);
         int antiCrash = 0;
@@ -257,8 +263,12 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
         {
             baseRoom = generatedRooms[Random.Range(0, generatedRooms.Count)];
             newRoom = GetRoomFromType(RoomType.Trial);
+            if (GameManager.Instance.DebugForcedTrialRoom)
+            {
+                newRoom = GameManager.Instance.DebugForcedTrialRoom;
+            }
 
-            if(bannedRooms.Contains(newRoom))
+            if (bannedRooms.Contains(newRoom) && !GameManager.Instance.DebugForcedTrialRoom)
             {
                 continue;
             }

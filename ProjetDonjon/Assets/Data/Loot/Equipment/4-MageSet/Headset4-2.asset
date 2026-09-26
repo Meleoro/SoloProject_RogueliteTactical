@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Headset4-2
   m_EditorClassIdentifier: 
   lootName: MAGE HEADSET II
-  lootDescription: +1 MAX <#E9A800>SKILL POINT</color>
+  lootDescription: +1 MAX <#FFA768>SKILL POINT</color>
   lootType: 1
   rarityType: 3
   sprite: {fileID: 551776223, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
@@ -23,9 +23,9 @@ MonoBehaviour:
   - row: 01
   equipmentType: 1
   equipmentSprite: {fileID: 551776223, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
-  healthUpgrade: 2
+  healthUpgrade: 1
   strengthUpgrade: 0
-  speedUpgrade: 0
+  speedUpgrade: 1
   luckUpgrade: 1
   mpUpgrade: 0
   spUpgrade: 1

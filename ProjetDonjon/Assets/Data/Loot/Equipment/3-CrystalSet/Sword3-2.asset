@@ -28,7 +28,7 @@ MonoBehaviour:
   healthUpgrade: 0
   strengthUpgrade: 2
   speedUpgrade: 0
-  luckUpgrade: 4
+  luckUpgrade: 3
   mpUpgrade: 0
   spUpgrade: 0
   exclusiveHeroIndex: 0

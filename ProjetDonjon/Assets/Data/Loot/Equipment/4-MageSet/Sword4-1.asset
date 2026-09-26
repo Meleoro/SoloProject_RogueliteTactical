@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sword4-1
   m_EditorClassIdentifier: 
   lootName: MAGE SWORD I
-  lootDescription: EACH TIME THIS UNIT SHOULD LOSE <#E9A800>FOCUS POINTS</color>,
-    LOSE <#E9A800>-1 FOCUS POINT</color>
+  lootDescription: EACH TIME THIS UNIT SHOULD LOSE <#FFA768>FOCUS POINTS</color>,
+    LOSE <#FFA768>-1 FOCUS POINT</color>
   lootType: 1
   rarityType: 3
   sprite: {fileID: -1155239217, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}

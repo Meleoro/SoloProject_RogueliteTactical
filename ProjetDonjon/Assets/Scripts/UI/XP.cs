@@ -20,6 +20,14 @@ public class XP : MonoBehaviour
 
     public void Initialise(Hero aimedHero, int value)
     {
+        if(aimedHero.CurrentHealth <= 0)
+        {
+            _aimedHero.GainXP(xpValue);
+            Destroy(gameObject);
+
+            return;
+        }
+
         _aimedHero = aimedHero;
         _rectTr.SetParent(aimedHero.UI.XPPointsParent);
 

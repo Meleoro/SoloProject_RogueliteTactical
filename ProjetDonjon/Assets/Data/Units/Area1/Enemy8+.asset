@@ -21,7 +21,6 @@ MonoBehaviour:
   baseLuck: 10
   startAlterations:
   - {fileID: 11400000, guid: 79b94ac45e9570a4f8938ed57c937901, type: 2}
-  - {fileID: 11400000, guid: 4778a0e8b8b972b47b6beffae90cf0dd, type: 2}
   AI: 1
   dangerLevel: 6
   skills:

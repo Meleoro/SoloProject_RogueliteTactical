@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -83,12 +82,6 @@ public class HUDExploration : MonoBehaviour
         isDisplayed = true;
         _animator.SetBool("IsDisplayed", true);
 
-        if(UIManager.Instance.Transition.IsActive || !GameManager.Instance.IsInExplo)
-            _minimap.gameObject.SetActive(false);
-
-        else 
-            _minimap.gameObject.SetActive(true);
-
         ActualiseDisplayedButtons();
     }
 
@@ -134,6 +127,8 @@ public class HUDExploration : MonoBehaviour
 
     public void OverlayButton(int index)
     {
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 0);
+        
         _buttonsImages[index].rectTransform.DOComplete();
 
         _buttonsImages[index].material.ULerpMaterialFloat(overlayEffectDuration, 1, "_OutlineSize");
@@ -165,6 +160,8 @@ public class HUDExploration : MonoBehaviour
     {
         if (!isDisplayed) return;
 
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         _inventoryManager.ShowInventories();
     }
 
@@ -172,12 +169,16 @@ public class HUDExploration : MonoBehaviour
     {
         if (!isDisplayed) return;
 
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         StartCoroutine(_heroInfosScreen.OpenInfosScreenCoroutine());
     }
 
     public void ClickSkillTree()
     {
         if (!isDisplayed) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
 
         _skillTreeScreen.Show();
 
@@ -191,12 +192,16 @@ public class HUDExploration : MonoBehaviour
     {
         if (!isDisplayed) return;
 
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
+
         _skillsMenu.Show();
     }
 
     public void ClickCollection()
     {
         if (!isDisplayed) return;
+
+        AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 1);
 
         _collectionMenu.Show();
     }
@@ -208,14 +213,21 @@ public class HUDExploration : MonoBehaviour
 
     public void ActualiseDisplayedButtons()
     {
-        //if(TutoManager.Instance.TutoDisabled)
-        //    return;
+        if (UIManager.Instance.Transition.IsActive || !GameManager.Instance.IsInExplo)
+        {
+            _minimap.gameObject.SetActive(false);
+            _buttonsParent[4].gameObject.SetActive(false);    // Collection button
+        }
+        else
+        {
+            _minimap.gameObject.SetActive(true);
+            _buttonsParent[4].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[9] || TutoManager.Instance.TutoDisabled);    // Collection button
+        }
 
-        _buttonsParent[0].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[3]);
-        _buttonsParent[1].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[2]);
-        _buttonsParent[2].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[3]);
-        _buttonsParent[3].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[4]);
-        _buttonsParent[4].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[9]);
+        _buttonsParent[0].gameObject.SetActive(TutoManager.Instance.DidTutorialStep[3] || TutoManager.Instance.TutoDisabled);    // Inventory
+        _buttonsParent[1].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[2] || TutoManager.Instance.TutoDisabled);   // Equipment
+        _buttonsParent[2].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[4] || TutoManager.Instance.TutoDisabled);   // Skills
+        _buttonsParent[3].gameObject.SetActive(TutoManager.Instance.DidAdditionalTutorialStep[3] || TutoManager.Instance.TutoDisabled);   // Skill Trees
     }
 
     private void DoBounceSkillTree()

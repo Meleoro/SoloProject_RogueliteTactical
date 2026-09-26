@@ -42,6 +42,8 @@ public class UnitAnimsInfos : MonoBehaviour
         {
             isPlayingCritVFX = true;
             _critVFXAnim.SetTrigger("PlayVFX");
+
+            AudioManager.Instance.PlaySoundOneShot(2, 16);
         }
         else if(!PlayCritVFX && isPlayingCritVFX)
         {

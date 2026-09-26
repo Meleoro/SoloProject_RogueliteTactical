@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6480e1efa2d5341b3af49125052ea1, type: 3}
+  m_Name: Hero3
+  m_EditorClassIdentifier: 
+  unitName: SAMURAI
+  unitImage: {fileID: -7196809872301644223, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+  unitImageHighlight: {fileID: -698061677, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+  baseHealth: 3
+  baseStrength: 2
+  baseSpeed: 5
+  baseLuck: 1
+  startAlterations: []
+  baseMovePoints: 4
+  maxSkillPoints: 3
+  startSkillPoints: 1
+  heroInventoryPrefab: {fileID: 4803297770596504823, guid: 73957351403097a46aedc8ddb9ee430c, type: 3}
+  heroBaseSkills:
+  - {fileID: 11400000, guid: fa97ea0063e522441914677eada810e1, type: 2}
+  - {fileID: 11400000, guid: a54d94e12a6ae5e48b51889145abb1af, type: 2}
+  heroSkillPool:
+  - {fileID: 11400000, guid: fa97ea0063e522441914677eada810e1, type: 2}
+  - {fileID: 11400000, guid: 482bef61e241a5e44ae9564744b6361c, type: 2}
+  - {fileID: 11400000, guid: 6446af2578459de4083a12a37efc94ed, type: 2}
+  - {fileID: 11400000, guid: 3b58756d0586d7047b935a61a7e16d05, type: 2}
+  - {fileID: 11400000, guid: 1ad3d76110d9630478f6ac318c73d159, type: 2}
+  - {fileID: 11400000, guid: a54d94e12a6ae5e48b51889145abb1af, type: 2}
+  - {fileID: 11400000, guid: 26c8896787f68394492e596ad66258ca, type: 2}
+  - {fileID: 11400000, guid: 6751e20b554257c4992d441afd4c1c57, type: 2}
+  - {fileID: 11400000, guid: ed4c0e619cc7dc540a4cb7f07bdb72cf, type: 2}
+  - {fileID: 11400000, guid: 0c0476276e966a14e8be6bf6fc6ba390, type: 2}
+  - {fileID: 11400000, guid: 5da4028e8305f324fab8252fcfa564b4, type: 2}
+  - {fileID: 11400000, guid: 6b488f1af944b00428fb99a2bd8a9f4b, type: 2}
+  heroPassivePool: []
+  heroSkillSlotsUnlockedLevels: 00000000000000000000000005000000090000000d000000
+  heroPassiveSlotsUnlockedLevels: 00000000070000000f000000

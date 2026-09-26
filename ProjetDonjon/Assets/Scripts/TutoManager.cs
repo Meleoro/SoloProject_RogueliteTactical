@@ -10,6 +10,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [SerializeField] private TutoStepData[] mainTutoSteps;
     [SerializeField] private TutoStepData[] additionalTutoSteps;
     [SerializeField] private bool disableTuto;
+    [SerializeField] private bool disableAdditionalTuto;
 
     [Header("Actions")]
     public Action OnFirstStepValidated;
@@ -20,7 +21,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     public bool[] DidAdditionalTutorialStep { get {  return didAdditionalTutorialSteps; } }
     public bool DidBattleTuto { get {  return didTutorialStep[4]; } }
     public bool IsDisplayingTuto { get {  return isDisplayingTuto; } }
-    public bool IsInTuto { get {  return didTutorialStep[0] && !didTutorialStep[10]; } }
+    public bool IsInTuto { get {  return !isInitialised || (didTutorialStep[0] && !didTutorialStep[10]); } }
     public bool TutoDisabled { get {  return disableTuto; } }
 
     [Header("Private Infos")]
@@ -28,6 +29,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     private bool[] didAdditionalTutorialSteps;
     private bool didTutorial;
     private bool isDisplayingTuto;
+    private bool isInitialised;
     private TutoStepData currentStep;
     private int currentTutoID;
     private bool[] endConditionsValidated;
@@ -40,6 +42,23 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
     [SerializeField] private TutorialPanel _tutorialPanel;
     [SerializeField] private TutorialPanel _smallTutorialPanel;
     [SerializeField] private TutorialPanel _screenTutorialPanel;
+
+
+
+    private void Start()
+    {
+        StartCoroutine(WaitForBindCoroutine());
+    }
+
+    private IEnumerator WaitForBindCoroutine()
+    {
+        while(!HeroesManager.Instance.IsInitialised && !isInitialised)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        BindTutorials();
+    }
 
 
     // Called at the start to bind the tutorial steps the player hasn't done
@@ -58,9 +77,27 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             }
         }
 
-        if (!didAdditionalTutorialSteps[4])
+        if (!didAdditionalTutorialSteps[5])
         {
             BattleManager.Instance.OnBattleWithManyEnemiesStart += DoAllPatternsTutorial;
+        }
+
+        if (!didAdditionalTutorialSteps[7])
+        {
+            UIMetaManager.Instance.ChestMenu.OnShow += DoChestMenuTutorial;
+        }
+
+        if (!didAdditionalTutorialSteps[8])
+        {
+            for(int i = 0; i < HeroesManager.Instance.AllHeroes.Length; i++)
+            {
+                HeroesManager.Instance.AllHeroes[i].OnDead += DoHeroDeathTutorial;
+            }
+        }
+
+        if (!didAdditionalTutorialSteps[9])
+        {
+            GameManager.Instance.OnExpeditionStart += DoExpeditionTutotial;
         }
     }
 
@@ -79,19 +116,44 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
 
     public IEnumerator DisplayTutorialWithDelayCoroutine(int tutoID, float delay, bool isAdditionalStep = false)
     {
+        if (isAdditionalStep ? didAdditionalTutorialSteps[tutoID] : didTutorialStep[tutoID]) yield break;
+        if (disableTuto && !isAdditionalStep) yield break;
+
         TutoStepData step = isAdditionalStep ? additionalTutoSteps[tutoID] : mainTutoSteps[tutoID];
-        if (step && step.lockPlayerInputs)
+
+        switch (step.lockInputType)
         {
-            HeroesManager.Instance.StopControl();
+            case LockInputType.LockHeroInputs:
+                HeroesManager.Instance.StopControl();
+                break;
+
+            case LockInputType.LockAllInputs:
+                InputManager.DisableInputs = true;
+                break;
+
+            case LockInputType.LockAllExceptEquipment:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptEquipment = true;
+                break;
+
+            case LockInputType.LockAllExceptSkillTrees:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptSkillTree = true;
+                break;
+
+            case LockInputType.LockAllExceptSkills:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptSkills = true;
+                break;
         }
         _tutorialPanel.LockUIInputs();
 
         yield return new WaitForSeconds(delay);
 
-        if (step && step.lockPlayerInputs)
-        {
-            HeroesManager.Instance.RestartControl();
-        }
+        //if (step && step.lockInputType != LockInputType.DontLock)
+        //{
+        //    HeroesManager.Instance.RestartControl();
+        //}
         _tutorialPanel.UnlockUIInputs();
         DisplayTutorial(tutoID, isAdditionalStep);
     }
@@ -110,12 +172,35 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         if (isAdditionalStep) didAdditionalTutorialSteps[tutoID] = true;
         else didTutorialStep[tutoID] = true;
 
+        SaveManager.Instance.SaveGame(SaveManager.Instance.CurrentFileIndex);
+
         currentStep = isAdditionalStep ? additionalTutoSteps[tutoID] : mainTutoSteps[tutoID];
         currentTutoID = tutoID;
 
-        if (currentStep.lockPlayerInputs)
+        switch(currentStep.lockInputType)
         {
-            HeroesManager.Instance.StopControl();
+            case LockInputType.LockHeroInputs:
+                HeroesManager.Instance.StopControl();
+                break;
+
+            case LockInputType.LockAllInputs:
+                InputManager.DisableInputs = true;
+                break;
+
+            case LockInputType.LockAllExceptEquipment:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptEquipment = true;
+                break;
+
+            case LockInputType.LockAllExceptSkillTrees:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptSkillTree = true;
+                break;
+
+            case LockInputType.LockAllExceptSkills:
+                InputManager.DisableInputs = true;
+                InputManager.ExceptSkills = true;
+                break;
         }
 
         // Classic Panel
@@ -134,7 +219,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         }
 
         // Small Panel
-        else if(currentStep.tutoType == TutoType.SmallPanel)
+        else if (currentStep.tutoType == TutoType.SmallPanel)
         {
             if (currentStep.leftSidePanel)
             {
@@ -291,6 +376,23 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         StartCoroutine(DisplayTutorialWithDelayCoroutine(5, 2f, true));
     }
 
+    private void DoChestMenuTutorial()
+    {
+        UIMetaManager.Instance.ChestMenu.OnShow -= DoChestMenuTutorial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(7, 0.2f, true));
+    }
+
+    private void DoHeroDeathTutorial()
+    {
+        for (int i = 0; i < HeroesManager.Instance.AllHeroes.Length; i++)
+        {
+            HeroesManager.Instance.AllHeroes[i].OnDead -= DoHeroDeathTutorial;
+        }
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(8, 0f, true));
+    }
+
     private void BindEquipmentTutorial()
     {
         InventoriesManager.Instance.OnEquipmentAdded -= BindEquipmentTutorial;
@@ -302,6 +404,13 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         InventoriesManager.Instance.OnInventoryClose -= DoEquipmentTutorial;
 
         StartCoroutine(DisplayTutorialWithDelayCoroutine(2, 0.5f, true));
+    }
+
+    private void DoExpeditionTutotial()
+    {
+        GameManager.Instance.OnExpeditionStart -= DoExpeditionTutotial;
+
+        StartCoroutine(DisplayTutorialWithDelayCoroutine(9, 1.5f, true));
     }
 
     #endregion
@@ -318,9 +427,30 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
             if (!endConditionsValidated[i]) return;
         }
 
-        if (currentStep.lockPlayerInputs)
+        switch (currentStep.lockInputType)
         {
-            HeroesManager.Instance.RestartControl();
+            case LockInputType.LockHeroInputs:
+                HeroesManager.Instance.RestartControl();
+                break;
+
+            case LockInputType.LockAllInputs:
+                InputManager.DisableInputs = false;
+                break;
+
+            case LockInputType.LockAllExceptEquipment:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptEquipment = false;
+                break;
+
+            case LockInputType.LockAllExceptSkillTrees:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptSkillTree = false;
+                break;
+
+            case LockInputType.LockAllExceptSkills:
+                InputManager.DisableInputs = false;
+                InputManager.ExceptSkills = false;
+                break;
         }
 
         _tutorialPanel.HideTutorial();
@@ -336,6 +466,15 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         for (int i = 0; i < endConditionsValidated.Length; i++)
         {
             if (!endConditionsValidated[i]) return;
+        }
+
+        if (currentStep.lockInputType == LockInputType.LockHeroInputs)
+        {
+            HeroesManager.Instance.RestartControl();
+        }
+        else if (currentStep.lockInputType == LockInputType.LockAllInputs)
+        {
+            InputManager.DisableInputs = false;
         }
 
         _tutorialPanel.HideTutorial();
@@ -439,7 +578,7 @@ public class TutoManager : GenericSingletonClass<TutoManager>, ISaveable
         didAdditionalTutorialSteps = data.finishedAdditionalTutorialSteps;
         didTutorial = data.launchedTutorial;
 
-        BindTutorials();
+        isInitialised = true;
     }
 
     public void SaveGame(ref GameData data)
