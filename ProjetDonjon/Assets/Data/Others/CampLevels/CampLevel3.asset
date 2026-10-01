@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel3
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 8
-  unlockType: 1
-  unlockName: 'NEW AREA: THE TEMPLE'
-  unlockDescription: "En gros l\xE0 vous devriez obtenir l'acc\xE8s vers la seconde
-    zone, mais elle est pas encore dans le jeu, donc en fait vous avez rien gagn\xE9
-    voil\xE0"
-  unlockedHeroIndex: 0
-  unlockAdditionalDescription: 
-  heroAnim: []
-  unlockedExpeditionIndex: 1
+  neededRelicCount: 4
+  unlockType: 0
+  unlockName: 'NEW HERO: THE SAMURAI'
+  unlockDescription: '- CAN COUNTER ENEMIES'' ATTACKS'
+  unlockedHeroIndex: 2
+  unlockAdditionalDescription: '- CAN DEAL A LOT OF DAMAGES VERY FAST
+
+    - ...
+    BUT IS VERY FRAGILE  '
+  heroAnim:
+  - {fileID: 1565149374502581010, guid: 57736bd5ea7435e479b9a823c0a81946, type: 3}
+  - {fileID: -6436913468408096086, guid: 57736bd5ea7435e479b9a823c0a81946, type: 3}
+  - {fileID: -5015048390480560685, guid: 57736bd5ea7435e479b9a823c0a81946, type: 3}
+  - {fileID: -8365199628755382129, guid: 57736bd5ea7435e479b9a823c0a81946, type: 3}
+  unlockedExpeditionIndex: 0

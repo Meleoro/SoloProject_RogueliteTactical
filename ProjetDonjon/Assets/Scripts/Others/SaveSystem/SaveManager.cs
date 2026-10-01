@@ -38,13 +38,13 @@ public class SaveManager : GenericSingletonClass<SaveManager>
         LoadSaves();
     }
 
-    private void Start()
+    public void StartGame()
     {
         SetupSaveableObjects();
 
         if (newGameOnStart) NewGame(0);
 
-        //LoadGame();
+        if (!GameManager.Instance.StartGameInMainMenu) LoadGame(0);
     }
 
     public void LoadSaves()

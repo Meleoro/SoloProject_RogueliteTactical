@@ -98,26 +98,25 @@ public class HeroesManager : GenericSingletonClass<HeroesManager>, ISaveable
 
     private void SwitchHero()
     {
+        if (BattleManager.Instance.IsInBattle) return;
+
         Vector3 heroPosSave = heroes[currentHeroIndex].transform.position;
         currentHeroIndex = ++currentHeroIndex % heroes.Length;
 
         int antiCrash = 0;
-        while (heroes[currentHeroIndex].CurrentHealth <= 0 && antiCrash++ < 5)
+        while (heroes[currentHeroIndex].CurrentHealth <= 0 && antiCrash++ < 10)
         {
             currentHeroIndex = ++currentHeroIndex % heroes.Length;
         }
-        if (antiCrash == 5)
+        if (antiCrash == 10)
         {
             Debug.LogError("Needed to use the anti crash counter in the hero switch");
             return;
         }
 
-        if(!BattleManager.Instance.IsInBattle)
-        {
-            heroes[currentHeroIndex].transform.position = heroPosSave;
-            heroes[currentHeroIndex].Controller.ForceAddCurrentPositionForSave(heroPosSave);
-            heroes[currentHeroIndex].Controller.RestartControl();
-        }
+        heroes[currentHeroIndex].transform.position = heroPosSave;
+        heroes[currentHeroIndex].Controller.ForceAddCurrentPositionForSave(heroPosSave);
+        heroes[currentHeroIndex].Controller.RestartControl();
 
         _spriteLayererManager.InitialiseAll();
         ActualiseDisplayedHero();

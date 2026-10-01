@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -348,6 +349,8 @@ public class AIUnit : Unit
 
                         if (!aimedTiles.Contains(dangerTile) && (pickedMoveTile != dangerTile 
                             || currentSkillData.skillEffects[0].skillEffectTargetType != SkillEffectTargetType.Allies)) continue;
+
+                        if (fearedUnit && dangerTile.UnitOnTile == fearedUnit) break;
 
                         pickedSkillTile = possibleSkillTiles[j];
                         break;

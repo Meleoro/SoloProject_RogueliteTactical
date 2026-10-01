@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel4
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 12
-  unlockType: 0
-  unlockName: 'NEW HERO: THE SAMURAI'
-  unlockDescription: "La m\xEAme qu'avant : vous avez rien gagn\xE9, le samurai champignon
-    est pas encore dans le jeu :("
-  unlockedHeroIndex: 2
+  neededRelicCount: 6
+  unlockType: 1
+  unlockName: 'NEW AREA: THE TEMPLE'
+  unlockDescription: 'A NEW EXPEDITION DESTINATION HAS BEEN DISCOVERED '
+  unlockedHeroIndex: 0
   unlockAdditionalDescription: 
   heroAnim: []
-  unlockedExpeditionIndex: 0
+  unlockedExpeditionIndex: 1

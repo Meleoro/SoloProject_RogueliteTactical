@@ -648,7 +648,7 @@ TextureImporter:
         width: 69
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -657,6 +657,28 @@ TextureImporter:
       bones: []
       spriteID: 25abafd8fa23963448bb4ed7fbb054dd
       internalID: -212177858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Transition_25
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 159
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68b59f51537bcc347836b24edcff929e
+      internalID: 2002095509
       vertices: []
       indices: 
       edges: []
@@ -693,6 +715,7 @@ TextureImporter:
       Transition_22: 1202612761
       Transition_23: 1350952
       Transition_24: -212177858
+      Transition_25: 2002095509
       Transition_3: -5120422719492145513
       Transition_4: 6212022559610932868
       Transition_5: 257642906

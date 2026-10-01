@@ -60,6 +60,7 @@ MonoBehaviour:
   possibleHeroSprites:
   - {fileID: -426819511, guid: 38d4f958ac051f54099b46b4ecdbaf01, type: 3}
   - {fileID: 646397315, guid: 38d4f958ac051f54099b46b4ecdbaf01, type: 3}
+  - {fileID: 2002095509, guid: 38d4f958ac051f54099b46b4ecdbaf01, type: 3}
   _mainRectTr: {fileID: 4852344227393277730}
   _floorText: {fileID: 4577426460704600664}
   _recommandedLevelText: {fileID: 1767658578701758713}

@@ -33,6 +33,8 @@ public class GameManager : GenericSingletonClass<GameManager>
 
     private void Start()
     {
+        SaveManager.Instance.StartGame();
+
         BattleManager.Instance.OnEnemyKilled += KillEnemy;
         InventoriesManager.Instance.OnCoinsObtained += ObtainGold;
         RelicsManager.Instance.OnRelicObtained += ObtainRelic;

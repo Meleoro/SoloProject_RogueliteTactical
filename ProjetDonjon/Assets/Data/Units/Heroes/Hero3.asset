@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hero3
   m_EditorClassIdentifier: 
   unitName: SAMURAI
-  unitImage: {fileID: -7196809872301644223, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
-  unitImageHighlight: {fileID: -698061677, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+  unitImage: {fileID: -1697309738, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
+  unitImageHighlight: {fileID: -1061615534, guid: b73575d8e5dc3a14cbe857413be0dc29, type: 3}
   baseHealth: 3
   baseStrength: 2
   baseSpeed: 5
@@ -25,21 +25,26 @@ MonoBehaviour:
   startSkillPoints: 1
   heroInventoryPrefab: {fileID: 4803297770596504823, guid: 73957351403097a46aedc8ddb9ee430c, type: 3}
   heroBaseSkills:
-  - {fileID: 11400000, guid: fa97ea0063e522441914677eada810e1, type: 2}
-  - {fileID: 11400000, guid: a54d94e12a6ae5e48b51889145abb1af, type: 2}
+  - {fileID: 11400000, guid: 6f3b9812a0d442248b7e636816ceb4e3, type: 2}
+  - {fileID: 11400000, guid: 5d4ec2c800f81404996a02fa97a091ec, type: 2}
   heroSkillPool:
-  - {fileID: 11400000, guid: fa97ea0063e522441914677eada810e1, type: 2}
-  - {fileID: 11400000, guid: 482bef61e241a5e44ae9564744b6361c, type: 2}
-  - {fileID: 11400000, guid: 6446af2578459de4083a12a37efc94ed, type: 2}
-  - {fileID: 11400000, guid: 3b58756d0586d7047b935a61a7e16d05, type: 2}
-  - {fileID: 11400000, guid: 1ad3d76110d9630478f6ac318c73d159, type: 2}
-  - {fileID: 11400000, guid: a54d94e12a6ae5e48b51889145abb1af, type: 2}
-  - {fileID: 11400000, guid: 26c8896787f68394492e596ad66258ca, type: 2}
-  - {fileID: 11400000, guid: 6751e20b554257c4992d441afd4c1c57, type: 2}
-  - {fileID: 11400000, guid: ed4c0e619cc7dc540a4cb7f07bdb72cf, type: 2}
-  - {fileID: 11400000, guid: 0c0476276e966a14e8be6bf6fc6ba390, type: 2}
-  - {fileID: 11400000, guid: 5da4028e8305f324fab8252fcfa564b4, type: 2}
-  - {fileID: 11400000, guid: 6b488f1af944b00428fb99a2bd8a9f4b, type: 2}
-  heroPassivePool: []
+  - {fileID: 11400000, guid: 6f3b9812a0d442248b7e636816ceb4e3, type: 2}
+  - {fileID: 11400000, guid: 5d4ec2c800f81404996a02fa97a091ec, type: 2}
+  - {fileID: 11400000, guid: 186520aba8aff2c43929c6ad52e4cba4, type: 2}
+  - {fileID: 11400000, guid: 9590c4f1cdd6e3044a81f093c96e5000, type: 2}
+  - {fileID: 11400000, guid: 8e5c535080e871242a483a5178a57cca, type: 2}
+  - {fileID: 11400000, guid: e006cb7eccc42eb4683fef1dec24bcc7, type: 2}
+  - {fileID: 11400000, guid: 1cb6464a3fc25394bb12fd7d05f2a369, type: 2}
+  - {fileID: 11400000, guid: a3fbd5b943aed264686f900908bb94dc, type: 2}
+  - {fileID: 11400000, guid: 7eeb9b6aea447ab46b596ac31c1cdc9a, type: 2}
+  - {fileID: 11400000, guid: 705cbef3d52d7214cb7966b060845608, type: 2}
+  - {fileID: 11400000, guid: 3db8f4c6e32b92a40978f929d54249cd, type: 2}
+  - {fileID: 11400000, guid: 150489b2f4bb2bf4eb6f5497922f1b16, type: 2}
+  heroPassivePool:
+  - {fileID: 11400000, guid: 0bf85afb7c9fab849ae4837c1b96f9ea, type: 2}
+  - {fileID: 11400000, guid: e066ee9b2d7c4df478d69bb7b84df002, type: 2}
+  - {fileID: 11400000, guid: 5d20c42eebb692142a9710374c7815ba, type: 2}
+  - {fileID: 11400000, guid: d52d3e62d62196742b6b935dcfd14ff4, type: 2}
+  - {fileID: 11400000, guid: 74a697cca7830dd429a720d0d1c9f089, type: 2}
   heroSkillSlotsUnlockedLevels: 00000000000000000000000005000000090000000d000000
   heroPassiveSlotsUnlockedLevels: 00000000070000000f000000

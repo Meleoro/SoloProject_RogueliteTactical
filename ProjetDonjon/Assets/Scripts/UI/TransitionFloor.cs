@@ -123,6 +123,8 @@ public class TransitionFloor : MonoBehaviour
             _enemyImages[i].rectTransform.localPosition = saveEnemiesLocalPos[i];
             _enemyImages[i].DOFade(1, 0);
         }
+
+        _clearedText.DOFade(0, 0);
     }
 
     #region Enter / Exit Effects

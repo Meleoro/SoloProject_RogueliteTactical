@@ -255,6 +255,7 @@ public class RelicsManager : GenericSingletonClass<RelicsManager>, ISaveable
                     return true;
 
                 case CampUnlockType.Blacksmith:
+                    Debug.Log("Unlocked blacksmith");
                     return true;
             }
         }

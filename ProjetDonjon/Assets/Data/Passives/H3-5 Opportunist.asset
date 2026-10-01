@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f51d3c135e2eb44b0a2bc3502c2e38, type: 3}
+  m_Name: H3-5 Opportunist
+  m_EditorClassIdentifier: 
+  passiveName: OPPORTUNIST
+  passiveDescription: +50% CRITICAL CHANCES AGAINST STUNNED OR HIDNERED UNITS
+  passiveIcon: {fileID: 1685792960, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  passiveHighlightIcon: {fileID: -1451717230, guid: 888e112301f7e7b41b20accdedb0e2fd, type: 3}
+  additionalTooltipDatas: []
+  passiveTriggerType: 4
+  neededAlteration:
+  - {fileID: 11400000, guid: c2542ffcfdc24874f80e68e474db9402, type: 2}
+  - {fileID: 11400000, guid: 90b47bb6b429ed34aa18b3e0a5c5b0e5, type: 2}
+  passiveTriggerProba: 100
+  passiveEffects:
+  - passiveEffectType: 5
+    appliedAlteration: {fileID: 0}
+    additivePower: 50
+    multipliedPower: 1

@@ -143,7 +143,7 @@ public class UIMetaManager : GenericSingletonClass<UIMetaManager>
         _mainMetaMenu.Show(true);
         _expeditionsMenu.Hide(true);
 
-        if (!TutoManager.Instance.DidTutorialStep[12])
+        if (!TutoManager.Instance.DidTutorialStep[12] && !TutoManager.Instance.TutoDisabled)
         {
             StartCoroutine(TutoManager.Instance.DisplayTutorialWithDelayCoroutine(12, 0.5f, false));
             return;

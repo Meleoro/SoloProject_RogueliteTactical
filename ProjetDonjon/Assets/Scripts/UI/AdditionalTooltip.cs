@@ -8,9 +8,11 @@ using Utilities;
 
 public class AdditionalTooltip : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private Vector3 offset;
+
     [Header("Private Infos")]
     private Coroutine showCoroutine;
-    private Vector3 saveOffset;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
@@ -24,7 +26,6 @@ public class AdditionalTooltip : MonoBehaviour
 
     private void Start()
     {
-        saveOffset = _mainRectTr.localPosition;
         Hide();
     }
 
@@ -35,7 +36,7 @@ public class AdditionalTooltip : MonoBehaviour
 
         if(mirrorVertical)
         {
-            _mainRectTr.localPosition = new Vector3(saveOffset.x, -1 * saveOffset.y, 1 * saveOffset.z);
+            _mainRectTr.localPosition = new Vector3(offset.x, -1 * offset.y, 1 * offset.z);
         }
 
         if(showCoroutine != null) StopCoroutine(showCoroutine);
@@ -67,13 +68,13 @@ public class AdditionalTooltip : MonoBehaviour
 
         if (mirrorVertical)
         {
-            _mainRectTr.localPosition = new Vector3(saveOffset.x, -1 * saveOffset.y, 1 * saveOffset.z) + new Vector3(0, 80f, 0);
-            _mainRectTr.DOLocalMove(new Vector3(saveOffset.x, -1 * saveOffset.y, 1 * saveOffset.z), 0.25f).SetEase(Ease.OutBack);
+            _mainRectTr.localPosition = new Vector3(offset.x, -1 * offset.y, 1 * offset.z) + new Vector3(0, 80f, 0);
+            _mainRectTr.DOLocalMove(new Vector3(offset.x, -1 * offset.y, 1 * offset.z), 0.25f).SetEase(Ease.OutBack);
         }
         else
         {
-            _mainRectTr.localPosition = saveOffset + new Vector3(0, -80f, 0);
-            _mainRectTr.DOLocalMove(saveOffset, 0.25f).SetEase(Ease.OutBack);
+            _mainRectTr.localPosition = offset + new Vector3(0, -80f, 0);
+            _mainRectTr.DOLocalMove(offset, 0.25f).SetEase(Ease.OutBack);
         }
     }
 

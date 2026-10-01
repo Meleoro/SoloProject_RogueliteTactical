@@ -258,8 +258,8 @@ public class MainMetaMenu : MonoBehaviour
         }
         else
         {
-            _campLevelProgressBar.fillAmount = previousRelicCount - campLevels[previousCampLevel - 1].neededRelicCount / 
-                campLevels[previousCampLevel - 1].neededRelicCount;
+            _campLevelProgressBar.fillAmount = (float)(campLevels[currentCampLevel - 1].neededRelicCount - (float)currentRelicCount) /
+                    (campLevels[currentCampLevel - 1].neededRelicCount - campLevels[currentCampLevel].neededRelicCount);
         }
         _campLevelProgressText.text = previousRelicCount + "/" + campLevels[previousCampLevel].neededRelicCount;
         _campLevelMainText.text = "CAMP LEVEL " + previousCampLevel;
@@ -277,8 +277,8 @@ public class MainMetaMenu : MonoBehaviour
                 StartCoroutine(PlayProgressCoroutine((float)currentRelicCount / campLevels[previousCampLevel].neededRelicCount));
 
             else
-                StartCoroutine(PlayProgressCoroutine((float)currentRelicCount - campLevels[previousCampLevel - 1].neededRelicCount / 
-                    campLevels[previousCampLevel - 1].neededRelicCount));
+                StartCoroutine(PlayProgressCoroutine((float)(campLevels[currentCampLevel - 1].neededRelicCount - (float)currentRelicCount) /
+                    (campLevels[currentCampLevel - 1].neededRelicCount - campLevels[currentCampLevel].neededRelicCount)));
         }
         else
         {

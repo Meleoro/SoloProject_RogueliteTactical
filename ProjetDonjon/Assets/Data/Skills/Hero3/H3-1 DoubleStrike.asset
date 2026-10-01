@@ -22,8 +22,8 @@ MonoBehaviour:
   skillIntentIcon: {fileID: 0}
   additionalTooltipDatas: []
   vfxDatas:
-  - {fileID: 11400000, guid: 8ef9632802a51f640953bbc5c9672a3c, type: 2}
   - {fileID: 11400000, guid: 742108e1a78c11b4ea7dee1ff001d05b, type: 2}
+  - {fileID: 11400000, guid: 8ef9632802a51f640953bbc5c9672a3c, type: 2}
   skillType: 0
   skillPaternType: 1
   skillEffects:
@@ -33,13 +33,7 @@ MonoBehaviour:
     additivePower: 0
     multipliedPower: 0.5
     onlyOnCrit: 0
-    summonPrefab: {fileID: 0}
-  - skillEffectType: 1
-    skillEffectTargetType: 2
-    appliedAlteration: {fileID: 0}
-    additivePower: 0
-    multipliedPower: 0.5
-    onlyOnCrit: 0
+    onlyOnKill: 0
     summonPrefab: {fileID: 0}
   attackCount: 2
   useOrientatedAOE: 0

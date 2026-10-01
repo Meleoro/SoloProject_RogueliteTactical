@@ -996,6 +996,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: NewHeroInfos_36
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 431
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fb1404d71a33a44ab56810d7e29f90
+      internalID: -2129956926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1040,6 +1062,7 @@ TextureImporter:
       NewHeroInfos_33: -6630648328330117541
       NewHeroInfos_34: -3888357400132825913
       NewHeroInfos_35: 2344153043410033413
+      NewHeroInfos_36: -2129956926
       NewHeroInfos_4: 4970245602665293319
       NewHeroInfos_5: -5420717282129001589
       NewHeroInfos_6: -6192316287069856184

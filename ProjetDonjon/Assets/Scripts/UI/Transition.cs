@@ -27,6 +27,7 @@ public class Transition : MonoBehaviour
     private int currentFloor;
     private bool isOnLastFloor;
     private bool isActive = false;
+    private Vector3 saveFloorParentOffset;
     private Vector3 saveButtonScale;
 
     [Header("References")]
@@ -136,7 +137,12 @@ public class Transition : MonoBehaviour
 
     private void ResetFloors()
     {
-        for(int i = 0; i < _floorTransitions.Length; i++)
+        if(saveFloorParentOffset != Vector3.zero)
+        {
+            _floorsRectTr.localPosition = saveFloorParentOffset;
+        }
+
+        for (int i = 0; i < _floorTransitions.Length; i++)
         {
             _floorTransitions[i].ResetVisuals();
         }
@@ -286,6 +292,11 @@ public class Transition : MonoBehaviour
 
     private void ChangeFloor(int newFloor, float duration)
     {
+        if (saveFloorParentOffset == Vector3.zero)
+        {
+            saveFloorParentOffset = _floorsRectTr.localPosition;
+        }
+
         Vector3 dif = _floorTransitions[newFloor].transform.localPosition - _floorTransitions[currentFloor].transform.localPosition;
         _floorsRectTr.DOLocalMove(_floorsRectTr.localPosition - dif, duration).SetEase(Ease.OutBack);
 

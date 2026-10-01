@@ -11,7 +11,8 @@ public enum BattleEventType
     NextTurn,
     NextPlayerAction,
     GainXP,
-    HeroDeath
+    HeroDeath,
+    DoAParry
 }
 
 
@@ -23,6 +24,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     [SerializeField] private Relic relicPrefab;
     [SerializeField] private Coin coinPrefab;
     [SerializeField] private ParticleSystem hitVFXPrefab;
+    [SerializeField] private SkillData parrySkillData;
 
     [Header("Actions")]
     public Action OnMoveUnit;
@@ -42,8 +44,10 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     private List<AIUnit> currentEnemies = new();
     private List<AIUnit> currentAllies = new();
     private List<Unit> currentUnits = new();
+    Unit parryOriginUnit, parryTargetUnit;
     private Room battleRoom;
     private Unit currentUnit;
+    private SkillData currentUsedSkillData;
     private int currentVFXIndex;
     private Queue<BattleEventType> eventQueue;
     private Coroutine currentHeroDeathCoroutine;
@@ -103,7 +107,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
     }
 
 
-    #region Add / Remove Units
+    #region Manage Units
 
     public void AddUnit(Unit unit)
     {
@@ -161,6 +165,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 currentAllies.Remove((AIUnit)unit);
             }
         }
+    }
+
+    public bool AreUnitsAllies(Unit unit1, Unit unit2)
+    {
+        return unit1.IsEnemy == unit2.IsEnemy;
     }
 
     #endregion
@@ -304,6 +313,10 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 }
                 currentHeroDeathCoroutine = StartCoroutine(HeroDeathCoroutine());
                 break;
+
+            case BattleEventType.DoAParry:
+                DoParry(parryOriginUnit, parryTargetUnit);
+                break;
         }
     }
 
@@ -346,7 +359,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         }
     }
 
-
     public IEnumerator NextTurnCoroutine(float delay = 0, bool endTurn = true)
     {
         noMouseControls = true;
@@ -383,7 +395,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             StartCoroutine(enemy.PlayEnemyTurnCoroutine());
         }
     }
-
 
     public IEnumerator MoveUnitCoroutine(BattleTile aimedTile, bool useDiagonals) 
     {
@@ -441,6 +452,27 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         noMouseControls = false;
     }
 
+    public void SetupParryingEvent(Unit originUnit, Unit targetUnit)
+    {
+        if (eventQueue.Contains(BattleEventType.DoAParry)) return;
+
+        AddBattleEventToQueue(BattleEventType.DoAParry);
+
+        parryOriginUnit = originUnit;
+        parryTargetUnit = targetUnit;
+    }
+
+    public void DoParry(Unit originUnit, Unit targetUnit)
+    {
+        //targetUnit.CurrentTile.DisplayDangerTile(SkillType.Attack);
+
+        TilesManager.DisplayDangerTiles(targetUnit.CurrentTile, parrySkillData);
+
+        StartCoroutine(UseParrySkillCoroutine(parrySkillData));
+
+        parryOriginUnit.RemoveAlteration(AlterationType.Parry);
+    }
+
     #endregion
 
 
@@ -451,7 +483,9 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         if (usedSkill == null) usedSkill = _tilesManager.CurrentSkill;
         BattleTile[] skillBattleTiles = _tilesManager.GetAllSkillTiles().ToArray();
 
-        if(skillBattleTiles.Length == 0)
+        currentUsedSkillData = usedSkill;
+
+        if (skillBattleTiles.Length == 0)
         {
             _tilesManager.ResetTiles();
 
@@ -538,6 +572,15 @@ public class BattleManager : GenericSingletonClass<BattleManager>
             (currentUnit as Hero).UseSkillPoints(usedSkill.skillPointCost);
             (currentUnit as Hero).DoAction();
 
+            if(usedSkill.endsTurn)
+            {
+                yield return new WaitForSeconds(0.5f);
+
+                currentUnit.EndTurn(0.5f);
+
+                yield break;
+            }
+
             // We verify if the turn ends
             if ((currentUnit as Hero).CurrentActionPoints > 0)
             {
@@ -557,12 +600,92 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         currentUnit.EndTurn(0.5f);
     }
 
+    private IEnumerator UseParrySkillCoroutine(SkillData usedSkill)
+    {
+        if (usedSkill == null) usedSkill = _tilesManager.CurrentSkill;
+        BattleTile[] skillBattleTiles = _tilesManager.GetAllSkillTiles().ToArray();
+
+        Unit currentUnit = parryOriginUnit;
+
+        if (currentUnit.GetType() == typeof(Hero) && usedSkill.skillEffects[0].skillEffectType == SkillEffectType.Damage)
+        {
+            Unit[] attackUnits = _tilesManager.GetConcernedUnits(skillBattleTiles, usedSkill, currentUnit);
+
+            // Probably a missclick from the player, so we cancel it
+            if (attackUnits.Length == 0)
+            {
+                Debug.Log("C'est non");
+
+                yield break;
+            }
+        }
+
+        noMouseControls = true;
+        OnSkillUsed.Invoke();
+
+        // Camera Part
+        Transform[] cameraTiles = new Transform[skillBattleTiles.Length + 1];
+        for (int i = 0; i < skillBattleTiles.Length; i++)
+        {
+            cameraTiles[i] = skillBattleTiles[i].transform;
+        }
+        cameraTiles[cameraTiles.Length - 1] = currentUnit.CurrentTile.transform;
+        CameraManager.Instance.FocusOnTransforms(cameraTiles);
+
+        currentVFXIndex = 0;
+
+        // We launch the animations / others effects
+        currentUnit._animator.SetTrigger("DoParry");
+        currentUnit.RotateTowardTarget(skillBattleTiles[0]?.transform);
+        StartCoroutine(currentUnit.UseSkillCoroutine());
+
+        // We wait the moment the skill applies it's effect
+        int wantedAttackCount = usedSkill.attackCount, currentAttackCount = 0;
+        bool applied = false;
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+
+            if (currentUnit._unitAnimsInfos.PlaySkillEffect && !applied)
+            {
+                Debug.Log("Apply PArry");
+
+                currentAttackCount++;
+                applied = true;
+
+                // We apply the skill effect
+                PlaySkillVFX(skillBattleTiles, usedSkill);
+                for (int i = 0; i < skillBattleTiles.Length; i++)
+                {
+                    ApplySkillOnTile(skillBattleTiles[i], usedSkill, currentUnit, false);
+                }
+
+                if (currentAttackCount >= wantedAttackCount) break;
+            }
+
+
+            if (!CurrentUnit._unitAnimsInfos.PlaySkillEffect)
+            {
+                applied = false;
+            }
+        }
+
+        _tilesManager.ResetTiles();
+
+        yield return new WaitForSeconds(0.5f);
+
+        PlayNextBattleEvent();
+    }
 
     private void ApplySkillOnTile(BattleTile battleTile, SkillData usedSkill, Unit unit, bool isCrit)
     {
+        Unit currentUnit = unit;
+        Unit attackedUnit = battleTile.UnitOnTile;
+
         for (int i = 0; i < usedSkill.skillEffects.Length; i++)
         {
             if (usedSkill.skillEffects[i].onlyOnCrit && !isCrit) continue;
+            if (usedSkill.skillEffects[i].onlyOnKill && attackedUnit.CurrentHealth > 0) continue;
 
             // We verify the effect applies on the unit type on the tile
             switch (usedSkill.skillEffects[i].skillEffectTargetType)
@@ -598,16 +721,23 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 case SkillEffectType.Damage:
                     int damages = (int)(usedSkill.skillEffects[i].multipliedPower * unit.CurrentStrength);
 
-                    if (isCrit) battleTile.UnitOnTile.TakeDamage((int)(damages * (unit.CurrentCritMultiplier + 
-                        _passivesManager.GetPassiveCritDmgMultiplierUpgrade(unit, battleTile.UnitOnTile))), unit, true);
+                    if (isCrit) attackedUnit.TakeDamage((int)(damages * (unit.CurrentCritMultiplier + 
+                        _passivesManager.GetPassiveCritDmgMultiplierUpgrade(unit, attackedUnit))), unit, true);
 
-                    else battleTile.UnitOnTile.TakeDamage(damages, unit, false);
+                    else attackedUnit.TakeDamage(damages, unit, false);
 
                     PassiveData[] prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnAttack, unit).ToArray();
-                    _passivesManager.ApplyPassives(prokedPassives, unit, battleTile.UnitOnTile);
+                    _passivesManager.ApplyPassives(prokedPassives, unit, attackedUnit);
 
-                    prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnDamageReceived, battleTile.UnitOnTile).ToArray();
+                    prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnDamageReceived, attackedUnit).ToArray();
                     _passivesManager.ApplyPassives(prokedPassives, battleTile.UnitOnTile, unit);
+
+                    if(attackedUnit.CurrentHealth <= 0)
+                    {
+                        prokedPassives = _passivesManager.GetTriggeredPassives(PassiveTriggerType.OnKill, unit).ToArray();
+                        _passivesManager.ApplyPassives(prokedPassives, unit, battleTile.UnitOnTile);
+                    }
+
                     break;
 
                 case SkillEffectType.Heal:

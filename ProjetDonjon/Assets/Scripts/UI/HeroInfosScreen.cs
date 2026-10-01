@@ -255,7 +255,7 @@ public class HeroInfosScreen : MonoBehaviour
         }
 
         _heroName.text = heroData.unitName;
-        _heroLevel.text = hero.CurrentLevel.ToString();
+        _heroLevel.text = "LEVEL " + hero.CurrentLevel.ToString();
 
         _currentHealthText.text = hero.CurrentHealth + "/" + hero.CurrentMaxHealth;
         _currentXpText.text = hero.CurrentXP + "/" + hero.CurrentXPToReach;

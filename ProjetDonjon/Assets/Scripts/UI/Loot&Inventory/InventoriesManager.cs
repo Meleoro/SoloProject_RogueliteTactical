@@ -35,7 +35,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     private List<InventorySlot> allSlots = new List<InventorySlot>();
     private List<Loot> allLoots = new List<Loot>();
     private int inventoryInstantiatedAmount = 0;
-    private int currentCoins;
+    private int currentGold;
     private bool alreadyLoadedSave;
     private bool lockedInInventory;
     private bool isOpeningOrClosing;
@@ -44,7 +44,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
     public RectTransform MainLootParent { get { return _mainLootParent; } }
     public RectTransform FrontLootParent { get { return _frontLootPaent; } }
     public InventoryActionPanel InventoryActionPanel { get { return _inventoryActionsPanel; } }  
-    public int CurrentCoins { get { return currentCoins; } }
+    public int CurrentGold { get { return currentGold; } }
     public Inventory[] CurrentHeroesInventories { get { return currentHeroesInventories; } }
 
     [Header("References Main")]
@@ -380,16 +380,16 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
 
         AudioManager.Instance.PlaySoundOneShotRandomPitch(0.9f, 1.1f, 0, 13);  
 
-        currentCoins += quantity;
-        _topRightCointUI.ActualiseCoins(currentCoins);
-        _hudBarCoinUI.ActualiseCoins(currentCoins);
+        currentGold += quantity;
+        _topRightCointUI.ActualiseCoins(currentGold);
+        _hudBarCoinUI.ActualiseCoins(currentGold);
     }
 
     public void RemoveCoins(int quantity)
     {
-        currentCoins -= quantity;
-        _topRightCointUI.ActualiseCoins(currentCoins);
-        _hudBarCoinUI.ActualiseCoins(currentCoins);
+        currentGold -= quantity;
+        _topRightCointUI.ActualiseCoins(currentGold);
+        _hudBarCoinUI.ActualiseCoins(currentGold);
     }
 
     #endregion
@@ -520,6 +520,11 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
             item.PlaceInInventory(concernedInventory.GetOverlayedCoordinates(data.savedInventoryItems[i].coord,
                 lootData.spaceTaken, data.savedInventoryItems[i].angle));
         }
+
+        currentGold = data.gold;
+
+        _topRightCointUI.ActualiseCoins(currentGold);
+        _hudBarCoinUI.ActualiseCoins(currentGold);
     }
 
     public void SaveGame(ref GameData data)
@@ -539,6 +544,7 @@ public class InventoriesManager : GenericSingletonClass<InventoriesManager>, ISa
         }
 
         data.savedInventoryItems = itemsToSave;
+        data.gold = currentGold;
     }
 
 

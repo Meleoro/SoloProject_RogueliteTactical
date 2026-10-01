@@ -40,6 +40,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c0476276e966a14e8be6bf6fc6ba390, type: 2}
   - {fileID: 11400000, guid: 5da4028e8305f324fab8252fcfa564b4, type: 2}
   - {fileID: 11400000, guid: 6b488f1af944b00428fb99a2bd8a9f4b, type: 2}
-  heroPassivePool: []
+  heroPassivePool:
+  - {fileID: 11400000, guid: 855497575fd323e4cb5476dfad7c58f4, type: 2}
+  - {fileID: 11400000, guid: cfc1eadab94a4bd49b14970aac1bf56e, type: 2}
+  - {fileID: 11400000, guid: 697e2234c37b3e4469e401e78a6446bd, type: 2}
+  - {fileID: 11400000, guid: 312d0956952e5874486ed9d518107045, type: 2}
+  - {fileID: 11400000, guid: 5ab74b68d3363e645b7eb4e377b3ed50, type: 2}
   heroSkillSlotsUnlockedLevels: 00000000000000000000000005000000090000000d000000
   heroPassiveSlotsUnlockedLevels: 00000000070000000f000000

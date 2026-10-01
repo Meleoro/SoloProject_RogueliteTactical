@@ -41,7 +41,8 @@ public enum SkillEffectType
     Push,
     Summon,
     HealDebuffs,
-    DestroySelf
+    DestroySelf,
+    MoveUnit
 }
 
 [Serializable]
@@ -54,6 +55,7 @@ public struct SkillEffect
     public int additivePower;
     public float multipliedPower;
     public bool onlyOnCrit;
+    public bool onlyOnKill;
 
     public AIUnit summonPrefab;
 }
@@ -79,6 +81,7 @@ public class SkillData : ScriptableObject
     public SkillPaternType skillPaternType;
     public SkillEffect[] skillEffects;
     [Min(1)] public int attackCount;
+    public bool endsTurn;
 
     [Header("Paterns")]
     public bool useOrientatedAOE;

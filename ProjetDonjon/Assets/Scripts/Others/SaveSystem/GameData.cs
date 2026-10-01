@@ -42,6 +42,7 @@ public class GameData
     // INVENTORIES
     public List<ItemSaveStruct> savedInventoryItems;
     public int gold;
+    public int[] inventoryLevels;
 
     // Others
     public bool[] finishedTutorialSteps;
@@ -52,13 +53,13 @@ public class GameData
 
     public GameData()
     {
-        heroesLevel = new int[4];
-        heroesUnlockedNodes = new bool[4 * 20];
-        heroesCurrentSkillPoint = new int[4];
-        heroesEquippedSkillIndexes = new string[4 * 6];
-        heroesEquippedPassiveIndexes = new string[4 * 3];
+        heroesLevel = new int[10];    // 6 In case of updates for save compatibility
+        heroesUnlockedNodes = new bool[10 * 20];
+        heroesCurrentSkillPoint = new int[10];
+        heroesEquippedSkillIndexes = new string[10 * 6];
+        heroesEquippedPassiveIndexes = new string[10 * 3];
 
-        possessedRelicsIndexes = new bool[12];
+        possessedRelicsIndexes = new bool[12 * 10];
 
         needEquippedInitialisation = true;
         campLevel = 0;
@@ -66,6 +67,8 @@ public class GameData
         chestLevel = 0;
 
         savedInventoryItems = new List<ItemSaveStruct>();
+        gold = 0;
+        inventoryLevels = new int[10];
 
         finishedTutorialSteps = new bool[20];
         finishedAdditionalTutorialSteps = new bool[30];

@@ -412,13 +412,16 @@ public class TilesManager
             for (int j = 0; j < neighbors.Count; j++)
             {
                 if (closedList.Contains(neighbors[j])) continue;
-                if (neighbors[j].UnitOnTile != null) continue;
+                if (neighbors[j].UnitOnTile != null && !BattleManager.Instance.AreUnitsAllies(hero, neighbors[j].UnitOnTile)) continue;
                 if (neighbors[j].IsHole) continue;
 
                 openList.Add(neighbors[j]);
                 closedList.Add(neighbors[j]);
 
-                neighbors[j].DisplayMoveTile();
+                if (!neighbors[j].CantStopHere)
+                {
+                    neighbors[j].DisplayMoveTile();
+                }
             }
         }
 

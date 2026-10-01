@@ -1757,6 +1757,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BattleUIV3_68
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 466
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d300f0c135b6e9041b350d2bf0b4903d
+      internalID: 579639000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleUIV3_69
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 114
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d5687c8a9af41847af9a0862fc28c9d
+      internalID: -1697309738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleUIV3_70
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 98
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8ea37b055ba8ea4fa70a1135db97b7d
+      internalID: -1061615534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1836,7 +1902,10 @@ TextureImporter:
       BattleUIV3_65: -1089814119
       BattleUIV3_66: 66326231
       BattleUIV3_67: 1295778000
+      BattleUIV3_68: 579639000
+      BattleUIV3_69: -1697309738
       BattleUIV3_7: 442001188293465077
+      BattleUIV3_70: -1061615534
       BattleUIV3_8: -1446987326050235386
       BattleUIV3_9: -195943878001718372
   mipmapLimitGroupName: 

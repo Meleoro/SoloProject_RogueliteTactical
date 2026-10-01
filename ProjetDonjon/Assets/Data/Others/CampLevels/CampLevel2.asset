@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09734a5350c23564aaa6177afe3427ab, type: 3}
   m_Name: CampLevel2
   m_EditorClassIdentifier: Assembly-CSharp::CampLevelData
-  neededRelicCount: 3
+  neededRelicCount: 2
   unlockType: 2
   unlockName: 'UNLOCKED: THE SHOP'
-  unlockDescription: "A shop opened in your camp ! \nYou can buy or sell items in
-    it, and upgrade it for cheaper prices and more item choices "
-  unlockedHero: {fileID: 0}
-  expeditionUnlockedIndex: 0
+  unlockDescription: 'A SHOP HAS OPENED IN YOUR CAMP !
+
+    YOU CAN BUY ITEM IN IT
+    AND UPGRADE IT FOR A WIDER VARIETY OF CHOICE'
+  unlockedHeroIndex: 0
+  unlockAdditionalDescription: 
+  heroAnim: []
+  unlockedExpeditionIndex: 0

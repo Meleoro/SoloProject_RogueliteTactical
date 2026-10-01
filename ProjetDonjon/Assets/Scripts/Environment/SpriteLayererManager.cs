@@ -22,9 +22,6 @@ public class SpriteLayererManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-
-        Debug.Log("Initialise");
-
         InitialiseAll();
     }
 }

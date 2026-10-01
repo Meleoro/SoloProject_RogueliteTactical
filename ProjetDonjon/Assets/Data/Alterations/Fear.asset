@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dbdbd1fa00c0946929de6036460233, type: 3}
+  m_Name: Fear
+  m_EditorClassIdentifier: 
+  alterationName: FEAR
+  alterationDescription: 'CAN''T ATTACK THE UNIT AT THE ORIGIN OF THE FEAR '
+  alterationIcon: {fileID: 7988679433831818700, guid: e1ca4aa97367bc14b988dd602f8dc871, type: 3}
+  alterationType: 15
+  isPositive: 0
+  isInfinite: 0
+  isStackable: 0
+  duration: 3
+  strength: 0

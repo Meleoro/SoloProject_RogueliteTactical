@@ -80,7 +80,7 @@ public class ShopItem : MonoBehaviour
 
     public void Click()
     {
-        if (InventoriesManager.Instance.CurrentCoins < itemData.value)
+        if (InventoriesManager.Instance.CurrentGold < itemData.value)
         {
             _itemImage.DOComplete();
             _itemImage.rectTransform.DOComplete();

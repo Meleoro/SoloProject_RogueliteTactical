@@ -82,6 +82,7 @@ public class Unit : MonoBehaviour
     protected bool isUnitsTurn;
     protected UnitData unitData;
     protected Unit provocationTarget;
+    protected Unit fearedUnit;
     protected Coroutine squishCoroutine;
     protected Coroutine turnOutlineCoroutine;
     protected PassiveData[] equippedPassives = new PassiveData[3];
@@ -105,6 +106,7 @@ public class Unit : MonoBehaviour
     public bool IsHindered { get { return VerifyHasAlteration(AlterationType.Hindered) != null; } }
     public bool IsStunned { get { return VerifyHasAlteration(AlterationType.Stunned) != null; } }
     public bool IsSkulled { get { return VerifyHasAlteration(AlterationType.Skulled) != null; } }
+    public bool IsParrying { get { return VerifyHasAlteration(AlterationType.Parry) != null; } }
     public bool IsHovered { get { return isHovered; } }
 
     [Header("References")]
@@ -337,6 +339,13 @@ public class Unit : MonoBehaviour
             if (thornAlt) originUnit.TakeDamage((int)thornAlt.strength, null);
         }
 
+        // Parry (no damages + counter attack + alteration removed)
+        if(IsParrying)
+        {
+            BattleManager.Instance.SetupParryingEvent(this, originUnit);
+            return;
+        }
+
         // Skulled (no damages + alteration removed)
         if (IsSkulled)
         {
@@ -555,6 +564,10 @@ public class Unit : MonoBehaviour
             case AlterationType.Skulled:
                 Destroy(Instantiate(skullVFX, transform.position, Quaternion.Euler(0,0, 0)), 1f);
                 return;
+
+            case AlterationType.Parry:
+                _animator.SetBool("IsParrying", true);
+                return;
         }
 
         if (isBuff)
@@ -597,10 +610,15 @@ public class Unit : MonoBehaviour
             _stunnedVFX.Hide();
         }
 
+        else if(currentAlterations[index].alteration.alterationType == AlterationType.Parry)
+        {
+            _animator.SetBool("IsParrying", false);
+        }
+
         currentAlterations.RemoveAt(index);
     }
 
-    private void RemoveAlteration(AlterationType type)
+    public void RemoveAlteration(AlterationType type)
     {
         for (int i = currentAlterations.Count - 1; i >= 0; i--)
         {
@@ -655,6 +673,10 @@ public class Unit : MonoBehaviour
 
                 case AlterationType.Provocked:
                     provocationTarget = currentAlterations[i].origin;
+                    break;
+
+                case AlterationType.Fear:
+                    fearedUnit = currentAlterations[i].origin;
                     break;
 
                 case AlterationType.Lucky:

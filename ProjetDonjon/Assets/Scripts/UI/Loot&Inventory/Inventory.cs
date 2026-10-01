@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
 
     [Header("Private Infos")]
     private InventorySlot[,] inventorySlotsTab = new InventorySlot[0, 0];
-    private InventorySlot[] inventorySlots;
+    private InventorySlot[] inventorySlots = new InventorySlot[0];
     private InventorySlot[] baseSlots;
     private RectTransform originalParent;
     private RectTransform originalLootParentParent;  
