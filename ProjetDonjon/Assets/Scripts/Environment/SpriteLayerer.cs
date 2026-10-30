@@ -43,6 +43,6 @@ public class SpriteLayerer : MonoBehaviour
     {
         if (!isInitialised) return;
 
-        _spriteRenderer.sortingOrder = Mathf.Clamp(100 - (int)((transform.position.y - referenceTr.position.y) * 5) + offset + PublicOffset, 1, 200);
+        _spriteRenderer.sortingOrder = Mathf.Clamp(100 - (int)((transform.position.y - referenceTr.position.y) * 5) + offset + PublicOffset, 1 + offset, 200 + offset);
     }
 }

@@ -6,13 +6,15 @@ public class TilesManager
 {
     [Header("Public Infos")]
     public SkillData CurrentSkill { get { return currentSkill; } }
+    public BattleTile CurrentClickedSkillTile { get { return currentClickedSkillTile; } }
     public BattleTile CurrentSkillBaseTile { get { return currentSkillBaseTile; } }
     public Unit currentUnit;
     public Room battleRoom;
 
     [Header("Private Infos")]
     private SkillData currentSkill;
-    private BattleTile currentSkillBaseTile;
+    private BattleTile currentSkillBaseTile;   // Tile on which the unit launching the current skill is
+    private BattleTile currentClickedSkillTile;         // Tile selected by the player / enemy to launch the skill
     private AIUnit currentHoveredUnit;
     private PreviewType currentPreviewType;
 
@@ -32,7 +34,7 @@ public class TilesManager
     #region Utilities Functions
 
     public List<BattleTile> GetPaternTiles(Vector2Int paternMiddle, bool[] patern, int paternSize, bool useDiagonals = false,
-        ObstacleType obstacleType = ObstacleType.Nothing, BattleTile ignoredTile = null, bool includeEnd = false)
+        ObstacleType obstacleType = ObstacleType.Nothing, BattleTile ignoredTile = null, bool includeEnd = false, bool isEnemy = false)
     {
         List<BattleTile> returnedTiles = new List<BattleTile>();
 
@@ -46,9 +48,9 @@ public class TilesManager
 
             if (battleTile is null) continue;
             if (obstacleType != ObstacleType.Nothing && !_pathCalculator.VerifyIsReachable(paternMiddle, paternMiddle + coordAccordingToCenter,
-                useDiagonals, obstacleType, ignoredTile, includeEnd)) continue;
-            if (battleTile.UnitOnTile is not null && (obstacleType == ObstacleType.Units || obstacleType == ObstacleType.All)
-                && ignoredTile != battleTile) continue;
+                useDiagonals, obstacleType, ignoredTile, includeEnd, isEnemy)) continue;
+            if (battleTile.UnitOnTile is not null && (obstacleType == ObstacleType.Units || obstacleType == ObstacleType.All 
+                || obstacleType == ObstacleType.Enemies) && ignoredTile != battleTile) continue;
 
             returnedTiles.Add(battleTile);
         }
@@ -174,12 +176,20 @@ public class TilesManager
 
         bool isBlockedByUnits = currentSkill.skillPaternType != SkillPaternType.SkillArea && currentSkill.skillPaternType != SkillPaternType.AdjacentTiles;
 
+        if (currentSkill.canBeLaunchedThroughEnemies)
+            isBlockedByUnits = false;
+
         List<BattleTile> skillTiles = GetPaternTiles(currentSkillBaseTile.TileCoordinates, currentSkill.skillPatern,
             (int)Mathf.Sqrt(currentSkill.skillPatern.Length), true,
             isBlockedByUnits ? ObstacleType.UnitsIncluded : ObstacleType.Nothing);
 
         for (int i = 0; i < skillTiles.Count; i++)
         {
+            if (skillTiles[i].UnitOnTile && currentSkill.skillEffects[0].skillEffectTargetType == SkillEffectTargetType.Empty)
+            {
+                continue;
+            }
+
             skillTiles[i].DisplayPossibleSkillTile(doBounce, currentSkill.skillType);
         }
 
@@ -199,6 +209,8 @@ public class TilesManager
             currentSkill = skill;
             currentSkillBaseTile = overlayedTile;
         }
+
+        currentClickedSkillTile = overlayedTile;
 
         List<BattleTile> skillTiles = new List<BattleTile>();
 

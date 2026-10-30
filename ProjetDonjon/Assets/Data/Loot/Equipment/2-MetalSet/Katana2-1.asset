@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
+  m_Name: Katana2-1
+  m_EditorClassIdentifier: 
+  lootName: METAL KATANA I
+  lootDescription: IF THIS UNIT HAS <#2C2E5E>SHIELD</color> ON IT, DEALS +1 DAMAGE
+  lootType: 1
+  rarityType: 1
+  sprite: {fileID: 278711079, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
+  value: 50
+  level: 0
+  spaceTaken:
+  - row: 01
+  - row: 01
+  equipmentType: 0
+  equipmentSprite: {fileID: -359881767, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
+  healthUpgrade: 0
+  strengthUpgrade: 1
+  speedUpgrade: 0
+  luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  exclusiveHeroIndex: 2
+  upgradedVersion: {fileID: 11400000, guid: 5c671bb4f05a362459948a060d3183d4, type: 2}
+  upgradeCost:
+    neededMaterials:
+    - {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
+    neededMatQuantities: 01000000
+  appliedPassive: {fileID: 11400000, guid: 7e1612629eb46d64a8e0361ff8914d1e, type: 2}
+  consumableType: 0
+  givenAlteration: {fileID: 0}
+  consumablePower: 0
+  usableOutsideBattle: 0
+  usableInsideBattle: 1
+  additionalTooltipDatas:
+  - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}

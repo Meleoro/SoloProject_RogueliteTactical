@@ -12,6 +12,8 @@ public class EnviroData : ScriptableObject
     public Sprite enviroIllustration;
     public int enviroIndex;
     public int[] recommandedLevels;
+    public Color areaNameTextColor;
+    public Color backgroundColor;
 
     [Header("Main Generation")]
     public int minDistGoldenPath;

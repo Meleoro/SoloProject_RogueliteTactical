@@ -22,6 +22,7 @@ public class Chest : MonoBehaviour, IInteractible
     [SerializeField] private float displayedDitherValue;
     [SerializeField] private float hiddenDitherValue;
     [SerializeField] private bool activatesChallenge;
+    [SerializeField] private bool hideDuringTrial;
     [SerializeField] private Sprite noLockSprite;
 
     [Header("Private Infos")]
@@ -146,7 +147,13 @@ public class Chest : MonoBehaviour, IInteractible
         Destroy(gameObject);
     }
 
-    public void Show()
+
+    public void Open()
+    {
+        StartCoroutine(InteractCoroutine(1.5f, 1.0f));
+    }
+
+    public void ShowAndOpen()
     {
         _spriteRenderer.material.ULerpMaterialFloat(0.5f, displayedDitherValue, "_DitherProgress");
         _lockSprite.DOFade(1, 0.5f);
@@ -154,7 +161,7 @@ public class Chest : MonoBehaviour, IInteractible
         _shadowSpriteRenderer.enabled = true;
 
         if(chestType == ChestType.Challenge)
-            BattleManager.Instance.OnBattleEnd -= Show;
+            BattleManager.Instance.OnBattleEnd -= ShowAndOpen;
 
         StartCoroutine(InteractCoroutine(1.5f, 1.0f));
     }
@@ -279,7 +286,7 @@ public class Chest : MonoBehaviour, IInteractible
             _collider.enabled = false;
 
             _activatedRoom.StartBattle(true);
-            BattleManager.Instance.OnBattleEnd += Show;
+            BattleManager.Instance.OnBattleEnd += ShowAndOpen;
 
             Hide();
         }
@@ -294,9 +301,16 @@ public class Chest : MonoBehaviour, IInteractible
             if(_activatedTrial != null)
             {
                 _activatedTrial.StartTrial();
-                _activatedTrial.OnTrialEnd += Show;
 
-                Hide();
+                if(hideDuringTrial)
+                {
+                    _activatedTrial.OnTrialEnd += ShowAndOpen;
+                    Hide();
+                }
+                else
+                {
+                    _activatedTrial.OnTrialEnd += Open;
+                }
             }
             else
             {

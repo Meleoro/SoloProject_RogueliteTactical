@@ -25,7 +25,9 @@ public enum ConsumableType
     Focus,
     Action,
     Strength,
-    Move
+    Move,
+    GiveAlteration,
+    ReturnToCamp
 }
 
 public enum SpecialEquipmentEffectType
@@ -71,8 +73,10 @@ public class LootData : ScriptableObject
 
     [Header("Consumable Infos")]
     public ConsumableType consumableType;
+    public Alteration givenAlteration;
     public int consumablePower;
     public bool usableOutsideBattle;
+    public bool usableInsideBattle = true;
 
     [Header("Others")]
     public AdditionalTooltipData[] additionalTooltipDatas;

@@ -108,6 +108,7 @@ public class Unit : MonoBehaviour
     public bool IsSkulled { get { return VerifyHasAlteration(AlterationType.Skulled) != null; } }
     public bool IsParrying { get { return VerifyHasAlteration(AlterationType.Parry) != null; } }
     public bool IsHovered { get { return isHovered; } }
+    public bool DidFirstBattleMovement;
 
     [Header("References")]
     [SerializeField] protected UnitUI _ui;
@@ -284,7 +285,9 @@ public class Unit : MonoBehaviour
     public virtual void EnterBattle(BattleTile startTile)
     {
         _ui.ShowUnitUI();
+
         currentTile = startTile;
+        DidFirstBattleMovement = false;
     }
 
     public virtual void ExitBattle(Hero currentHero)
@@ -506,7 +509,7 @@ public class Unit : MonoBehaviour
         }
 
         PlayAlterationVFX(alteration.alterationType, alteration.isPositive);
-        ActualiseAlterations(false);
+        ActualiseAlterations(false, false);
     }
 
     public void AddAlterationStrength(AlterationType type, float addedStrength)
@@ -633,7 +636,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    private void ActualiseAlterations(bool endTurn)
+    private void ActualiseAlterations(bool endTurn, bool startTurn)
     {
         if (endTurn)
         {
@@ -641,7 +644,25 @@ public class Unit : MonoBehaviour
             {
                 AlterationStruct current = currentAlterations[i];
 
-                if (!current.alteration.isInfinite)
+                if (!current.alteration.isInfinite && !current.alteration.decrementOnTurnStart)
+                    current.duration--;
+
+                currentAlterations[i] = current;
+
+                if (currentAlterations[i].duration <= 0 && !currentAlterations[i].alteration.isInfinite)
+                {
+                    RemoveAlteration(i);
+                }
+            }
+        }
+
+        if(startTurn)
+        {
+            for (int i = currentAlterations.Count - 1; i >= 0; i--)
+            {
+                AlterationStruct current = currentAlterations[i];
+
+                if (!current.alteration.isInfinite && current.alteration.decrementOnTurnStart)
                     current.duration--;
 
                 currentAlterations[i] = current;
@@ -868,6 +889,8 @@ public class Unit : MonoBehaviour
             _poisonedVFX.PlayApplyPoisonEffect();
         }
 
+        ActualiseAlterations(false, true);
+
         // On turn starts passives
         PassiveData[] prokedPassives = 
             BattleManager.Instance.PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnTurnStarted, this).ToArray();
@@ -887,7 +910,7 @@ public class Unit : MonoBehaviour
         EndTurnOutline(false);
         HideOutline();
 
-        ActualiseAlterations(true);
+        ActualiseAlterations(true, false);
 
         BattleManager.Instance.AddBattleEventToQueue(BattleEventType.NextTurn);
         BattleManager.Instance.PlayNextBattleEvent(); 

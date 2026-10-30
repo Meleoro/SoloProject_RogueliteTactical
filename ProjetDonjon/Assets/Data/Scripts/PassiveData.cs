@@ -46,7 +46,8 @@ public enum PassiveTriggerType
     OnConsumeFocusPoint,
     OnMoneyGain,
     OnXpGain,
-    OnParry
+    OnParry,
+    OnFirstMovement
 }
 
 public enum PassiveEffectType
@@ -64,5 +65,6 @@ public enum PassiveEffectType
     UpgradeDamages,
     LoseLessSkillPoint,
     GainMore,
-    UpgradeParryDamages
+    UpgradeParryDamages,
+    GainActionPoint
 }

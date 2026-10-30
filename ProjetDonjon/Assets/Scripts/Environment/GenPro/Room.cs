@@ -34,7 +34,9 @@ public class Room : MonoBehaviour
     [SerializeField] private Vector3 battleTilesOffset;
     [SerializeField] private float startCameraSize;
     [SerializeField] private Tile[] holeTiles;
+    [SerializeField] private Tile collapsingGroundTile;
     [SerializeField] private Hole holePrefab;
+    [SerializeField] private CollapsingGround collapsingGroundPrefab;
     [SerializeField] private bool isDebugRoom;
     [SerializeField] private bool isBossRoom;
     [SerializeField] private bool isChallengeRoom;
@@ -108,6 +110,7 @@ public class Room : MonoBehaviour
     public void CloseUnusedEntrances(List<Room> neighbors)
     {
         PlaceHoles();
+        PlaceCollapsingGrounds();
 
         closedEntrances = new List<RoomBlockableEntranceStruct>();  // Needed to activate the corner tilemaps
 
@@ -169,6 +172,28 @@ public class Room : MonoBehaviour
                 if (!holeTiles.Contains(_battleGroundTilemap.GetTile(new Vector3Int(x, y)))) continue;
 
                 Instantiate(holePrefab, _battleGroundTilemap.CellToWorld(new Vector3Int(x, y)) + new Vector3(1, 0.75f), 
+                    Quaternion.Euler(0, 0, 0), transform);
+            }
+        }
+    }
+
+    private void PlaceCollapsingGrounds()
+    {
+        if(collapsingGroundTile is null || collapsingGroundPrefab is null)
+        {
+            return;
+        }
+
+        for (int x = _battleGroundTilemap.cellBounds.min.x; x <= _battleGroundTilemap.cellBounds.max.x; x++)
+        {
+            for (int y = _battleGroundTilemap.cellBounds.min.y; y <= _battleGroundTilemap.cellBounds.max.y; y++)
+            {
+                if (!_battleGroundTilemap.HasTile(new Vector3Int(x, y))) continue;
+                if (collapsingGroundTile != _battleGroundTilemap.GetTile(new Vector3Int(x, y))) continue;
+
+                _battleGroundTilemap.SetTile(new Vector3Int(x, y), holeTiles[1]);
+
+                Instantiate(collapsingGroundPrefab, _battleGroundTilemap.CellToWorld(new Vector3Int(x, y)) + new Vector3(1, 0.75f),
                     Quaternion.Euler(0, 0, 0), transform);
             }
         }

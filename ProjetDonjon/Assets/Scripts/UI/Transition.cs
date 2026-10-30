@@ -68,6 +68,9 @@ public class Transition : MonoBehaviour
             _buttonsImages[i].raycastTarget = true;
         }
 
+        _introAreaNameText.color = new Color(enviroData.areaNameTextColor.r, enviroData.areaNameTextColor.g, enviroData.areaNameTextColor.b, 0);
+        _introFloorNameText.color = new Color(enviroData.areaNameTextColor.r, enviroData.areaNameTextColor.g, enviroData.areaNameTextColor.b, 0);
+
         if (floorIndex == enviroData.floorsAmount) isOnLastFloor = true;
         else isOnLastFloor = false;
 

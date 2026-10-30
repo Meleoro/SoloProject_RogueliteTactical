@@ -15,11 +15,13 @@ MonoBehaviour:
   enviroName: THE CRYPT
   enviroDescription: THIS CRYPT FULL OF TREASURE IS ALSO HOME FOR A CIVILISATION
     OF GOBLINS, IT IS ALSO SAID THAT A DARK MAGE LURKS IN THE DEPTH OF THIS CRYPT
-  enviroDangerText: 'RECOMMENDED LEVEL : 1 - 8'
+  enviroDangerText: 'RECOMMENDED LEVEL : 1 - 10'
   enviroResourcesTexts: 'RESOURCES : WOOD, IRON'
   enviroIllustration: {fileID: 6030883662778213400, guid: c09bee4696533c248b349d7ad5262ed3, type: 3}
   enviroIndex: 0
-  recommandedLevels: 010000000200000004000000050000000600000008000000
+  recommandedLevels: 01000000020000000400000007000000080000000a000000
+  areaNameTextColor: {r: 0.9882353, g: 0.7254902, b: 0.4117647, a: 1}
+  backgroundColor: {r: 0.13333334, g: 0.105882354, b: 0.3764706, a: 1}
   minDistGoldenPath: 5
   maxDistGoldenPath: 7
   minRoomAmount: 7
@@ -148,10 +150,12 @@ MonoBehaviour:
   possibleRareLoot:
   - probability: 20
     loot: {fileID: 11400000, guid: 661a19b205b0bbb4797906800037173f, type: 2}
-  - probability: 10
+  - probability: 7
     loot: {fileID: 11400000, guid: 861915a6d01ecc247b8ba04832474eb5, type: 2}
-  - probability: 10
+  - probability: 7
     loot: {fileID: 11400000, guid: ae63ec5eccf09584dac1a34cf0bd7b4c, type: 2}
+  - probability: 6
+    loot: {fileID: 11400000, guid: 6015dcb50419b394f83d332664a221ab, type: 2}
   - probability: 10
     loot: {fileID: 11400000, guid: c6365ca817b6eca4f9ee09436cae8af2, type: 2}
   - probability: 10
@@ -165,16 +169,18 @@ MonoBehaviour:
   - probability: 10
     loot: {fileID: 11400000, guid: 45011751c251c3d4facdd68092b5380c, type: 2}
   possibleEpicLoot:
+  - probability: 15
+    loot: {fileID: 11400000, guid: 5be01843ab0b9584d8170cbec03c6d20, type: 2}
+  - probability: 15
+    loot: {fileID: 11400000, guid: 14f29554b7566754e800e129accf075a, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: e24e46352fb297b47b21437e2b8d99c0, type: 2}
   - probability: 20
-    loot: {fileID: 11400000, guid: 958a5b169ab7298438b75a782fd839da, type: 2}
+    loot: {fileID: 11400000, guid: 1744f27cd7e218f44a0d8480be37b1db, type: 2}
   - probability: 20
-    loot: {fileID: 11400000, guid: c7110c3f65a3990439bc0df0bb4015ee, type: 2}
+    loot: {fileID: 11400000, guid: 0d5d2f37a07a4df459f22eda34315568, type: 2}
   - probability: 20
-    loot: {fileID: 11400000, guid: 3cccb3983fb8db745a87a167e4d2931a, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: 5ef1cddf51852764e97f12bc0f4be436, type: 2}
-  - probability: 20
-    loot: {fileID: 11400000, guid: d35ccc5368a3afb4f935d839db5247a2, type: 2}
+    loot: {fileID: 11400000, guid: 70482c006646a864e81fb0e7f2bdc88c, type: 2}
   possibleMysticLoot:
   - probability: 20
     loot: {fileID: 11400000, guid: c2c504afd88e1c74fa51801fb07a5a7f, type: 2}
@@ -182,10 +188,12 @@ MonoBehaviour:
     loot: {fileID: 11400000, guid: e7e0a4442387ad14ab003b55760919bf, type: 2}
   - probability: 20
     loot: {fileID: 11400000, guid: df8748ba0b1a37c4d9f1edf5ab74cd3d, type: 2}
-  - probability: 20
+  - probability: 15
     loot: {fileID: 11400000, guid: 96f0184470bc7e740967f996d653f93b, type: 2}
-  - probability: 20
+  - probability: 15
     loot: {fileID: 11400000, guid: 440e036a5b8ec2e4e95a9ffbbd8b2c2e, type: 2}
+  - probability: 10
+    loot: {fileID: 11400000, guid: 97cb3bf97eca3f047b5192ab0eeee8fe, type: 2}
   lootPerFloors:
   - {fileID: 11400000, guid: 552fdf40ba613ba4798b39159b339ca9, type: 2}
   - {fileID: 11400000, guid: c2e6cfa2e8d18214ea3f908b7db5ebd6, type: 2}

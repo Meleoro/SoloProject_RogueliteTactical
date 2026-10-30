@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
+  m_Name: EscapeRune
+  m_EditorClassIdentifier: 
+  lootName: ESCAPE RUNE
+  lootDescription: CAN BE USED OUTSIDE OF BATTLES TO IMMEDIATLY RETURN TO YOUR CAMP
+  lootType: 2
+  rarityType: 1
+  sprite: {fileID: 973201886, guid: f1c9dbb95a46b5245a91b44d8416364c, type: 3}
+  value: 30
+  level: 0
+  spaceTaken:
+  - row: 01
+  equipmentType: 0
+  equipmentSprite: {fileID: 0}
+  healthUpgrade: 0
+  strengthUpgrade: 0
+  speedUpgrade: 0
+  luckUpgrade: 0
+  mpUpgrade: 0
+  spUpgrade: 0
+  exclusiveHeroIndex: -1
+  upgradedVersion: {fileID: 0}
+  upgradeCost:
+    neededMaterials: []
+    neededMatQuantities: 
+  appliedPassive: {fileID: 0}
+  consumableType: 6
+  givenAlteration: {fileID: 0}
+  consumablePower: -1
+  usableOutsideBattle: 1
+  usableInsideBattle: 0
+  additionalTooltipDatas: []

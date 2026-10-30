@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Utilities;
 
 public class CameraManager : GenericSingletonClass<CameraManager>
@@ -40,6 +41,7 @@ public class CameraManager : GenericSingletonClass<CameraManager>
 
     [Header("Public Infos")]
     public Camera Camera { get { return _camera; } }
+    public SpriteRenderer BackImage { get { return _backImage; } }
 
     [Header("Actions")]
     public Action OnCameraMouseInput;
@@ -47,6 +49,7 @@ public class CameraManager : GenericSingletonClass<CameraManager>
     [Header("References")]
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _parentTransform;
+    [SerializeField] private SpriteRenderer _backImage;
 
 
     public void Initialise(Transform followedTransform)

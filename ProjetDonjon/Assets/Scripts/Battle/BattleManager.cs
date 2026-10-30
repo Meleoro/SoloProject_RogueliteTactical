@@ -402,6 +402,13 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
         _pathCalculator.ActualisePathCalculatorTiles(battleRoom.PlacedBattleTiles);
 
+        if(!currentUnit.DidFirstBattleMovement)
+        {
+            PassivesManager.ApplyPassives(PassivesManager.GetTriggeredPassives(PassiveTriggerType.OnFirstMovement, currentUnit).ToArray(), currentUnit, null);
+
+            currentUnit.DidFirstBattleMovement = true;
+        }
+
         if(currentUnit.CurrentTile.TileCoordinates == aimedTile.TileCoordinates)
         {
             _tilesManager.ResetTiles();
@@ -759,6 +766,10 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 case SkillEffectType.DestroySelf:
                     currentUnit.RemoveAllAlterations();
                     currentUnit.TakeDamage(999, currentUnit);
+                    break;
+
+                case SkillEffectType.MoveUnit:
+                    currentUnit.MoveUnit(TilesManager.CurrentClickedSkillTile, true);
                     break;
             }
         }

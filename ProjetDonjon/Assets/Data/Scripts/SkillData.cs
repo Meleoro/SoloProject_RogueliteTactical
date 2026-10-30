@@ -70,6 +70,7 @@ public class SkillData : ScriptableObject
     public string animName;
     public int skillPointCost;
     public bool mustTargetAlly;
+    public bool canBeLaunchedThroughEnemies = false;
     public Sprite skillIcon;
     public Sprite skillHighlightIcon;
     public Sprite skillIntentIcon;     // For enemies intent icon in battles

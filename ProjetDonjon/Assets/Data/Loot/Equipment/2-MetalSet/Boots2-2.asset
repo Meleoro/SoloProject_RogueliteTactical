@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e25216f199bc41a77737520795259, type: 3}
   m_Name: Boots2-2
   m_EditorClassIdentifier: 
-  lootName: METAL BOOTS
+  lootName: METAL BOOTS II
   lootDescription: 'EACH TIME THIS UNIT APPLIES SHIELD, APPLY <#2C2E5E>+1 SHIELD</color> '
   lootType: 1
   rarityType: 1
@@ -37,7 +37,9 @@ MonoBehaviour:
     neededMatQuantities: 
   appliedPassive: {fileID: 11400000, guid: cdb164c719c973346a55ec6979b2eb08, type: 2}
   consumableType: 0
+  givenAlteration: {fileID: 0}
   consumablePower: 0
   usableOutsideBattle: 0
+  usableInsideBattle: 1
   additionalTooltipDatas:
   - {fileID: 11400000, guid: 2e667cfbef3b2ac4c803004a64dfb851, type: 2}

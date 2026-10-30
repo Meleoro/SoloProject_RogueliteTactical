@@ -32,6 +32,7 @@ public class AlterationData : ScriptableObject
     public bool isPositive;
     public bool isInfinite;
     public bool isStackable;
+    public bool decrementOnTurnStart;
     public int duration;
     public float strength;
 }

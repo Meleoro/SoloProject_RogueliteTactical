@@ -1,0 +1,3271 @@
+fileFormatVersion: 2
+guid: 00254c9f89b41124a8a2f86e9594a1ba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1068108940584226911
+    second: Enviro2Props_0
+  - first:
+      213: 3337090827181457513
+    second: Enviro2Props_1
+  - first:
+      213: -1232360602764422155
+    second: Enviro2Props_2
+  - first:
+      213: 1086083802107148901
+    second: Enviro2Props_3
+  - first:
+      213: -4462019151642394047
+    second: Enviro2Props_4
+  - first:
+      213: -64821302492017801
+    second: Enviro2Props_5
+  - first:
+      213: 247285186026388055
+    second: Enviro2Props_6
+  - first:
+      213: -8638477270871249602
+    second: Enviro2Props_7
+  - first:
+      213: -7040670289345211448
+    second: Enviro2Props_8
+  - first:
+      213: -7012612416531010277
+    second: Enviro2Props_9
+  - first:
+      213: -1241891285253860160
+    second: Enviro2Props_10
+  - first:
+      213: 4383079103979768154
+    second: Enviro2Props_11
+  - first:
+      213: -175567915342600325
+    second: Enviro2Props_12
+  - first:
+      213: 45500169744547303
+    second: Enviro2Props_13
+  - first:
+      213: -1150478490913740028
+    second: Enviro2Props_14
+  - first:
+      213: 2438390876525239743
+    second: Enviro2Props_15
+  - first:
+      213: -7902488059287185962
+    second: Enviro2Props_16
+  - first:
+      213: 6853745620873644974
+    second: Enviro2Props_17
+  - first:
+      213: -3774951282734896160
+    second: Enviro2Props_18
+  - first:
+      213: 2681880789036255528
+    second: Enviro2Props_19
+  - first:
+      213: 4074198886554225346
+    second: Enviro2Props_20
+  - first:
+      213: 4932718241194829265
+    second: Enviro2Props_21
+  - first:
+      213: -4180265197524611321
+    second: Enviro2Props_22
+  - first:
+      213: 5068672208014490426
+    second: Enviro2Props_23
+  - first:
+      213: 3314942024170743906
+    second: Enviro2Props_24
+  - first:
+      213: -3725166751161576339
+    second: Enviro2Props_25
+  - first:
+      213: 166834796203171744
+    second: Enviro2Props_26
+  - first:
+      213: -4580162200557985846
+    second: Enviro2Props_27
+  - first:
+      213: -3304273318613217061
+    second: Enviro2Props_28
+  - first:
+      213: -2567767431911151564
+    second: Enviro2Props_29
+  - first:
+      213: -7167779241048554107
+    second: Enviro2Props_30
+  - first:
+      213: 3759705519699648820
+    second: Enviro2Props_31
+  - first:
+      213: -3154745939269572086
+    second: Enviro2Props_32
+  - first:
+      213: 7304005280570129969
+    second: Enviro2Props_33
+  - first:
+      213: -3198833937920869829
+    second: Enviro2Props_34
+  - first:
+      213: 112623844726173640
+    second: Enviro2Props_35
+  - first:
+      213: -4770018753900281772
+    second: Enviro2Props_36
+  - first:
+      213: -5316241431954621463
+    second: Enviro2Props_37
+  - first:
+      213: -2122513333018421605
+    second: Enviro2Props_38
+  - first:
+      213: -1604226132636507115
+    second: Enviro2Props_39
+  - first:
+      213: -626722530825439089
+    second: Enviro2Props_40
+  - first:
+      213: 8197671965792288770
+    second: Enviro2Props_41
+  - first:
+      213: -8358975006639787801
+    second: Enviro2Props_42
+  - first:
+      213: 3595476533740610066
+    second: Enviro2Props_43
+  - first:
+      213: 7308343981806962985
+    second: Enviro2Props_44
+  - first:
+      213: -1312024391051633064
+    second: Enviro2Props_45
+  - first:
+      213: 7316339980492877431
+    second: Enviro2Props_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enviro2Props_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 467
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5011f02c6fa2de00800000000000000
+      internalID: 1068108940584226911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 467
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9608d593d6abf4e20800000000000000
+      internalID: 3337090827181457513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_2
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 467
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f35a05af86c5eee0800000000000000
+      internalID: -1232360602764422155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_3
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 467
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56af6e4b67b821f00800000000000000
+      internalID: 1086083802107148901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_4
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 467
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1428d5de839b312c0800000000000000
+      internalID: -4462019151642394047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_5
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 467
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77bc51b6e55b91ff0800000000000000
+      internalID: -64821302492017801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_6
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 467
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75ab15701988e6300800000000000000
+      internalID: 247285186026388055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_7
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 466
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3dee65d0b6fd1880800000000000000
+      internalID: -8638477270871249602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_8
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 465
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c39ee6cca38a4e90800000000000000
+      internalID: -7040670289345211448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_9
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 465
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1dec2d59223eae90800000000000000
+      internalID: -7012612416531010277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_10
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 466
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c45ac4b47ae3cee0800000000000000
+      internalID: -1241891285253860160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_11
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 455
+        width: 37
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59c627f833d3dc30800000000000000
+      internalID: 4383079103979768154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 455
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b776c0449e1409df0800000000000000
+      internalID: -175567915342600325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_13
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 455
+        width: 45
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7edf7dec926a1a000800000000000000
+      internalID: 45500169744547303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_14
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 454
+        width: 17
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40beb5378eda800f0800000000000000
+      internalID: -1150478490913740028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_15
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 454
+        width: 13
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbd17d24597e6d120800000000000000
+      internalID: 2438390876525239743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_16
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 453
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d5db60baf8b45290800000000000000
+      internalID: -7902488059287185962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_17
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 452
+        width: 60
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab001954556d1f50800000000000000
+      internalID: 6853745620873644974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 453
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb6e241fcdac9bc0800000000000000
+      internalID: -3774951282734896160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_19
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 452
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82943705e54f73520800000000000000
+      internalID: 2681880789036255528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_20
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 453
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca4b512d467a8830800000000000000
+      internalID: 4074198886554225346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_21
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 453
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d5e18f0b19847440800000000000000
+      internalID: 4932718241194829265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_22
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 453
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f0e9a63f6bcf5c0800000000000000
+      internalID: -4180265197524611321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_23
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 453
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3b3999a48a875640800000000000000
+      internalID: 5068672208014490426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_24
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 436
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26826b9253a010e20800000000000000
+      internalID: 3314942024170743906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_25
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 436
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d641beb939c8d4cc0800000000000000
+      internalID: -3725166751161576339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_26
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 427
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0af5ddbfc57b05200800000000000000
+      internalID: 166834796203171744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_27
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 427
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acfd11ecebeff60c0800000000000000
+      internalID: -4580162200557985846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_28
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 426
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0124b6cecd422d0800000000000000
+      internalID: -3304273318613217061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_29
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 426
+        width: 26
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4386e1310257d5cd0800000000000000
+      internalID: -2567767431911151564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_30
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 411
+        width: 47
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 585c1ecb1cee68c90800000000000000
+      internalID: -7167779241048554107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_31
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 397
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 431e5c910482d2430800000000000000
+      internalID: 3759705519699648820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 398
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0a2b3568471834d0800000000000000
+      internalID: -3154745939269572086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_33
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 398
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13eb5f9ba1a0d5560800000000000000
+      internalID: 7304005280570129969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_34
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 399
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3a33ca4b757b93d0800000000000000
+      internalID: -3198833937920869829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_35
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 397
+        width: 11
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf64224ace109100800000000000000
+      internalID: 112623844726173640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_36
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 356
+        width: 24
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45082d9473d7dcdb0800000000000000
+      internalID: -4770018753900281772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_37
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 356
+        width: 25
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb7124959ae836b0800000000000000
+      internalID: -5316241431954621463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_38
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 372
+        width: 22
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9618628e515b82e0800000000000000
+      internalID: -2122513333018421605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_39
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 372
+        width: 18
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5146dc8f4d4acb9e0800000000000000
+      internalID: -1604226132636507115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_40
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 372
+        width: 13
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f887a61cd2f6d47f0800000000000000
+      internalID: -626722530825439089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_41
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 411
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2004a32483bf3c170800000000000000
+      internalID: 8197671965792288770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_42
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 411
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e0fddae484fefb80800000000000000
+      internalID: -8358975006639787801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_43
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 411
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 212acd79bd2b5e130800000000000000
+      internalID: 3595476533740610066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_44
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 410
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 929c7f351247c6560800000000000000
+      internalID: 7308343981806962985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_45
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 410
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85e18ba84c0cacde0800000000000000
+      internalID: -1312024391051633064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_46
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 364
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e2449d27cd88560800000000000000
+      internalID: 7316339980492877431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_47
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 435
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c52b9b2f3b0c50c42ae65271a71fcb06
+      internalID: 1137561863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_48
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 435
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b1f8a6005d76f438c880b1118800c1
+      internalID: -1340771196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_49
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 435
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c86b46c91739ce408403f2b0a23f9f2
+      internalID: -1672567054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_50
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 435
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244fa9ab0f57bb54aa95aee447fd45b6
+      internalID: 1653296156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_51
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 435
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1be08c4d77194314f921d7f8c37cd7ed
+      internalID: -247743035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_52
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 435
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b54dd9895c260734cb95a1892c5eb1ec
+      internalID: -2003789804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_53
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 368
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bff12d3743b20241b0e84c2f1fbdec2
+      internalID: -185808554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_54
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 368
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb0e7838b9d9db642b2167ef9f91f25c
+      internalID: 506891159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_55
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 368
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6752be3d53eeb55409cca97377467896
+      internalID: -1924600284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_56
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 369
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0adffac17fd9a7a41872981ca22dce4e
+      internalID: 1256944328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_57
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 369
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41913292b85284c4fb199428b45fae4f
+      internalID: 687622663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_58
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 369
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d69fec99dc2b8374fa8f1792e84a2d43
+      internalID: 153686161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_59
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 369
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd2a734d40727fb47a08fc2006561105
+      internalID: 1098452984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_60
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 334
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b611c3e4ae0fa2541b000dc40ef081d5
+      internalID: -63552176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_61
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 334
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df4aa5bb7b28ba3489fa26d7ee316ea2
+      internalID: -255752232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_62
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 334
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13287337ff164b45b8546231fddbf6f
+      internalID: -1041082392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_63
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 301
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ad3c7b54be59e42b7cc80a1323dc62
+      internalID: 200324722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_64
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 300
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4823bee5a6891434eab3facab0bb92b1
+      internalID: -932322365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_65
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 390
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dfed03e8bc309346a47599e09fca7ae
+      internalID: -659407581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_66
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 390
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5fca4e7e76438f4c83af7278aab0c8c
+      internalID: 1914563715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_67
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 391
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9da5b52b16eb604e8c60f802e17b27d
+      internalID: 414073501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_68
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 391
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 639244e3dd0dace46aaf15a24cbcfa1f
+      internalID: 915343849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_69
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 391
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d891c3b566d548479025621f3712f31
+      internalID: -1142721587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_70
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 332
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd5399e7aba4e8d4d84bfb706c64c512
+      internalID: 368642618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_71
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 332
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cba827f3547b7644d9bf4df4e1cc27cb
+      internalID: -1717691370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_72
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 379
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f430302645462640a7f53278a8819a0
+      internalID: -1768688390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_73
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 299
+        width: 33
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa0580a89bb1bb94da93d7ab89bca95c
+      internalID: -175927125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_74
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 299
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33f85abbfeab39142aebdb569496cfb9
+      internalID: 1500643003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_75
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 299
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4eaaf7204e7403499e5eb1bdb97a9e6
+      internalID: -981698356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_76
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 266
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7830ece666e18a488e2e5634f0e03ef
+      internalID: -261190947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_77
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 266
+        width: 38
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dc8e8fc48e345848bdb33793f4c5fe2
+      internalID: 1985819842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_78
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 274
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29a300452deba824dae80363ef2d7579
+      internalID: -1821382129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_79
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 274
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dfbc7bd45dd26142848625207938aa1
+      internalID: 193980557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_80
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 274
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c30b1933450d32f4eba6509c0c5d8f6a
+      internalID: -1452804146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_81
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 263
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fbf1f2fe8585d8489d7c981ac824451
+      internalID: -1297452990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_82
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 262
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98ec2fa7ea8b6694c9fb82d4744eca7e
+      internalID: -364094752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_83
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 251
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb8d9e363c675dc4f988dcc1422aae7f
+      internalID: 1719238146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_84
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 250
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51cbf9468d27022479a9a8d374b375da
+      internalID: -1429864579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_85
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 255
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335f2961d02b2f54a84eeaad5351e0fe
+      internalID: -1372259891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_86
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 263
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 011c3f161350e0c47adb18d1d71e0cef
+      internalID: -1751146817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_87
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 246
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8573ef134c03584f8c3ed3e90ba574f
+      internalID: 240616019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_88
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 281
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6236002aaa2eec4ea0da16ea4c04682
+      internalID: -1757195270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_89
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 271
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de9add633b5a2b45aa46132ab41fca6
+      internalID: 1702812675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_90
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 257
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c921215c30fa93045b29e3c0a82fc676
+      internalID: 1457710228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_91
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 289
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4a0ac3a491b634c9d43968eb876eb2
+      internalID: 1535061128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_92
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 299
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e0e823598e5814c9780e8db98bf6c2
+      internalID: 1666471930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_93
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 283
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e138cc67a717e9a4b8fe49147d438506
+      internalID: -1337775156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_94
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 248
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c537e06416d56a428c48287577a2db7
+      internalID: -1468410885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_95
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 256
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deb86d3dba3c10a42a70ef545983e5c1
+      internalID: -822452307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_96
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 240
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6add03d5c7370864db4d8c75cb8bf630
+      internalID: 2008482391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_97
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 268
+        width: 26
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55491d09e3bbcb34eac210902ac401fc
+      internalID: -206310773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_98
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 249
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21fc2c5d2c9b21b40b7f52e15e18264c
+      internalID: -677702979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_99
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 347
+        width: 48
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd808cc0d89c83c439910f50cafc802d
+      internalID: -1947100278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_100
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 346
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2cc5dfc16accf42bbd7066c2cd3435
+      internalID: 1873330981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_101
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 344
+        width: 48
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97425de4c62166e489738a5544dee3ae
+      internalID: 1153060237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_102
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 283
+        width: 25
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03cb005250fcbcb4d949b1e64f882050
+      internalID: -522974456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_103
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 283
+        width: 23
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e074cf130c478cc4795893a7388510b0
+      internalID: -138912426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_104
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 281
+        width: 35
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 455d79ba9bd0ebc44b298561741deb86
+      internalID: -1560360242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_105
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 179
+        width: 44
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7270e1556db77e4a866ab66ea13e78c
+      internalID: 1389843936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_106
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 183
+        width: 30
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4dc636e44219a04a950692ac6453e57
+      internalID: -458663210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_107
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 184
+        width: 20
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89016a564a3424d479b8975aef3ba947
+      internalID: 1695784641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_108
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 181
+        width: 13
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee002bc187f4e154f9e91d4bdb4d6627
+      internalID: -1317021880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_109
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 128
+        width: 82
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6355f4b162504d14a8caa9b2212a3174
+      internalID: -657992808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_110
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 18
+        width: 53
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78082e30bd7046a4ebe6de9eb5c5f50b
+      internalID: 1806335613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_111
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 20
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 362fd5005c31c14418bad64b25a0bca4
+      internalID: -1353455923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_112
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 12
+        width: 44
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc8cbdb8f0624634a919ec063ad1a84a
+      internalID: 306323693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_113
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 9
+        width: 69
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b34ad87c2fe4b146828e5635b421b7f
+      internalID: -750555625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_114
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 7
+        width: 57
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2522da3becd514f9b805627750e0d8
+      internalID: 1222714938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_115
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 5
+        width: 69
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ede966534eacb8469e513f876debeed
+      internalID: 750488657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_116
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 191
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e434b38abecd11946a2ec39ca4b434d7
+      internalID: 1992776473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_117
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 191
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c360b1b25211a4aadeee26c40bacf7
+      internalID: 1314030395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_118
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 190
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 317cc8cc09aea8a4295c0ae52d95a20d
+      internalID: -568029497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_119
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 209
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13807cb32a211d46819364c293afff8
+      internalID: 1138271312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_120
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 209
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a84fd97de0aaf5d428f3b9286b6a82df
+      internalID: 411681072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_121
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 209
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3998d63aa3152284e883b91f7d6ca5e8
+      internalID: 1208674156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_122
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 195
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dd9f989ea36315498e6827eb2ff34c3
+      internalID: -671291584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_123
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 194
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbea7e41b5ad65345ae822dee8397d55
+      internalID: -1181411331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_124
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 196
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5243aff5b1709d4bad3203cbc01ff1d
+      internalID: -1281359862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_125
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 181
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ca774ed39bd8e408f1905a632990e1
+      internalID: -1327628144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_126
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 181
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a301633978ee748ab8f797b2f99d4e
+      internalID: 403667356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_127
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 181
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9d950d22ff7dbb4bab5b14e0b539b72
+      internalID: -44912961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_128
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 199
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87559eb7897d12f4d87be59aede8304e
+      internalID: 701832183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_129
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 170
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4878334518a63b488088e27d0b8b18c
+      internalID: 2111022585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enviro2Props_130
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 176
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71f9aad1cc4bada48a25f4389cd63bec
+      internalID: 367387070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e7fc1b2a7e117454ca1c6799b31138a4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enviro2Props_0: 1068108940584226911
+      Enviro2Props_1: 3337090827181457513
+      Enviro2Props_10: -1241891285253860160
+      Enviro2Props_100: 1873330981
+      Enviro2Props_101: 1153060237
+      Enviro2Props_102: -522974456
+      Enviro2Props_103: -138912426
+      Enviro2Props_104: -1560360242
+      Enviro2Props_105: 1389843936
+      Enviro2Props_106: -458663210
+      Enviro2Props_107: 1695784641
+      Enviro2Props_108: -1317021880
+      Enviro2Props_109: -657992808
+      Enviro2Props_11: 4383079103979768154
+      Enviro2Props_110: 1806335613
+      Enviro2Props_111: -1353455923
+      Enviro2Props_112: 306323693
+      Enviro2Props_113: -750555625
+      Enviro2Props_114: 1222714938
+      Enviro2Props_115: 750488657
+      Enviro2Props_116: 1992776473
+      Enviro2Props_117: 1314030395
+      Enviro2Props_118: -568029497
+      Enviro2Props_119: 1138271312
+      Enviro2Props_12: -175567915342600325
+      Enviro2Props_120: 411681072
+      Enviro2Props_121: 1208674156
+      Enviro2Props_122: -671291584
+      Enviro2Props_123: -1181411331
+      Enviro2Props_124: -1281359862
+      Enviro2Props_125: -1327628144
+      Enviro2Props_126: 403667356
+      Enviro2Props_127: -44912961
+      Enviro2Props_128: 701832183
+      Enviro2Props_129: 2111022585
+      Enviro2Props_13: 45500169744547303
+      Enviro2Props_130: 367387070
+      Enviro2Props_14: -1150478490913740028
+      Enviro2Props_15: 2438390876525239743
+      Enviro2Props_16: -7902488059287185962
+      Enviro2Props_17: 6853745620873644974
+      Enviro2Props_18: -3774951282734896160
+      Enviro2Props_19: 2681880789036255528
+      Enviro2Props_2: -1232360602764422155
+      Enviro2Props_20: 4074198886554225346
+      Enviro2Props_21: 4932718241194829265
+      Enviro2Props_22: -4180265197524611321
+      Enviro2Props_23: 5068672208014490426
+      Enviro2Props_24: 3314942024170743906
+      Enviro2Props_25: -3725166751161576339
+      Enviro2Props_26: 166834796203171744
+      Enviro2Props_27: -4580162200557985846
+      Enviro2Props_28: -3304273318613217061
+      Enviro2Props_29: -2567767431911151564
+      Enviro2Props_3: 1086083802107148901
+      Enviro2Props_30: -7167779241048554107
+      Enviro2Props_31: 3759705519699648820
+      Enviro2Props_32: -3154745939269572086
+      Enviro2Props_33: 7304005280570129969
+      Enviro2Props_34: -3198833937920869829
+      Enviro2Props_35: 112623844726173640
+      Enviro2Props_36: -4770018753900281772
+      Enviro2Props_37: -5316241431954621463
+      Enviro2Props_38: -2122513333018421605
+      Enviro2Props_39: -1604226132636507115
+      Enviro2Props_4: -4462019151642394047
+      Enviro2Props_40: -626722530825439089
+      Enviro2Props_41: 8197671965792288770
+      Enviro2Props_42: -8358975006639787801
+      Enviro2Props_43: 3595476533740610066
+      Enviro2Props_44: 7308343981806962985
+      Enviro2Props_45: -1312024391051633064
+      Enviro2Props_46: 7316339980492877431
+      Enviro2Props_47: 1137561863
+      Enviro2Props_48: -1340771196
+      Enviro2Props_49: -1672567054
+      Enviro2Props_5: -64821302492017801
+      Enviro2Props_50: 1653296156
+      Enviro2Props_51: -247743035
+      Enviro2Props_52: -2003789804
+      Enviro2Props_53: -185808554
+      Enviro2Props_54: 506891159
+      Enviro2Props_55: -1924600284
+      Enviro2Props_56: 1256944328
+      Enviro2Props_57: 687622663
+      Enviro2Props_58: 153686161
+      Enviro2Props_59: 1098452984
+      Enviro2Props_6: 247285186026388055
+      Enviro2Props_60: -63552176
+      Enviro2Props_61: -255752232
+      Enviro2Props_62: -1041082392
+      Enviro2Props_63: 200324722
+      Enviro2Props_64: -932322365
+      Enviro2Props_65: -659407581
+      Enviro2Props_66: 1914563715
+      Enviro2Props_67: 414073501
+      Enviro2Props_68: 915343849
+      Enviro2Props_69: -1142721587
+      Enviro2Props_7: -8638477270871249602
+      Enviro2Props_70: 368642618
+      Enviro2Props_71: -1717691370
+      Enviro2Props_72: -1768688390
+      Enviro2Props_73: -175927125
+      Enviro2Props_74: 1500643003
+      Enviro2Props_75: -981698356
+      Enviro2Props_76: -261190947
+      Enviro2Props_77: 1985819842
+      Enviro2Props_78: -1821382129
+      Enviro2Props_79: 193980557
+      Enviro2Props_8: -7040670289345211448
+      Enviro2Props_80: -1452804146
+      Enviro2Props_81: -1297452990
+      Enviro2Props_82: -364094752
+      Enviro2Props_83: 1719238146
+      Enviro2Props_84: -1429864579
+      Enviro2Props_85: -1372259891
+      Enviro2Props_86: -1751146817
+      Enviro2Props_87: 240616019
+      Enviro2Props_88: -1757195270
+      Enviro2Props_89: 1702812675
+      Enviro2Props_9: -7012612416531010277
+      Enviro2Props_90: 1457710228
+      Enviro2Props_91: 1535061128
+      Enviro2Props_92: 1666471930
+      Enviro2Props_93: -1337775156
+      Enviro2Props_94: -1468410885
+      Enviro2Props_95: -822452307
+      Enviro2Props_96: 2008482391
+      Enviro2Props_97: -206310773
+      Enviro2Props_98: -677702979
+      Enviro2Props_99: -1947100278
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -25,6 +25,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
     [SerializeField] private Vector2Int roomSizeUnits;
     [SerializeField] private Vector2 offsetRoomCenter;
     [SerializeField] private bool noGeneration;
+    [SerializeField] private bool noBannedRooms;
     [SerializeField] private int startFloorIndex;    // For debug, normally at 0
     
     [Header("Private Infos")]
@@ -233,7 +234,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
                 baseRoom = generatedRooms[Random.Range(0, generatedRooms.Count)];
                 newRoom = GetRoomFromType(i == deadEndsCount - 1 ? (RoomType)6 : (RoomType)Random.Range(4, 6));
 
-                if (bannedRooms.Contains(newRoom))
+                if (bannedRooms.Contains(newRoom) && !noBannedRooms)
                 {
                     continue;
                 }
@@ -268,7 +269,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
                 newRoom = GameManager.Instance.DebugForcedTrialRoom;
             }
 
-            if (bannedRooms.Contains(newRoom) && !GameManager.Instance.DebugForcedTrialRoom)
+            if (bannedRooms.Contains(newRoom) && !noBannedRooms && !GameManager.Instance.DebugForcedTrialRoom)
             {
                 continue;
             }
@@ -394,7 +395,7 @@ public class ProceduralGenerationManager : GenericSingletonClass<ProceduralGener
                 continue;
             }
 
-            if(bannedRooms.Contains(testedRoom))
+            if(bannedRooms.Contains(testedRoom) && !noBannedRooms)
             {
                 continue;
             }

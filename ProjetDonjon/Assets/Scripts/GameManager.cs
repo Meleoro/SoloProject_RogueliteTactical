@@ -100,6 +100,7 @@ public class GameManager : GenericSingletonClass<GameManager>
         RelicsManager.Instance.StartExploration(enviroData.enviroIndex);
 
         ProceduralGenerationManager.Instance.StartExploration(enviroData, !TutoManager.Instance.DidTutorial);
+        CameraManager.Instance.BackImage.color = enviroData.backgroundColor;
 
         ExpeditionCoinsCount = 0;
         ExpeditionKillCount = 0;

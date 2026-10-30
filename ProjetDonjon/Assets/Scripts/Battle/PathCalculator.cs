@@ -109,7 +109,7 @@ public class PathCalculator
                 return GetFinalPath(start, end, includeEndStart, includeEndStart);
             }
 
-            List<Vector2Int> pickedLocationNeighbors = GetPossibleNeighborLocations(pickedPos, canUseDiagonals);
+            List<Vector2Int> pickedLocationNeighbors = GetPossibleNeighborLocations(pickedPos, canUseDiagonals, true);
             for (int i = 0; i < pickedLocationNeighbors.Count; i++)
             {
                 if (openList.Contains(pickedLocationNeighbors[i])) continue;
@@ -231,8 +231,9 @@ public class PathCalculator
     #endregion
 
 
-    public bool VerifyIsReachable(Vector2Int start, Vector2Int end, bool useDiagonals, ObstacleType obstacleType, BattleTile ignoredTile, bool includeEnd)
+    public bool VerifyIsReachable(Vector2Int start, Vector2Int end, bool useDiagonals, ObstacleType obstacleType, BattleTile ignoredTile, bool includeEnd, bool isEnemy)
     {
+        PathCalculatorTile startTile = pathCalculatorTiles[start.x, start.y];
         Vector2Int dir = end - start;
 
         if(dir.x > 0)
@@ -262,7 +263,14 @@ public class PathCalculator
             if (currentTile.battleTile != ignoredTile)
             {
                 if (currentTile.isBlocked && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Units 
-                    || obstacleType == ObstacleType.UnitsIncluded)) return false;
+                    || obstacleType == ObstacleType.UnitsIncluded)) return false;   // Walls + Units in generals
+
+                if (obstacleType == ObstacleType.Enemies && currentTile.isBlocked && currentTile.battleTile.UnitOnTile != null 
+                    && (currentTile.battleTile.UnitOnTile.GetType() == typeof(AIUnit) != isEnemy)) return false;   // Enemy on tile, if ally skips
+
+                if (obstacleType == ObstacleType.Enemies && currentTile.isBlocked && currentTile.battleTile.UnitOnTile == null) 
+                    return false;   // Obstacle on tile
+
                 if (currentTile.battleTile.IsHole && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Holes)) return false;
             }
 
@@ -281,6 +289,13 @@ public class PathCalculator
                 if (currentTile.battleTile is null) return false;
                 if (currentTile.isBlocked && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Units
                     || obstacleType == ObstacleType.UnitsIncluded)) return false;
+
+                if (obstacleType == ObstacleType.Enemies && currentTile.isBlocked && currentTile.battleTile.UnitOnTile != null
+                    && (currentTile.battleTile.UnitOnTile.GetType() == typeof(AIUnit) != isEnemy)) return false;   // Enemy on tile, if ally skips
+
+                if (obstacleType == ObstacleType.Enemies && currentTile.isBlocked && currentTile.battleTile.UnitOnTile == null)
+                    return false;   // Obstacle on tile
+
                 if (currentTile.battleTile.IsHole && (obstacleType == ObstacleType.All || obstacleType == ObstacleType.Holes)) return false;
             }
         }

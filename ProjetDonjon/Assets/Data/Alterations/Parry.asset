@@ -20,5 +20,6 @@ MonoBehaviour:
   isPositive: 1
   isInfinite: 0
   isStackable: 0
-  duration: 2
+  decrementOnTurnStart: 1
+  duration: 1
   strength: 1

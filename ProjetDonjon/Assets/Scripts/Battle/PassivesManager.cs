@@ -66,6 +66,10 @@ public class PassivesManager
                     (mainUnit as Hero).AddSkillPoints((int)passivesEffects[i].additivePower);
                     break;
 
+                case PassiveEffectType.GainActionPoint:
+                    (mainUnit as Hero).AddActionPoints((int)passivesEffects[i].additivePower);
+                    break;
+
                 case PassiveEffectType.MaxSkillPoints:
                     mainUnit.AddStatsModificators(0, 0, 0, 0, 0, (int)passivesEffects[i].additivePower);
                     break;
