@@ -17,6 +17,27 @@ TextureImporter:
   - first:
       213: -4325742698569672805
     second: Collection-Sheet_4
+  - first:
+      213: 7737308341549807963
+    second: Collection-Sheet_5
+  - first:
+      213: -5004930544810747539
+    second: Collection-Sheet_6
+  - first:
+      213: -3073451155545511599
+    second: Collection-Sheet_7
+  - first:
+      213: -4968466773696722511
+    second: Collection-Sheet_8
+  - first:
+      213: 8794027761157928010
+    second: Collection-Sheet_9
+  - first:
+      213: -7990381922152750384
+    second: Collection-Sheet_10
+  - first:
+      213: 8704823911093711766
+    second: Collection-Sheet_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +105,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -116,7 +137,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 256
         width: 512
         height: 256
       alignment: 0
@@ -138,7 +159,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 0
+        y: 256
         width: 512
         height: 256
       alignment: 0
@@ -160,7 +181,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 0
+        y: 256
         width: 512
         height: 256
       alignment: 0
@@ -182,7 +203,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 0
+        y: 256
         width: 512
         height: 256
       alignment: 0
@@ -204,7 +225,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2048
-        y: 0
+        y: 256
         width: 512
         height: 256
       alignment: 0
@@ -221,11 +242,165 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b593ebf41f0706b60800000000000000
+      internalID: 7737308341549807963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d699d0fcf2aea8ab0800000000000000
+      internalID: -5004930544810747539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15922373578e855d0800000000000000
+      internalID: -3073451155545511599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9c97b1bc57c0bb0800000000000000
+      internalID: -4968466773696722511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a44fdb0f7a9aa0a70800000000000000
+      internalID: 8794027761157928010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2e1660af57c1190800000000000000
+      internalID: -7990381922152750384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collection-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 693311d1a3fbdc870800000000000000
+      internalID: 8704823911093711766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 7993a93af2a948045b06e6074d90379f
+    spriteID: 7f58ef5221388cb4aa940da8faa7e1e5
     internalID: 0
     vertices: []
     indices: 
@@ -239,9 +414,16 @@ TextureImporter:
     nameFileIdTable:
       Collection-Sheet_0: 5210260212125467724
       Collection-Sheet_1: 1779480039530736235
+      Collection-Sheet_10: -7990381922152750384
+      Collection-Sheet_11: 8704823911093711766
       Collection-Sheet_2: -620327320528437784
       Collection-Sheet_3: -1179477282967553191
       Collection-Sheet_4: -4325742698569672805
+      Collection-Sheet_5: 7737308341549807963
+      Collection-Sheet_6: -5004930544810747539
+      Collection-Sheet_7: -3073451155545511599
+      Collection-Sheet_8: -4968466773696722511
+      Collection-Sheet_9: 8794027761157928010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 public class TutorialPanel : MonoBehaviour
 {
@@ -223,8 +224,11 @@ public class TutorialPanel : MonoBehaviour
 
             case TutoHighlightType.HighlightEnemy:
                 BattleManager.Instance.CurrentEnemies[0].UI.Canvas.sortingOrder = 331;
-                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.GetComponent<SpriteLayerer>().enabled = false;
-                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.sortingOrder = 331;
+                foreach (SpriteRenderer spriteRenderer in BattleManager.Instance.CurrentEnemies[0].SpriteRenderers)
+                {
+                    spriteRenderer.GetComponent<SpriteLayerer>().enabled = false;
+                    spriteRenderer.sortingOrder = 331;
+                }
                 highlightedImages = new Image[] { };
 
                 _backDarkImage.raycastTarget = true;
@@ -336,7 +340,10 @@ public class TutorialPanel : MonoBehaviour
                 break;
 
             case TutoHighlightType.HighlightEnemy:
-                BattleManager.Instance.CurrentEnemies[0].SpriteRenderer.GetComponent<SpriteLayerer>().enabled = true;
+                foreach (SpriteRenderer spriteRenderer in BattleManager.Instance.CurrentEnemies[0].SpriteRenderers)
+                {
+                    spriteRenderer.GetComponent<SpriteLayerer>().enabled = true;
+                }
                 break;
         }
 

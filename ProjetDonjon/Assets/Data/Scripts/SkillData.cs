@@ -12,7 +12,8 @@ public enum SkillType
     Debuff,
     AttackBuff,
     AttackDebuff,
-    Summon
+    Summon,
+    TransformUnit
 }
 
 
@@ -42,7 +43,8 @@ public enum SkillEffectType
     Summon,
     HealDebuffs,
     DestroySelf,
-    MoveUnit
+    MoveUnit,
+    TransformUnit
 }
 
 [Serializable]
@@ -75,6 +77,10 @@ public class SkillData : ScriptableObject
     public Sprite skillHighlightIcon;
     public Sprite skillIntentIcon;     // For enemies intent icon in battles
     public AdditionalTooltipData[] additionalTooltipDatas;
+
+    [Header("Visuals")]
+    public bool playVFXDirectly;
+    public bool playAllVFXAtOnce;
     public VFXData[] vfxDatas;   // May have multiple vfx for attacks in multiple steps
 
     [Header("Effects")]

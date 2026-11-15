@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class Spike : MonoBehaviour
@@ -38,23 +39,28 @@ public class Spike : MonoBehaviour
         }
         else
         {
-            Deactivate();
+            StartCoroutine(DeactivateCoroutine());
         }
     }
 
     private void Activate()
     {
+        _spriteRenderer.enabled = true;
         _spriteRenderer.transform.DOLocalMoveY(activatedLocalY, moveDuration).SetEase(Ease.OutBack);
 
         _maskTransform.DOLocalMoveY(maskLocalYSave, moveDuration).SetEase(Ease.OutBack);
         _maskTransform.DOScaleY(maskScaleSaveY, moveDuration).SetEase(Ease.OutBack);
     }
 
-    private void Deactivate()
+    private IEnumerator DeactivateCoroutine()
     {
         _spriteRenderer.transform.DOLocalMoveY(deactivatedLocalY, moveDuration).SetEase(Ease.OutBack);
 
         _maskTransform.DOLocalMoveY(0, moveDuration).SetEase(Ease.OutBack);
         _maskTransform.DOScaleY(0, moveDuration).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(moveDuration);
+
+        _spriteRenderer.enabled = false;
     }
 }

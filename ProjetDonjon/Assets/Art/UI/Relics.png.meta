@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -340,7 +340,7 @@ TextureImporter:
         width: 23
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -362,7 +362,7 @@ TextureImporter:
         width: 36
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -371,6 +371,270 @@ TextureImporter:
       bones: []
       spriteID: 5109d04200cae2b44a286d895fc4245a
       internalID: 1543814480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_12
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 422
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d8c63aa89e7c6545b82858cae248a9b
+      internalID: 1385563451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_13
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 424
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28dc99248360a5043a5703e4c36f369a
+      internalID: -1098008199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_14
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 422
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61115d7b241c8c643b88ebad38da5025
+      internalID: 1094062480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_15
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 416
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac637274051a96478100e8ff64293ad
+      internalID: -210317636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_16
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 416
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de8a82919fdf9b64da626b25ead16571
+      internalID: 134102103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_17
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 416
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d9de8ace6c5d574ba4708374aa2d261
+      internalID: 842287565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_18
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 417
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d6b662668a4f0409a6945651833eb2
+      internalID: 1839250604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_19
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 420
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bfa8d32029b0e84a9314e2e23c110de
+      internalID: 1536522664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_20
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 377
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d0ee14b2000874b89a2d379f13c640
+      internalID: -1859819384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_21
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 376
+        width: 18
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be7a900e7301e544c9a76428ff57f12c
+      internalID: -1326365845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_22
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 377
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2508153fc1c06ec4bad1fb88132e55fa
+      internalID: -616330848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Relics_23
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 375
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0c2c3252778c14e8b35234ded34275
+      internalID: 432275941
       vertices: []
       indices: 
       edges: []
@@ -393,7 +657,19 @@ TextureImporter:
       Relics_1: -1364227274356053833
       Relics_10: -1156755099
       Relics_11: 1543814480
+      Relics_12: 1385563451
+      Relics_13: -1098008199
+      Relics_14: 1094062480
+      Relics_15: -210317636
+      Relics_16: 134102103
+      Relics_17: 842287565
+      Relics_18: 1839250604
+      Relics_19: 1536522664
       Relics_2: -5310228929941939868
+      Relics_20: -1859819384
+      Relics_21: -1326365845
+      Relics_22: -616330848
+      Relics_23: 432275941
       Relics_3: -5265623100913011340
       Relics_4: 4982871040124427490
       Relics_5: 1503466479

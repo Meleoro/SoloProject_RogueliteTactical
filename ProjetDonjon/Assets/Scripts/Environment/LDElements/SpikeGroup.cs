@@ -11,6 +11,7 @@ public class SpikeGroup : MonoBehaviour
 
     [Header("Private Infos")]
     private bool isActivated;
+    private bool isColliderActivated;
     private float timer;
 
     [Header("References")]
@@ -62,11 +63,12 @@ public class SpikeGroup : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        _groupCollider.enabled = activated;
+        isColliderActivated = activated;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!isColliderActivated) return;
         if (!collision.CompareTag("Hero")) return;
         if (collision.GetComponent<HeroController>().CurrentControllerState == ControllerState.Jump) return;
 

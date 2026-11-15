@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86258820cbae8943a90ea26e2ffacb8, type: 3}
   m_Name: ThrowFlask
   m_EditorClassIdentifier: Assembly-CSharp::VFXData
-  vfxType: 0
+  vfxType: 3
   offset: {x: 0, y: 0}
   rotateVFX: 0
   mirrorHorizontalVFX: 0
@@ -23,3 +23,5 @@ MonoBehaviour:
   rightVFX: {fileID: 0}
   upVFX: {fileID: 0}
   downVFX: {fileID: 0}
+  laserObject: {fileID: 0}
+  laserDirection: 0

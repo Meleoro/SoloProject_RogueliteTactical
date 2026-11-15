@@ -325,6 +325,12 @@ public class HeroController : MonoBehaviour
                     isValid = false;
                     break;
                 }
+
+                if (hit.collider.gameObject.CompareTag("Unsafe"))
+                {
+                    isValid = false;
+                    break;
+                }
             }
         }
 

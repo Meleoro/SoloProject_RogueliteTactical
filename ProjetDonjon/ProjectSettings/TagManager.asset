@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Walls
   - Hole
+  - Unsafe
   layers:
   - Default
   - TransparentFX

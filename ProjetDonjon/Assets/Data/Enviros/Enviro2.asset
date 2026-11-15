@@ -165,9 +165,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dec5c41635ad061418926eccd860a28f, type: 2}
   - {fileID: 11400000, guid: 7077cbaea47420645918febcb3ee1463, type: 2}
   enemySpawnsPerFloor:
-  - {fileID: 11400000, guid: 67936368a301ebf4aa43f0d3184247d5, type: 2}
-  - {fileID: 11400000, guid: a751178e5de40aa4a8d8fbe6f743b8ff, type: 2}
-  - {fileID: 11400000, guid: a86e230126572f245a9f589e9f504163, type: 2}
-  - {fileID: 11400000, guid: e66d0b04f75115443869519f98a37726, type: 2}
-  - {fileID: 11400000, guid: efb18c40d988cfe4781d6cf5b2e39cec, type: 2}
-  - {fileID: 11400000, guid: 222ba2f9b981e884c86a8d1e695ad698, type: 2}
+  - {fileID: 11400000, guid: 06281df51c3642847b7cd070f5f9e58d, type: 2}
+  - {fileID: 11400000, guid: 91cf0ebb7764aca4aaf876c680de7946, type: 2}
+  - {fileID: 11400000, guid: 4bd152b592bd58840bf041b4b3d1dde7, type: 2}
+  - {fileID: 11400000, guid: eaaae31ccc64b3442adc21ab2961e132, type: 2}
+  - {fileID: 11400000, guid: 5468ff6490c2b2148a8dfd1e500695b5, type: 2}
+  - {fileID: 11400000, guid: a3a6094544903f04d915046b09ca3e1c, type: 2}

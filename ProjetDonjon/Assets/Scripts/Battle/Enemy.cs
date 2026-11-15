@@ -41,7 +41,7 @@ public class AIUnit : Unit
     public SkillData CurrentSkillData { get { return currentSkillData; } }
     public PreviewType CurrentPreviewType { get { return currentPreviewType; } }
     public bool IsBoss { get { return isBoss; } }
-    public SpriteRenderer SpriteRenderer { get { return _spriteRenderer; } }
+    public SpriteRenderer[] SpriteRenderers { get { return _spriteRenderers; } }
 
     [Header("Enemy References")]
     [SerializeField] private ParticleSystem _eliteVFX;
@@ -58,7 +58,10 @@ public class AIUnit : Unit
             currentData = aiEliteData;
             _eliteVFX.Play();
 
-            _spriteRenderer.material.SetInt("_DisplayEliteEffect", 1);
+            foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.material.SetInt("_DisplayEliteEffect", 1);
+            }
         }
         else
         {
@@ -171,9 +174,11 @@ public class AIUnit : Unit
 
     private IEnumerator AppearCoroutine(float duration)
     {
-        _spriteRenderer.material.SetFloat("_DitherProgress", -2);
-
-        _spriteRenderer.material.DOFloat(3.5f, "_DitherProgress", duration).SetEase(Ease.OutFlash);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.SetFloat("_DitherProgress", -2);
+            spriteRenderer.material.DOFloat(3.5f, "_DitherProgress", duration).SetEase(Ease.OutFlash);
+        }
 
         yield return new WaitForSeconds(duration);
 
@@ -485,14 +490,20 @@ public class AIUnit : Unit
 
         if (transform.position.x + 0.2f > aimedTr.position.x) return;
 
-        _spriteRenderer.transform.rotation = Quaternion.Euler(0, 180, 0);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     public override void RotateBackToNormal()
     {
         base.RotateBackToNormal();
 
-        _spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     #endregion

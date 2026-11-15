@@ -116,8 +116,11 @@ public class Hero : Unit
     {
         isHidden = false;
 
-        _spriteRenderer.transform.localPosition = Vector3.zero;
-        _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.localPosition = Vector3.zero;
+            spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
 
         _shadowTransform.localScale = Vector3.one;
 
@@ -135,8 +138,11 @@ public class Hero : Unit
     {
         isHidden = true;
 
-        _spriteRenderer.transform.localPosition = Vector3.zero;
-        _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.localPosition = Vector3.zero;
+            spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
 
         _spriteRendererParent.gameObject.SetActive(false);
         _shadowTransform.gameObject.SetActive(false);
@@ -291,7 +297,11 @@ public class Hero : Unit
         }
 
         _shadowTransform.localScale = Vector3.one;
-        _spriteRenderer.material.SetFloat("_DitherProgress", 2.5f);
+
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.SetFloat("_DitherProgress", 2.5f);
+        }
 
         HideHero();
     }
@@ -400,10 +410,12 @@ public class Hero : Unit
         CurrentHealth = currentMaxHealth;
         isDead = false;
 
-        _spriteRenderer.material.ULerpMaterialFloat(0.05f, 3.0f, "_DitherProgress");
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.ULerpMaterialFloat(0.05f, 3.0f, "_DitherProgress");
+        }
 
         _controller.ExitBattle();
-
         _animator.SetBool("IsDead", false);
     }
 

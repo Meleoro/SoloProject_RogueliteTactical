@@ -7,7 +7,20 @@ public class VFXData : ScriptableObject
     {
         OnTargetsVFX,
         OnTilesVFX,
-        OnAverageTilesPosVFX
+        OnAverageTilesPosVFX,
+        ObjectVFX    // For laser or throwed object
+    }
+
+    public enum LaserDirection
+    {
+        Up,
+        Right,
+        Down,
+        Left,
+        UpRight,
+        BottomRight,
+        BottomLeft,
+        UpLeft
     }
 
     [Header("VFX Parameters")]
@@ -24,4 +37,8 @@ public class VFXData : ScriptableObject
     public GameObject rightVFX;
     public GameObject upVFX;
     public GameObject downVFX;
+
+    [Header("VFX Lasers")]
+    public LaserVFX laserObject;
+    public LaserDirection laserDirection;
 }

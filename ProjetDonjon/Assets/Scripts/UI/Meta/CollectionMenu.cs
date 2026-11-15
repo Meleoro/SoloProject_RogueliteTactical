@@ -20,11 +20,13 @@ public class CollectionMenu : MonoBehaviour
 
     [Header("Private Infos")]
     private bool[] possessedRelics;
+    private int currentPageIndex;
 
     [Header("References")]
     [SerializeField] private RectTransform _mainRectTr;
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private CollectionRelic[] _collectionRelics;
+    [SerializeField] private CollectionButton[] _collectionButtons;
     [SerializeField] private Animator _animator;
 
 
@@ -32,6 +34,12 @@ public class CollectionMenu : MonoBehaviour
     private void Start()
     {
         RelicsManager.Instance.OnRelicObtained += AddNewRelic;
+
+        for(int i = 0; i < _collectionButtons.Length; i++)
+        {
+            _collectionButtons[i].SetupButton(i);
+            _collectionButtons[i].OnClick += ChangePage;
+        }
     }
 
 
@@ -85,6 +93,13 @@ public class CollectionMenu : MonoBehaviour
         _backgroundImage.DOFade(0.5f, 0.3f);
 
         possessedRelics = RelicsManager.Instance.PossessedRelicIndexes;
+
+        for(int i = 0; i < _collectionButtons.Length; i++)
+        {
+            _collectionButtons[i].SetIsSelected(i == startPage);
+        }
+
+        currentPageIndex = startPage;
         LoadPage(startPage);
 
         _animator.SetBool("IsDisplayed", true);
@@ -136,6 +151,44 @@ public class CollectionMenu : MonoBehaviour
         _mainRectTr.gameObject.SetActive(false);
 
         OnEndTransition?.Invoke();
+    }
+
+    #endregion
+
+
+    #region
+
+    private void ChangePage(int index)
+    {
+        bool leftDir = currentPageIndex > index;
+        currentPageIndex = index;
+
+        for(int i = 0; i < _collectionButtons.Length; i++)
+        {
+            _collectionButtons[i].SetIsSelected(i == currentPageIndex);
+        }
+
+        StartCoroutine(ChangePageCoroutine(leftDir));
+    }
+
+    private IEnumerator ChangePageCoroutine(bool turnToTheLeft)
+    {
+        for (int i = 0; i < _collectionRelics.Length; i++)
+        {
+            StartCoroutine(_collectionRelics[i].DisappearEffectCoroutine(0.01f));
+        }
+
+        yield return new WaitForSeconds(0.15f);
+
+        _animator.SetTrigger(turnToTheLeft ? "TurnPageLeft" : "TurnPageRight");
+
+        yield return new WaitForSeconds(0.3f);
+
+        LoadPage(currentPageIndex);
+        for (int i = 0; i < _collectionRelics.Length; i++)
+        {
+            StartCoroutine(_collectionRelics[i].AppearEffectCoroutine(Random.Range(minOpenRelicAppearDelay, maxOpenRelicAppearDelay)));
+        }
     }
 
     #endregion

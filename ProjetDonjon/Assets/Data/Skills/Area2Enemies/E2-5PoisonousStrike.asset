@@ -24,9 +24,11 @@ MonoBehaviour:
   skillHighlightIcon: {fileID: 0}
   skillIntentIcon: {fileID: -6797380999643392754, guid: 2c514522191fcd24eaa84ace94748e08, type: 3}
   additionalTooltipDatas: []
+  playVFXDirectly: 0
+  playAllVFXAtOnce: 0
   vfxDatas:
   - {fileID: 11400000, guid: d625acc956b6f0b449ad9e93c2e5504e, type: 2}
-  skillType: 0
+  skillType: 6
   skillPaternType: 1
   skillEffects:
   - skillEffectType: 1

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f36d164f50f8e4a81432d002eb8cf3, type: 3}
+  m_Name: Z2-B1
+  m_EditorClassIdentifier: 
+  possibleEnemies:
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 70e303305ebdc8c468a69e20ccc80b88, type: 3}
+    proba: 40
+    eliteProba: 20
+    maxCountPerBattle: 10
+    minEnemyCountBeforeSpawn: 0
+  - enemyPrefab: {fileID: 4534582793652375552, guid: 8ecdeba3a3418884a8b2ac8e334f3640, type: 3}
+    proba: 30
+    eliteProba: 20
+    maxCountPerBattle: 5
+    minEnemyCountBeforeSpawn: 0
+  - enemyPrefab: {fileID: 4534582793652375552, guid: d59a313854ee6834ea9851116f4d7131, type: 3}
+    proba: 30
+    eliteProba: 0
+    maxCountPerBattle: 2
+    minEnemyCountBeforeSpawn: 1
+  possibleChallengeEnemies: []
+  minDangerAmountPerBattle: 6
+  maxDangerAmountPerBattle: 10
+  minDangerAmountPerChallenge: 6
+  maxDangerAmountPerChallenge: 10

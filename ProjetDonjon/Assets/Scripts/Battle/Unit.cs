@@ -112,7 +112,7 @@ public class Unit : MonoBehaviour
 
     [Header("References")]
     [SerializeField] protected UnitUI _ui;
-    [SerializeField] protected SpriteRenderer _spriteRenderer;
+    [SerializeField] protected SpriteRenderer[] _spriteRenderers;
     [SerializeField] protected StunnedVFX _stunnedVFX;
     [SerializeField] protected PoisonedVFX _poisonedVFX;
     [SerializeField] protected ShieldVFX _shieldVFX;
@@ -141,7 +141,10 @@ public class Unit : MonoBehaviour
 
         StartCoroutine(StartAlterationsDelayCoroutine());
 
-        _spriteRenderer.material.SetVector("_TextureSize", new Vector2(_spriteRenderer.sprite.texture.width, _spriteRenderer.sprite.texture.height));
+        foreach(SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.SetVector("_TextureSize", new Vector2(spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height));
+        }
     }
 
     private IEnumerator StartAlterationsDelayCoroutine()
@@ -209,13 +212,19 @@ public class Unit : MonoBehaviour
 
     private IEnumerator FallCoroutine()
     {
-        _spriteRenderer.transform.UChangeScale(0.5f, Vector3.zero, CurveType.EaseInOutSin);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutSine);
+        }
 
         yield return new WaitForSeconds(0.5f);
 
-        _spriteRenderer.transform.UStopChangeScale();
         MoveUnit(previousTile);
-        _spriteRenderer.transform.localScale = Vector3.one;
+
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.transform.localScale = Vector3.one;
+        }
 
         HeroesManager.Instance.TakeDamage(2);
         BattleManager.Instance.PathCalculator.ActualisePathCalculatorTiles(BattleManager.Instance.BattleRoom.PlacedBattleTiles);
@@ -426,11 +435,17 @@ public class Unit : MonoBehaviour
 
     private IEnumerator DoColorEffectCoroutine(Color color)
     {
-        _spriteRenderer.material.DOVector(color, "_AddedColor", 0.1f);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.DOVector(color, "_AddedColor", 0.1f);
+        }
 
         yield return new WaitForSeconds(0.15f);
 
-        _spriteRenderer.material.DOVector(Color.black, "_AddedColor", 0.25f);
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.DOVector(Color.black, "_AddedColor", 0.25f);
+        }
     }
 
     public IEnumerator UseSkillCoroutine()
@@ -767,7 +782,11 @@ public class Unit : MonoBehaviour
         }
 
         //_spriteRenderer.material.DOKill();
-        _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.15f);
+
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.15f);
+        }
     }
 
     protected void DisplayOutline(Color color)
@@ -779,7 +798,11 @@ public class Unit : MonoBehaviour
         }
 
         //_spriteRenderer.material.DOKill();
-        _spriteRenderer.material.DOVector(color, "_OutlineColor", 0.15f);
+
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.DOVector(color, "_OutlineColor", 0.15f);
+        }
     }
 
     public void DisplayOverlayOutline()
@@ -818,13 +841,20 @@ public class Unit : MonoBehaviour
         if (turnOutlineCoroutine != null)
         {
             StopCoroutine(turnOutlineCoroutine);
-            _spriteRenderer.material.DOKill();
             turnOutlineCoroutine = null;
+
+            foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.material.DOKill();
+            }
         }
 
         if(!fromHover) 
         {
-            _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.3f); 
+            foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.3f);
+            }
         }
     }
 
@@ -832,11 +862,17 @@ public class Unit : MonoBehaviour
     {
         while (true)
         {
-            _spriteRenderer.material.DOVector(unitsTurnColor, "_OutlineColor", 0.7f);
+            foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.material.DOVector(unitsTurnColor, "_OutlineColor", 0.8f);
+            }
 
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1.0f);
 
-            _spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.7f);
+            foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.material.DOVector(new Color(0, 0, 0, 0), "_OutlineColor", 0.8f);
+            }
 
             yield return new WaitForSeconds(0.8f);
         }
@@ -849,8 +885,11 @@ public class Unit : MonoBehaviour
 
     protected IEnumerator DisappearCoroutine(float duration, bool destroy = true)
     {
-        _spriteRenderer.material.ULerpMaterialFloat(duration, -0.5f, "_DitherProgress");
-        _spriteRenderer.material.SetColor("_OutlineColor", new Color(0, 0, 0, 0));
+        foreach (SpriteRenderer spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.material.ULerpMaterialFloat(duration, -0.5f, "_DitherProgress");
+            spriteRenderer.material.SetColor("_OutlineColor", new Color(0, 0, 0, 0));
+        }
 
         yield return new WaitForSeconds(duration);
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3161634716617757389}
   - component: {fileID: 1488174397244801850}
   - component: {fileID: 6100982224087673530}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 8041234616349752691}
   - component: {fileID: 2742884876922237520}
   - component: {fileID: 8262292826116265679}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,9 +233,9 @@ GameObject:
   - component: {fileID: 873624298509690592}
   - component: {fileID: 1252544306757233731}
   - component: {fileID: 3437455239321942507}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CollapsingGround
-  m_TagString: Untagged
+  m_TagString: Unsafe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606608691456822016}
   - component: {fileID: 7316967527019352466}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

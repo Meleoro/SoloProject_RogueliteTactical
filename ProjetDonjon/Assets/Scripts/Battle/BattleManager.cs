@@ -543,6 +543,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         CurrentUnit.RotateTowardTarget(skillBattleTiles[0]?.transform);
         StartCoroutine(CurrentUnit.UseSkillCoroutine());
 
+        if(usedSkill.playVFXDirectly)
+        {
+            PlaySkillVFX(skillBattleTiles, usedSkill);
+        }
+
         // We wait the moment the skill applies it's effect
         int wantedAttackCount = usedSkill.attackCount, currentAttackCount = 0;
         bool applied = false;
@@ -655,8 +660,6 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
             if (currentUnit._unitAnimsInfos.PlaySkillEffect && !applied)
             {
-                Debug.Log("Apply PArry");
-
                 currentAttackCount++;
                 applied = true;
 
@@ -795,7 +798,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
 
     #region Skill Visuals
 
-    private void PlaySkillVFX(BattleTile[] battleTile, SkillData usedSkill)
+    private void PlaySkillVFX(BattleTile[] battleTiles, SkillData usedSkill)
     {
         if(currentVFXIndex >= usedSkill.vfxDatas.Length)
         {
@@ -809,11 +812,11 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         if (vfxData.throwedObject != null)
         {
             Vector3 middlePos = Vector2.zero;
-            foreach (BattleTile tile in battleTile)
+            foreach (BattleTile tile in battleTiles)
             {
                 middlePos += tile.transform.position;
             }
-            middlePos /= battleTile.Length;
+            middlePos /= battleTiles.Length;
 
             if (vfxData.throwedObject.TryGetComponent<Flask>(out Flask flask))
             {
@@ -822,10 +825,15 @@ public class BattleManager : GenericSingletonClass<BattleManager>
                 else if (usedSkill.skillEffects[0].appliedAlteration.alterationType == AlterationType.Weakened) type = FlaskType.Debuff;
                 Instantiate(flask, currentUnit.transform.position, Quaternion.Euler(0, 0, 0)).Initialise(middlePos, type);
             }
-            return;
         }
 
-        Vector2Int coordDif = battleTile[0].TileCoordinates - currentUnit.CurrentTile.TileCoordinates;
+        // Laser VFX
+        if (vfxData.laserObject != null)
+        {
+            PlayLaserVFX(battleTiles, vfxData);
+        }
+
+        Vector2Int coordDif = battleTiles[0].TileCoordinates - currentUnit.CurrentTile.TileCoordinates;
 
         // We Choose the VFX to play
         GameObject usedVFX = null;
@@ -844,7 +852,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         // We play the VFX
         if (vfxData.vfxType == VFXData.VFXAttackType.OnTilesVFX)
         {
-            foreach (BattleTile tile in battleTile)
+            foreach (BattleTile tile in battleTiles)
             {
                 GameObject newVFX = Instantiate(usedVFX, tile.UnitOnTile.transform.position, usedVFX.transform.rotation);
                 AdaptVFXVisuals(newVFX, coordDif, vfxData);
@@ -852,7 +860,7 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         }
         else if (vfxData.vfxType == VFXData.VFXAttackType.OnTargetsVFX)
         {
-            foreach (BattleTile tile in battleTile)
+            foreach (BattleTile tile in battleTiles)
             {
                 if (tile.UnitOnTile is null) continue;
 
@@ -868,17 +876,67 @@ public class BattleManager : GenericSingletonClass<BattleManager>
         else if (vfxData.vfxType == VFXData.VFXAttackType.OnAverageTilesPosVFX)
         {
             Vector3 middlePos = Vector2.zero;
-            foreach (BattleTile tile in battleTile)
+            foreach (BattleTile tile in battleTiles)
             {
                 middlePos += tile.transform.position;
             }
-            middlePos /= battleTile.Length;
+            middlePos /= battleTiles.Length;
 
             GameObject newVFX = Instantiate(usedVFX, middlePos, usedVFX.transform.rotation);
             AdaptVFXVisuals(newVFX, coordDif, vfxData);
         }
 
-        currentVFXIndex++;   
+        currentVFXIndex++;
+        if (currentVFXIndex < usedSkill.vfxDatas.Length && usedSkill.playAllVFXAtOnce)
+        {
+            PlaySkillVFX(battleTiles, usedSkill);
+        }
+    }
+
+    private void PlayLaserVFX(BattleTile[] battleTiles, VFXData vfxData)
+    {
+        Vector3 targetPos = currentUnit.transform.position + (Vector3)vfxData.offset;
+
+        foreach (BattleTile tile in battleTiles)
+        {
+            switch(vfxData.laserDirection)
+            {
+                case VFXData.LaserDirection.Up:
+                    if(tile.transform.position.y > targetPos.y)
+                    {
+                        targetPos.y = tile.transform.position.y;
+                        //targetPos.x = currentUnit.transform.position.x + vfxData.offset.x;
+                    }
+                    break;
+
+                case VFXData.LaserDirection.Right:
+                    if (tile.transform.position.x > targetPos.x)
+                    {
+                        targetPos.x = tile.transform.position.x;
+                        //targetPos.y = currentUnit.transform.position.y + vfxData.offset.y;
+                    }
+                    break;
+
+                case VFXData.LaserDirection.Down:
+                    if (tile.transform.position.y < targetPos.y)
+                    {
+                        targetPos.y = tile.transform.position.y;
+                        //targetPos.x = currentUnit.transform.position.x + vfxData.offset.x;
+                    }
+                    break;
+
+                case VFXData.LaserDirection.Left:
+                    if (tile.transform.position.x < targetPos.x)
+                    {
+                        targetPos.x = tile.transform.position.x;
+                        //targetPos.y = currentUnit.transform.position.y + vfxData.offset.y;
+                    }
+                    break;
+            }
+        }
+
+        Instantiate(vfxData.laserObject, currentUnit.transform.position + (Vector3)vfxData.offset, 
+            Quaternion.Euler(0, 0, 0)).StartLaserVFX(currentUnit.transform.position, targetPos);
     }
 
     private void AdaptVFXVisuals(GameObject vfx, Vector2Int coordDif, VFXData vfxData)
